@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+node_modules/
+.netlify/
+
+# registration data never belongs in the repository
+public/data/*.sqlite
+public/data/*.jsonl
+*.sqlite
+*.jsonl
+
+# private site settings: generated per server with node tools/make-config.mjs
+public/api/config.php

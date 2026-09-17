@@ -1,0 +1,120 @@
+<?php
+/* Next Gen Summit: receives the registration, volunteer and partner forms.
+   Answers JSON to the site's JavaScript, and redirects to a confirmation page
+   when a browser posts the form directly (JavaScript off). */
+declare(strict_types=1);
+
+require __DIR__ . '/_lib.php';
+
+header('X-Robots-Tag: noindex');
+header('Cache-Control: no-store');
+
+$wantsJson = stripos((string) ($_SERVER['HTTP_ACCEPT'] ?? ''), 'application/json') !== false;
+$kind = isset($_POST['form-name']) && is_string($_POST['form-name']) ? $_POST['form-name'] : '';
+
+function ngs_reply(bool $ok, string $kind, string $error, int $status, bool $json): void
+{
+    if ($json) {
+        http_response_code($status);
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($ok ? ['ok' => true] : ['ok' => false, 'error' => $error]);
+        exit;
+    }
+    if ($ok) {
+        header('Location: ' . ($kind === 'registration' ? '/registration-received/' : '/thanks/'), true, 303);
+        exit;
+    }
+    http_response_code($status);
+    header('Content-Type: text/html; charset=utf-8');
+    $back = $kind === 'registration' ? '/#registration' : '/#involved';
+    echo '<!doctype html><html lang="en"><head><meta charset="utf-8">'
+        . '<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">'
+        . '<title>Not sent yet · Next Gen Summit</title>'
+        . '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">'
+        . '<link rel="stylesheet" href="/assets/css/site.css"></head><body>'
+        . '<div class="received"><main class="received__main">'
+        . '<p class="draft-note">Not sent yet</p><h1 class="done__title wm">almost.</h1>'
+        . '<p class="done__text">' . htmlspecialchars($error, ENT_QUOTES, 'UTF-8') . '</p>'
+        . '<p style="margin-top:28px"><a class="btn btn--lg" href="' . $back . '">Go back and try again</a></p>'
+        . '</main></div></body></html>';
+    exit;
+}
+
+if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+    header('Allow: POST');
+    ngs_reply(false, $kind, 'Please use the form on the site.', 405, $wantsJson);
+}
+
+if (!in_array($kind, NGS_KINDS, true)) {
+    ngs_reply(false, 'registration', 'That form was not recognized.', 400, $wantsJson);
+}
+
+// Honeypot: people never see this field, so anything in it is a bot. Pretend it worked.
+if (ngs_text($_POST, 'bot-field', 200) !== '') {
+    ngs_reply(true, $kind, '', 200, $wantsJson);
+}
+
+$email = ngs_text($_POST, 'email', 254);
+$emailOk = filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+$errors = [];
+
+if ($kind === 'registration') {
+    $data = [
+        'first_name' => ngs_text($_POST, 'first_name', 80),
+        'last_name' => ngs_text($_POST, 'last_name', 80),
+        'email' => $email,
+        'education_level' => ngs_text($_POST, 'education_level', 20),
+        'school_name' => ngs_text($_POST, 'school_name', 150),
+        'volunteer_interest' => ngs_text($_POST, 'volunteer_interest', 3),
+    ];
+    if ($data['first_name'] === '' || $data['last_name'] === '') {
+        $errors[] = 'Please add your first and last name.';
+    }
+    if (!$emailOk) {
+        $errors[] = 'Please check your email address.';
+    }
+    if (!in_array($data['education_level'], ['High School', 'College', 'Other'], true)) {
+        $errors[] = 'Please choose your education level.';
+    } elseif ($data['school_name'] === '' && $data['education_level'] !== 'Other') {
+        $errors[] = 'Please add your school name.';
+    }
+    if (!in_array($data['volunteer_interest'], ['Yes', 'No'], true)) {
+        $errors[] = 'Please tell us whether you would like to volunteer.';
+    }
+} else {
+    $data = [
+        'name' => ngs_text($_POST, 'name', 120),
+        'email' => $email,
+    ];
+    if ($kind === 'volunteer') {
+        $data['campus'] = ngs_text($_POST, 'campus', 150);
+    } else {
+        $data['organization'] = ngs_text($_POST, 'organization', 150);
+    }
+    if ($data['name'] === '') {
+        $errors[] = 'Please add your name.';
+    }
+    if (!$emailOk) {
+        $errors[] = 'Please check your email address.';
+    }
+    if ($kind === 'partner' && $data['organization'] === '') {
+        $errors[] = 'Please add your organization.';
+    }
+}
+
+if ($errors) {
+    ngs_reply(false, $kind, implode(' ', $errors), 422, $wantsJson);
+}
+
+try {
+    // generous enough for a whole class registering on one campus network
+    if (ngs_recent_from_ip(ngs_ip_hash(), 3600) >= 30) {
+        ngs_reply(false, $kind, 'Too many submissions from this connection. Please try again in an hour.', 429, $wantsJson);
+    }
+    ngs_store($kind, $data);
+} catch (Throwable $e) {
+    error_log('Next Gen Summit form error: ' . $e->getMessage());
+    ngs_reply(false, $kind, 'We could not save that right now. Please try again in a moment.', 500, $wantsJson);
+}
+
+ngs_reply(true, $kind, '', 200, $wantsJson);
