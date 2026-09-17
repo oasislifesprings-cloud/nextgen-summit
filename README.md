@@ -24,6 +24,10 @@ nextgen-summit/
     └── assets/                   css, js, images
 ```
 
+## Search engines
+
+The homepage is indexable, with a canonical link to `https://nextgen2026.org/`. `robots.txt` keeps `/admin/`, `/api/` and `/data/` out of search results and points to `sitemap.xml`. The admin page, form endpoint and confirmation pages each send their own noindex.
+
 ## Hosting requirements
 
 Any host with **PHP 7.4 or newer** and Apache or LiteSpeed (`.htaccess` support). Hostinger web hosting qualifies. SQLite (`pdo_sqlite`) is used when available, otherwise submissions go to a JSON Lines file. Netlify and other static-only hosts cannot run the forms.
@@ -79,9 +83,7 @@ Then upload the new `config.php` to `public_html/api/`. Replacing it also change
 
 The form sends in place and shows the "you're in." confirmation. With JavaScript off, the browser posts normally and lands on `/registration-received/`. On a plain local preview (file:// or localhost) nothing is sent and the confirmation says so.
 
-## Before a public launch
+## Still to do
 
-- Remove `<meta name="robots" content="noindex">` from `public/index.html`.
-- Confirm the event time (the site says 2–8 PM; the old Eventbrite listing said 4:00–8:30 PM).
 - Replace the draft speaker lineup, the draft taglines, and the "Soon" Contact and Instagram links.
 - Host the remaining Unsplash photos locally and credit the photographers.
