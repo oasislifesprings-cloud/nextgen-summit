@@ -562,15 +562,26 @@
     var err = $('.form__error', form);
     var school = form.elements.school_name;
     var schoolHint = $('[data-school-hint]', form);
+    var schoolField = $('[data-school-field]', form);      // waitlist: asked only of students
     var mark = $('.done__title .reg', done);
     if (mark) buildReg(mark);
+    if (schoolField) $$('.field__opt', schoolField).forEach(function (n) { n.hidden = true; });
 
     function syncSchool() {
-      var other = form.elements.education_level.value === 'Other';
+      var level = form.elements.education_level.value;
+      if (schoolField) {
+        var student = level === 'College' || level === 'High School';
+        schoolField.hidden = !student;
+        school.required = student;
+        if (!student) school.value = '';
+        return;
+      }
+      var other = level === 'Other';
       school.required = !other;
       if (schoolHint) schoolHint.hidden = !other;
     }
     $$('input[name="education_level"]', form).forEach(function (i) { i.addEventListener('change', syncSchool); });
+    syncSchool();
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();

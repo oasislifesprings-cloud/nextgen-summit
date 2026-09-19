@@ -127,7 +127,7 @@ foreach ($registrations as $r) {
     $e = strtolower((string) ($r['data']['email'] ?? ''));
     $emailCount[$e] = ($emailCount[$e] ?? 0) + 1;
 }
-$stats = ['High School' => 0, 'College' => 0, 'Other' => 0, 'volunteers' => 0];
+$stats = ['High School' => 0, 'College' => 0, 'Young Professional' => 0, 'Other' => 0, 'volunteers' => 0];
 foreach ($registrations as $r) {
     $lvl = $r['data']['education_level'] ?? '';
     if (isset($stats[$lvl])) {
@@ -157,7 +157,7 @@ $shownNotes = array_values(array_filter($notes, function ($r) use ($q) { return 
 <meta name="robots" content="noindex, nofollow">
 <title>Admin · Next Gen Summit</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20260919">
+<link rel="stylesheet" href="/assets/css/site.css?v=20260919-2">
 <style>
   body{background:var(--paper)}
   .adm{max-width:1280px;margin:0 auto;padding:28px clamp(18px,4vw,48px) 80px}
@@ -231,7 +231,8 @@ $shownNotes = array_values(array_filter($notes, function ($r) use ($q) { return 
       <div class="stat"><b><?= count($emailCount) ?></b><span>Unique emails</span></div>
       <div class="stat"><b><?= $stats['College'] ?></b><span>College</span></div>
       <div class="stat"><b><?= $stats['High School'] ?></b><span>High school</span></div>
-      <div class="stat"><b><?= $stats['Other'] ?></b><span>Other</span></div>
+      <div class="stat"><b><?= $stats['Young Professional'] ?></b><span>Young professional</span></div>
+      <?php if ($stats['Other'] > 0): ?><div class="stat"><b><?= $stats['Other'] ?></b><span>Other</span></div><?php endif; ?>
       <div class="stat"><b><?= $stats['volunteers'] ?></b><span>Want to volunteer</span></div>
     </div>
 

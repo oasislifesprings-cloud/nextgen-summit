@@ -83,8 +83,8 @@ Posted with `form-name` = `waitlist`. The admin page lists waitlist sign-ups and
 | First Name | `first_name` | required |
 | Last Name | `last_name` | required |
 | Email Address | `email` | required, valid email |
-| Education Level | `education_level` | `High School`, `College`, `Other` |
-| School Name | `school_name` | required unless Education Level is Other |
+| Which best describes you? | `education_level` | `College`, `High School`, `Young Professional` |
+| School | `school_name` | asked only of College and High School; required for them, blank for Young Professional |
 
 ## Restoring the registration form
 
