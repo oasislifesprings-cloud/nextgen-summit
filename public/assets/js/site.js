@@ -562,10 +562,13 @@
     var err = $('.form__error', form);
     var school = form.elements.school_name;
     var schoolHint = $('[data-school-hint]', form);
-    var schoolField = $('[data-school-field]', form);      // waitlist: asked only of students
+    var schoolField = $('[data-school-field]', form);        // waitlist: asked only of students
+    var volunteerField = $('[data-volunteer-field]', form);  // waitlist: asked only of young professionals
     var mark = $('.done__title .reg', done);
     if (mark) buildReg(mark);
-    if (schoolField) $$('.field__opt', schoolField).forEach(function (n) { n.hidden = true; });
+    [schoolField, volunteerField].forEach(function (f) {
+      if (f) $$('.field__opt', f).forEach(function (n) { n.hidden = true; });
+    });
 
     function syncSchool() {
       var level = form.elements.education_level.value;
@@ -574,6 +577,13 @@
         schoolField.hidden = !student;
         school.required = student;
         if (!student) school.value = '';
+        if (volunteerField) {
+          var pro = level === 'Young Professional';
+          var opts = $$('input', volunteerField);
+          volunteerField.hidden = !pro;
+          opts[0].required = pro;
+          if (!pro) opts.forEach(function (o) { o.checked = false; });
+        }
         return;
       }
       var other = level === 'Other';

@@ -37,9 +37,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preload" as="image" href="assets/img/hero-m-864.jpg" media="(max-aspect-ratio: 3/4)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/img/hero-1600.jpg" imagesrcset="assets/img/hero-800.jpg 800w, assets/img/hero-1200.jpg 1200w, assets/img/hero-1600.jpg 1600w, assets/img/hero-2048.jpg 2048w" imagesizes="(max-aspect-ratio: 16/9) 177.78vh, 100vw" media="not all and (max-aspect-ratio: 3/4)" fetchpriority="high">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="assets/css/site.css?v=20260919-2">
-<script src="assets/js/liquid.js?v=20260919-2" defer></script>
-<script src="assets/js/site.js?v=20260919-2" defer></script>
+<link rel="stylesheet" href="assets/css/site.css?v=20260919-3">
+<script src="assets/js/liquid.js?v=20260919-3" defer></script>
+<script src="assets/js/site.js?v=20260919-3" defer></script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -333,6 +333,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- shown once a student option is picked; site.js hides it until then and for young professionals -->
         <div class="field" data-school-field><label for="w-school">What school do you attend? <span class="field__opt">(students only)</span></label><input id="w-school" name="school_name" autocomplete="organization"></div>
 
+        <!-- shown only to young professionals; site.js hides it for students -->
+        <fieldset class="choice" data-volunteer-field>
+          <legend>Would you like to volunteer? <span class="field__opt">(young professionals)</span></legend>
+          <div class="choice__opts">
+            <label class="chip"><input type="radio" name="volunteer_interest" value="Yes"><span>Yes</span></label>
+            <label class="chip"><input type="radio" name="volunteer_interest" value="No"><span>No</span></label>
+          </div>
+        </fieldset>
+
         <p class="form__error" role="alert" tabindex="-1" hidden></p>
 
         <div class="form__actions">
@@ -347,6 +356,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h2 class="done__title wm"><span class="reg">you're on the list.</span></h2>
       <p class="done__text">Thanks, <span data-done-name>friend</span>. You're on the Next Gen Summit waitlist.</p>
       <p class="done__text done__text--muted">We'll email <strong data-done-email>you</strong> as soon as details are announced.</p>
+      <p class="done__text done__text--muted" data-done-volunteer hidden>You said you'd like to volunteer, so we'll include volunteer details too.</p>
       <p class="mini__note" data-done-local hidden>Local preview: nothing was sent. Sign-ups are saved once the site is live.</p>
       <div class="mini__row">
         <button class="btn btn--lg" type="button" data-close>Back to the site</button>

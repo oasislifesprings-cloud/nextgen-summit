@@ -32,7 +32,7 @@ function ngs_reply(bool $ok, string $kind, string $error, int $status, bool $jso
         . '<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">'
         . '<title>Not sent yet · Next Gen Summit</title>'
         . '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">'
-        . '<link rel="stylesheet" href="/assets/css/site.css?v=20260919-2"></head><body>'
+        . '<link rel="stylesheet" href="/assets/css/site.css?v=20260919-3"></head><body>'
         . '<div class="received"><main class="received__main">'
         . '<p class="draft-note">Not sent yet</p><h1 class="done__title wm">almost.</h1>'
         . '<p class="done__text">' . htmlspecialchars($error, ENT_QUOTES, 'UTF-8') . '</p>'
@@ -66,6 +66,7 @@ if ($kind === 'waitlist') {
         'email' => $email,
         'education_level' => ngs_text($_POST, 'education_level', 20),
         'school_name' => ngs_text($_POST, 'school_name', 150),
+        'volunteer_interest' => ngs_text($_POST, 'volunteer_interest', 3),
     ];
     if ($data['first_name'] === '' || $data['last_name'] === '') {
         $errors[] = 'Please add your first and last name.';
@@ -76,8 +77,15 @@ if ($kind === 'waitlist') {
     if (!in_array($data['education_level'], ['College', 'High School', 'Young Professional'], true)) {
         $errors[] = 'Please choose college student, high schooler or young professional.';
     } elseif ($data['education_level'] === 'Young Professional') {
-        $data['school_name'] = '';   // the school question is only asked of students
-    } elseif ($data['school_name'] === '') {
+        // young professionals are asked about volunteering instead of school
+        $data['school_name'] = '';
+        if (!in_array($data['volunteer_interest'], ['Yes', 'No'], true)) {
+            $errors[] = 'Please tell us whether you would like to volunteer.';
+        }
+    } else {
+        unset($data['volunteer_interest']);   // students are not asked, so the admin shows a dash
+    }
+    if (($data['education_level'] === 'College' || $data['education_level'] === 'High School') && $data['school_name'] === '') {
         $errors[] = 'Please add the school you attend.';
     }
 } elseif ($kind === 'registration') {
