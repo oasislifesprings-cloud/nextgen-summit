@@ -3,4 +3,4 @@ Disallow: /admin/
 Disallow: /api/
 Disallow: /data/
 
-Sitemap: https://nextgen2026.org/sitemap.xml
+Sitemap: https://nextgensummit.us/sitemap.xml

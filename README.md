@@ -1,18 +1,18 @@
 # Next Gen Summit
 
-The microsite for Next Gen Summit, a free event on Saturday, October 31, at Joseph Meyerhoff Symphony Hall, Baltimore.
+The microsite for Next Gen Summit. The site currently collects a **waitlist**; the date, venue and registration form are paused until details are announced.
 
-It's plain HTML, CSS and JavaScript with one small PHP backend for the forms. There is no framework, no build step and no separate database server. Registrations are stored in a SQLite database on the host, and a password-protected admin page shows them.
+It's plain HTML, CSS and JavaScript with one small PHP backend for the forms. There is no framework, no build step and no separate database server. Waitlist sign-ups are stored in a SQLite database on the host, and a password-protected admin page shows them.
 
 ```
 nextgen-summit/
 ├── README.md
 ├── tools/make-config.mjs         creates public/api/config.php with a new admin password
 └── public/                       everything that goes online (upload its CONTENTS)
-    ├── index.html                the site, including the three forms
+    ├── index.html                the site, including the waitlist, volunteer and partner forms
     ├── .htaccess                 security headers, caching, blocks data files
     ├── api/
-    │   ├── register.php          receives registration, volunteer and partner forms
+    │   ├── register.php          receives waitlist, registration, volunteer and partner forms
     │   ├── _lib.php              storage helpers (not web-accessible)
     │   ├── config.php            admin password hash and secrets (not in git, not web-accessible)
     │   ├── config.example.php    template; generate the real file with tools/make-config.mjs
@@ -24,9 +24,13 @@ nextgen-summit/
     └── assets/                   css, js, images
 ```
 
+## Updating CSS or JavaScript
+
+Browsers keep `site.css`, `site.js` and `liquid.js` for 7 days (see `.htaccess`). Whenever you change one of them, bump the `?v=` date on every link to it (`index.html`, `registration-received/`, `thanks/`, `admin/index.php`, `api/register.php`) so returning visitors get the new file straight away.
+
 ## Search engines
 
-The homepage is indexable, with a canonical link to `https://nextgen2026.org/`. `robots.txt` keeps `/admin/`, `/api/` and `/data/` out of search results and points to `sitemap.xml`. The admin page, form endpoint and confirmation pages each send their own noindex.
+The homepage is indexable, with a canonical link to `https://nextgensummit.us/`. `robots.txt` keeps `/admin/`, `/api/` and `/data/` out of search results and points to `sitemap.xml`. The admin page, form endpoint and confirmation pages each send their own noindex.
 
 ## Hosting requirements
 
@@ -37,7 +41,7 @@ Any host with **PHP 7.4 or newer** and Apache or LiteSpeed (`.htaccess` support)
 1. Zip the **contents** of `public/` so `index.html` is at the top level of the zip. Include the `.htaccess` files.
 2. Upload and extract into the domain's `public_html` folder (hPanel File Manager, or the Hostinger connector).
 3. Turn on SSL for the domain in hPanel, then **Force HTTPS**.
-4. Test: submit one registration, sign in at `/admin/`, confirm it appears, then delete it.
+4. Test: join the waitlist once, sign in at `/admin/`, confirm it appears, then delete it.
 
 ## Where registrations are stored
 
@@ -70,7 +74,23 @@ Then upload the new `config.php` to `public_html/api/`. Replacing it also change
 - Server-side validation of every field.
 - At most 30 submissions per hour from one connection (enough for a whole class on one campus network).
 
-## Registration form fields
+## Waitlist form fields
+
+Posted with `form-name` = `waitlist`. The admin page lists waitlist sign-ups and any earlier registrations together, with a List column telling them apart.
+
+| Field | Name posted | Values |
+|---|---|---|
+| First Name | `first_name` | required |
+| Last Name | `last_name` | required |
+| Email Address | `email` | required, valid email |
+| Education Level | `education_level` | `High School`, `College`, `Other` |
+| School Name | `school_name` | required unless Education Level is Other |
+
+## Restoring the registration form
+
+The original registration form and its confirmation are commented out inside the `#registration` drawer in `public/index.html` (search for `REGISTRATION FORM`). Uncomment that block and delete the waitlist form above it. `site.js` and `register.php` handle either form, so nothing else needs to change. Also restore the date, venue and cost copy you want shown.
+
+## Registration form fields (paused)
 
 | Field | Name posted | Values |
 |---|---|---|
@@ -81,7 +101,7 @@ Then upload the new `config.php` to `public_html/api/`. Replacing it also change
 | School Name | `school_name` | required unless Education Level is Other |
 | Interested in Volunteering? | `volunteer_interest` | `Yes`, `No` |
 
-The form sends in place and shows the "you're in." confirmation. With JavaScript off, the browser posts normally and lands on `/registration-received/`. On a plain local preview (file:// or localhost) nothing is sent and the confirmation says so.
+The form sends in place and shows its confirmation. With JavaScript off, the browser posts normally and lands on `/registration-received/`. On a plain local preview (file:// or localhost) nothing is sent and the confirmation says so.
 
 ## Still to do
 
