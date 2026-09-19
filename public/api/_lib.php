@@ -11,7 +11,7 @@ if (realpath((string) ($_SERVER['SCRIPT_FILENAME'] ?? '')) === realpath(__FILE__
 
 require __DIR__ . '/config.php';
 
-const NGS_KINDS = ['registration', 'volunteer', 'partner'];
+const NGS_KINDS = ['waitlist', 'registration', 'volunteer', 'partner'];
 
 function ngs_text(array $src, string $key, int $max): string
 {

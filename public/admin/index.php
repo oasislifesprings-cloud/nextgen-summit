@@ -77,7 +77,11 @@ $error = '';
 $registrations = $notes = [];
 if ($authed) {
     try {
-        $registrations = ngs_all('registration');
+        // waitlist sign-ups and any earlier registrations share one list, newest first
+        $registrations = array_merge(ngs_all('waitlist'), ngs_all('registration'));
+        usort($registrations, function ($a, $b) {
+            return strcmp($b['created_at'], $a['created_at']);
+        });
         $notes = array_merge(ngs_all('volunteer'), ngs_all('partner'));
         usort($notes, function ($a, $b) {
             return strcmp($b['created_at'], $a['created_at']);
@@ -100,10 +104,10 @@ if ($authed && isset($_GET['export']) && $error === '') {
         return preg_match('/^[=+\-@\t\r]/', $v) ? "'" . $v : $v;
     };
     if ($which === 'registrations') {
-        fputcsv($out, ['Registered (ET)', 'First name', 'Last name', 'Email', 'Education level', 'School', 'Interested in volunteering']);
+        fputcsv($out, ['Signed up (ET)', 'List', 'First name', 'Last name', 'Email', 'Education level', 'School', 'Interested in volunteering']);
         foreach ($registrations as $r) {
             $d = $r['data'];
-            fputcsv($out, array_map($safe, [et($r['created_at']), $d['first_name'] ?? '', $d['last_name'] ?? '', $d['email'] ?? '', $d['education_level'] ?? '', $d['school_name'] ?? '', $d['volunteer_interest'] ?? '']));
+            fputcsv($out, array_map($safe, [et($r['created_at']), $r['kind'] === 'waitlist' ? 'Waitlist' : 'Registration', $d['first_name'] ?? '', $d['last_name'] ?? '', $d['email'] ?? '', $d['education_level'] ?? '', $d['school_name'] ?? '', $d['volunteer_interest'] ?? '']));
         }
     } else {
         fputcsv($out, ['Sent (ET)', 'Type', 'Name', 'Email', 'Campus', 'Organization']);
@@ -123,7 +127,7 @@ foreach ($registrations as $r) {
     $e = strtolower((string) ($r['data']['email'] ?? ''));
     $emailCount[$e] = ($emailCount[$e] ?? 0) + 1;
 }
-$stats = ['High School' => 0, 'College' => 0, 'Other' => 0, 'volunteers' => 0];
+$stats = ['High School' => 0, 'College' => 0, 'Young Professional' => 0, 'Other' => 0, 'volunteers' => 0];
 foreach ($registrations as $r) {
     $lvl = $r['data']['education_level'] ?? '';
     if (isset($stats[$lvl])) {
@@ -153,7 +157,7 @@ $shownNotes = array_values(array_filter($notes, function ($r) use ($q) { return 
 <meta name="robots" content="noindex, nofollow">
 <title>Admin · Next Gen Summit</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/site.css?v=20260919-3">
 <style>
   body{background:var(--paper)}
   .adm{max-width:1280px;margin:0 auto;padding:28px clamp(18px,4vw,48px) 80px}
@@ -179,7 +183,7 @@ $shownNotes = array_values(array_filter($notes, function ($r) use ($q) { return 
   tr:last-child td{border-bottom:0}
   td a{color:var(--ink)}
   .dup{display:inline-block;margin-left:6px;padding:2px 6px;border-radius:4px;background:var(--paper-2);font:700 10px/1.3 var(--f-sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
-  .yes{font-weight:700;color:var(--accent)}
+  .yes{font-weight:700;color:var(--accent-ink)}
   .del{min-height:32px;padding:0 10px;border:1.5px solid var(--rule-strong);border-radius:6px;font:700 11px/1 var(--f-sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
   .del:hover{border-color:#8A1233;color:#8A1233}
   .empty{padding:40px 20px;text-align:center;color:var(--ink-2)}
@@ -195,7 +199,7 @@ $shownNotes = array_values(array_filter($notes, function ($r) use ($q) { return 
     <div class="login">
       <a class="adm__mark" href="/"><span class="wm">nextgen</span><span class="nav__summit">Admin</span></a>
       <h1 class="wm">sign in.</h1>
-      <p class="adm__sub">Registrations for Next Gen Summit.</p>
+      <p class="adm__sub">Sign-ups for Next Gen Summit.</p>
       <?php if ($notice !== ''): ?><p class="note" role="alert"><?= h($notice) ?></p><?php endif; ?>
       <form method="post" action="/admin/">
         <input type="hidden" name="csrf" value="<?= h($csrf) ?>">
@@ -217,17 +221,18 @@ $shownNotes = array_values(array_filter($notes, function ($r) use ($q) { return 
     </div>
 
     <h1 class="wm"><?= $tab === 'notes' ? 'notes.' : 'registrations.' ?></h1>
-    <p class="adm__sub">Saturday, October 31 · Times shown in Eastern Time.</p>
+    <p class="adm__sub">Waitlist and registrations · Times shown in Eastern Time.</p>
 
     <?php if ($error !== ''): ?><p class="note" role="alert"><?= h($error) ?></p><?php endif; ?>
     <?php if (isset($_GET['deleted'])): ?><p class="note note--ok" role="status">Entry deleted.</p><?php endif; ?>
 
     <div class="stats">
-      <div class="stat"><b><?= count($registrations) ?></b><span>Registrations</span></div>
+      <div class="stat"><b><?= count($registrations) ?></b><span>Sign-ups</span></div>
       <div class="stat"><b><?= count($emailCount) ?></b><span>Unique emails</span></div>
       <div class="stat"><b><?= $stats['College'] ?></b><span>College</span></div>
       <div class="stat"><b><?= $stats['High School'] ?></b><span>High school</span></div>
-      <div class="stat"><b><?= $stats['Other'] ?></b><span>Other</span></div>
+      <div class="stat"><b><?= $stats['Young Professional'] ?></b><span>Young professional</span></div>
+      <?php if ($stats['Other'] > 0): ?><div class="stat"><b><?= $stats['Other'] ?></b><span>Other</span></div><?php endif; ?>
       <div class="stat"><b><?= $stats['volunteers'] ?></b><span>Want to volunteer</span></div>
     </div>
 
@@ -252,16 +257,17 @@ $shownNotes = array_values(array_filter($notes, function ($r) use ($q) { return 
         <p class="empty"><?= $q === '' ? 'No registrations yet.' : 'Nothing matches that search.' ?></p>
       <?php else: ?>
         <table>
-          <thead><tr><th>Registered</th><th>Name</th><th>Email</th><th>Level</th><th>School</th><th>Volunteer</th><th><span class="sr">Actions</span></th></tr></thead>
+          <thead><tr><th>Signed up</th><th>List</th><th>Name</th><th>Email</th><th>Level</th><th>School</th><th>Volunteer</th><th><span class="sr">Actions</span></th></tr></thead>
           <tbody>
           <?php foreach ($shownRegs as $r): $d = $r['data']; $em = strtolower((string) ($d['email'] ?? '')); ?>
             <tr>
               <td><?= h(et($r['created_at'])) ?></td>
+              <td><?= $r['kind'] === 'waitlist' ? 'Waitlist' : 'Registration' ?></td>
               <td><?= h(trim(($d['first_name'] ?? '') . ' ' . ($d['last_name'] ?? ''))) ?></td>
               <td><a href="mailto:<?= h($d['email'] ?? '') ?>"><?= h($d['email'] ?? '') ?></a><?php if (($emailCount[$em] ?? 0) > 1): ?><span class="dup" title="This email registered more than once">Repeat</span><?php endif; ?></td>
               <td><?= h($d['education_level'] ?? '') ?></td>
               <td><?= h($d['school_name'] ?? '') ?></td>
-              <td><?= ($d['volunteer_interest'] ?? '') === 'Yes' ? '<span class="yes">Yes</span>' : 'No' ?></td>
+              <td><?= ($d['volunteer_interest'] ?? '') === 'Yes' ? '<span class="yes">Yes</span>' : (isset($d['volunteer_interest']) ? 'No' : '–') ?></td>
               <td>
                 <form method="post" action="/admin/" onsubmit="return confirm('Delete this registration? This cannot be undone.')">
                   <input type="hidden" name="csrf" value="<?= h($csrf) ?>">

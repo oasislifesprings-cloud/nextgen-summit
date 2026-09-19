@@ -1,5 +1,6 @@
 <?php
-/* Next Gen Summit: receives the registration, volunteer and partner forms.
+/* Next Gen Summit: receives the waitlist, registration, volunteer and partner forms.
+   (Registration is paused while the waitlist is open; its handling below is kept for when it returns.)
    Answers JSON to the site's JavaScript, and redirects to a confirmation page
    when a browser posts the form directly (JavaScript off). */
 declare(strict_types=1);
@@ -21,17 +22,17 @@ function ngs_reply(bool $ok, string $kind, string $error, int $status, bool $jso
         exit;
     }
     if ($ok) {
-        header('Location: ' . ($kind === 'registration' ? '/registration-received/' : '/thanks/'), true, 303);
+        header('Location: ' . (in_array($kind, ['waitlist', 'registration'], true) ? '/registration-received/' : '/thanks/'), true, 303);
         exit;
     }
     http_response_code($status);
     header('Content-Type: text/html; charset=utf-8');
-    $back = $kind === 'registration' ? '/#registration' : '/#involved';
+    $back = in_array($kind, ['waitlist', 'registration'], true) ? '/#registration' : '/#involved';
     echo '<!doctype html><html lang="en"><head><meta charset="utf-8">'
         . '<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">'
         . '<title>Not sent yet · Next Gen Summit</title>'
         . '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">'
-        . '<link rel="stylesheet" href="/assets/css/site.css"></head><body>'
+        . '<link rel="stylesheet" href="/assets/css/site.css?v=20260919-3"></head><body>'
         . '<div class="received"><main class="received__main">'
         . '<p class="draft-note">Not sent yet</p><h1 class="done__title wm">almost.</h1>'
         . '<p class="done__text">' . htmlspecialchars($error, ENT_QUOTES, 'UTF-8') . '</p>'
@@ -46,7 +47,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
 }
 
 if (!in_array($kind, NGS_KINDS, true)) {
-    ngs_reply(false, 'registration', 'That form was not recognized.', 400, $wantsJson);
+    ngs_reply(false, 'waitlist', 'That form was not recognized.', 400, $wantsJson);
 }
 
 // Honeypot: people never see this field, so anything in it is a bot. Pretend it worked.
@@ -58,7 +59,36 @@ $email = ngs_text($_POST, 'email', 254);
 $emailOk = filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
 $errors = [];
 
-if ($kind === 'registration') {
+if ($kind === 'waitlist') {
+    $data = [
+        'first_name' => ngs_text($_POST, 'first_name', 80),
+        'last_name' => ngs_text($_POST, 'last_name', 80),
+        'email' => $email,
+        'education_level' => ngs_text($_POST, 'education_level', 20),
+        'school_name' => ngs_text($_POST, 'school_name', 150),
+        'volunteer_interest' => ngs_text($_POST, 'volunteer_interest', 3),
+    ];
+    if ($data['first_name'] === '' || $data['last_name'] === '') {
+        $errors[] = 'Please add your first and last name.';
+    }
+    if (!$emailOk) {
+        $errors[] = 'Please check your email address.';
+    }
+    if (!in_array($data['education_level'], ['College', 'High School', 'Young Professional'], true)) {
+        $errors[] = 'Please choose college student, high schooler or young professional.';
+    } elseif ($data['education_level'] === 'Young Professional') {
+        // young professionals are asked about volunteering instead of school
+        $data['school_name'] = '';
+        if (!in_array($data['volunteer_interest'], ['Yes', 'No'], true)) {
+            $errors[] = 'Please tell us whether you would like to volunteer.';
+        }
+    } else {
+        unset($data['volunteer_interest']);   // students are not asked, so the admin shows a dash
+    }
+    if (($data['education_level'] === 'College' || $data['education_level'] === 'High School') && $data['school_name'] === '') {
+        $errors[] = 'Please add the school you attend.';
+    }
+} elseif ($kind === 'registration') {
     $data = [
         'first_name' => ngs_text($_POST, 'first_name', 80),
         'last_name' => ngs_text($_POST, 'last_name', 80),

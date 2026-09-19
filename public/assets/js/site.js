@@ -221,9 +221,10 @@
       if (loaded) return;
       loaded = true;
       bgs.forEach(function (f) {
-        var img = $('img', f);
-        if (img.dataset.srcset) img.srcset = img.dataset.srcset;
-        if (img.dataset.src) img.src = img.dataset.src;
+        $$('source, img', f).forEach(function (n) {    // sources first, so the img picks from them
+          if (n.dataset.srcset) n.srcset = n.dataset.srcset;
+          if (n.dataset.src) n.src = n.dataset.src;
+        });
       });
     }
     new IntersectionObserver(function (es) { if (es[0].isIntersecting) loadImages(); }, { rootMargin: '50% 0px' }).observe(xp);
@@ -550,8 +551,9 @@
     initRegistration();
   }
 
+  // Drives the waitlist form, or the paused registration form if it is restored in index.html.
   function initRegistration() {
-    var form = $('form[name="registration"]');
+    var form = $('form[name="waitlist"]') || $('form[name="registration"]');
     if (!form) return;
     var dialog = form.closest('dialog');
     var wrap = $('[data-form-wrap]', dialog);
@@ -560,15 +562,36 @@
     var err = $('.form__error', form);
     var school = form.elements.school_name;
     var schoolHint = $('[data-school-hint]', form);
+    var schoolField = $('[data-school-field]', form);        // waitlist: asked only of students
+    var volunteerField = $('[data-volunteer-field]', form);  // waitlist: asked only of young professionals
     var mark = $('.done__title .reg', done);
     if (mark) buildReg(mark);
+    [schoolField, volunteerField].forEach(function (f) {
+      if (f) $$('.field__opt', f).forEach(function (n) { n.hidden = true; });
+    });
 
     function syncSchool() {
-      var other = form.elements.education_level.value === 'Other';
+      var level = form.elements.education_level.value;
+      if (schoolField) {
+        var student = level === 'College' || level === 'High School';
+        schoolField.hidden = !student;
+        school.required = student;
+        if (!student) school.value = '';
+        if (volunteerField) {
+          var pro = level === 'Young Professional';
+          var opts = $$('input', volunteerField);
+          volunteerField.hidden = !pro;
+          opts[0].required = pro;
+          if (!pro) opts.forEach(function (o) { o.checked = false; });
+        }
+        return;
+      }
+      var other = level === 'Other';
       school.required = !other;
       if (schoolHint) schoolHint.hidden = !other;
     }
     $$('input[name="education_level"]', form).forEach(function (i) { i.addEventListener('change', syncSchool); });
+    syncSchool();
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -576,13 +599,14 @@
       var who = {
         first: firstName(form.elements.first_name.value),
         email: form.elements.email.value.trim(),
-        volunteer: form.elements.volunteer_interest.value === 'Yes'
+        volunteer: !!form.elements.volunteer_interest && form.elements.volunteer_interest.value === 'Yes'
       };
       setBusy(btn, true);
       sendForm(form).then(function () {
         $('[data-done-name]', done).textContent = who.first;
         $('[data-done-email]', done).textContent = who.email;
-        $('[data-done-volunteer]', done).hidden = !who.volunteer;
+        var vol = $('[data-done-volunteer]', done);
+        if (vol) vol.hidden = !who.volunteer;
         $('[data-done-local]', done).hidden = !LOCAL_PREVIEW;
         wrap.hidden = true;
         done.hidden = false;
