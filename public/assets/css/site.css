@@ -148,9 +148,9 @@ h1,h2,h3,p{margin:0}
 .what__title{margin-top:clamp(28px,6vh,70px);font-size:min(13.4vw,13rem);line-height:.92}
 .what__title > .wm{display:block}
 .what__rot{position:relative;display:block;height:1.18em;margin:-.04em 0 -.14em;overflow:hidden;overflow:clip}
-.what__word{position:absolute;left:0;top:0;white-space:nowrap;line-height:1.08;opacity:0;transform:translate3d(0,72%,0);transition:transform 1.05s var(--ease),opacity .7s var(--ease)}
+.what__word{position:absolute;left:0;top:0;white-space:nowrap;line-height:1.08;opacity:0;transform:translate3d(0,72%,0);transition:transform .7s var(--ease),opacity .45s var(--ease)}
 .what__word.is-current{opacity:1;transform:none}
-.what__word.is-leaving{opacity:0;transform:translate3d(0,-46%,0);transition:transform .8s var(--ease-io),opacity .5s var(--ease)}
+.what__word.is-leaving{opacity:0;transform:translate3d(0,-46%,0);transition:transform .55s var(--ease-io),opacity .35s var(--ease)}
 .what__dot{color:var(--accent)}
 .what__foot{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,31rem);gap:28px 40px;align-items:end;margin-top:clamp(40px,8vh,96px)}
 .what__lede{grid-column:2;font:500 clamp(19px,1.65vw,25px)/1.48 var(--f-sans);max-width:30ch}

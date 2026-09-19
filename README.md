@@ -80,12 +80,9 @@ Posted with `form-name` = `waitlist`. The admin page lists waitlist sign-ups and
 
 | Field | Name posted | Values |
 |---|---|---|
-| First Name | `first_name` | required |
-| Last Name | `last_name` | required |
-| Email Address | `email` | required, valid email |
-| Which best describes you? | `education_level` | `College`, `High School`, `Young Professional` |
-| School | `school_name` | asked only of College and High School; required for them, blank for Young Professional |
-| Would you like to volunteer? | `volunteer_interest` | `Yes`, `No`; asked only of, and required for, Young Professional |
+| Name | `name` | required |
+| Phone number | `phone` | required; any common format with 7 to 15 digits |
+| Email | `email` | required, valid email |
 
 ## Restoring the registration form
 

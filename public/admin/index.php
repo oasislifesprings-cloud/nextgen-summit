@@ -104,10 +104,10 @@ if ($authed && isset($_GET['export']) && $error === '') {
         return preg_match('/^[=+\-@\t\r]/', $v) ? "'" . $v : $v;
     };
     if ($which === 'registrations') {
-        fputcsv($out, ['Signed up (ET)', 'List', 'First name', 'Last name', 'Email', 'Education level', 'School', 'Interested in volunteering']);
+        fputcsv($out, ['Signed up (ET)', 'List', 'Name', 'Email', 'Phone', 'Education level', 'School', 'Interested in volunteering']);
         foreach ($registrations as $r) {
             $d = $r['data'];
-            fputcsv($out, array_map($safe, [et($r['created_at']), $r['kind'] === 'waitlist' ? 'Waitlist' : 'Registration', $d['first_name'] ?? '', $d['last_name'] ?? '', $d['email'] ?? '', $d['education_level'] ?? '', $d['school_name'] ?? '', $d['volunteer_interest'] ?? '']));
+            fputcsv($out, array_map($safe, [et($r['created_at']), $r['kind'] === 'waitlist' ? 'Waitlist' : 'Registration', person_name($d), $d['email'] ?? '', $d['phone'] ?? '', $d['education_level'] ?? '', $d['school_name'] ?? '', $d['volunteer_interest'] ?? '']));
         }
     } else {
         fputcsv($out, ['Sent (ET)', 'Type', 'Name', 'Email', 'Campus', 'Organization']);
@@ -138,6 +138,12 @@ foreach ($registrations as $r) {
     }
 }
 
+/** Waitlist sign-ups have one name field; registrations had first and last. */
+function person_name(array $d): string
+{
+    return trim((string) ($d['name'] ?? (($d['first_name'] ?? '') . ' ' . ($d['last_name'] ?? ''))));
+}
+
 function matches(array $r, string $q): bool
 {
     if ($q === '') {
@@ -157,7 +163,7 @@ $shownNotes = array_values(array_filter($notes, function ($r) use ($q) { return 
 <meta name="robots" content="noindex, nofollow">
 <title>Admin · Next Gen Summit</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20260919-3">
+<link rel="stylesheet" href="/assets/css/site.css?v=20260919-5">
 <style>
   body{background:var(--paper)}
   .adm{max-width:1280px;margin:0 auto;padding:28px clamp(18px,4vw,48px) 80px}
@@ -229,11 +235,11 @@ $shownNotes = array_values(array_filter($notes, function ($r) use ($q) { return 
     <div class="stats">
       <div class="stat"><b><?= count($registrations) ?></b><span>Sign-ups</span></div>
       <div class="stat"><b><?= count($emailCount) ?></b><span>Unique emails</span></div>
-      <div class="stat"><b><?= $stats['College'] ?></b><span>College</span></div>
-      <div class="stat"><b><?= $stats['High School'] ?></b><span>High school</span></div>
-      <div class="stat"><b><?= $stats['Young Professional'] ?></b><span>Young professional</span></div>
-      <?php if ($stats['Other'] > 0): ?><div class="stat"><b><?= $stats['Other'] ?></b><span>Other</span></div><?php endif; ?>
-      <div class="stat"><b><?= $stats['volunteers'] ?></b><span>Want to volunteer</span></div>
+      <?php // the waitlist no longer asks these, so they only show when earlier sign-ups answered them
+      foreach (['College' => 'College', 'High School' => 'High school', 'Young Professional' => 'Young professional', 'Other' => 'Other', 'volunteers' => 'Want to volunteer'] as $k => $label):
+        if ($stats[$k] > 0): ?>
+      <div class="stat"><b><?= $stats[$k] ?></b><span><?= h($label) ?></span></div>
+      <?php endif; endforeach; ?>
     </div>
 
     <div class="bar">
@@ -245,7 +251,7 @@ $shownNotes = array_values(array_filter($notes, function ($r) use ($q) { return 
         <form method="get" action="/admin/" role="search">
           <input type="hidden" name="tab" value="<?= h($tab) ?>">
           <label class="sr" for="q">Search</label>
-          <input id="q" name="q" type="search" value="<?= h($q) ?>" placeholder="Search name, email, school">
+          <input id="q" name="q" type="search" value="<?= h($q) ?>" placeholder="Search name, email, phone">
         </form>
         <a class="btn btn--sm" href="/admin/?export=<?= $tab === 'notes' ? 'notes' : 'registrations' ?>">Export CSV</a>
       </div>
@@ -257,14 +263,15 @@ $shownNotes = array_values(array_filter($notes, function ($r) use ($q) { return 
         <p class="empty"><?= $q === '' ? 'No registrations yet.' : 'Nothing matches that search.' ?></p>
       <?php else: ?>
         <table>
-          <thead><tr><th>Signed up</th><th>List</th><th>Name</th><th>Email</th><th>Level</th><th>School</th><th>Volunteer</th><th><span class="sr">Actions</span></th></tr></thead>
+          <thead><tr><th>Signed up</th><th>List</th><th>Name</th><th>Email</th><th>Phone</th><th>Level</th><th>School</th><th>Volunteer</th><th><span class="sr">Actions</span></th></tr></thead>
           <tbody>
           <?php foreach ($shownRegs as $r): $d = $r['data']; $em = strtolower((string) ($d['email'] ?? '')); ?>
             <tr>
               <td><?= h(et($r['created_at'])) ?></td>
               <td><?= $r['kind'] === 'waitlist' ? 'Waitlist' : 'Registration' ?></td>
-              <td><?= h(trim(($d['first_name'] ?? '') . ' ' . ($d['last_name'] ?? ''))) ?></td>
+              <td><?= h(person_name($d)) ?></td>
               <td><a href="mailto:<?= h($d['email'] ?? '') ?>"><?= h($d['email'] ?? '') ?></a><?php if (($emailCount[$em] ?? 0) > 1): ?><span class="dup" title="This email registered more than once">Repeat</span><?php endif; ?></td>
+              <td><?php if (($d['phone'] ?? '') !== ''): ?><a href="tel:<?= h(preg_replace('/[^0-9+]/', '', $d['phone'])) ?>"><?= h($d['phone']) ?></a><?php endif; ?></td>
               <td><?= h($d['education_level'] ?? '') ?></td>
               <td><?= h($d['school_name'] ?? '') ?></td>
               <td><?= ($d['volunteer_interest'] ?? '') === 'Yes' ? '<span class="yes">Yes</span>' : (isset($d['volunteer_interest']) ? 'No' : '–') ?></td>

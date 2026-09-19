@@ -168,14 +168,14 @@
       var nxt = nodes[idx];
       cur.classList.remove('is-current');
       cur.classList.add('is-leaving');
-      setTimeout(function () { cur.classList.remove('is-leaving'); }, 900);
+      setTimeout(function () { cur.classList.remove('is-leaving'); }, 650);
       nxt.classList.add('is-current');
       regPlay($('.reg', nxt), 60);
     }
     function schedule() {
       clearTimeout(timer);
       timer = null;
-      if (canRun()) timer = setTimeout(function () { step(); schedule(); }, 2600);
+      if (canRun()) timer = setTimeout(function () { step(); schedule(); }, 1500);   // time each word holds
     }
     function showFirst() {
       nodes.forEach(function (n, i) {
@@ -562,31 +562,13 @@
     var err = $('.form__error', form);
     var school = form.elements.school_name;
     var schoolHint = $('[data-school-hint]', form);
-    var schoolField = $('[data-school-field]', form);        // waitlist: asked only of students
-    var volunteerField = $('[data-volunteer-field]', form);  // waitlist: asked only of young professionals
     var mark = $('.done__title .reg', done);
     if (mark) buildReg(mark);
-    [schoolField, volunteerField].forEach(function (f) {
-      if (f) $$('.field__opt', f).forEach(function (n) { n.hidden = true; });
-    });
 
+    // registration form only: school becomes optional for "Other" (the waitlist has no school question)
     function syncSchool() {
-      var level = form.elements.education_level.value;
-      if (schoolField) {
-        var student = level === 'College' || level === 'High School';
-        schoolField.hidden = !student;
-        school.required = student;
-        if (!student) school.value = '';
-        if (volunteerField) {
-          var pro = level === 'Young Professional';
-          var opts = $$('input', volunteerField);
-          volunteerField.hidden = !pro;
-          opts[0].required = pro;
-          if (!pro) opts.forEach(function (o) { o.checked = false; });
-        }
-        return;
-      }
-      var other = level === 'Other';
+      if (!school || !form.elements.education_level) return;
+      var other = form.elements.education_level.value === 'Other';
       school.required = !other;
       if (schoolHint) schoolHint.hidden = !other;
     }
@@ -597,7 +579,7 @@
       e.preventDefault();
       err.hidden = true;
       var who = {
-        first: firstName(form.elements.first_name.value),
+        first: firstName((form.elements.first_name || form.elements.name).value),
         email: form.elements.email.value.trim(),
         volunteer: !!form.elements.volunteer_interest && form.elements.volunteer_interest.value === 'Yes'
       };
@@ -627,7 +609,7 @@
       done.hidden = true;
       wrap.hidden = false;
       dialog.scrollTop = 0;
-      form.elements.first_name.focus();
+      (form.elements.first_name || form.elements.name).focus();
     });
   }
 
