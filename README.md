@@ -24,6 +24,10 @@ nextgen-summit/
     └── assets/                   css, js, images
 ```
 
+## "Who NextGen is for" images
+
+The three photos in the 17—29 section were generated with Higgsfield (Soul 2.0). The 2K originals are kept locally in `source-images/gen/` (ignored by git because of their size). To rebuild the web sizes after replacing an original, run `sh tools/make-gen-images.sh`: it trims the film border, crops each frame to its ratio and writes 600/900/1200px greyscale JPEGs to `public/assets/img/`.
+
 ## Updating CSS or JavaScript
 
 Browsers keep `site.css`, `site.js` and `liquid.js` for 7 days (see `.htaccess`). Whenever you change one of them, bump the `?v=` date on every link to it (`index.html`, `registration-received/`, `thanks/`, `admin/index.php`, `api/register.php`) so returning visitors get the new file straight away.

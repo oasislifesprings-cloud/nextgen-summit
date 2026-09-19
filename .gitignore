@@ -11,3 +11,6 @@ public/data/*.jsonl
 
 # private site settings: generated per server with node tools/make-config.mjs
 public/api/config.php
+
+# originals from the image generator (large); web sizes live in public/assets/img
+source-images/

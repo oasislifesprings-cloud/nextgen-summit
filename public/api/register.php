@@ -32,7 +32,7 @@ function ngs_reply(bool $ok, string $kind, string $error, int $status, bool $jso
         . '<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">'
         . '<title>Not sent yet · Next Gen Summit</title>'
         . '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">'
-        . '<link rel="stylesheet" href="/assets/css/site.css?v=20260919-5"></head><body>'
+        . '<link rel="stylesheet" href="/assets/css/site.css?v=20260919-9"></head><body>'
         . '<div class="received"><main class="received__main">'
         . '<p class="draft-note">Not sent yet</p><h1 class="done__title wm">almost.</h1>'
         . '<p class="done__text">' . htmlspecialchars($error, ENT_QUOTES, 'UTF-8') . '</p>'
@@ -104,9 +104,7 @@ if ($kind === 'waitlist') {
         'name' => ngs_text($_POST, 'name', 120),
         'email' => $email,
     ];
-    if ($kind === 'volunteer') {
-        $data['campus'] = ngs_text($_POST, 'campus', 150);
-    } else {
+    if ($kind === 'partner') {   // volunteers give just a name and email
         $data['organization'] = ngs_text($_POST, 'organization', 150);
     }
     if ($data['name'] === '') {

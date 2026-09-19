@@ -37,9 +37,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preload" as="image" href="assets/img/hero-m-864.jpg" media="(max-aspect-ratio: 3/4)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/img/hero-1600.jpg" imagesrcset="assets/img/hero-800.jpg 800w, assets/img/hero-1200.jpg 1200w, assets/img/hero-1600.jpg 1600w, assets/img/hero-2048.jpg 2048w" imagesizes="(max-aspect-ratio: 16/9) 177.78vh, 100vw" media="not all and (max-aspect-ratio: 3/4)" fetchpriority="high">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="assets/css/site.css?v=20260919-5">
-<script src="assets/js/liquid.js?v=20260919-5" defer></script>
-<script src="assets/js/site.js?v=20260919-5" defer></script>
+<link rel="stylesheet" href="assets/css/site.css?v=20260919-9">
+<script src="assets/js/liquid.js?v=20260919-9" defer></script>
+<script src="assets/js/site.js?v=20260919-9" defer></script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -145,7 +145,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </li>
         <li class="xp__item rv" data-key="meet" style="--d:.16s">
           <h3 class="xp__phrase wm">meet people.</h3>
-          <p class="xp__note">Students from campuses across Maryland in one room. Come with friends, or come solo.</p>
+          <p class="xp__note">High school, college and early career, all in one room. Come with friends, or come solo.</p>
         </li>
         <li class="xp__item rv" data-key="next" style="--d:.24s">
           <h3 class="xp__phrase wm">find what's next.</h3>
@@ -225,40 +225,66 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </ul>
   </section>
 
-  <!-- 06 all campuses welcome -->
-  <section class="campus" id="campuses" data-nav="paper" aria-labelledby="campus-title">
-    <div class="campus__head">
-      <p class="label rv"><span class="idx">05</span>All Campuses</p>
-      <h2 class="campus__title wm rv" id="campus-title" style="--d:.1s">all campuses welcome.</h2>
-      <p class="campus__lede rv" style="--d:.2s">Students from colleges and universities across Maryland are invited.</p>
+  <!-- 06 who nextgen is for: one generation, three stages -->
+  <section class="gen" id="who" data-nav="paper" aria-labelledby="gen-title">
+    <!-- the turquoise thread that draws 01 → 02 → 03 → the ending; site.js builds the path from the labels -->
+    <svg class="gen__thread" aria-hidden="true" focusable="false"><path/></svg>
+    <div class="gen__head">
+      <p class="label rv"><span class="idx">05</span>Who NextGen is for</p>
+      <p class="gen__range rv" style="--d:.08s" aria-hidden="true"><span class="reg">17—29</span></p>
+      <div class="gen__intro">
+        <h2 class="gen__title wm rv" id="gen-title" style="--d:.16s"><span class="sr">Ages 17 to 29. </span>different stages.<br> one generation.</h2>
+        <p class="gen__lede rv" style="--d:.24s">High school students. College students. Young professionals. All building what comes next.</p>
+      </div>
     </div>
-    <p class="label campus__kicker rv">Students invited from campuses across Maryland</p>
-    <div class="marquee rv" style="--d:.1s" data-marquee>
-      <ul class="marquee__track" aria-label="Some of the Maryland campuses whose students are invited">
-        <li class="marquee__item">Morgan State</li>
-        <li class="marquee__item">Towson</li>
-        <li class="marquee__item">UMD</li>
-        <li class="marquee__item">Bowie State</li>
-        <li class="marquee__item">UMBC</li>
-        <li class="marquee__item">Johns Hopkins</li>
-        <li class="marquee__item">Coppin State</li>
-        <li class="marquee__item">Loyola Maryland</li>
-        <li class="marquee__item">Stevenson</li>
-        <li class="marquee__item">UMES</li>
-        <li class="marquee__item">UBalt</li>
-        <li class="marquee__item">MICA</li>
-        <li class="marquee__item">Goucher</li>
-        <li class="marquee__item">Salisbury</li>
-        <li class="marquee__item">Frostburg State</li>
-        <li class="marquee__item">McDaniel</li>
-        <li class="marquee__item">CCBC</li>
-        <li class="marquee__item">Baltimore City CC</li>
-        <li class="marquee__item">Prince George's CC</li>
-        <li class="marquee__item">Montgomery College</li>
-      </ul>
+
+    <div class="gen__art">
+      <!-- 17—29 again, as the ground the portraits stand on: it fades in behind them as the headline fades out -->
+      <div class="gen__ghost" aria-hidden="true"><span class="gen__ghost-t"><span>17</span><span>—</span><span>29</span></span></div>
+      <ol class="gen__set">
+        <li class="gen__stage gen__stage--hs rv" style="--d:.05s">
+          <div class="gen__frame">
+            <span class="gen__back" aria-hidden="true"></span>
+            <figure class="gen__img" tabindex="0" aria-labelledby="gen-tag-hs">
+              <img src="assets/img/gen-high-school-900.jpg" srcset="assets/img/gen-high-school-600.jpg 600w, assets/img/gen-high-school-900.jpg 900w, assets/img/gen-high-school-1200.jpg 1200w"
+                sizes="(max-width:760px) 64vw, (max-width:1000px) 40vw, (max-width:1560px) 30vw, 470px" width="1200" height="1600" loading="lazy" decoding="async" style="--pos:50% 30%"
+                alt="A young man in an oversized blazer and white t-shirt, a tote on his shoulder, looking toward the horizon in low sun.">
+            </figure>
+          </div>
+          <h3 class="gen__tag" id="gen-tag-hs"><span class="gen__no">01</span> / High school</h3>
+          <p class="gen__line wm">see what's ahead.</p>
+        </li>
+        <li class="gen__stage gen__stage--college rv" style="--d:.15s">
+          <div class="gen__frame">
+            <span class="gen__back" aria-hidden="true"></span>
+            <figure class="gen__img" tabindex="0" aria-labelledby="gen-tag-college">
+              <img src="assets/img/gen-college-900.jpg" srcset="assets/img/gen-college-600.jpg 600w, assets/img/gen-college-900.jpg 900w, assets/img/gen-college-1200.jpg 1200w"
+                sizes="(max-width:760px) 88vw, (max-width:1000px) 56vw, (max-width:1560px) 40vw, 620px" width="1200" height="900" loading="lazy" decoding="async"
+                alt="Three friends walking and talking outdoors, one explaining an idea with her hands while the others listen and laugh.">
+            </figure>
+          </div>
+          <h3 class="gen__tag" id="gen-tag-college"><span class="gen__no">02</span> / College</h3>
+          <p class="gen__line wm">expand what's possible.</p>
+        </li>
+        <li class="gen__stage gen__stage--pro rv" style="--d:.25s">
+          <div class="gen__frame">
+            <span class="gen__back" aria-hidden="true"></span>
+            <figure class="gen__img" tabindex="0" aria-labelledby="gen-tag-pro">
+              <img src="assets/img/gen-young-professional-900.jpg" srcset="assets/img/gen-young-professional-600.jpg 600w, assets/img/gen-young-professional-900.jpg 900w, assets/img/gen-young-professional-1200.jpg 1200w"
+                sizes="(max-width:760px) 64vw, (max-width:1000px) 30vw, (max-width:1560px) 23vw, 360px" width="1200" height="1600" loading="lazy" decoding="async" style="--pos:50% 30%"
+                alt="A young designer with curly hair at a studio worktable, one hand on pinned sketches, looking toward the window light.">
+            </figure>
+          </div>
+          <h3 class="gen__tag" id="gen-tag-pro"><span class="gen__no">03</span> / Young professionals</h3>
+          <p class="gen__line wm">build what's next.</p>
+        </li>
+      </ol>
     </div>
-    <div class="campus__tools">
-      <button class="toggle" type="button" aria-pressed="false" data-marquee-toggle><span class="toggle__i" aria-hidden="true"></span><span class="toggle__t">Pause campuses</span></button>
+
+    <div class="gen__end">
+      <p class="gen__end-kicker rv">One generation</p>
+      <p class="gen__end-title wm rv" style="--d:.1s">different stages.<br> same future.</p>
+      <p class="gen__close rv" style="--d:.2s">From high school to college to the start of your career, NextGen brings young people ages 17–29 into one room.</p>
     </div>
   </section>
 
@@ -440,7 +466,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p class="hp" aria-hidden="true"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
           <div class="field"><label for="v-name">Name</label><input id="v-name" name="name" autocomplete="name" required></div>
           <div class="field"><label for="v-email">Email</label><input id="v-email" name="email" type="email" autocomplete="email" required></div>
-          <div class="field"><label for="v-campus">Campus (optional)</label><input id="v-campus" name="campus" autocomplete="organization"></div>
           <p class="form__error" role="alert" hidden></p>
           <div class="mini__row">
             <button class="btn" type="submit"><span class="btn__t">Send</span> <span class="arr" aria-hidden="true">→</span></button>
@@ -487,7 +512,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </details>
       <details name="faq">
         <summary>Who can attend?<span class="faq__plus" aria-hidden="true"></span></summary>
-        <div class="faq__a"><p>College students, emerging young adults, and older high-school students. Students from all campuses are welcome.</p></div>
+        <div class="faq__a"><p>Young people ages 17–29: high school students, college students and young professionals.</p></div>
       </details>
       <details name="faq">
         <summary>How much does it cost?<span class="faq__plus" aria-hidden="true"></span></summary>
