@@ -37,9 +37,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preload" as="image" href="assets/img/hero-m-864.jpg" media="(max-aspect-ratio: 3/4)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/img/hero-1600.jpg" imagesrcset="assets/img/hero-800.jpg 800w, assets/img/hero-1200.jpg 1200w, assets/img/hero-1600.jpg 1600w, assets/img/hero-2048.jpg 2048w" imagesizes="(max-aspect-ratio: 16/9) 177.78vh, 100vw" media="not all and (max-aspect-ratio: 3/4)" fetchpriority="high">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="assets/css/site.css?v=20260922-2">
-<script src="assets/js/liquid.js?v=20260922-2" defer></script>
-<script src="assets/js/site.js?v=20260922-2" defer></script>
+<link rel="stylesheet" href="assets/css/site.css?v=20260923-2">
+<script src="assets/js/liquid.js?v=20260923-2" defer></script>
+<script src="assets/js/site.js?v=20260923-2" defer></script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -58,6 +58,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
        "Join the waitlist". When Eventbrite ticketing opens, point these at the Eventbrite URL (drop the
        data-open attribute so the drawer no longer intercepts them) and change the label to "Register".
        They are: this nav button, the hero, the invitation section, the closing section and the small-screen menu. -->
+  <!-- countdown to the summit; site.js reads data-until. It inherits the bar's colour, so it flips
+       from white on photo sections to ink on paper sections with everything else in the nav. -->
+  <div class="count" data-until="2026-10-30T00:00:00-04:00">
+    <p class="sr" data-count-sr>NextGen Summit is on October 30.</p>
+    <p class="count__row" aria-hidden="true">
+      <span class="count__u"><span class="count__n" data-count="days">--</span><span class="count__l">d<span class="count__word">ays</span></span></span>
+      <span class="count__u count__u--hms"><span class="count__n" data-count="hours">--</span><span class="count__l">h</span></span>
+      <span class="count__u count__u--hms"><span class="count__n" data-count="minutes">--</span><span class="count__l">m</span></span>
+      <span class="count__u count__u--hms"><span class="count__n" data-count="seconds">--</span><span class="count__l">s</span></span>
+      <span class="count__to">to NextGen</span>
+    </p>
+  </div>
   <nav class="nav__links" aria-label="Utilities">
     <button class="nav__link" type="button" data-open="involved">Get Involved</button>
     <button class="nav__link" type="button" data-open="faq">FAQ</button>
@@ -112,7 +124,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="what__foot">
       <p class="what__lede rv" style="--d:.2s">A one-day experience for students and young adults to grow, connect, and see what's possible for their future.</p>
       <div class="what__tools rv" style="--d:.3s">
-        <button class="toggle" type="button" aria-pressed="false" data-rotator-toggle><span class="toggle__i" aria-hidden="true"></span><span class="toggle__t">Pause words</span></button>
+        <button class="toggle" type="button" aria-pressed="false" data-rotator-toggle aria-label="Pause the rotating words"><span class="toggle__i" aria-hidden="true"></span><span class="toggle__t sr">Pause words</span></button>
       </div>
     </div>
   </section>
@@ -238,10 +250,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- the turquoise thread that draws 01 → 02 → 03 → the ending; site.js builds the path from the labels -->
     <svg class="gen__thread" aria-hidden="true" focusable="false"><path/></svg>
     <div class="gen__head">
-      <p class="label rv"><span class="idx">05</span>Who NextGen is for</p>
+      <p class="label rv"><span class="idx">05</span>The audience</p>
       <p class="gen__range rv" style="--d:.08s" aria-hidden="true"><span class="reg">17—29</span></p>
       <div class="gen__intro">
-        <h2 class="gen__title wm rv" id="gen-title" style="--d:.16s"><span class="sr">Ages 17 to 29. </span>different stages.<br> one generation.</h2>
+        <h2 class="gen__title wm rv" id="gen-title" style="--d:.16s"><span class="sr">Ages 17 to 29. </span>one generation.<br> many stages.</h2>
         <p class="gen__lede rv" style="--d:.24s">High school students. College students. Young professionals. All building what comes next.</p>
       </div>
     </div>
@@ -290,8 +302,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <div class="gen__end">
-      <p class="gen__end-kicker rv">One generation</p>
-      <p class="gen__end-title wm rv" style="--d:.1s">different stages.<br> same future.</p>
+      <p class="gen__end-kicker rv">One room</p>
+      <p class="gen__end-title wm rv" style="--d:.1s">different paths.<br> same future.</p>
       <p class="gen__close rv" style="--d:.2s">From high school to college to the start of your career, NextGen brings young people ages 17–29 into one room.</p>
     </div>
   </section>
@@ -322,8 +334,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <ul>
       <li><button type="button" data-open="faq">FAQ</button></li>
       <li><button type="button" data-open="involved">Get Involved</button></li>
-      <li><span class="foot__ph">Contact<span class="foot__soon">Soon</span></span></li>
-      <li><a href="https://www.instagram.com/blw.oasis/" target="_blank" rel="noopener">Instagram<span class="sr"> (opens in a new tab)</span></a></li>
+      <li><a href="mailto:hello@nextgensummit.us">Contact</a></li>
+      <li><a href="https://www.instagram.com/nextgensummit.us/" target="_blank" rel="noopener">Instagram<span class="sr"> (opens in a new tab)</span></a></li>
+      <li><a href="https://www.tiktok.com/@nextgensummit.us" target="_blank" rel="noopener">TikTok<span class="sr"> (opens in a new tab)</span></a></li>
     </ul>
   </nav>
   <p class="foot__note">NextGen Summit 2026</p>

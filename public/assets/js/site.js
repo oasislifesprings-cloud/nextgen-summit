@@ -103,6 +103,39 @@
     });
   }
 
+  /* ---------- hero countdown ---------- */
+  function initCountdown() {
+    var box = $('.count');
+    if (!box) return;
+    var target = new Date(box.getAttribute('data-until')).getTime();
+    if (!target) { box.hidden = true; return; }
+    var out = {};
+    ['days', 'hours', 'minutes', 'seconds'].forEach(function (k) { out[k] = $('[data-count="' + k + '"]', box); });
+    var sr = $('[data-count-sr]', box);
+    var timer = null, visible = false;
+
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function tick() {
+      var left = Math.max(0, target - Date.now());
+      var sec = Math.floor(left / 1000);
+      var d = Math.floor(sec / 86400), h = Math.floor(sec % 86400 / 3600), m = Math.floor(sec % 3600 / 60);
+      out.days.textContent = pad(d);
+      out.hours.textContent = pad(h);
+      out.minutes.textContent = pad(m);
+      out.seconds.textContent = pad(sec % 60);
+      if (sr) sr.textContent = left ? d + ' days until NextGen Summit on October 30.' : 'NextGen Summit is here.';
+      if (!left && timer) { clearInterval(timer); timer = null; }
+    }
+    function run() {                        // only ticks while the hero is on screen and the tab is open
+      var on = visible && !document.hidden;
+      if (on && !timer) { tick(); timer = setInterval(tick, 1000); }
+      else if (!on && timer) { clearInterval(timer); timer = null; }
+    }
+    tick();
+    new IntersectionObserver(function (es) { visible = es[0].isIntersecting; run(); }).observe(box);
+    document.addEventListener('visibilitychange', run);
+  }
+
   /* ---------- nav theme ---------- */
   var requestNav = function () {};
   function initNav() {
@@ -195,7 +228,9 @@
       toggle.addEventListener('click', function () {
         userPaused = !userPaused;
         toggle.setAttribute('aria-pressed', String(userPaused));
+        var label = userPaused ? 'Play the rotating words' : 'Pause the rotating words';
         $('.toggle__t', toggle).textContent = userPaused ? 'Play words' : 'Pause words';
+        toggle.setAttribute('aria-label', label);
         schedule();
       });
     }
@@ -690,6 +725,7 @@
 
   initMotionPrefs();
   initNav();
+  initCountdown();
   initHero();
   initReveals();
   initRotator();
