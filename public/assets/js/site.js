@@ -483,7 +483,8 @@
       }
       // --p: 0 while 17—29 sits in view, 1 once it has handed off to the portraits
       pickCentered();
-      var rt = range ? range.getBoundingClientRect().top : 0;
+      var anchor = range || $('.gen__title', gen);
+      var rt = anchor ? anchor.getBoundingClientRect().top : 0;
       gen.style.setProperty('--p', clamp01((vh * 0.35 - rt) / (vh * 0.55)).toFixed(3));
       // the thread draws as the collage passes, finishing as the ending arrives
       if (path && threadLen) {

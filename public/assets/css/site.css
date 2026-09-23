@@ -148,6 +148,7 @@ h1,h2,h3,p{margin:0}
 .is-ready .hero__img{transform:none}
 .hero__shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(var(--shade),.3) 0%,rgba(var(--shade),.06) 45%,rgba(var(--shade),0) 100%),linear-gradient(180deg,rgba(var(--shade),.32) 0%,rgba(var(--shade),0) 16%,rgba(var(--shade),0) 48%,rgba(var(--shade),.5) 74%,rgba(var(--shade),.84) 100%)}
 .hero__inner{position:relative;width:100%;max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter) clamp(26px,5vh,54px)}
+.hero__meta{color:#fff;text-shadow:0 1px 3px rgba(var(--shade),.65)}
 .hero__title{margin:clamp(6px,1.2vh,14px) 0 0;font-size:clamp(84px,19.2vw,340px);line-height:.84;text-shadow:0 2px 40px rgba(var(--shade),.18)}
 .hero__title .reg{margin-left:-.045em;padding-bottom:.08em}
 /* the flyer lockup: tracked SUMMIT tucked under the end of the wordmark */
@@ -242,14 +243,18 @@ h1,h2,h3,p{margin:0}
 .invite__date .reg + .reg{margin-top:.02em}
 .invite__card{padding-bottom:.4em}
 .invite__details{margin:0}
-.invite__details div{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:16px;align-items:baseline;padding:15px 0;border-top:1px solid var(--rule)}
+.invite__details div{display:grid;grid-template-columns:minmax(5.5rem,auto) minmax(0,1fr);gap:8px 28px;align-items:baseline;padding:17px 0;border-top:1px solid var(--rule)}
 .invite__details div:last-child{border-bottom:1px solid var(--rule)}
-.invite__details dt{font:700 11px/1.3 var(--f-sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2)}
+.invite__details dt{font:700 11px/1.3 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
 .invite__details dd{margin:0;font:800 clamp(16px,1.45vw,21px)/1.3 var(--f-sans);letter-spacing:.02em;text-transform:uppercase}
 .invite__cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-top:30px}
 .invite__small{font:600 13px/1.45 var(--f-sans);color:var(--ink-2);max-width:30ch}
 @media (max-width:900px){
   .invite__body{grid-template-columns:1fr}
+}
+/* narrow phones: label above value, so a long label like "Registration" never crowds it */
+@media (max-width:420px){
+  .invite__details div{grid-template-columns:1fr;gap:6px}
 }
 
 /* ---------- 05 who's in the room ---------- */
@@ -260,13 +265,15 @@ h1,h2,h3,p{margin:0}
 .room__note{justify-self:end;text-align:right;padding-bottom:.9em}
 .room__note p{margin-top:8px;font:600 13px/1.45 var(--f-sans);color:var(--ink-2);max-width:30ch;margin-left:auto}
 .room__note .draft-note{margin-top:0;max-width:none;white-space:nowrap;font:700 11px/1.3 var(--f-sans);letter-spacing:.16em;color:var(--accent-ink)}
-.room__grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.8vw,28px)}
+.room__grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.4vw,40px)}
 .person__img{position:relative;margin:0;aspect-ratio:3/4;overflow:hidden;background:var(--paper-2)}
 .person__img img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 50%);filter:grayscale(1) contrast(1.08) brightness(1.02);transform:scale(1.02);transition:transform 1.6s var(--ease)}
 .person:hover .person__img img{transform:scale(1.07)}
 .person__tag{position:absolute;left:10px;bottom:10px;font:700 10px/1 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;background:rgba(250,250,248,.94);color:var(--ink);padding:7px 9px;border-radius:6px}
 .person__role{margin-top:18px;font:800 clamp(15px,1.25vw,19px)/1.25 var(--f-sans);letter-spacing:.02em;text-transform:uppercase}
-.person__status{margin-top:6px;font:600 14px/1.4 var(--f-sans);color:var(--ink-2)}
+.person__status{margin-top:8px;font:600 14px/1.5 var(--f-sans);color:var(--ink-2);max-width:30ch}
+.room__credit{margin-top:clamp(22px,3.2vh,34px);font:500 12px/1.5 var(--f-sans);color:var(--ink-3)}
+.room__credit .linkish{font-size:12px}
 @media (max-width:1000px){
   .room__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
@@ -288,11 +295,9 @@ h1,h2,h3,p{margin:0}
    hands off) and draws the thread; with no script everything below still reads as a static layout. */
 .gen{position:relative;max-width:var(--maxw);margin:0 auto;padding:clamp(110px,18vh,210px) var(--gutter) clamp(100px,16vh,190px);border-top:1px solid var(--rule)}
 .gen__head,.gen__art,.gen__end{position:relative;z-index:1}
-.gen__range{margin:clamp(18px,3vh,34px) 0 0 -.05em;font:800 clamp(96px,24vw,300px)/.82 var(--f-sans);letter-spacing:-.05em;white-space:nowrap}
-.gen__range .reg{opacity:calc(1 - var(--p,0) * .85);transform:translate3d(0,calc(var(--p,0) * -6vh),0)}
-.gen__intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,26rem);gap:20px 48px;align-items:end;margin-top:clamp(22px,3.6vh,40px)}
-.gen__title{font-size:clamp(40px,5.8vw,96px);line-height:.95}
-.gen__lede{font:500 clamp(17px,1.4vw,21px)/1.5 var(--f-sans);color:var(--ink-2);max-width:30ch;padding-bottom:.3em}
+.gen__intro{margin-top:clamp(26px,4.5vh,54px)}
+.gen__title{font-size:clamp(46px,7.4vw,124px);line-height:.92;opacity:calc(1 - var(--p,0) * .55);transform:translate3d(0,calc(var(--p,0) * -3vh),0)}
+.gen__lede{margin:clamp(22px,3.4vh,40px) 0 0 auto;font:500 clamp(17px,1.4vw,21px)/1.5 var(--f-sans);color:var(--ink-2);max-width:32ch}
 
 /* the headline's numerals, reborn as the ground behind the portraits */
 .gen__art{margin-top:clamp(56px,9vh,110px)}
@@ -348,7 +353,7 @@ h1,h2,h3,p{margin:0}
 .gen__end-title{margin-top:14px;font-size:clamp(40px,5.2vw,84px);line-height:.95}
 .gen__close{margin:clamp(18px,2.6vh,26px) 0 0 auto;max-width:34ch;font:500 clamp(16px,1.3vw,19px)/1.55 var(--f-sans);color:var(--ink-2)}
 @media (max-width:1000px){
-  .gen__intro{grid-template-columns:1fr}
+  .gen__lede{margin-left:0}
   .gen__end{margin-left:0;text-align:left}
   .gen__end-kicker,.gen__close{margin-left:0}
 }
@@ -477,7 +482,7 @@ h1,h2,h3,p{margin:0}
   .xp__bg img{transform:none}
   .js .gen__stage.rv .gen__img img{transform:none}
   /* the static version: frames never lift, recolour or yield; the numerals and thread simply sit in place */
-  .gen__range .reg{opacity:1;transform:none}
+  .gen__title{opacity:1;transform:none}
   .gen__ghost-t{opacity:.05;transform:none}
   .gen__frame{transform:none!important}
   .gen__stage.is-active .gen__back{opacity:0}
