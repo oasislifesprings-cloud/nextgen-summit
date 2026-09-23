@@ -148,8 +148,8 @@ h1,h2,h3,p{margin:0}
 .is-ready .hero__img{transform:none}
 .hero__shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(var(--shade),.3) 0%,rgba(var(--shade),.06) 45%,rgba(var(--shade),0) 100%),linear-gradient(180deg,rgba(var(--shade),.32) 0%,rgba(var(--shade),0) 16%,rgba(var(--shade),0) 48%,rgba(var(--shade),.5) 74%,rgba(var(--shade),.84) 100%)}
 .hero__inner{position:relative;width:100%;max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter) clamp(26px,5vh,54px)}
-.hero__meta{color:#fff;text-shadow:0 1px 3px rgba(var(--shade),.65)}
-.hero__title{margin:clamp(6px,1.2vh,14px) 0 0;font-size:clamp(84px,19.2vw,340px);line-height:.84;text-shadow:0 2px 40px rgba(var(--shade),.18)}
+.hero__meta{display:inline-flex;align-items:center;min-height:25px;margin-bottom:clamp(-16px,-1.1vh,-6px);padding:0 10px;border-radius:6px;background:var(--accent);color:var(--on-accent);font:700 10px/1 var(--f-sans);letter-spacing:.14em;text-transform:uppercase;text-shadow:none}
+.hero__title{margin:0;font-size:clamp(84px,19.2vw,340px);line-height:.84;text-shadow:0 2px 40px rgba(var(--shade),.18)}
 .hero__title .reg{margin-left:-.045em;padding-bottom:.08em}
 /* the flyer lockup: tracked SUMMIT tucked under the end of the wordmark */
 .lockup{position:relative;display:inline-block}
