@@ -488,6 +488,8 @@
     $$('dialog.drawer').forEach(function (d) {
       dialogs[d.id] = d;
       d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+      // browsers close a modal dialog on Escape themselves; this covers the non-modal fallback too
+      d.addEventListener('keydown', function (e) { if (e.key === 'Escape') { e.preventDefault(); d.close(); } });
       d.addEventListener('close', function () {
         if (location.hash === '#' + d.id) history.replaceState(null, '', location.pathname + location.search);
       });

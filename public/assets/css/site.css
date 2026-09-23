@@ -118,7 +118,13 @@ h1,h2,h3,p{margin:0}
   .nav__menu{display:inline-flex}
   .nav__mark .wm{font-size:26px}
   .nav__summit{display:none}
-  .nav__links{gap:6px}
+  .nav__links{gap:10px}
+}
+/* small phones: the CTA keeps its full wording by tightening, so it never crowds MENU */
+@media (max-width:440px){
+  .nav .btn--sm{--h:40px;font-size:10.5px;letter-spacing:.07em;padding:0 .85em;gap:.5em}
+  .nav__menu{font-size:11px;letter-spacing:.1em}
+  .nav__links{gap:8px}
 }
 
 /* ---------- 01 hero ---------- */
@@ -133,13 +139,19 @@ h1,h2,h3,p{margin:0}
 /* the flyer lockup: tracked SUMMIT tucked under the end of the wordmark */
 .lockup{position:relative;display:inline-block}
 .lockup__summit{position:absolute;right:0;top:91%;margin-right:-.62em;font:700 max(10px,.095em)/1 var(--f-sans);letter-spacing:.62em;text-transform:uppercase;text-shadow:none}
-.hero__row{display:flex;align-items:center;justify-content:space-between;gap:20px 32px;margin-top:clamp(14px,2.4vh,26px);padding-top:clamp(18px,2.8vh,28px);border-top:1px solid rgba(255,255,255,.3)}
+.hero__row{display:flex;align-items:flex-end;justify-content:space-between;gap:20px 32px;margin-top:clamp(14px,2.4vh,26px);padding-top:clamp(18px,2.8vh,28px);border-top:1px solid rgba(255,255,255,.3)}
+.hero__copy{max-width:44rem}
 .hero__line{font:800 clamp(19px,2.2vw,34px)/1.1 var(--f-sans);letter-spacing:.015em;text-transform:uppercase}
-.hero__actions{display:flex;align-items:center;gap:clamp(18px,2.4vw,36px)}
+/* the launch line sits between the promise and the paragraph, in the brand turquoise */
+.hero__launch{margin-top:clamp(8px,1.4vh,14px);font:700 clamp(11px,1vw,13px)/1.35 var(--f-sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);text-shadow:0 1px 3px rgba(var(--shade),.65)}
+.hero__note{margin-top:8px;max-width:46ch;font:500 clamp(14px,1.05vw,16px)/1.5 var(--f-sans);color:rgba(255,255,255,.9);text-shadow:0 1px 3px rgba(var(--shade),.7)}
+.hero__actions{display:flex;align-items:center;gap:clamp(18px,2.4vw,36px);flex:none}
 @media (max-width:760px){
   .hero__img{object-position:var(--pos-m,50% 40%)}
   .hero__shade{background:linear-gradient(180deg,rgba(var(--shade),.36) 0%,rgba(var(--shade),0) 14%,rgba(var(--shade),0) 44%,rgba(var(--shade),.55) 66%,rgba(var(--shade),.86) 100%)}
   .hero__row{flex-direction:column;align-items:flex-start}
+  .hero__copy{max-width:none}
+  .hero__note{max-width:38ch}
   .hero__actions{width:100%;justify-content:space-between}
 }
 
