@@ -149,7 +149,7 @@ h1,h2,h3,p{margin:0}
 .hero__shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(var(--shade),.3) 0%,rgba(var(--shade),.06) 45%,rgba(var(--shade),0) 100%),linear-gradient(180deg,rgba(var(--shade),.32) 0%,rgba(var(--shade),0) 16%,rgba(var(--shade),0) 48%,rgba(var(--shade),.5) 74%,rgba(var(--shade),.84) 100%)}
 .hero__inner{position:relative;width:100%;max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter) clamp(26px,5vh,54px)}
 .hero__meta{display:inline-flex;align-items:center;min-height:25px;margin-bottom:clamp(-16px,-1.1vh,-6px);padding:0 10px;border-radius:6px;background:var(--accent);color:var(--on-accent);font:700 10px/1 var(--f-sans);letter-spacing:.14em;text-transform:uppercase;text-shadow:none}
-.hero__title{margin:0;font-size:clamp(84px,19.2vw,340px);line-height:.84;text-shadow:0 2px 40px rgba(var(--shade),.18)}
+.hero__title{margin:-.26em 0 0;font-size:clamp(84px,19.2vw,340px);line-height:.84;text-shadow:0 2px 40px rgba(var(--shade),.18)}
 .hero__title .reg{margin-left:-.045em;padding-bottom:.08em}
 /* the flyer lockup: tracked SUMMIT tucked under the end of the wordmark */
 .lockup{position:relative;display:inline-block}
@@ -408,11 +408,30 @@ h1,h2,h3,p{margin:0}
 .hero .textlink{text-shadow:0 1px 3px rgba(var(--shade),.65)}
 
 /* ---------- footer ---------- */
-.foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 36px;padding:18px var(--gutter);background:var(--paper);border-top:1px solid var(--rule)}
-.foot ul{display:flex;flex-wrap:wrap;gap:0 30px;list-style:none;margin:0;padding:0}
-.foot a,.foot button{display:inline-flex;align-items:center;min-height:44px;font:700 12px/1 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;text-decoration:none}
-.foot a:hover,.foot button:hover{color:var(--accent-ink)}
-.foot__note{font:600 12px/1.5 var(--f-sans);color:var(--ink-2)}
+/* footer: social icons on their own line, then the text links on one line, all centred */
+.foot{display:grid;justify-items:center;gap:clamp(18px,3vh,28px);padding:clamp(30px,5vh,48px) var(--gutter) clamp(24px,4vh,36px);background:var(--paper);border-top:1px solid var(--rule);text-align:center}
+.foot__social{display:flex;justify-content:center;gap:clamp(22px,4vw,40px);list-style:none;margin:0;padding:0}
+.soc{display:grid;justify-items:center;gap:9px;text-decoration:none;color:var(--ink)}
+.soc__icon{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--ink);color:var(--paper);transition:background-color .35s var(--ease),transform .35s var(--ease)}
+.soc__icon svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.soc__icon .soc__dot{fill:currentColor;stroke:none}
+.soc:hover .soc__icon{background:var(--accent-ink);transform:translateY(-2px)}
+.soc:focus-visible .soc__icon{outline:2px solid var(--accent-ink);outline-offset:3px}
+.soc:focus-visible{outline:none}
+.soc__label{font:700 10.5px/1 var(--f-sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.soc:hover .soc__label{color:var(--accent-ink)}
+.foot__nav ul{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:0 clamp(18px,3vw,34px);list-style:none;margin:0;padding:0}
+.foot__nav a,.foot__nav button{display:inline-flex;align-items:center;min-height:44px;font:700 12px/1 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;text-decoration:none}
+.foot__nav a:hover,.foot__nav button:hover{color:var(--accent-ink)}
+/* the address keeps its own lowercase: it is an address, not a label, and it reads better and
+   fits on one line beside the other two links on a phone */
+.foot__nav a.foot__mail{text-transform:none;letter-spacing:.01em;font-weight:600}
+.foot__note{font:600 12px/1.5 var(--f-sans);color:var(--ink-3)}
+@media (max-width:560px){
+  .foot__nav ul{gap:0 clamp(10px,3.4vw,18px)}
+  .foot__nav a,.foot__nav button{font-size:clamp(9.5px,2.9vw,11px);letter-spacing:.08em}
+  .foot__nav a.foot__mail{font-size:clamp(10.5px,3.2vw,12px);letter-spacing:0}
+}
 
 /* ---------- drawers ---------- */
 .drawer{position:fixed;inset:0;margin:0 0 0 auto;width:min(560px,100%);max-width:100%;height:100%;max-height:100%;padding:0;border:0;background:var(--paper);color:var(--ink);overflow-y:auto;overscroll-behavior:contain;
