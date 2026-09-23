@@ -367,21 +367,15 @@
     var stages = $$('.gen__stage', set);
     var art = $('.gen__art', gen);
     var end = $('.gen__end', gen);
-    var path = $('.gen__thread path', gen);
     var hoverMQ = matchMedia('(hover:hover) and (pointer:fine)');
 
-    /* --- the active portrait, and the others yielding to it --- */
+    /* --- one stage holds the attention; the other two settle back --- */
     var active = null, leaveT = null;
     function setActive(st) {
       if (reduced) st = null;
       if (st === active) return;
       active = st;
-      var ai = stages.indexOf(st);
-      stages.forEach(function (s, i) {
-        s.classList.toggle('is-active', s === st);
-        s.classList.toggle('is-before', !!st && i < ai);
-        s.classList.toggle('is-after', !!st && i > ai);
-      });
+      stages.forEach(function (s) { s.classList.toggle('is-active', s === st); });
       set.classList.toggle('has-active', !!st);
     }
     function settle() {                       // after hover or focus leaves, keep whatever still holds it
@@ -390,7 +384,7 @@
         var focused = stages.filter(function (s) { return s.contains(document.activeElement); })[0];
         var hovered = hoverMQ.matches && stages.filter(function (s) { return s.matches(':hover'); })[0];
         if (focused || hovered) setActive(focused || hovered);
-        else if (hoverMQ.matches) setActive(null);
+        else if (hoverMQ.matches) setActive(null);   // with a mouse, resting means no one is singled out
         else pickCentered();
       }, 90);
     }
@@ -405,69 +399,36 @@
       st.addEventListener('focusout', settle);
     });
 
-    // touch: while the collage crosses the middle of the screen, its first, second and last thirds
-    // hand the active state 01 → 02 → 03 (works stacked, two-row and side by side alike)
+    // touch and trackpad-less screens: whichever portrait is nearest the reading line takes the focus,
+    // so scrolling normally walks 01 -> 02 -> 03. Nothing is pinned and nothing hijacks the scroll.
     function pickCentered() {
       if (hoverMQ.matches) return;
-      var r = set.getBoundingClientRect(), mid = window.innerHeight / 2, best = null;
-      if (r.top < mid && r.bottom > mid) {
-        best = stages[Math.min(stages.length - 1, Math.floor((mid - r.top) / r.height * stages.length))];
-      }
+      var line = window.innerHeight * 0.46, best = null, bestD = Infinity;
+      stages.forEach(function (s) {
+        var r = s.getBoundingClientRect();
+        if (r.bottom <= 0 || r.top >= window.innerHeight) return;   // off screen: not a candidate
+        var d = Math.abs(r.top + r.height / 2 - line);
+        if (d < bestD) { bestD = d; best = s; }
+      });
       if (!best && stages.some(function (s) { return s.contains(document.activeElement); })) return;
       setActive(best);
     }
 
-    /* --- the thread: an elbowed 1px line from label to label, routed through the gaps --- */
-    var threadLen = 0;
-    function box(el) {                        // layout box relative to the section, ignoring transforms
-      var x = 0, y = 0, n = el;
-      while (n && n !== gen) { x += n.offsetLeft; y += n.offsetTop; n = n.offsetParent; }
-      return { l: x, t: y, r: x + el.offsetWidth, b: y + el.offsetHeight, cy: y + el.offsetHeight / 2 };
-    }
-    function elbow(sx, sy, xv, ey, ex) {      // horizontal, vertical, horizontal, with soft corners
-      var d1 = xv > sx ? 1 : -1, dy = ey > sy ? 1 : -1, d2 = ex > xv ? 1 : -1;
-      var r = Math.max(0, Math.min(10, Math.abs(xv - sx), Math.abs(ey - sy) / 2, Math.abs(ex - xv)));
-      var p = 'M' + sx + ' ' + sy + 'L' + (xv - d1 * r) + ' ' + sy + 'Q' + xv + ' ' + sy + ' ' + xv + ' ' + (sy + dy * r) +
-              'L' + xv + ' ' + (ey - dy * r);
-      return p + (Math.abs(ex - xv) < 1 ? '' : 'Q' + xv + ' ' + ey + ' ' + (xv + d2 * r) + ' ' + ey + 'L' + ex + ' ' + ey);
-    }
-    function link(a, b, fa, fb) {             // label a to label b
-      if (b.l - a.r >= 40) {                  // b sits to the right: leave a's end, climb in the gap, arrive at b
-        var sx = a.r + 12, ex = b.l - 10;
-        var xv = (fa && fb && fa.r < fb.l) ? (fa.r + fb.l) / 2 : (sx + ex) / 2;
-        return elbow(sx, a.cy, Math.min(xv, ex), b.cy, ex);
-      }
-      if (a.l - b.r >= 40) {                  // b sits to the left: mirror it
-        var sx2 = a.l - 12, ex2 = b.r + 12;
-        var xv2 = (fa && fb && fb.r < fa.l) ? (fb.r + fa.l) / 2 : (sx2 + ex2) / 2;
-        return elbow(sx2, a.cy, Math.max(xv2, ex2), b.cy, ex2);
-      }
-      var xv3 = Math.max(a.r, b.r, fb ? fb.r : 0) + 16;   // stacked: step out past both (and b's photo), come back to b
-      return elbow(a.r + 12, a.cy, xv3, b.cy, b.r + 12);
-    }
-    function drop(x, y, ey, ex) {             // vertical, then horizontal, with a soft corner
-      var dy = ey > y ? 1 : -1, dx = ex > x ? 1 : -1;
-      var r = Math.max(0, Math.min(10, Math.abs(ey - y) / 2, Math.abs(ex - x)));
-      return 'M' + x + ' ' + y + 'L' + x + ' ' + (ey - dy * r) + 'Q' + x + ' ' + ey + ' ' + (x + dx * r) + ' ' + ey + 'L' + ex + ' ' + ey;
-    }
-    function toEnd(st, kicker) {              // from under the last caption down to the ending's label
-      var s = box(st), k = box(kicker), tag = box($('.gen__tag', st));
-      var x0 = tag.l + 4, y0 = s.b + 14;
-      if (k.l - x0 >= 40) return drop(x0, y0, k.cy, k.l - 10);
-      if (x0 - k.r >= 40) return drop(x0, y0, k.cy, k.r + 12);
-      return 'M' + (k.l + 4) + ' ' + y0 + 'L' + (k.l + 4) + ' ' + (k.t - 12);
-    }
-    function buildThread() {
-      if (!path) return;
-      var tags = stages.map(function (s) { return box($('.gen__tag', s)); });
-      var frames = stages.map(function (s) { return box(s.firstElementChild); });
-      var d = link(tags[0], tags[1], frames[0], frames[1]) + link(tags[1], tags[2], frames[1], frames[2]);
-      var kicker = $('.gen__end-kicker', gen);
-      if (kicker) d += toEnd(stages[2], kicker);
-      path.setAttribute('d', d);
-      threadLen = path.getTotalLength();
-      path.style.strokeDasharray = threadLen + ' ' + threadLen;
-      paint();
+    /* --- the rail: park it at the height every frame shares, so it reads as one line running
+           behind all three photographs and showing in the gaps between them --- */
+    var rail = $('.gen__rail', gen), oneRow = matchMedia('(min-width:1001px)');
+    function placeRail() {
+      if (!rail) return;
+      if (!oneRow.matches) { rail.style.removeProperty('--rail-y'); return; }
+      var tops = [], bottoms = [];
+      stages.forEach(function (s) {
+        var f = $('.gen__img', s), y = 0, n = f;
+        while (n && n !== art) { y += n.offsetTop; n = n.offsetParent; }
+        tops.push(y);
+        bottoms.push(y + f.offsetHeight);
+      });
+      var lo = Math.max.apply(null, tops), hi = Math.min.apply(null, bottoms);
+      rail.style.setProperty('--rail-y', (hi - lo > 40 ? (lo + hi) / 2 : art.offsetHeight * 0.54) + 'px');
     }
 
     /* --- scroll: one rAF-throttled passive listener, only while the section is on screen --- */
@@ -478,26 +439,25 @@
       var vh = window.innerHeight;
       if (reduced) {
         gen.style.removeProperty('--p');
-        if (path) path.style.strokeDashoffset = '0';
+        gen.style.setProperty('--q', '1');       // the rail simply sits there, fully drawn
         return;
       }
-      // --p: 0 while 17—29 sits in view, 1 once it has handed off to the portraits
+      // --p: 0 while 17-29 sits in view, 1 once it has handed off to the portraits
       pickCentered();
       var anchor = range || $('.gen__title', gen);
       var rt = anchor ? anchor.getBoundingClientRect().top : 0;
       gen.style.setProperty('--p', clamp01((vh * 0.35 - rt) / (vh * 0.55)).toFixed(3));
-      // the thread draws as the collage passes, finishing as the ending arrives
-      if (path && threadLen) {
-        var a = art.getBoundingClientRect(), e = (end || art).getBoundingClientRect();
-        var q = clamp01((vh * 0.85 - a.top) / Math.max(1, e.bottom - a.top));
-        path.style.strokeDashoffset = (threadLen * (1 - q)).toFixed(1);
-      }
+      // --q: the rail draws across the collage, finishing as the ending arrives
+      var a = art.getBoundingClientRect(), e = (end || art).getBoundingClientRect();
+      gen.style.setProperty('--q', clamp01((vh * 0.85 - a.top) / Math.max(1, e.bottom - a.top)).toFixed(3));
     }
     function request() { if (raf === null && onScreen) raf = requestAnimationFrame(paint); }
     new IntersectionObserver(function (es) { onScreen = es[0].isIntersecting; request(); }, { rootMargin: '25% 0px' }).observe(gen);
     addEventListener('scroll', request, { passive: true });
-    new ResizeObserver(buildThread).observe(gen);
-    fontsReady.then(buildThread);
+    addEventListener('resize', function () { placeRail(); request(); }, { passive: true });
+    new ResizeObserver(placeRail).observe(art);
+    fontsReady.then(placeRail);
+    placeRail();
 
     hoverMQ.addEventListener('change', function () { setActive(null); pickCentered(); });
     onMotionChange(function () {

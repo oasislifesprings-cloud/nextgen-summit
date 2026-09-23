@@ -307,55 +307,51 @@ h1,h2,h3,p{margin:0}
 .gen__ghost{position:absolute;z-index:0;top:-10%;bottom:-6%;left:calc(var(--gutter) * -1);right:calc(var(--gutter) * -1);overflow:hidden;pointer-events:none;display:flex;align-items:center}
 .gen__ghost-t{display:block;margin-left:calc(var(--gutter) - .07em);font:800 clamp(140px,33vw,560px)/.8 var(--f-sans);letter-spacing:-.05em;white-space:nowrap;color:var(--ink);opacity:calc(var(--p,0) * .055);transform:translate3d(0,calc((1 - var(--p,0)) * 16vh),0)}
 
-/* the thread: 1px turquoise, behind the photographs, drawn by site.js as the collage scrolls through */
-.gen__thread{position:absolute;inset:0;z-index:0;width:100%;height:100%;overflow:visible;pointer-events:none}
-.gen__thread path{fill:none;stroke:var(--accent);stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}
+/* one hairline the length of the collage, behind the photographs. It draws in with --q as the
+   section scrolls, so the three stages read as one continuous run instead of three cards. */
+.gen__rail{position:absolute;z-index:0;left:calc(var(--gutter) * -1);right:calc(var(--gutter) * -1);top:var(--rail-y,54%);height:1px;background:var(--accent);opacity:.5;transform:scaleX(var(--q,0));transform-origin:0 50%;pointer-events:none}
 
 /* the frames step up from high school to young professional */
 .gen__set{position:relative;z-index:1;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:0 clamp(14px,1.8vw,28px);align-items:start}
 .gen__stage--hs{grid-column:1 / span 4;margin-top:clamp(60px,11vw,180px)}
 .gen__stage--college{grid-column:5 / span 5;margin-top:clamp(30px,5.5vw,90px)}
 .gen__stage--pro{grid-column:10 / span 3}
-/* each photo sits on a turquoise backing sheet that slides out when the frame is active;
-   --ox/--oy set which corner it overhangs: high school bottom-right, college top-left, young pro bottom-left */
-.gen__stage{--ox:1;--oy:1;--t:.42s}
-.gen__stage--college{--ox:-1;--oy:-1}
-.gen__stage--pro{--ox:-1;--oy:1}
-.gen__frame{position:relative;isolation:isolate;transition:transform var(--t) var(--ease)}
-.gen__back{position:absolute;inset:0;z-index:-1;background:var(--accent);opacity:0;transition:transform var(--t) var(--ease),opacity .3s var(--ease)}
-.gen__img{position:relative;margin:0;overflow:hidden;background:var(--paper-2);transition:transform var(--t) var(--ease)}
-.gen__img::after{content:"";position:absolute;inset:0;background:var(--accent);opacity:0;pointer-events:none;transition:opacity .45s var(--ease)}
+
+/* attention moves by focus, not by furniture: the active print grows a little and warms toward
+   colour while the other two settle back. Nothing moves sideways and nothing covers a label. */
+.gen__stage{--t:.72s}
+.gen__frame{position:relative;transition:transform var(--t) var(--ease)}
+.gen__img{position:relative;margin:0;overflow:hidden;background:var(--paper-2)}
 .gen__img:focus-visible{outline-offset:6px}
 .gen__stage--hs .gen__img,.gen__stage--pro .gen__img{aspect-ratio:3/4}
 .gen__stage--college .gen__img{aspect-ratio:4/3}
-.gen__img img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 50%);filter:grayscale(1) contrast(1.04);transform:scale(1.02);transition:transform 1.6s var(--ease),filter .45s var(--ease),opacity .45s var(--ease)}
+.gen__img img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 50%);filter:grayscale(1) contrast(1.04);transform:scale(1.02);transition:transform 1.6s var(--ease),filter .7s var(--ease),opacity .7s var(--ease)}
 .js .gen__stage.rv .gen__img img{transform:scale(1.08)}
-.js .gen__stage.rv.in .gen__img img{transform:scale(1.02);transition:transform 2.2s var(--ease) var(--d,0s),filter .45s var(--ease),opacity .45s var(--ease)}
-.gen__tag{position:relative;width:fit-content;max-width:100%;margin-top:18px;font:700 11px/1.3 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink);transition:color .3s var(--ease),opacity .35s var(--ease)}
+.js .gen__stage.rv.in .gen__img img{transform:scale(1.02);transition:transform 2.2s var(--ease) var(--d,0s),filter .7s var(--ease),opacity .7s var(--ease)}
+.gen__tag{position:relative;width:fit-content;max-width:100%;margin-top:18px;font:700 11px/1.3 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink);transition:color .45s var(--ease),opacity .55s var(--ease)}
 .gen__tag::after{content:"";position:absolute;left:0;bottom:-7px;width:22px;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:0 50%;transition:transform var(--t) var(--ease)}
-.gen__line{margin-top:8px;font-size:clamp(24px,2.3vw,38px);line-height:1;transition:opacity .35s var(--ease),transform var(--t) var(--ease)}
+.gen__line{margin-top:8px;font-size:clamp(24px,2.3vw,38px);line-height:1;transition:opacity .55s var(--ease),color .45s var(--ease)}
 
-/* active: the print grows and lifts off its backing, warms toward colour, and its words strengthen */
-.gen__stage.is-active .gen__back{opacity:1;transform:translate3d(calc(var(--ox) * 8px),calc(var(--oy) * 8px),0) scale(1.04)}
-.gen__stage.is-active .gen__img{transform:translate3d(calc(var(--ox) * -4px),calc(var(--oy) * -4px),0) scale(1.04)}
-.gen__stage.is-active .gen__img img{filter:grayscale(.15) sepia(.2) saturate(1.1) contrast(1.04)}
-.gen__stage.is-active .gen__img::after{opacity:.05}
+/* active: a restrained lift and a breath of natural colour, and the caption reaches full strength */
+.gen__stage.is-active .gen__frame{transform:scale(1.032)}
+.gen__stage.is-active .gen__img img{filter:grayscale(.82) contrast(1.12) saturate(1.18) brightness(1.02)}
 .gen__stage.is-active .gen__tag{color:var(--accent-ink-hover)}
 .gen__stage.is-active .gen__tag::after{transform:scaleX(1)}
-.gen__stage.is-active .gen__line{transform:translate3d(4px,0,0)}
-/* the other two yield: a touch smaller, stepped aside to give the active one room, never fully dimmed */
-.gen__set.has-active .gen__stage:not(.is-active) .gen__frame{transform:scale(.975)}
-.gen__set.has-active .gen__stage.is-before .gen__frame{transform:translate3d(-10px,0,0) scale(.975)}
-.gen__set.has-active .gen__stage.is-after .gen__frame{transform:translate3d(10px,0,0) scale(.975)}
-.gen__set.has-active .gen__stage:not(.is-active) .gen__img img{opacity:.8;filter:grayscale(1) contrast(.96)}
-.gen__set.has-active .gen__stage:not(.is-active) .gen__tag,.gen__set.has-active .gen__stage:not(.is-active) .gen__line{opacity:.6}
+/* the other two settle back: slightly smaller and quieter, still legible, never pushed aside */
+.gen__set.has-active .gen__stage:not(.is-active) .gen__frame{transform:scale(.982)}
+.gen__set.has-active .gen__stage:not(.is-active) .gen__img img{opacity:.68;filter:grayscale(1) contrast(.94)}
+.gen__set.has-active .gen__stage:not(.is-active) .gen__tag{opacity:.62}
+.gen__set.has-active .gen__stage:not(.is-active) .gen__line{color:var(--ink-2)}
 
-/* the payoff: the thread arrives here */
+/* the payoff: where the run of stages lands */
 .gen__end{margin:clamp(64px,10vh,130px) 0 0 auto;max-width:36rem;text-align:right}
 .gen__end-kicker{width:fit-content;margin-left:auto;font:700 11px/1.3 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink)}
 .gen__end-title{margin-top:14px;font-size:clamp(40px,5.2vw,84px);line-height:.95}
 .gen__close{margin:clamp(18px,2.6vh,26px) 0 0 auto;max-width:34ch;font:500 clamp(16px,1.3vw,19px)/1.55 var(--f-sans);color:var(--ink-2)}
+/* below the single row the frames break apart, so the rail turns vertical and threads the stack
+   down the margin instead, where it can never reach a label */
 @media (max-width:1000px){
+  .gen__rail{left:calc(var(--gutter) * -.42);right:auto;top:0;bottom:0;width:1px;height:auto;transform:scaleY(var(--q,0));transform-origin:50% 0}
   .gen__lede{margin-left:0}
   .gen__end{margin-left:0;text-align:left}
   .gen__end-kicker,.gen__close{margin-left:0}
@@ -379,11 +375,9 @@ h1,h2,h3,p{margin:0}
   .gen__stage--college .gen__tag{margin-left:auto}
   .gen__stage--college .gen__tag,.gen__stage--college .gen__line{text-align:right}
   .gen__stage--college .gen__tag::after{left:auto;right:0;transform-origin:100% 50%}
-  /* frames sit against the gutter here, so each one grows away from its edge, and the others yield in place */
-  .gen__stage .gen__img,.gen__stage .gen__back,.gen__stage .gen__frame{transform-origin:0 50%}
-  .gen__stage--college .gen__img,.gen__stage--college .gen__back,.gen__stage--college .gen__frame{transform-origin:100% 50%}
-  .gen__set.has-active .gen__stage.is-before .gen__frame,.gen__set.has-active .gen__stage.is-after .gen__frame{transform:scale(.975)}
-  .gen__stage--college.is-active .gen__line{transform:translate3d(-4px,0,0)}
+  /* frames sit against the gutter here, so each one grows away from its own edge rather than into the page */
+  .gen__stage .gen__frame{transform-origin:0 50%}
+  .gen__stage--college .gen__frame{transform-origin:100% 50%}
   .gen__tag{margin-top:12px}
   .gen__line{margin-top:6px;font-size:24px}
   .gen__end{margin-top:52px}
@@ -503,12 +497,13 @@ h1,h2,h3,p{margin:0}
   .reg.is-armed .reg__p{opacity:0}
   .xp__bg img{transform:none}
   .js .gen__stage.rv .gen__img img{transform:none}
-  /* the static version: frames never lift, recolour or yield; the numerals and thread simply sit in place */
+  /* the static version: no frame ever grows, recolours or yields; the numerals and the rail simply sit there */
   .gen__title{opacity:1;transform:none}
   .gen__ghost-t{opacity:.05;transform:none}
   .gen__frame{transform:none!important}
-  .gen__stage.is-active .gen__back{opacity:0}
-  .gen__stage.is-active .gen__img,.gen__stage.is-active .gen__line{transform:none}
+  .gen__rail{transform:none}
+  .gen__img img{filter:grayscale(1) contrast(1.04)!important;opacity:1!important}
+  .gen__tag,.gen__line{opacity:1!important}
 }
 
 /* pause every loop while the tab is hidden */
