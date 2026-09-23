@@ -107,5 +107,7 @@ The form sends in place and shows its confirmation. With JavaScript off, the bro
 
 ## Still to do
 
-- Replace the draft speaker lineup, the draft taglines, and the "Soon" Contact and Instagram links.
+- Announce the lineup. Section 04 holds three "to be announced" cards showing an empty stage, so nothing
+  suggests who is coming. Replace one card at a time as each speaker is confirmed: swap the picture for
+  a portrait, put the name in `.person__role` and the title in `.person__status`, and drop `.person__tag`.
 - Host the remaining Unsplash photos locally and credit the photographers.
