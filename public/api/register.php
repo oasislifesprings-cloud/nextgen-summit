@@ -1,5 +1,6 @@
 <?php
-/* Next Gen Summit: receives the registration, volunteer and partner forms.
+/* Next Gen Summit: receives the waitlist, registration, volunteer and partner forms.
+   (Registration is paused while the waitlist is open; its handling below is kept for when it returns.)
    Answers JSON to the site's JavaScript, and redirects to a confirmation page
    when a browser posts the form directly (JavaScript off). */
 declare(strict_types=1);
@@ -21,17 +22,17 @@ function ngs_reply(bool $ok, string $kind, string $error, int $status, bool $jso
         exit;
     }
     if ($ok) {
-        header('Location: ' . ($kind === 'registration' ? '/registration-received/' : '/thanks/'), true, 303);
+        header('Location: ' . (in_array($kind, ['waitlist', 'registration'], true) ? '/registration-received/' : '/thanks/'), true, 303);
         exit;
     }
     http_response_code($status);
     header('Content-Type: text/html; charset=utf-8');
-    $back = $kind === 'registration' ? '/#registration' : '/#involved';
+    $back = in_array($kind, ['waitlist', 'registration'], true) ? '/#registration' : '/#involved';
     echo '<!doctype html><html lang="en"><head><meta charset="utf-8">'
         . '<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">'
         . '<title>Not sent yet · Next Gen Summit</title>'
         . '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">'
-        . '<link rel="stylesheet" href="/assets/css/site.css"></head><body>'
+        . '<link rel="stylesheet" href="/assets/css/site.css?v=20260923-10"></head><body>'
         . '<div class="received"><main class="received__main">'
         . '<p class="draft-note">Not sent yet</p><h1 class="done__title wm">almost.</h1>'
         . '<p class="done__text">' . htmlspecialchars($error, ENT_QUOTES, 'UTF-8') . '</p>'
@@ -46,7 +47,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
 }
 
 if (!in_array($kind, NGS_KINDS, true)) {
-    ngs_reply(false, 'registration', 'That form was not recognized.', 400, $wantsJson);
+    ngs_reply(false, 'waitlist', 'That form was not recognized.', 400, $wantsJson);
 }
 
 // Honeypot: people never see this field, so anything in it is a bot. Pretend it worked.
@@ -58,7 +59,24 @@ $email = ngs_text($_POST, 'email', 254);
 $emailOk = filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
 $errors = [];
 
-if ($kind === 'registration') {
+if ($kind === 'waitlist') {
+    $data = [
+        'name' => ngs_text($_POST, 'name', 120),
+        'phone' => ngs_text($_POST, 'phone', 30),
+        'email' => $email,
+    ];
+    if ($data['name'] === '') {
+        $errors[] = 'Please add your name.';
+    }
+    // any common format is fine ((410) 555-0123, 410.555.0123, +1 410 555 0123); it just needs 7 to 15 digits
+    $digits = preg_replace('/\D+/', '', $data['phone']) ?? '';
+    if (strlen($digits) < 7 || strlen($digits) > 15 || !preg_match('/^[0-9+().\-\s]+$/', $data['phone'])) {
+        $errors[] = 'Please check your phone number.';
+    }
+    if (!$emailOk) {
+        $errors[] = 'Please check your email address.';
+    }
+} elseif ($kind === 'registration') {
     $data = [
         'first_name' => ngs_text($_POST, 'first_name', 80),
         'last_name' => ngs_text($_POST, 'last_name', 80),
@@ -86,9 +104,7 @@ if ($kind === 'registration') {
         'name' => ngs_text($_POST, 'name', 120),
         'email' => $email,
     ];
-    if ($kind === 'volunteer') {
-        $data['campus'] = ngs_text($_POST, 'campus', 150);
-    } else {
+    if ($kind === 'partner') {   // volunteers give just a name and email
         $data['organization'] = ngs_text($_POST, 'organization', 150);
     }
     if ($data['name'] === '') {

@@ -1,7 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google Tag Manager -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -17,28 +20,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   gtag('config', 'G-3M5BCK61VB');
 </script>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Next Gen Summit · Oct 31 · Baltimore</title>
-<meta name="description" content="A free one-day experience for students and young adults to grow, connect, and see what's possible for their future. Saturday, October 31, Joseph Meyerhoff Symphony Hall, Baltimore.">
+<title>NextGen Summit · Oct 30 · Maryland</title>
+<meta name="description" content="A one-day experience for students and young adults to grow, connect, and see what's possible. Friday, October 30 at the Gordon Center for Performing Arts, Maryland. Registration opens September 28 — join the waitlist for early access and special launch rates.">
 <meta name="theme-color" content="#FAFAF8">
-<link rel="canonical" href="https://nextgen2026.org/">
-<!-- DEPLOY STEP: og:url and og:image point at https://nextgen2026.org; change them if the site moves -->
+<link rel="canonical" href="https://nextgensummit.us/">
+<!-- DEPLOY STEP: og:url and og:image point at https://nextgensummit.us; change them if the site moves -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Next Gen Summit · Free · Oct 31 · Baltimore">
-<meta property="og:description" content="Free to attend. A one-day experience for students and young adults to grow, connect, and see what's possible.">
-<meta property="og:url" content="https://nextgen2026.org/">
-<meta property="og:image" content="https://nextgen2026.org/assets/img/hero-1200.jpg">
+<meta property="og:title" content="NextGen Summit · Join the waitlist">
+<meta property="og:description" content="Friday, October 30 · Gordon Center for Performing Arts, Maryland. Registration opens September 28 — join the waitlist for early access and special launch rates.">
+<meta property="og:url" content="https://nextgensummit.us/">
+<meta property="og:image" content="https://nextgensummit.us/assets/img/hero-1200.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='28' cy='34' r='21' fill='%2300A3E6'/%3E%3Ccircle cx='36' cy='35' r='21' fill='%23EC008C'/%3E%3Ccircle cx='32' cy='28' r='21' fill='%23FFE500'/%3E%3Ccircle cx='32' cy='32' r='19' fill='%230B0B0F'/%3E%3C/svg%3E">
 <script>(function(d){d.classList.add('js');setTimeout(function(){if(!d.classList.contains('js-ready'))d.classList.remove('js')},4000)})(document.documentElement)</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com">
-<link rel="preload" as="image" href="assets/img/hero-1600.jpg" imagesrcset="assets/img/hero-800.jpg 800w, assets/img/hero-1200.jpg 1200w, assets/img/hero-1600.jpg 1600w, assets/img/hero-2048.jpg 2048w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/hero-m-864.jpg" media="(max-aspect-ratio: 3/4)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/hero-1600.jpg" imagesrcset="assets/img/hero-800.jpg 800w, assets/img/hero-1200.jpg 1200w, assets/img/hero-1600.jpg 1600w, assets/img/hero-2048.jpg 2048w" imagesizes="(max-aspect-ratio: 16/9) 177.78vh, 100vw" media="not all and (max-aspect-ratio: 3/4)" fetchpriority="high">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="assets/css/site.css">
-<script src="assets/js/liquid.js" defer></script>
-<script src="assets/js/site.js" defer></script>
+<link rel="stylesheet" href="assets/css/site.css?v=20260923-10">
+<script src="assets/js/liquid.js?v=20260923-10" defer></script>
+<script src="assets/js/site.js?v=20260923-10" defer></script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -50,13 +52,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="grain" aria-hidden="true"></div>
 
 <header class="nav at-hero on-photo">
-  <a class="nav__mark" href="#top" aria-label="Next Gen Summit, back to top">
+  <a class="nav__mark" href="#top" aria-label="NextGen Summit, back to top">
     <span class="wm" aria-hidden="true">nextgen</span><span class="nav__summit" aria-hidden="true">Summit</span>
   </a>
+  <!-- LAUNCH SWITCH: every primary CTA is an <a href="#registration" data-open="registration"> and says
+       "Join the waitlist". When Eventbrite ticketing opens, point these at the Eventbrite URL (drop the
+       data-open attribute so the drawer no longer intercepts them) and change the label to "Register".
+       They are: this nav button, the hero, the invitation section, the closing section and the small-screen menu. -->
+  <!-- countdown to the summit; site.js reads data-until. It inherits the bar's colour, so it flips
+       from white on photo sections to ink on paper sections with everything else in the nav. -->
+  <div class="count" data-until="2026-10-30T00:00:00-04:00">
+    <p class="sr" data-count-sr>NextGen Summit is on October 30.</p>
+    <p class="count__row" aria-hidden="true">
+      <span class="count__u"><span class="count__n" data-count="days">--</span><span class="count__l">d<span class="count__word">ays</span></span></span>
+      <span class="count__u count__u--hms"><span class="count__n" data-count="hours">--</span><span class="count__l">h</span></span>
+      <span class="count__u count__u--hms"><span class="count__n" data-count="minutes">--</span><span class="count__l">m</span></span>
+      <span class="count__u count__u--hms"><span class="count__n" data-count="seconds">--</span><span class="count__l">s</span></span>
+      <span class="count__to">to NextGen</span>
+    </p>
+  </div>
   <nav class="nav__links" aria-label="Utilities">
     <button class="nav__link" type="button" data-open="involved">Get Involved</button>
     <button class="nav__link" type="button" data-open="faq">FAQ</button>
-    <a class="btn btn--sm" href="#registration" data-open="registration">Register free <span class="arr" aria-hidden="true">→</span></a>
+    <a class="btn btn--sm" href="#registration" data-open="registration">Join the waitlist <span class="arr" aria-hidden="true">→</span></a>
     <button class="nav__link nav__menu" type="button" data-open="menu">Menu</button>
   </nav>
 </header>
@@ -65,25 +83,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <!-- 01 hero -->
   <section class="hero" id="top" data-nav="photo" aria-labelledby="hero-title">
-    <figure class="hero__media">
+    <!-- portrait screens get a full-resolution portrait crop; landscape screens size the 16:9 set by height,
+         because object-fit:cover makes the photo wider than the viewport whenever the screen is narrower than 16:9 -->
+    <picture class="hero__media">
+      <source media="(max-aspect-ratio: 3/4)" srcset="assets/img/hero-m-864.jpg" width="864" height="1152">
       <img class="hero__img"
         src="assets/img/hero-1600.jpg"
         srcset="assets/img/hero-800.jpg 800w, assets/img/hero-1200.jpg 1200w, assets/img/hero-1600.jpg 1600w, assets/img/hero-2048.jpg 2048w"
-        sizes="100vw" width="2048" height="1152" fetchpriority="high" decoding="async"
-        style="--pos:50% 42%;--pos-m:58% 46%"
+        sizes="(max-aspect-ratio: 16/9) 177.78vh, 100vw" width="2048" height="1152" fetchpriority="high" decoding="async"
+        style="--pos:50% 42%;--pos-m:50% 46%"
         alt="Seven young people in modern business casual, walking together in late afternoon light and looking ahead.">
-    </figure>
+    </picture>
     <div class="hero__shade" aria-hidden="true"></div>
     <div class="hero__inner">
-      <p class="label hero__meta rv" style="--d:.1s"><span class="tag-free">Free</span>Oct 31 · Maryland</p>
+      <p class="label hero__meta rv" style="--d:.1s">Friday, Oct 30</p>
       <h1 class="hero__title rv" id="hero-title" style="--d:.22s">
-        <span class="sr">Next Gen Summit</span>
+        <span class="sr">NextGen Summit</span>
         <span class="lockup" aria-hidden="true"><span class="wm reg reg--light">nextgen</span><span class="lockup__summit">Summit</span></span>
       </h1>
       <div class="hero__row rv" style="--d:.5s">
-        <p class="hero__line">See what's possible.</p>
+        <div class="hero__copy">
+          <p class="hero__line">See what's possible.</p>
+          <p class="hero__launch">Registration opens Sept 28</p>
+          <p class="hero__note">Join the waitlist now to be among the first to register and receive access to special launch rates when tickets go live.</p>
+        </div>
         <div class="hero__actions">
-          <a class="btn btn--lg" href="#registration" data-open="registration">Register free <span class="arr" aria-hidden="true">→</span></a>
+          <a class="btn btn--lg" href="#registration" data-open="registration">Join the waitlist <span class="arr" aria-hidden="true">→</span></a>
           <a class="textlink" href="#what">Explore <span class="arr" aria-hidden="true">↓</span></a>
         </div>
       </div>
@@ -99,9 +124,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="what__rot wm" aria-hidden="true" data-rotator='["thinkers","builders","leaders","creators","changemakers"]'><span class="what__word is-current">thinkers<span class="what__dot">.</span></span></span>
     </h2>
     <div class="what__foot">
-      <p class="what__lede rv" style="--d:.2s">A free one-day experience for students and young adults to grow, connect, and see what's possible for their future.</p>
+      <p class="what__lede rv" style="--d:.2s">A one-day experience for students and young adults to grow, connect, and see what's possible for their future.</p>
       <div class="what__tools rv" style="--d:.3s">
-        <button class="toggle" type="button" aria-pressed="false" data-rotator-toggle><span class="toggle__i" aria-hidden="true"></span><span class="toggle__t">Pause words</span></button>
+        <button class="toggle" type="button" aria-pressed="false" data-rotator-toggle aria-label="Pause the rotating words"><span class="toggle__i" aria-hidden="true"></span><span class="toggle__t sr">Pause words</span></button>
       </div>
     </div>
   </section>
@@ -109,24 +134,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- 03 the experience -->
   <section class="xp" id="experience" data-nav="xp" aria-labelledby="xp-title">
     <div class="xp__stage" aria-hidden="true">
-      <figure class="xp__bg" data-key="think">
+      <picture class="xp__bg" data-key="think">
+        <source media="(max-aspect-ratio: 3/4)" data-srcset="https://images.unsplash.com/photo-1626125345510-4603468eedfb?auto=format&amp;fit=crop&amp;crop=focalpoint&amp;fp-x=0.5&amp;fp-y=0.45&amp;q=70&amp;w=600&amp;h=1067 600w, https://images.unsplash.com/photo-1626125345510-4603468eedfb?auto=format&amp;fit=crop&amp;crop=focalpoint&amp;fp-x=0.5&amp;fp-y=0.45&amp;q=70&amp;w=900&amp;h=1600 900w, https://images.unsplash.com/photo-1626125345510-4603468eedfb?auto=format&amp;fit=crop&amp;crop=focalpoint&amp;fp-x=0.5&amp;fp-y=0.45&amp;q=70&amp;w=1200&amp;h=2133 1200w" sizes="(max-aspect-ratio: 9/16) 56.25vh, 100vw">
         <img alt="" decoding="async" style="--pos:50% 45%"
           data-src="https://images.unsplash.com/photo-1626125345510-4603468eedfb?auto=format&amp;fit=crop&amp;q=70&amp;w=1600"
           data-srcset="https://images.unsplash.com/photo-1626125345510-4603468eedfb?auto=format&amp;fit=crop&amp;q=70&amp;w=800 800w, https://images.unsplash.com/photo-1626125345510-4603468eedfb?auto=format&amp;fit=crop&amp;q=70&amp;w=1400 1400w, https://images.unsplash.com/photo-1626125345510-4603468eedfb?auto=format&amp;fit=crop&amp;q=70&amp;w=1600 1600w, https://images.unsplash.com/photo-1626125345510-4603468eedfb?auto=format&amp;fit=crop&amp;q=70&amp;w=2000 2000w"
           sizes="100vw">
-      </figure>
-      <figure class="xp__bg" data-key="meet">
+      </picture>
+      <picture class="xp__bg" data-key="meet">
+        <source media="(max-aspect-ratio: 3/4)" data-srcset="https://images.unsplash.com/photo-1461280360983-bd93eaa5051b?auto=format&amp;fit=crop&amp;crop=focalpoint&amp;fp-x=0.5&amp;fp-y=0.4&amp;q=70&amp;w=600&amp;h=1067 600w, https://images.unsplash.com/photo-1461280360983-bd93eaa5051b?auto=format&amp;fit=crop&amp;crop=focalpoint&amp;fp-x=0.5&amp;fp-y=0.4&amp;q=70&amp;w=900&amp;h=1600 900w, https://images.unsplash.com/photo-1461280360983-bd93eaa5051b?auto=format&amp;fit=crop&amp;crop=focalpoint&amp;fp-x=0.5&amp;fp-y=0.4&amp;q=70&amp;w=1200&amp;h=2133 1200w" sizes="(max-aspect-ratio: 9/16) 56.25vh, 100vw">
         <img alt="" decoding="async" style="--pos:50% 40%"
           data-src="https://images.unsplash.com/photo-1461280360983-bd93eaa5051b?auto=format&amp;fit=crop&amp;q=70&amp;w=1600"
           data-srcset="https://images.unsplash.com/photo-1461280360983-bd93eaa5051b?auto=format&amp;fit=crop&amp;q=70&amp;w=800 800w, https://images.unsplash.com/photo-1461280360983-bd93eaa5051b?auto=format&amp;fit=crop&amp;q=70&amp;w=1400 1400w, https://images.unsplash.com/photo-1461280360983-bd93eaa5051b?auto=format&amp;fit=crop&amp;q=70&amp;w=1600 1600w, https://images.unsplash.com/photo-1461280360983-bd93eaa5051b?auto=format&amp;fit=crop&amp;q=70&amp;w=2000 2000w"
           sizes="100vw">
-      </figure>
-      <figure class="xp__bg" data-key="next">
+      </picture>
+      <picture class="xp__bg" data-key="next">
+        <source media="(max-aspect-ratio: 3/4)" data-srcset="https://images.unsplash.com/photo-1625682115702-3a561cd465fd?auto=format&amp;fit=crop&amp;crop=focalpoint&amp;fp-x=0.6&amp;fp-y=0.4&amp;q=70&amp;w=600&amp;h=1067 600w, https://images.unsplash.com/photo-1625682115702-3a561cd465fd?auto=format&amp;fit=crop&amp;crop=focalpoint&amp;fp-x=0.6&amp;fp-y=0.4&amp;q=70&amp;w=900&amp;h=1600 900w, https://images.unsplash.com/photo-1625682115702-3a561cd465fd?auto=format&amp;fit=crop&amp;crop=focalpoint&amp;fp-x=0.6&amp;fp-y=0.4&amp;q=70&amp;w=1200&amp;h=2133 1200w" sizes="(max-aspect-ratio: 9/16) 56.25vh, 100vw">
         <img alt="" decoding="async" style="--pos:60% 40%"
           data-src="https://images.unsplash.com/photo-1625682115702-3a561cd465fd?auto=format&amp;fit=crop&amp;q=70&amp;w=1600"
           data-srcset="https://images.unsplash.com/photo-1625682115702-3a561cd465fd?auto=format&amp;fit=crop&amp;q=70&amp;w=800 800w, https://images.unsplash.com/photo-1625682115702-3a561cd465fd?auto=format&amp;fit=crop&amp;q=70&amp;w=1400 1400w, https://images.unsplash.com/photo-1625682115702-3a561cd465fd?auto=format&amp;fit=crop&amp;q=70&amp;w=1600 1600w, https://images.unsplash.com/photo-1625682115702-3a561cd465fd?auto=format&amp;fit=crop&amp;q=70&amp;w=2000 2000w"
           sizes="100vw">
-      </figure>
+      </picture>
       <div class="xp__shade"></div>
     </div>
     <div class="xp__inner">
@@ -139,7 +167,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </li>
         <li class="xp__item rv" data-key="meet" style="--d:.16s">
           <h3 class="xp__phrase wm">meet people.</h3>
-          <p class="xp__note">Students from campuses across Maryland in one room. Come with friends, or come solo.</p>
+          <p class="xp__note">High school, college and early career, all in one room. Come with friends, or come solo.</p>
         </li>
         <li class="xp__item rv" data-key="next" style="--d:.24s">
           <h3 class="xp__phrase wm">find what's next.</h3>
@@ -158,22 +186,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="invite__body">
       <p class="label invite__head rv"><span class="idx">03</span>The Invitation</p>
       <h2 class="invite__date" id="invite-title">
-        <span class="sr">Saturday, October 31</span>
-        <span class="reg" aria-hidden="true">Oct</span>
-        <span class="reg" aria-hidden="true">31</span>
+        <span class="sr">You in?</span>
+        <span class="reg" aria-hidden="true">You</span>
+        <span class="reg" aria-hidden="true">in?</span>
       </h2>
       <div class="invite__card">
         <dl class="invite__details rv" style="--d:.15s">
-          <div><dt>Event</dt><dd>Next Gen Summit</dd></div>
-          <div><dt>Date</dt><dd>Saturday, October 31</dd></div>
-          <div><dt>Time</dt><dd>2–8 PM</dd></div>
-          <div><dt>Cost</dt><dd>Free to attend</dd></div>
-          <div><dt>Venue</dt><dd>Joseph Meyerhoff Symphony Hall</dd></div>
-          <div><dt>City</dt><dd>Baltimore, Maryland</dd></div>
+          <div><dt>Event</dt><dd>NextGen Summit</dd></div>
+          <div><dt>Date</dt><dd>Friday, October 30</dd></div>
+          <div><dt>Venue</dt><dd>Gordon Center for Performing Arts</dd></div>
+          <div><dt>Where</dt><dd>Maryland</dd></div>
+          <div><dt>For</dt><dd>Students and young adults</dd></div>
+          <div><dt>Registration</dt><dd>Opens Sept 28</dd></div>
         </dl>
         <div class="invite__cta rv" style="--d:.3s">
-          <a class="btn btn--lg" href="#registration" data-open="registration">Register free <span class="arr" aria-hidden="true">→</span></a>
-          <p class="invite__small">Registration takes about a minute. Event details come to your inbox.</p>
+          <a class="btn btn--lg" href="#registration" data-open="registration">Join the waitlist <span class="arr" aria-hidden="true">→</span></a>
+          <p class="invite__small">It takes about a minute. You'll hear first when registration opens, with your special-rate link.</p>
         </div>
       </div>
     </div>
@@ -185,94 +213,113 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="label rv"><span class="idx">04</span>The Lineup</p>
       <h2 class="room__title wm rv" id="room-title" style="--d:.1s">who's in the room?</h2>
       <div class="room__note rv" style="--d:.2s">
-        <p class="draft-note">Speakers to be announced</p>
-        <p>Names will be shared as speakers are confirmed.</p>
+        <p class="draft-note">More speakers to come</p>
+        <p>The first names on the NextGen Summit stage.</p>
       </div>
     </div>
     <ul class="room__grid">
       <li class="person rv" style="--d:.05s">
         <figure class="person__img">
-          <img src="https://images.unsplash.com/photo-1453090927415-5f45085b65c0?auto=format&amp;fit=crop&amp;q=70&amp;w=700&amp;h=933" srcset="https://images.unsplash.com/photo-1453090927415-5f45085b65c0?auto=format&amp;fit=crop&amp;q=70&amp;w=480&amp;h=640 480w, https://images.unsplash.com/photo-1453090927415-5f45085b65c0?auto=format&amp;fit=crop&amp;q=70&amp;w=900&amp;h=1200 900w" sizes="(max-width:560px) 74vw, (max-width:1000px) 46vw, 24vw" width="900" height="1200" alt="" loading="lazy" decoding="async" style="--pos:40% 50%">
+          <img src="assets/img/spk-moore-700.jpg" srcset="assets/img/spk-moore-480.jpg 480w, assets/img/spk-moore-700.jpg 700w, assets/img/spk-moore-900.jpg 900w" sizes="(max-width:560px) 74vw, (max-width:1000px) 46vw, 30vw" width="900" height="1200" alt="Governor Wes Moore, official portrait." loading="lazy" decoding="async">
         </figure>
-        <h3 class="person__role">Governor of Maryland</h3>
-        <p class="person__status">Potential guest</p>
+        <h3 class="person__role">Wes Moore</h3>
+        <p class="person__status">Governor of Maryland<br>Author and U.S. Army veteran</p>
       </li>
-      <li class="person rv" style="--d:.12s">
+      <li class="person rv" style="--d:.05s">
         <figure class="person__img">
-          <img src="https://images.unsplash.com/photo-1561264974-153c4dacddd2?auto=format&amp;fit=crop&amp;q=70&amp;w=700&amp;h=933" srcset="https://images.unsplash.com/photo-1561264974-153c4dacddd2?auto=format&amp;fit=crop&amp;q=70&amp;w=480&amp;h=640 480w, https://images.unsplash.com/photo-1561264974-153c4dacddd2?auto=format&amp;fit=crop&amp;q=70&amp;w=900&amp;h=1200 900w" sizes="(max-width:560px) 74vw, (max-width:1000px) 46vw, 24vw" width="900" height="1200" alt="" loading="lazy" decoding="async">
+          <img src="assets/img/spk-edwards-700.jpg" srcset="assets/img/spk-edwards-480.jpg 480w, assets/img/spk-edwards-700.jpg 700w, assets/img/spk-edwards-900.jpg 900w" sizes="(max-width:560px) 74vw, (max-width:1000px) 46vw, 30vw" width="900" height="1200" alt="Tisha Edwards, portrait." loading="lazy" decoding="async">
         </figure>
-        <h3 class="person__role">Mayor of Baltimore</h3>
-        <p class="person__status">Potential guest</p>
+        <h3 class="person__role">Tisha Edwards</h3>
+        <p class="person__status">President and CEO, Maryland Bankers Association<br>Former Secretary of Appointments, State of Maryland</p>
       </li>
       <li class="person rv" style="--d:.19s">
         <figure class="person__img">
-          <img src="https://images.unsplash.com/photo-1570862687479-cb2debfcb186?auto=format&amp;fit=crop&amp;q=70&amp;w=700&amp;h=933" srcset="https://images.unsplash.com/photo-1570862687479-cb2debfcb186?auto=format&amp;fit=crop&amp;q=70&amp;w=480&amp;h=640 480w, https://images.unsplash.com/photo-1570862687479-cb2debfcb186?auto=format&amp;fit=crop&amp;q=70&amp;w=900&amp;h=1200 900w" sizes="(max-width:560px) 74vw, (max-width:1000px) 46vw, 24vw" width="900" height="1200" alt="" loading="lazy" decoding="async" style="--pos:62% 50%">
+          <img src="assets/img/spk-onakoya-464.jpg" srcset="assets/img/spk-onakoya-320.jpg 320w, assets/img/spk-onakoya-464.jpg 464w" sizes="(max-width:560px) 74vw, (max-width:1000px) 46vw, 30vw" width="464" height="619" alt="Tunde Onakoya, portrait." loading="lazy" decoding="async">
         </figure>
-        <h3 class="person__role">Business Leader</h3>
-        <p class="person__status">To be announced</p>
-      </li>
-      <li class="person rv" style="--d:.26s">
-        <figure class="person__img">
-          <img src="https://images.unsplash.com/photo-1629327896333-7ecec1515ae5?auto=format&amp;fit=crop&amp;q=70&amp;w=700&amp;h=933" srcset="https://images.unsplash.com/photo-1629327896333-7ecec1515ae5?auto=format&amp;fit=crop&amp;q=70&amp;w=480&amp;h=640 480w, https://images.unsplash.com/photo-1629327896333-7ecec1515ae5?auto=format&amp;fit=crop&amp;q=70&amp;w=900&amp;h=1200 900w" sizes="(max-width:560px) 74vw, (max-width:1000px) 46vw, 24vw" width="900" height="1200" alt="" loading="lazy" decoding="async">
-        </figure>
-        <h3 class="person__role">Brand Strategist / Creative Leader</h3>
-        <p class="person__status">To be announced</p>
+        <h3 class="person__role">Tunde Onakoya</h3>
+        <p class="person__status">Founder, Chess in Slums Africa<br>Guinness World Record holder, longest chess marathon</p>
       </li>
     </ul>
+    <p class="room__credit">Portrait of Governor Moore: Maryland State Government, <a class="linkish" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</p>
   </section>
 
-  <!-- 06 all campuses welcome -->
-  <section class="campus" id="campuses" data-nav="paper" aria-labelledby="campus-title">
-    <div class="campus__head">
-      <p class="label rv"><span class="idx">05</span>All Campuses</p>
-      <h2 class="campus__title wm rv" id="campus-title" style="--d:.1s">all campuses welcome.</h2>
-      <p class="campus__lede rv" style="--d:.2s">Students from colleges and universities across Maryland are invited.</p>
+  <!-- 06 who nextgen is for: different generations, one stage -->
+  <section class="gen" id="who" data-nav="paper" aria-labelledby="gen-title">
+    <!-- the turquoise thread that draws 01 → 02 → 03 → the ending; site.js builds the path from the labels -->
+    <svg class="gen__thread" aria-hidden="true" focusable="false"><path/></svg>
+    <div class="gen__head">
+      <p class="label rv"><span class="idx">05</span>The audience</p>
+      <div class="gen__intro">
+        <h2 class="gen__title wm rv" id="gen-title" style="--d:.1s"><span class="sr">Ages 17 to 29. </span>different generations.<br> one stage.</h2>
+        <p class="gen__lede rv" style="--d:.2s">High school students. College students. Young professionals. All building what comes next.</p>
+      </div>
     </div>
-    <p class="label campus__kicker rv">Students invited from campuses across Maryland</p>
-    <div class="marquee rv" style="--d:.1s" data-marquee>
-      <ul class="marquee__track" aria-label="Some of the Maryland campuses whose students are invited">
-        <li class="marquee__item">Morgan State</li>
-        <li class="marquee__item">Towson</li>
-        <li class="marquee__item">UMD</li>
-        <li class="marquee__item">Bowie State</li>
-        <li class="marquee__item">UMBC</li>
-        <li class="marquee__item">Johns Hopkins</li>
-        <li class="marquee__item">Coppin State</li>
-        <li class="marquee__item">Loyola Maryland</li>
-        <li class="marquee__item">Stevenson</li>
-        <li class="marquee__item">UMES</li>
-        <li class="marquee__item">UBalt</li>
-        <li class="marquee__item">MICA</li>
-        <li class="marquee__item">Goucher</li>
-        <li class="marquee__item">Salisbury</li>
-        <li class="marquee__item">Frostburg State</li>
-        <li class="marquee__item">McDaniel</li>
-        <li class="marquee__item">CCBC</li>
-        <li class="marquee__item">Baltimore City CC</li>
-        <li class="marquee__item">Prince George's CC</li>
-        <li class="marquee__item">Montgomery College</li>
-      </ul>
+
+    <div class="gen__art">
+      <!-- the age range as the ground the portraits stand on: it fades in behind them as the headline scrolls away -->
+      <div class="gen__ghost" aria-hidden="true"><span class="gen__ghost-t"><span>17</span><span>—</span><span>29</span></span></div>
+      <ol class="gen__set">
+        <li class="gen__stage gen__stage--hs rv" style="--d:.05s">
+          <div class="gen__frame">
+            <span class="gen__back" aria-hidden="true"></span>
+            <figure class="gen__img" tabindex="0" aria-labelledby="gen-tag-hs">
+              <img src="assets/img/gen-high-school-900.jpg" srcset="assets/img/gen-high-school-600.jpg 600w, assets/img/gen-high-school-900.jpg 900w, assets/img/gen-high-school-1200.jpg 1200w"
+                sizes="(max-width:760px) 64vw, (max-width:1000px) 40vw, (max-width:1560px) 30vw, 470px" width="1200" height="1600" loading="lazy" decoding="async" style="--pos:50% 30%"
+                alt="A young man in an oversized blazer and white t-shirt, a tote on his shoulder, looking toward the horizon in low sun.">
+            </figure>
+          </div>
+          <h3 class="gen__tag" id="gen-tag-hs"><span class="gen__no">01</span> / High school</h3>
+          <p class="gen__line wm">see what's ahead.</p>
+        </li>
+        <li class="gen__stage gen__stage--college rv" style="--d:.15s">
+          <div class="gen__frame">
+            <span class="gen__back" aria-hidden="true"></span>
+            <figure class="gen__img" tabindex="0" aria-labelledby="gen-tag-college">
+              <img src="assets/img/gen-college-900.jpg" srcset="assets/img/gen-college-600.jpg 600w, assets/img/gen-college-900.jpg 900w, assets/img/gen-college-1200.jpg 1200w"
+                sizes="(max-width:760px) 88vw, (max-width:1000px) 56vw, (max-width:1560px) 40vw, 620px" width="1200" height="900" loading="lazy" decoding="async"
+                alt="Three friends walking and talking outdoors, one explaining an idea with her hands while the others listen and laugh.">
+            </figure>
+          </div>
+          <h3 class="gen__tag" id="gen-tag-college"><span class="gen__no">02</span> / College</h3>
+          <p class="gen__line wm">expand what's possible.</p>
+        </li>
+        <li class="gen__stage gen__stage--pro rv" style="--d:.25s">
+          <div class="gen__frame">
+            <span class="gen__back" aria-hidden="true"></span>
+            <figure class="gen__img" tabindex="0" aria-labelledby="gen-tag-pro">
+              <img src="assets/img/gen-young-professional-900.jpg" srcset="assets/img/gen-young-professional-600.jpg 600w, assets/img/gen-young-professional-900.jpg 900w, assets/img/gen-young-professional-1200.jpg 1200w"
+                sizes="(max-width:760px) 64vw, (max-width:1000px) 30vw, (max-width:1560px) 23vw, 360px" width="1200" height="1600" loading="lazy" decoding="async" style="--pos:50% 30%"
+                alt="A young designer with curly hair at a studio worktable, one hand on pinned sketches, looking toward the window light.">
+            </figure>
+          </div>
+          <h3 class="gen__tag" id="gen-tag-pro"><span class="gen__no">03</span> / Young professionals</h3>
+          <p class="gen__line wm">build what's next.</p>
+        </li>
+      </ol>
     </div>
-    <div class="campus__tools">
-      <button class="toggle" type="button" aria-pressed="false" data-marquee-toggle><span class="toggle__i" aria-hidden="true"></span><span class="toggle__t">Pause campuses</span></button>
+
+    <div class="gen__end">
+      <p class="gen__end-kicker rv">One room</p>
+      <p class="gen__end-title wm rv" style="--d:.1s">many paths.<br> one future.</p>
+      <p class="gen__close rv" style="--d:.2s">From high school to college to the start of your career, NextGen brings young people ages 17–29 into one room.</p>
     </div>
   </section>
 
   <!-- 07 finale -->
   <section class="finale" id="register" data-nav="photo" aria-labelledby="finale-title">
-    <figure class="finale__media">
+    <picture class="finale__media">
+      <source media="(max-aspect-ratio: 3/4)" srcset="assets/img/closing-m-864.jpg" width="864" height="1152">
       <img src="assets/img/closing-1600.jpg"
         srcset="assets/img/closing-800.jpg 800w, assets/img/closing-1200.jpg 1200w, assets/img/closing-1600.jpg 1600w, assets/img/closing-2048.jpg 2048w"
-        sizes="100vw" width="2048" height="1152" loading="lazy" decoding="async" style="--pos:42% 45%;--pos-m:38% 45%"
+        sizes="(max-aspect-ratio: 16/9) 177.78vh, 100vw" width="2048" height="1152" loading="lazy" decoding="async" style="--pos:42% 45%"
         alt="Five young people talking and laughing together on wide steps, one explaining an idea with their hands.">
-    </figure>
+    </picture>
     <div class="finale__shade" aria-hidden="true"></div>
     <div class="finale__inner">
       <span class="finale__wm wm rv" aria-hidden="true">nextgen</span>
       <h2 class="finale__title wm rv" id="finale-title" style="--d:.1s"><span class="reg reg--light">what's next?</span></h2>
-      <p class="finale__meta rv" style="--d:.25s"><span>Free · Oct 31 · 2–8 PM</span><span><span class="nowrap">Joseph Meyerhoff Symphony Hall</span><span class="finale__sep" aria-hidden="true"> · </span><span class="nowrap">Baltimore, MD</span></span></p>
-      <div class="rv" style="--d:.4s">
-        <a class="btn btn--lg" href="#registration" data-open="registration">Register free <span class="arr" aria-hidden="true">→</span></a>
+      <div class="finale__cta rv" style="--d:.3s">
+        <a class="btn btn--lg" href="#registration" data-open="registration">Join the waitlist <span class="arr" aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
@@ -284,23 +331,63 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <ul>
       <li><button type="button" data-open="faq">FAQ</button></li>
       <li><button type="button" data-open="involved">Get Involved</button></li>
-      <li><span class="foot__ph">Contact<span class="foot__soon">Soon</span></span></li>
-      <li><a href="https://www.instagram.com/blw.oasis/" target="_blank" rel="noopener">Instagram<span class="sr"> (opens in a new tab)</span></a></li>
+      <li><a href="mailto:hello@nextgensummit.us">hello@nextgensummit.us</a></li>
+      <li><a href="https://www.instagram.com/nextgensummit.us/" target="_blank" rel="noopener">Instagram<span class="sr"> (opens in a new tab)</span></a></li>
+      <li><a href="https://www.tiktok.com/@nextgensummit.us" target="_blank" rel="noopener">TikTok<span class="sr"> (opens in a new tab)</span></a></li>
     </ul>
   </nav>
-  <p class="foot__note">Next Gen Summit 2026 · Baltimore, Maryland</p>
+  <p class="foot__note">NextGen Summit 2026</p>
 </footer>
 
-<!-- utility: registration (saved by /api/register.php) -->
+<!-- utility: waitlist (saved by /api/register.php as form-name "waitlist").
+     The drawer keeps the id "registration" so every Register button and #registration link still opens it. -->
 <dialog class="drawer" id="registration" aria-labelledby="registration-title">
   <div class="drawer__in">
     <div class="drawer__top">
-      <p class="label">Free registration · Oct 31</p>
+      <p class="label">Early access</p>
       <button class="drawer__close" type="button" data-close aria-label="Close">
         <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M2 2l14 14M16 2L2 16" stroke="currentColor" stroke-width="2" fill="none"/></svg>
       </button>
     </div>
 
+    <div data-form-wrap>
+      <h2 class="drawer__title wm" id="registration-title">get first access.</h2>
+      <p class="drawer__lede">NextGen Summit registration opens September 28. Join the waitlist now to be the first to register and receive access to our special launch rates when tickets go live.</p>
+
+      <form class="form" name="waitlist" method="POST" action="/api/register.php">
+        <input type="hidden" name="form-name" value="waitlist">
+        <p class="hp" aria-hidden="true"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+        <div class="field"><label for="w-name">Name</label><input id="w-name" name="name" autocomplete="name" required></div>
+
+        <div class="field"><label for="w-phone">Phone number</label><input id="w-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required></div>
+
+        <div class="field"><label for="w-email">Email</label><input id="w-email" name="email" type="email" autocomplete="email" inputmode="email" required></div>
+
+        <p class="form__error" role="alert" tabindex="-1" hidden></p>
+
+        <div class="form__actions">
+          <button class="btn btn--lg" type="submit"><span class="btn__t">Get early access</span> <span class="arr" aria-hidden="true">→</span></button>
+          <p class="form__fine">We'll notify you when registration opens and send your special-rate registration link.</p>
+        </div>
+      </form>
+    </div>
+
+    <div class="done" data-form-done tabindex="-1" hidden>
+      <p class="draft-note done__kicker">Early access confirmed</p>
+      <h2 class="done__title wm"><span class="reg">you're first in line.</span></h2>
+      <p class="done__text">Thanks, <span data-done-name>friend</span>. You have early access to NextGen Summit registration.</p>
+      <p class="done__text done__text--muted">We'll email <strong data-done-email>you</strong> when registration opens on September 28, with your special-rate registration link.</p>
+      <p class="mini__note" data-done-local hidden>Local preview: nothing was sent. Sign-ups are saved once the site is live.</p>
+      <div class="mini__row">
+        <button class="btn btn--lg" type="button" data-close>Back to the site</button>
+        <button class="linkish" type="button" data-form-again>Add someone else</button>
+      </div>
+    </div>
+
+<!-- REGISTRATION FORM, paused while the waitlist is open. To restore it: uncomment this block, delete the
+     waitlist form-wrap and done blocks above, and set the drawer label back to "Registration".
+     /api/register.php still accepts form-name "registration" and site.js drives either form.
     <div data-form-wrap>
       <h2 class="drawer__title wm" id="registration-title">save your spot.</h2>
       <p class="drawer__lede">Next Gen Summit is free to attend. This takes about a minute, and we'll email you event details as the day gets closer.</p>
@@ -363,6 +450,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
+     end of paused registration form -->
+
   </div>
 </dialog>
 
@@ -380,7 +469,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <li>
         <a class="path" href="#registration" data-open="registration">
           <span class="path__name">Attend</span>
-          <span class="path__note">Free, and it takes about a minute</span>
+          <span class="path__note">Early access, in about a minute</span>
           <span class="path__arr" aria-hidden="true">→</span>
         </a>
       </li>
@@ -395,7 +484,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <p class="hp" aria-hidden="true"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
           <div class="field"><label for="v-name">Name</label><input id="v-name" name="name" autocomplete="name" required></div>
           <div class="field"><label for="v-email">Email</label><input id="v-email" name="email" type="email" autocomplete="email" required></div>
-          <div class="field"><label for="v-campus">Campus (optional)</label><input id="v-campus" name="campus" autocomplete="organization"></div>
           <p class="form__error" role="alert" hidden></p>
           <div class="mini__row">
             <button class="btn" type="submit"><span class="btn__t">Send</span> <span class="arr" aria-hidden="true">→</span></button>
@@ -437,24 +525,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h2 class="drawer__title wm" id="faq-title">good questions.</h2>
     <div class="faq">
       <details name="faq">
-        <summary>When is Next Gen?<span class="faq__plus" aria-hidden="true"></span></summary>
-        <div class="faq__a"><p>Saturday, October 31, 2–8 PM.</p></div>
-      </details>
-      <details name="faq">
-        <summary>Where is Next Gen?<span class="faq__plus" aria-hidden="true"></span></summary>
-        <div class="faq__a"><p>Joseph Meyerhoff Symphony Hall, 1212 Cathedral Street, Baltimore, Maryland.</p></div>
+        <summary>When and where is Next Gen?<span class="faq__plus" aria-hidden="true"></span></summary>
+        <div class="faq__a"><p>Friday, October 30, at the Gordon Center for Performing Arts in Maryland. Start and finish times are being finalized.</p></div>
       </details>
       <details name="faq">
         <summary>Who can attend?<span class="faq__plus" aria-hidden="true"></span></summary>
-        <div class="faq__a"><p>College students, emerging young adults, and older high-school students. Students from all campuses are welcome.</p></div>
+        <div class="faq__a"><p>Young people ages 17–29: high school students, college students and young professionals.</p></div>
       </details>
       <details name="faq">
         <summary>How much does it cost?<span class="faq__plus" aria-hidden="true"></span></summary>
-        <div class="faq__a"><p>Nothing. Next Gen Summit is free to attend. You only need to register so we know you are coming.</p></div>
+        <div class="faq__a"><p>To be confirmed. Registration opens September 28, and everyone on the waitlist hears first and gets our special launch rates.</p></div>
       </details>
       <details name="faq">
         <summary>Do I need to register?<span class="faq__plus" aria-hidden="true"></span></summary>
-        <div class="faq__a"><p>Yes, and it is free. <a class="linkish" href="#registration" data-open="registration">Register here</a> to save your spot. It takes about a minute.</p></div>
+        <div class="faq__a"><p>Yes. Registration opens September 28. <a class="linkish" href="#registration" data-open="registration">Join the waitlist</a> now and we'll email you the moment it does, with your special-rate link.</p></div>
       </details>
       <details name="faq">
         <summary>Can I come alone?<span class="faq__plus" aria-hidden="true"></span></summary>
@@ -463,10 +547,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <details name="faq">
         <summary>What should I wear?<span class="faq__plus" aria-hidden="true"></span></summary>
         <div class="faq__a"><p>To be confirmed. We'll share it before the day.</p></div>
-      </details>
-      <details name="faq">
-        <summary>How do I get there?<span class="faq__plus" aria-hidden="true"></span></summary>
-        <div class="faq__a"><p>Take the Light Rail to Cultural Center. The hall is right across Park Avenue. The Metro stop at State Center also works. Parking details are to be confirmed.</p></div>
       </details>
       <details name="faq">
         <summary>Can I volunteer?<span class="faq__plus" aria-hidden="true"></span></summary>
@@ -490,11 +570,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </button>
     </div>
     <ul class="menu__list">
-      <li><a href="#registration" data-open="registration">Register free <span aria-hidden="true">→</span></a></li>
+      <li><a href="#registration" data-open="registration">Join the waitlist <span aria-hidden="true">→</span></a></li>
       <li><button type="button" data-open="involved">Get Involved <span aria-hidden="true">→</span></button></li>
       <li><button type="button" data-open="faq">FAQ <span aria-hidden="true">→</span></button></li>
     </ul>
-    <p class="menu__meta">Sat Oct 31 · 2–8 PM<br>Joseph Meyerhoff Symphony Hall<br>Baltimore, MD</p>
   </div>
 </dialog>
 

@@ -103,6 +103,39 @@
     });
   }
 
+  /* ---------- hero countdown ---------- */
+  function initCountdown() {
+    var box = $('.count');
+    if (!box) return;
+    var target = new Date(box.getAttribute('data-until')).getTime();
+    if (!target) { box.hidden = true; return; }
+    var out = {};
+    ['days', 'hours', 'minutes', 'seconds'].forEach(function (k) { out[k] = $('[data-count="' + k + '"]', box); });
+    var sr = $('[data-count-sr]', box);
+    var timer = null, visible = false;
+
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function tick() {
+      var left = Math.max(0, target - Date.now());
+      var sec = Math.floor(left / 1000);
+      var d = Math.floor(sec / 86400), h = Math.floor(sec % 86400 / 3600), m = Math.floor(sec % 3600 / 60);
+      out.days.textContent = pad(d);
+      out.hours.textContent = pad(h);
+      out.minutes.textContent = pad(m);
+      out.seconds.textContent = pad(sec % 60);
+      if (sr) sr.textContent = left ? d + ' days until NextGen Summit on October 30.' : 'NextGen Summit is here.';
+      if (!left && timer) { clearInterval(timer); timer = null; }
+    }
+    function run() {                        // only ticks while the hero is on screen and the tab is open
+      var on = visible && !document.hidden;
+      if (on && !timer) { tick(); timer = setInterval(tick, 1000); }
+      else if (!on && timer) { clearInterval(timer); timer = null; }
+    }
+    tick();
+    new IntersectionObserver(function (es) { visible = es[0].isIntersecting; run(); }).observe(box);
+    document.addEventListener('visibilitychange', run);
+  }
+
   /* ---------- nav theme ---------- */
   var requestNav = function () {};
   function initNav() {
@@ -168,14 +201,14 @@
       var nxt = nodes[idx];
       cur.classList.remove('is-current');
       cur.classList.add('is-leaving');
-      setTimeout(function () { cur.classList.remove('is-leaving'); }, 900);
+      setTimeout(function () { cur.classList.remove('is-leaving'); }, 650);
       nxt.classList.add('is-current');
       regPlay($('.reg', nxt), 60);
     }
     function schedule() {
       clearTimeout(timer);
       timer = null;
-      if (canRun()) timer = setTimeout(function () { step(); schedule(); }, 2600);
+      if (canRun()) timer = setTimeout(function () { step(); schedule(); }, 1500);   // time each word holds
     }
     function showFirst() {
       nodes.forEach(function (n, i) {
@@ -195,7 +228,9 @@
       toggle.addEventListener('click', function () {
         userPaused = !userPaused;
         toggle.setAttribute('aria-pressed', String(userPaused));
+        var label = userPaused ? 'Play the rotating words' : 'Pause the rotating words';
         $('.toggle__t', toggle).textContent = userPaused ? 'Play words' : 'Pause words';
+        toggle.setAttribute('aria-label', label);
         schedule();
       });
     }
@@ -221,9 +256,10 @@
       if (loaded) return;
       loaded = true;
       bgs.forEach(function (f) {
-        var img = $('img', f);
-        if (img.dataset.srcset) img.srcset = img.dataset.srcset;
-        if (img.dataset.src) img.src = img.dataset.src;
+        $$('source, img', f).forEach(function (n) {    // sources first, so the img picks from them
+          if (n.dataset.srcset) n.srcset = n.dataset.srcset;
+          if (n.dataset.src) n.src = n.dataset.src;
+        });
       });
     }
     new IntersectionObserver(function (es) { if (es[0].isIntersecting) loadImages(); }, { rootMargin: '50% 0px' }).observe(xp);
@@ -309,108 +345,165 @@
     });
   }
 
-  /* ---------- 06 campus marquee ---------- */
-  function initMarquee() {
-    var mq = $('[data-marquee]');
-    if (!mq) return;
-    var track = $('.marquee__track', mq);
-    var toggle = $('[data-marquee-toggle]');
-    var originals = $$('.marquee__item', track);
+  /* ---------- 06 who nextgen is for ---------- */
+  // One composition: the 17—29 headline hands off to the numerals behind the portraits (--p),
+  // a turquoise thread draws 01 → 02 → 03 → the ending, and one portrait at a time comes alive
+  // while the others make room for it.
+  function initGen() {
+    var gen = $('.gen');
+    if (!gen) return;
+    var range = $('.gen__range .reg', gen);
+    if (range) {
+      buildReg(range);
+      new IntersectionObserver(function (es, io) {
+        if (!es[0].isIntersecting) return;
+        regPlay(range, 200);
+        io.disconnect();
+      }, { threshold: 0.5 }).observe(range);
+    }
 
-    originals.forEach(function (li) {
-      var name = li.textContent.trim();
-      li.textContent = '';
-      var wrap = el('span', 'marquee__name');
-      wrap.appendChild(el('span', 'marquee__k', name));
-      wrap.appendChild(el('span', 'marquee__pl marquee__pl--c', name, true));
-      wrap.appendChild(el('span', 'marquee__pl marquee__pl--m', name, true));
-      li.appendChild(wrap);
+    var set = $('.gen__set', gen);
+    if (!set) return;
+    var stages = $$('.gen__stage', set);
+    var art = $('.gen__art', gen);
+    var end = $('.gen__end', gen);
+    var path = $('.gen__thread path', gen);
+    var hoverMQ = matchMedia('(hover:hover) and (pointer:fine)');
+
+    /* --- the active portrait, and the others yielding to it --- */
+    var active = null, leaveT = null;
+    function setActive(st) {
+      if (reduced) st = null;
+      if (st === active) return;
+      active = st;
+      var ai = stages.indexOf(st);
+      stages.forEach(function (s, i) {
+        s.classList.toggle('is-active', s === st);
+        s.classList.toggle('is-before', !!st && i < ai);
+        s.classList.toggle('is-after', !!st && i > ai);
+      });
+      set.classList.toggle('has-active', !!st);
+    }
+    function settle() {                       // after hover or focus leaves, keep whatever still holds it
+      clearTimeout(leaveT);
+      leaveT = setTimeout(function () {
+        var focused = stages.filter(function (s) { return s.contains(document.activeElement); })[0];
+        var hovered = hoverMQ.matches && stages.filter(function (s) { return s.matches(':hover'); })[0];
+        if (focused || hovered) setActive(focused || hovered);
+        else if (hoverMQ.matches) setActive(null);
+        else pickCentered();
+      }, 90);
+    }
+    stages.forEach(function (st) {
+      st.addEventListener('pointerenter', function () {
+        if (!hoverMQ.matches) return;
+        clearTimeout(leaveT);
+        setActive(st);
+      });
+      st.addEventListener('pointerleave', function () { if (hoverMQ.matches) settle(); });
+      st.addEventListener('focusin', function () { clearTimeout(leaveT); setActive(st); });
+      st.addEventListener('focusout', settle);
     });
 
-    var items = [], loopW = 0, x = 0, raf = null, last = 0;
-    var visible = false, hovering = false, userPaused = false, built = false;
-    var SPEED = 34;  // px per second
-
-    function build() {
-      $$('.marquee__item[aria-hidden="true"]', track).forEach(function (n) { n.remove(); });
-      var setW = originals.reduce(function (s, n) { return s + n.offsetWidth; }, 0);
-      if (!setW) return;
-      var need = Math.max(2600, window.innerWidth * 1.4);
-      var groupW = setW;
-      while (groupW < need) {                       // repeat the set until one loop covers wide screens
-        originals.forEach(function (n) { var c = n.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.appendChild(c); });
-        groupW += setW;
+    // touch: while the collage crosses the middle of the screen, its first, second and last thirds
+    // hand the active state 01 → 02 → 03 (works stacked, two-row and side by side alike)
+    function pickCentered() {
+      if (hoverMQ.matches) return;
+      var r = set.getBoundingClientRect(), mid = window.innerHeight / 2, best = null;
+      if (r.top < mid && r.bottom > mid) {
+        best = stages[Math.min(stages.length - 1, Math.floor((mid - r.top) / r.height * stages.length))];
       }
-      var group = $$('.marquee__item', track);
-      group.forEach(function (n) { var c = n.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.appendChild(c); });
-      loopW = groupW;
-      items = $$('.marquee__item', track).map(function (n) {
-        return { n: n, c: n.offsetLeft + n.firstChild.offsetWidth / 2, p: -1 };
-      });
-      x = x % loopW;
-      built = true;
+      if (!best && stages.some(function (s) { return s.contains(document.activeElement); })) return;
+      setActive(best);
+    }
+
+    /* --- the thread: an elbowed 1px line from label to label, routed through the gaps --- */
+    var threadLen = 0;
+    function box(el) {                        // layout box relative to the section, ignoring transforms
+      var x = 0, y = 0, n = el;
+      while (n && n !== gen) { x += n.offsetLeft; y += n.offsetTop; n = n.offsetParent; }
+      return { l: x, t: y, r: x + el.offsetWidth, b: y + el.offsetHeight, cy: y + el.offsetHeight / 2 };
+    }
+    function elbow(sx, sy, xv, ey, ex) {      // horizontal, vertical, horizontal, with soft corners
+      var d1 = xv > sx ? 1 : -1, dy = ey > sy ? 1 : -1, d2 = ex > xv ? 1 : -1;
+      var r = Math.max(0, Math.min(10, Math.abs(xv - sx), Math.abs(ey - sy) / 2, Math.abs(ex - xv)));
+      var p = 'M' + sx + ' ' + sy + 'L' + (xv - d1 * r) + ' ' + sy + 'Q' + xv + ' ' + sy + ' ' + xv + ' ' + (sy + dy * r) +
+              'L' + xv + ' ' + (ey - dy * r);
+      return p + (Math.abs(ex - xv) < 1 ? '' : 'Q' + xv + ' ' + ey + ' ' + (xv + d2 * r) + ' ' + ey + 'L' + ex + ' ' + ey);
+    }
+    function link(a, b, fa, fb) {             // label a to label b
+      if (b.l - a.r >= 40) {                  // b sits to the right: leave a's end, climb in the gap, arrive at b
+        var sx = a.r + 12, ex = b.l - 10;
+        var xv = (fa && fb && fa.r < fb.l) ? (fa.r + fb.l) / 2 : (sx + ex) / 2;
+        return elbow(sx, a.cy, Math.min(xv, ex), b.cy, ex);
+      }
+      if (a.l - b.r >= 40) {                  // b sits to the left: mirror it
+        var sx2 = a.l - 12, ex2 = b.r + 12;
+        var xv2 = (fa && fb && fb.r < fa.l) ? (fb.r + fa.l) / 2 : (sx2 + ex2) / 2;
+        return elbow(sx2, a.cy, Math.max(xv2, ex2), b.cy, ex2);
+      }
+      var xv3 = Math.max(a.r, b.r, fb ? fb.r : 0) + 16;   // stacked: step out past both (and b's photo), come back to b
+      return elbow(a.r + 12, a.cy, xv3, b.cy, b.r + 12);
+    }
+    function drop(x, y, ey, ex) {             // vertical, then horizontal, with a soft corner
+      var dy = ey > y ? 1 : -1, dx = ex > x ? 1 : -1;
+      var r = Math.max(0, Math.min(10, Math.abs(ey - y) / 2, Math.abs(ex - x)));
+      return 'M' + x + ' ' + y + 'L' + x + ' ' + (ey - dy * r) + 'Q' + x + ' ' + ey + ' ' + (x + dx * r) + ' ' + ey + 'L' + ex + ' ' + ey;
+    }
+    function toEnd(st, kicker) {              // from under the last caption down to the ending's label
+      var s = box(st), k = box(kicker), tag = box($('.gen__tag', st));
+      var x0 = tag.l + 4, y0 = s.b + 14;
+      if (k.l - x0 >= 40) return drop(x0, y0, k.cy, k.l - 10);
+      if (x0 - k.r >= 40) return drop(x0, y0, k.cy, k.r + 12);
+      return 'M' + (k.l + 4) + ' ' + y0 + 'L' + (k.l + 4) + ' ' + (k.t - 12);
+    }
+    function buildThread() {
+      if (!path) return;
+      var tags = stages.map(function (s) { return box($('.gen__tag', s)); });
+      var frames = stages.map(function (s) { return box(s.firstElementChild); });
+      var d = link(tags[0], tags[1], frames[0], frames[1]) + link(tags[1], tags[2], frames[1], frames[2]);
+      var kicker = $('.gen__end-kicker', gen);
+      if (kicker) d += toEnd(stages[2], kicker);
+      path.setAttribute('d', d);
+      threadLen = path.getTotalLength();
+      path.style.strokeDasharray = threadLen + ' ' + threadLen;
       paint();
     }
 
+    /* --- scroll: one rAF-throttled passive listener, only while the section is on screen --- */
+    var onScreen = false, raf = null;
+    function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
     function paint() {
-      track.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
-      var w = mq.clientWidth, mid = w / 2, reach = Math.max(220, w * 0.2);
-      for (var i = 0; i < items.length; i++) {
-        var it = items[i];
-        var cx = it.c + x;
-        var p = 0;
-        if (cx > -200 && cx < w + 200) {
-          var t = clamp(1 - Math.abs(cx - mid) / reach, 0, 1);
-          p = t * t * (3 - 2 * t);
-        }
-        if (Math.abs(p - it.p) > 0.02 || (p === 0 && it.p !== 0) || (p === 1 && it.p !== 1)) {
-          it.p = p;
-          it.n.style.setProperty('--p', p.toFixed(3));
-        }
-      }
-    }
-
-    function running() { return built && visible && !hovering && !userPaused && !reduced && !document.hidden; }
-    function tick(ts) {
       raf = null;
-      if (!running()) { last = 0; return; }
-      var dt = last ? Math.min(64, ts - last) : 16.667;
-      last = ts;
-      x -= SPEED * dt / 1000;
-      if (x <= -loopW) x += loopW;
-      paint();
-      raf = requestAnimationFrame(tick);
-    }
-    function wake() { if (raf === null && running()) raf = requestAnimationFrame(tick); }
-
-    function applyMode() {
-      doc.classList.toggle('no-marquee', reduced);
-      if (toggle) toggle.hidden = reduced;
+      var vh = window.innerHeight;
       if (reduced) {
-        items.forEach(function (it) { it.p = -1; it.n.style.setProperty('--p', '0'); });
-        track.style.transform = '';
-      } else {
-        build();                 // re-measure: the static list and any resize changed the layout
+        gen.style.removeProperty('--p');
+        if (path) path.style.strokeDashoffset = '0';
+        return;
       }
-      wake();
+      // --p: 0 while 17—29 sits in view, 1 once it has handed off to the portraits
+      pickCentered();
+      var anchor = range || $('.gen__title', gen);
+      var rt = anchor ? anchor.getBoundingClientRect().top : 0;
+      gen.style.setProperty('--p', clamp01((vh * 0.35 - rt) / (vh * 0.55)).toFixed(3));
+      // the thread draws as the collage passes, finishing as the ending arrives
+      if (path && threadLen) {
+        var a = art.getBoundingClientRect(), e = (end || art).getBoundingClientRect();
+        var q = clamp01((vh * 0.85 - a.top) / Math.max(1, e.bottom - a.top));
+        path.style.strokeDashoffset = (threadLen * (1 - q)).toFixed(1);
+      }
     }
+    function request() { if (raf === null && onScreen) raf = requestAnimationFrame(paint); }
+    new IntersectionObserver(function (es) { onScreen = es[0].isIntersecting; request(); }, { rootMargin: '25% 0px' }).observe(gen);
+    addEventListener('scroll', request, { passive: true });
+    new ResizeObserver(buildThread).observe(gen);
+    fontsReady.then(buildThread);
 
-    fontsReady.then(function () { build(); applyMode(); });
-    var resizeT = null;
-    addEventListener('resize', function () { clearTimeout(resizeT); resizeT = setTimeout(function () { if (!reduced) build(); }, 200); });
-    new IntersectionObserver(function (es) { visible = es[0].isIntersecting; wake(); }, { rootMargin: '100px' }).observe(mq);
-    mq.addEventListener('pointerenter', function () { hovering = true; });
-    mq.addEventListener('pointerleave', function () { hovering = false; wake(); });
-    document.addEventListener('visibilitychange', wake);
-    if (toggle) {
-      toggle.addEventListener('click', function () {
-        userPaused = !userPaused;
-        toggle.setAttribute('aria-pressed', String(userPaused));
-        $('.toggle__t', toggle).textContent = userPaused ? 'Play campuses' : 'Pause campuses';
-        wake();
-      });
-    }
-    onMotionChange(applyMode);
+    hoverMQ.addEventListener('change', function () { setActive(null); pickCentered(); });
+    onMotionChange(function () {
+      if (reduced) setActive(null); else pickCentered();
+      paint();
+    });
   }
 
   /* ---------- 07 finale ---------- */
@@ -431,6 +524,8 @@
     $$('dialog.drawer').forEach(function (d) {
       dialogs[d.id] = d;
       d.addEventListener('click', function (e) { if (e.target === d) d.close(); });
+      // browsers close a modal dialog on Escape themselves; this covers the non-modal fallback too
+      d.addEventListener('keydown', function (e) { if (e.key === 'Escape') { e.preventDefault(); d.close(); } });
       d.addEventListener('close', function () {
         if (location.hash === '#' + d.id) history.replaceState(null, '', location.pathname + location.search);
       });
@@ -550,8 +645,9 @@
     initRegistration();
   }
 
+  // Drives the waitlist form, or the paused registration form if it is restored in index.html.
   function initRegistration() {
-    var form = $('form[name="registration"]');
+    var form = $('form[name="waitlist"]') || $('form[name="registration"]');
     if (!form) return;
     var dialog = form.closest('dialog');
     var wrap = $('[data-form-wrap]', dialog);
@@ -563,26 +659,30 @@
     var mark = $('.done__title .reg', done);
     if (mark) buildReg(mark);
 
+    // registration form only: school becomes optional for "Other" (the waitlist has no school question)
     function syncSchool() {
+      if (!school || !form.elements.education_level) return;
       var other = form.elements.education_level.value === 'Other';
       school.required = !other;
       if (schoolHint) schoolHint.hidden = !other;
     }
     $$('input[name="education_level"]', form).forEach(function (i) { i.addEventListener('change', syncSchool); });
+    syncSchool();
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       err.hidden = true;
       var who = {
-        first: firstName(form.elements.first_name.value),
+        first: firstName((form.elements.first_name || form.elements.name).value),
         email: form.elements.email.value.trim(),
-        volunteer: form.elements.volunteer_interest.value === 'Yes'
+        volunteer: !!form.elements.volunteer_interest && form.elements.volunteer_interest.value === 'Yes'
       };
       setBusy(btn, true);
       sendForm(form).then(function () {
         $('[data-done-name]', done).textContent = who.first;
         $('[data-done-email]', done).textContent = who.email;
-        $('[data-done-volunteer]', done).hidden = !who.volunteer;
+        var vol = $('[data-done-volunteer]', done);
+        if (vol) vol.hidden = !who.volunteer;
         $('[data-done-local]', done).hidden = !LOCAL_PREVIEW;
         wrap.hidden = true;
         done.hidden = false;
@@ -603,7 +703,7 @@
       done.hidden = true;
       wrap.hidden = false;
       dialog.scrollTop = 0;
-      form.elements.first_name.focus();
+      (form.elements.first_name || form.elements.name).focus();
     });
   }
 
@@ -626,12 +726,13 @@
 
   initMotionPrefs();
   initNav();
+  initCountdown();
   initHero();
   initReveals();
   initRotator();
   initExperience();
   initInvite();
-  initMarquee();
+  initGen();
   initFinale();
   initDialogs();
   initForms();
