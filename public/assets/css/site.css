@@ -299,18 +299,18 @@ h1,h2,h3,p{margin:0}
   .room__note .draft-note{white-space:normal}
 }
 
-/* ---------- the vision: a full-width breath between the invitation and the lineup ---------- */
-.vision{position:relative;display:flex;align-items:center;min-height:clamp(560px,86vh,860px);color:#fff;overflow:hidden;background:#0B0B0F}
-.vision__media{position:absolute;inset:0;margin:0}
-.vision__media img{width:100%;height:100%;object-fit:cover;object-position:50% 64%;filter:grayscale(1) contrast(1.06)}
-.vision__shade{position:absolute;inset:0;background:
-  linear-gradient(180deg,rgba(6,6,9,.52) 0%,rgba(6,6,9,.28) 34%,rgba(6,6,9,.34) 58%,rgba(6,6,9,.72) 88%,rgba(6,6,9,.86) 100%),
-  linear-gradient(90deg,rgba(6,6,9,.5) 0%,rgba(6,6,9,.14) 52%,rgba(6,6,9,0) 100%)}
-.vision__inner{position:relative;width:100%;max-width:var(--maxw);margin:0 auto;padding:clamp(70px,12vh,130px) var(--gutter)}
-.vision__title{margin-top:clamp(14px,2.4vh,26px);font-size:clamp(46px,8.2vw,140px);line-height:.9;text-shadow:0 2px 40px rgba(6,6,9,.45)}
-.vision__copy{margin-top:clamp(18px,2.8vh,30px);max-width:46ch;font:500 clamp(15px,1.2vw,18px)/1.6 var(--f-sans);color:rgba(255,255,255,.92);text-shadow:0 1px 12px rgba(6,6,9,.6)}
-.vision__cta{margin-top:clamp(26px,4vh,44px)}
-@media (max-width:560px){.vision__cta .btn{width:100%;justify-content:center}}
+/* ---------- the pitch competition, teased between the invitation and the lineup ---------- */
+.pcta{position:relative;display:flex;align-items:center;min-height:clamp(560px,86vh,860px);color:#fff;overflow:hidden;background:#0B0B0F}
+.pcta__media{position:absolute;inset:0;margin:0}
+.pcta__media img{width:100%;height:100%;object-fit:cover;object-position:56% 50%;filter:grayscale(1) contrast(1.04)}
+.pcta__shade{position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(6,6,9,.72) 0%,rgba(6,6,9,.42) 44%,rgba(6,6,9,.08) 78%,rgba(6,6,9,0) 100%),
+  linear-gradient(180deg,rgba(6,6,9,.52) 0%,rgba(6,6,9,.2) 30%,rgba(6,6,9,.28) 62%,rgba(6,6,9,.7) 92%,rgba(6,6,9,.82) 100%)}
+.pcta__inner{position:relative;width:100%;max-width:var(--maxw);margin:0 auto;padding:clamp(70px,12vh,130px) var(--gutter)}
+.pcta__title{margin-top:clamp(14px,2.4vh,26px);font-size:clamp(44px,7.6vw,128px);line-height:.9;text-shadow:0 2px 40px rgba(6,6,9,.5)}
+.pcta__copy{margin-top:clamp(18px,2.8vh,30px);max-width:48ch;font:500 clamp(15px,1.2vw,18px)/1.6 var(--f-sans);color:rgba(255,255,255,.92);text-shadow:0 1px 12px rgba(6,6,9,.7)}
+.pcta__cta{margin-top:clamp(26px,4vh,44px)}
+@media (max-width:560px){.pcta__cta .btn{width:100%;justify-content:center}}
 
 /* ---------- 06 who nextgen is for ---------- */
 /* One composition: three editorial panels that rise into place as the section arrives, sharing one
