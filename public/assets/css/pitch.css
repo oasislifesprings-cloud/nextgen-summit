@@ -38,8 +38,6 @@
 .opp__media img{width:100%;height:100%;object-fit:cover;object-position:50% 58%;filter:grayscale(1) contrast(1.1) brightness(.82)}
 .opp__shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,6,9,.74) 0%,rgba(6,6,9,.4) 34%,rgba(6,6,9,.52) 66%,rgba(6,6,9,.88) 100%)}
 .opp__inner{position:relative;width:100%;max-width:var(--maxw);margin:0 auto;padding:clamp(80px,13vh,150px) var(--gutter)}
-.label--light{color:rgba(255,255,255,.72)}
-.label--light .idx{color:var(--accent)}
 .opp__prize{margin-top:clamp(10px,2vh,22px);font-size:clamp(108px,23vw,380px);line-height:.82;letter-spacing:-.02em;text-shadow:0 4px 60px rgba(6,6,9,.5)}
 .opp__cur{color:var(--accent)}
 .opp__sub{margin-top:clamp(12px,2vh,20px);max-width:34ch;font:600 clamp(15px,1.3vw,20px)/1.45 var(--f-sans);color:rgba(255,255,255,.92);text-shadow:0 1px 12px rgba(6,6,9,.6)}

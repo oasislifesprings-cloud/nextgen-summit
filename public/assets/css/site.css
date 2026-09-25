@@ -55,7 +55,7 @@ h1,h2,h3,p{margin:0}
 /* ---------- type ---------- */
 .wm{font-family:var(--f-display);font-weight:900;font-style:normal;font-variation-settings:"SOFT" 100,"WONK" 0,"opsz" 144;letter-spacing:-.04em;line-height:.9;text-transform:none}
 .label{font:700 12px/1.35 var(--f-sans);letter-spacing:.22em;text-transform:uppercase;color:var(--ink-2)}
-.label .idx{display:inline-block;min-width:2.6em;color:var(--ink-2)}
+.label--light{color:rgba(255,255,255,.72)}
 .draft-note{display:inline-flex;align-items:center;gap:10px;font:700 11px/1.3 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink)}
 .draft-note::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;flex:none}
 
@@ -209,7 +209,6 @@ h1,h2,h3,p{margin:0}
 .xp.is-lit{color:#fff}
 .xp .label{transition:color .8s var(--ease)}
 .xp.is-lit .label{color:rgba(255,255,255,.86)}
-.xp.is-lit .label .idx{color:inherit}
 .xp.is-lit .xp__phrase,.xp.is-lit .xp__note{text-shadow:0 2px 26px rgba(var(--shade),.38)}
 .xp__list{list-style:none;margin:clamp(26px,5vh,60px) 0 0;padding:0}
 .xp__item{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,21rem);align-items:end;gap:10px 32px}
@@ -249,10 +248,7 @@ h1,h2,h3,p{margin:0}
 .invite__details dd{margin:0;font:800 clamp(16px,1.45vw,21px)/1.3 var(--f-sans);letter-spacing:.02em;text-transform:uppercase}
 .invite__cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-top:30px}
 .invite__small{font:600 13px/1.45 var(--f-sans);color:var(--ink-2);max-width:30ch}
-/* the second way out of this section: quieter than the waitlist button, but not hidden */
-.invite__aside{flex:1 0 100%;margin-top:6px;padding-top:18px;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px}
-.invite__aside .linkish{font:800 clamp(13px,1.1vw,15px)/1.3 var(--f-sans);letter-spacing:.06em;text-transform:uppercase}
-.invite__aside-n{font:600 13px/1.45 var(--f-sans);color:var(--ink-2)}
+
 @media (max-width:900px){
   .invite__body{grid-template-columns:1fr}
 }
@@ -302,6 +298,19 @@ h1,h2,h3,p{margin:0}
   .room__note p{margin-left:0}
   .room__note .draft-note{white-space:normal}
 }
+
+/* ---------- the vision: a full-width breath between the invitation and the lineup ---------- */
+.vision{position:relative;display:flex;align-items:center;min-height:clamp(560px,86vh,860px);color:#fff;overflow:hidden;background:#0B0B0F}
+.vision__media{position:absolute;inset:0;margin:0}
+.vision__media img{width:100%;height:100%;object-fit:cover;object-position:50% 64%;filter:grayscale(1) contrast(1.06)}
+.vision__shade{position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(6,6,9,.52) 0%,rgba(6,6,9,.28) 34%,rgba(6,6,9,.34) 58%,rgba(6,6,9,.72) 88%,rgba(6,6,9,.86) 100%),
+  linear-gradient(90deg,rgba(6,6,9,.5) 0%,rgba(6,6,9,.14) 52%,rgba(6,6,9,0) 100%)}
+.vision__inner{position:relative;width:100%;max-width:var(--maxw);margin:0 auto;padding:clamp(70px,12vh,130px) var(--gutter)}
+.vision__title{margin-top:clamp(14px,2.4vh,26px);font-size:clamp(46px,8.2vw,140px);line-height:.9;text-shadow:0 2px 40px rgba(6,6,9,.45)}
+.vision__copy{margin-top:clamp(18px,2.8vh,30px);max-width:46ch;font:500 clamp(15px,1.2vw,18px)/1.6 var(--f-sans);color:rgba(255,255,255,.92);text-shadow:0 1px 12px rgba(6,6,9,.6)}
+.vision__cta{margin-top:clamp(26px,4vh,44px)}
+@media (max-width:560px){.vision__cta .btn{width:100%;justify-content:center}}
 
 /* ---------- 06 who nextgen is for ---------- */
 /* One composition: three editorial panels that rise into place as the section arrives, sharing one
