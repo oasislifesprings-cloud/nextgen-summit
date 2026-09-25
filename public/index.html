@@ -38,9 +38,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preload" as="image" href="assets/img/hero-m-864.jpg" media="(max-aspect-ratio: 3/4)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/img/hero-1600.jpg" imagesrcset="assets/img/hero-800.jpg 800w, assets/img/hero-1200.jpg 1200w, assets/img/hero-1600.jpg 1600w, assets/img/hero-2048.jpg 2048w" imagesizes="(max-aspect-ratio: 16/9) 177.78vh, 100vw" media="not all and (max-aspect-ratio: 3/4)" fetchpriority="high">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="assets/css/site.css?v=20260923-16">
-<script src="assets/js/liquid.js?v=20260923-16" defer></script>
-<script src="assets/js/site.js?v=20260923-16" defer></script>
+<link rel="stylesheet" href="assets/css/site.css?v=20260925-06">
+<script src="assets/js/liquid.js?v=20260925-06" defer></script>
+<script src="assets/js/site.js?v=20260925-06" defer></script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -217,34 +217,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p>Names are being locked in. The waitlist hears them first.</p>
       </div>
     </div>
-    <!-- The lineup is not announced yet: three held places. The pictures are the empty stage, so a
-         card can never suggest who is coming. Swap each one for a portrait as a speaker is confirmed. -->
-    <ul class="room__grid">
-      <li class="person person--tba rv" style="--d:.05s">
-        <figure class="person__img">
-          <img src="assets/img/stage-1-700.jpg" srcset="assets/img/stage-1-480.jpg 480w, assets/img/stage-1-700.jpg 700w, assets/img/stage-1-900.jpg 900w" sizes="(max-width:560px) 74vw, (max-width:1000px) 46vw, 30vw" width="900" height="1200" alt="An empty microphone stand lit by a single hard spotlight." loading="lazy" decoding="async">
-          <span class="person__tag">To be announced</span>
-        </figure>
-        <h3 class="person__role">Speaker one</h3>
-        <p class="person__status">Announcing soon</p>
+    <!-- The lineup is not announced yet: three held places on a runway that runs on whatever speakers
+         it is given. The pictures are the empty stage, so a card can never suggest who is coming.
+         To announce someone: swap the picture for their portrait, put their name in .spk__name, their
+         role and organisation in .spk__role, a sentence in .spk__note, and drop .spk--tba (the chip).
+         Add or remove <li class="spk"> freely -- site.js measures the row and clones it to fit. -->
+    <div class="run" data-run>
+      <ul class="run__track" data-run-track>
+      <li class="spk spk--tba">
+        <article class="spk__card" tabindex="0" aria-describedby="spk-note-1">
+          <figure class="spk__img">
+            <img src="assets/img/stage-1-700.jpg" srcset="assets/img/stage-1-480.jpg 480w, assets/img/stage-1-700.jpg 700w, assets/img/stage-1-900.jpg 900w" sizes="(max-width:760px) 46vw, 286px" width="900" height="1200" alt="An empty microphone stand lit by a single hard spotlight." loading="lazy" decoding="async">
+            <span class="spk__chip">To be announced</span>
+          </figure>
+          <h3 class="spk__name">Speaker one</h3>
+          <p class="spk__role">Announcing soon</p>
+          <p class="spk__note" id="spk-note-1">Announced here the moment they are confirmed.</p>
+        </article>
       </li>
-      <li class="person person--tba rv" style="--d:.12s">
-        <figure class="person__img">
-          <img src="assets/img/stage-2-700.jpg" srcset="assets/img/stage-2-480.jpg 480w, assets/img/stage-2-700.jpg 700w, assets/img/stage-2-900.jpg 900w" sizes="(max-width:560px) 74vw, (max-width:1000px) 46vw, 30vw" width="900" height="1200" alt="A microphone stand in silhouette against a row of stage lights." loading="lazy" decoding="async">
-          <span class="person__tag">To be announced</span>
-        </figure>
-        <h3 class="person__role">Speaker two</h3>
-        <p class="person__status">Announcing soon</p>
+      <li class="spk spk--tba spk--drop">
+        <article class="spk__card" tabindex="0" aria-describedby="spk-note-2">
+          <figure class="spk__img">
+            <img src="assets/img/stage-2-700.jpg" srcset="assets/img/stage-2-480.jpg 480w, assets/img/stage-2-700.jpg 700w, assets/img/stage-2-900.jpg 900w" sizes="(max-width:760px) 46vw, 286px" width="900" height="1200" alt="A microphone stand in silhouette against a row of stage lights." loading="lazy" decoding="async">
+            <span class="spk__chip">To be announced</span>
+          </figure>
+          <h3 class="spk__name">Speaker two</h3>
+          <p class="spk__role">Announcing soon</p>
+          <p class="spk__note" id="spk-note-2">Announced here the moment they are confirmed.</p>
+        </article>
       </li>
-      <li class="person person--tba rv" style="--d:.19s">
-        <figure class="person__img">
-          <img src="assets/img/stage-3-700.jpg" srcset="assets/img/stage-3-480.jpg 480w, assets/img/stage-3-700.jpg 700w, assets/img/stage-3-900.jpg 900w" sizes="(max-width:560px) 74vw, (max-width:1000px) 46vw, 30vw" width="900" height="1200" alt="A spotlight beam falling across a microphone on a dark stage." loading="lazy" decoding="async">
-          <span class="person__tag">To be announced</span>
-        </figure>
-        <h3 class="person__role">Speaker three</h3>
-        <p class="person__status">Announcing soon</p>
+      <li class="spk spk--tba">
+        <article class="spk__card" tabindex="0" aria-describedby="spk-note-3">
+          <figure class="spk__img">
+            <img src="assets/img/stage-3-700.jpg" srcset="assets/img/stage-3-480.jpg 480w, assets/img/stage-3-700.jpg 700w, assets/img/stage-3-900.jpg 900w" sizes="(max-width:760px) 46vw, 286px" width="900" height="1200" alt="A spotlight beam falling across a microphone on a dark stage." loading="lazy" decoding="async">
+            <span class="spk__chip">To be announced</span>
+          </figure>
+          <h3 class="spk__name">Speaker three</h3>
+          <p class="spk__role">Announcing soon</p>
+          <p class="spk__note" id="spk-note-3">Announced here the moment they are confirmed.</p>
+        </article>
       </li>
-    </ul>
+      </ul>
+    </div>
     <p class="room__credit rv" style="--d:.26s">We announce each name as it is confirmed. <a class="linkish" href="#registration" data-open="registration">Get early access</a> and hear them first.</p>
   </section>
 
@@ -253,49 +267,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="gen__head">
       <p class="label rv"><span class="idx">05</span>The audience</p>
       <div class="gen__intro">
-        <h2 class="gen__title wm rv" id="gen-title" style="--d:.1s"><span class="sr">Ages 17 to 29. </span>different generations.<br> one stage.</h2>
+        <h2 class="gen__title wm rv" id="gen-title" style="--d:.1s">one generation.<br> many stages.</h2>
         <p class="gen__lede rv" style="--d:.2s">High school students. College students. Young professionals. All building what comes next.</p>
       </div>
     </div>
 
     <div class="gen__art">
-      <!-- the age range as the ground the portraits stand on: it fades in behind them as the headline scrolls away -->
-      <!-- one hairline running the length of the collage, behind the photographs: the three stages
-           read as one continuous run rather than three cards. It draws in as the section scrolls. -->
+      <!-- one hairline running the length of the composition, behind the photographs: the three
+           panels read as one continuous run rather than three cards. It draws in as you scroll. -->
       <span class="gen__rail" aria-hidden="true"></span>
-      <div class="gen__ghost" aria-hidden="true"><span class="gen__ghost-t"><span>17</span><span>—</span><span>29</span></span></div>
       <ol class="gen__set">
-        <li class="gen__stage gen__stage--hs rv" style="--d:.05s">
+        <li class="gen__stage gen__stage--hs rv" style="--d:0s">
           <div class="gen__frame">
             <figure class="gen__img" tabindex="0" aria-labelledby="gen-tag-hs">
               <img src="assets/img/gen-high-school-900.jpg" srcset="assets/img/gen-high-school-600.jpg 600w, assets/img/gen-high-school-900.jpg 900w, assets/img/gen-high-school-1200.jpg 1200w"
-                sizes="(max-width:760px) 64vw, (max-width:1000px) 40vw, (max-width:1560px) 30vw, 470px" width="1200" height="1600" loading="lazy" decoding="async" style="--pos:50% 30%"
+                sizes="(max-width:760px) 66vw, (max-width:1000px) 40vw, (max-width:1560px) 28vw, 424px" width="1200" height="1600" loading="lazy" decoding="async" style="--pos:50% 30%"
                 alt="A young man in an oversized blazer and white t-shirt, a tote on his shoulder, looking toward the horizon in low sun.">
             </figure>
           </div>
-          <h3 class="gen__tag" id="gen-tag-hs"><span class="gen__no">01</span> / High school</h3>
+          <h3 class="gen__tag" id="gen-tag-hs"><span class="gen__no">01</span> <span aria-hidden="true">—</span> High school</h3>
           <p class="gen__line wm">see what's ahead.</p>
         </li>
-        <li class="gen__stage gen__stage--college rv" style="--d:.15s">
+        <li class="gen__stage gen__stage--college rv" style="--d:.14s">
           <div class="gen__frame">
             <figure class="gen__img" tabindex="0" aria-labelledby="gen-tag-college">
               <img src="assets/img/gen-college-900.jpg" srcset="assets/img/gen-college-600.jpg 600w, assets/img/gen-college-900.jpg 900w, assets/img/gen-college-1200.jpg 1200w"
-                sizes="(max-width:760px) 88vw, (max-width:1000px) 56vw, (max-width:1560px) 40vw, 620px" width="1200" height="900" loading="lazy" decoding="async"
+                sizes="(max-width:760px) 88vw, (max-width:1000px) 56vw, (max-width:1560px) 35vw, 536px" width="1200" height="900" loading="lazy" decoding="async"
                 alt="Three friends walking and talking outdoors, one explaining an idea with her hands while the others listen and laugh.">
             </figure>
           </div>
-          <h3 class="gen__tag" id="gen-tag-college"><span class="gen__no">02</span> / College</h3>
+          <h3 class="gen__tag" id="gen-tag-college"><span class="gen__no">02</span> <span aria-hidden="true">—</span> College</h3>
           <p class="gen__line wm">expand what's possible.</p>
         </li>
-        <li class="gen__stage gen__stage--pro rv" style="--d:.25s">
+        <li class="gen__stage gen__stage--pro rv" style="--d:.28s">
           <div class="gen__frame">
             <figure class="gen__img" tabindex="0" aria-labelledby="gen-tag-pro">
               <img src="assets/img/gen-young-professional-900.jpg" srcset="assets/img/gen-young-professional-600.jpg 600w, assets/img/gen-young-professional-900.jpg 900w, assets/img/gen-young-professional-1200.jpg 1200w"
-                sizes="(max-width:760px) 64vw, (max-width:1000px) 30vw, (max-width:1560px) 23vw, 360px" width="1200" height="1600" loading="lazy" decoding="async" style="--pos:50% 30%"
+                sizes="(max-width:760px) 66vw, (max-width:1000px) 30vw, (max-width:1560px) 21vw, 312px" width="1200" height="1600" loading="lazy" decoding="async" style="--pos:50% 30%"
                 alt="A young designer with curly hair at a studio worktable, one hand on pinned sketches, looking toward the window light.">
             </figure>
           </div>
-          <h3 class="gen__tag" id="gen-tag-pro"><span class="gen__no">03</span> / Young professionals</h3>
+          <h3 class="gen__tag" id="gen-tag-pro"><span class="gen__no">03</span> <span aria-hidden="true">—</span> Young professionals</h3>
           <p class="gen__line wm">build what's next.</p>
         </li>
       </ol>
