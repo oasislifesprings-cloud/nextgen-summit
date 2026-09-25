@@ -422,7 +422,7 @@
       if (!oneRow.matches) { rail.style.removeProperty('--rail-y'); return; }
       var tops = [], bottoms = [];
       stages.forEach(function (s) {
-        var f = $('.gen__img', s), y = 0, n = f;
+        var f = $('.gen__card', s), y = 0, n = f;
         while (n && n !== art) { y += n.offsetTop; n = n.offsetParent; }
         tops.push(y);
         bottoms.push(y + f.offsetHeight);
