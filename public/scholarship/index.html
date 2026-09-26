@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PRVSWFBN');</script>
+<!-- End Google Tag Manager -->
+<title>Scholarship application · NextGen Summit</title>
+<meta name="description" content="Apply for a NextGen Summit scholarship ticket. A limited number of places are available for applicants who cannot currently afford full admission.">
+<meta name="theme-color" content="#FAFAF8">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://nextgensummit.us/scholarship/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='28' cy='34' r='21' fill='%2300A3E6'/%3E%3Ccircle cx='36' cy='35' r='21' fill='%23EC008C'/%3E%3Ccircle cx='32' cy='28' r='21' fill='%23FFE500'/%3E%3Ccircle cx='32' cy='32' r='19' fill='%230B0B0F'/%3E%3C/svg%3E">
+<script>(function(d){d.classList.add('js');setTimeout(function(){if(!d.classList.contains('js-ready'))d.classList.remove('js')},4000)})(document.documentElement)</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="/assets/css/site.css?v=20260926-01">
+<link rel="stylesheet" href="/assets/css/tickets.css?v=20260926-01">
+<script src="/assets/js/site.js?v=20260926-01" defer></script>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PRVSWFBN"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<a class="skip" href="#sch-title">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav on-paper">
+  <a class="nav__mark" href="/" aria-label="NextGen Summit, home">
+    <span class="wm" aria-hidden="true">nextgen</span><span class="nav__summit" aria-hidden="true">Summit</span>
+  </a>
+  <nav class="nav__links" aria-label="Utilities">
+    <a class="nav__link" href="/tickets/">Tickets</a>
+    <a class="nav__link" href="/">The Summit</a>
+  </nav>
+</header>
+
+<main>
+  <section class="sch" aria-labelledby="sch-title">
+    <p class="label rv">Scholarship</p>
+    <h1 class="sch__title wm rv" style="--d:.1s" id="sch-title">cost shouldn&rsquo;t<br> be the reason.</h1>
+    <div class="sch__intro rv" style="--d:.18s">
+      <p>We want cost to be as little of a barrier as possible for anyone who genuinely wants to be at NextGen Summit. A limited number of scholarship tickets are available for applicants who cannot currently afford the full cost of admission.</p>
+      <p class="sch__caveat">Scholarship tickets are limited. Submitting this form does not guarantee approval.</p>
+    </div>
+
+    <!-- posts to the same endpoint as every other form on the site, as form-name "scholarship".
+         A plain multipart POST rather than a fetch, so the resume upload shows real browser
+         progress and the whole thing works with no JavaScript at all. -->
+    <form class="sch__form" method="POST" action="/api/register.php" enctype="multipart/form-data" novalidate>
+      <input type="hidden" name="form-name" value="scholarship">
+      <p class="hp" aria-hidden="true"><label>Leave this field empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+      <fieldset class="sch__set">
+        <legend class="sch__legend">Your information</legend>
+        <div class="field"><label for="s-name">Full name</label><input id="s-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="s-email">Email address</label><input id="s-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="s-phone">Phone number</label><input id="s-phone" name="phone" type="tel" autocomplete="tel" required></div>
+        <div class="field">
+          <label for="s-describes">What best describes you?</label>
+          <select id="s-describes" name="describes" required>
+            <option value="">Choose one</option>
+            <option>High school student</option>
+            <option>College student</option>
+            <option>Young professional</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field"><label for="s-aff">School, organization or employer <span class="field__opt">optional</span></label><input id="s-aff" name="affiliation" autocomplete="organization"></div>
+      </fieldset>
+
+      <fieldset class="sch__set">
+        <legend class="sch__legend">Your request</legend>
+        <div class="field">
+          <label for="s-why">Why are you requesting a scholarship ticket?</label>
+          <textarea id="s-why" name="why_request" rows="4" required></textarea>
+          <p class="field__help">Briefly tell us about your current circumstances. No detailed financial information is needed.</p>
+        </div>
+        <div class="field">
+          <label for="s-attend">Why would you like to attend NextGen Summit?</label>
+          <textarea id="s-attend" name="why_attend" rows="4" required></textarea>
+        </div>
+        <div class="field">
+          <label for="s-gain">What are you hoping to gain from the summit?</label>
+          <textarea id="s-gain" name="hope_gain" rows="4" required></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset class="sch__set">
+        <legend class="sch__legend">Resume <span class="field__opt">optional</span></legend>
+        <div class="field">
+          <label for="s-resume">Upload your resume</label>
+          <input id="s-resume" name="resume" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+          <p class="field__help">Helps us learn about your background and goals. PDF, DOC or DOCX, up to 5&nbsp;MB.</p>
+        </div>
+      </fieldset>
+
+      <fieldset class="sch__set">
+        <legend class="sch__legend">Commitment</legend>
+        <p class="sch__note">Scholarship tickets are limited. If you are selected, we ask that you only accept a ticket if you genuinely intend to come.</p>
+        <fieldset class="choice">
+          <legend>If awarded a scholarship ticket, do you plan to attend on Friday, October 30, 2026?</legend>
+          <div class="choice__opts">
+            <label class="chip"><input type="radio" name="plan_attend" value="Yes" required><span>Yes</span></label>
+            <label class="chip"><input type="radio" name="plan_attend" value="No"><span>No</span></label>
+            <label class="chip"><input type="radio" name="plan_attend" value="Unsure"><span>Unsure</span></label>
+          </div>
+        </fieldset>
+        <label class="sch__check">
+          <input type="checkbox" name="understood" value="yes" required>
+          <span>I understand that submitting this application does not guarantee a scholarship ticket, and that availability is limited.</span>
+        </label>
+      </fieldset>
+
+      <div class="sch__actions">
+        <button class="btn btn--lg" type="submit">Submit application <span class="arr" aria-hidden="true">→</span></button>
+        <p class="sch__fine">We only use these answers to review your application.</p>
+      </div>
+    </form>
+  </section>
+</main>
+
+<footer class="foot">
+  <nav class="foot__nav" aria-label="Footer">
+    <ul>
+      <li><a href="/">The Summit</a></li>
+      <li><a href="/tickets/">Tickets</a></li>
+      <li><a class="foot__mail" href="mailto:hello@nextgensummit.us">hello@nextgensummit.us</a></li>
+    </ul>
+  </nav>
+  <p class="foot__note">NextGen Summit 2026</p>
+</footer>
+</body>
+</html>

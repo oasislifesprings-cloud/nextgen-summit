@@ -67,14 +67,14 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
         if (preg_match('/^[a-f0-9]{16}$/', $id)) {
             ngs_delete($id);
         }
-        $tab = ($_POST['tab'] ?? '') === 'notes' ? 'notes' : 'registrations';
+        $tab = in_array($_POST['tab'] ?? '', ['notes', 'scholarships'], true) ? $_POST['tab'] : 'registrations';
         header('Location: /admin/?tab=' . $tab . '&deleted=1', true, 303);
         exit;
     }
 }
 
 $error = '';
-$registrations = $notes = [];
+$registrations = $notes = $scholarships = [];
 if ($authed) {
     try {
         // waitlist sign-ups and any earlier registrations share one list, newest first
@@ -82,6 +82,7 @@ if ($authed) {
         usort($registrations, function ($a, $b) {
             return strcmp($b['created_at'], $a['created_at']);
         });
+        $scholarships = ngs_all('scholarship');
         $notes = array_merge(ngs_all('volunteer'), ngs_all('partner'));
         usort($notes, function ($a, $b) {
             return strcmp($b['created_at'], $a['created_at']);
@@ -94,7 +95,7 @@ if ($authed) {
 
 // CSV export. A leading = + - @ is neutralized so spreadsheets never run a formula from a form.
 if ($authed && isset($_GET['export']) && $error === '') {
-    $which = $_GET['export'] === 'notes' ? 'notes' : 'registrations';
+    $which = in_array($_GET['export'], ['notes', 'scholarships'], true) ? $_GET['export'] : 'registrations';
     header('Content-Type: text/csv; charset=utf-8');
     header('Content-Disposition: attachment; filename="nextgen-' . $which . '-' . gmdate('Y-m-d') . '.csv"');
     $out = fopen('php://output', 'w');
@@ -109,6 +110,15 @@ if ($authed && isset($_GET['export']) && $error === '') {
             $d = $r['data'];
             fputcsv($out, array_map($safe, [et($r['created_at']), $r['kind'] === 'waitlist' ? 'Waitlist' : 'Registration', person_name($d), $d['email'] ?? '', $d['phone'] ?? '', $d['education_level'] ?? '', $d['school_name'] ?? '', $d['volunteer_interest'] ?? '']));
         }
+    } elseif ($which === 'scholarships') {
+        fputcsv($out, ['Applied (ET)', 'Name', 'Email', 'Phone', 'Describes', 'School or employer',
+                       'Why requesting', 'Why attend', 'Hoping to gain', 'Plans to attend', 'Resume file']);
+        foreach ($scholarships as $r) {
+            $d = $r['data'];
+            fputcsv($out, array_map($safe, [et($r['created_at']), $d['name'] ?? '', $d['email'] ?? '', $d['phone'] ?? '',
+                $d['describes'] ?? '', $d['affiliation'] ?? '', $d['why_request'] ?? '', $d['why_attend'] ?? '',
+                $d['hope_gain'] ?? '', $d['plan_attend'] ?? '', $d['resume_name'] ?? '']));
+        }
     } else {
         fputcsv($out, ['Sent (ET)', 'Type', 'Name', 'Email', 'Campus', 'Organization']);
         foreach ($notes as $r) {
@@ -119,7 +129,7 @@ if ($authed && isset($_GET['export']) && $error === '') {
     exit;
 }
 
-$tab = ($_GET['tab'] ?? '') === 'notes' ? 'notes' : 'registrations';
+$tab = in_array($_GET['tab'] ?? '', ['notes', 'scholarships'], true) ? $_GET['tab'] : 'registrations';
 $q = is_string($_GET['q'] ?? null) ? trim($_GET['q']) : '';
 
 $emailCount = [];
@@ -154,6 +164,7 @@ function matches(array $r, string $q): bool
 }
 $shownRegs = array_values(array_filter($registrations, function ($r) use ($q) { return matches($r, $q); }));
 $shownNotes = array_values(array_filter($notes, function ($r) use ($q) { return matches($r, $q); }));
+$shownSchol = array_values(array_filter($scholarships, function ($r) use ($q) { return matches($r, $q); }));
 ?>
 <!doctype html>
 <html lang="en">
@@ -182,6 +193,18 @@ $shownNotes = array_values(array_filter($notes, function ($r) use ($q) { return 
   .tabs a[aria-current="page"]{background:var(--ink);color:#fff}
   .tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
   .tools input{height:42px;min-width:220px;padding:0 12px;border:1.5px solid var(--rule-strong);border-radius:8px;font:500 15px/1 var(--f-sans);background:#fff}
+  .apps{list-style:none;margin:0;padding:0;display:grid;gap:18px}
+  .app{padding:20px 22px;border:1px solid var(--rule);border-radius:10px;background:#fff}
+  .app__top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;align-items:baseline}
+  .app__name{font:800 18px/1.3 var(--f-sans)}
+  .app__meta{margin-top:5px;font:500 13.5px/1.6 var(--f-sans);color:var(--ink-2)}
+  .app__when{font:600 12.5px/1.4 var(--f-sans);color:var(--ink-3);white-space:nowrap}
+  .app__qa{margin:16px 0 0;display:grid;grid-template-columns:minmax(9rem,auto) minmax(0,1fr);gap:10px 20px}
+  .app__qa dt{font:700 11px/1.5 var(--f-sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+  .app__qa dd{margin:0;font:500 14.5px/1.6 var(--f-sans)}
+  .app__foot{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-top:18px;padding-top:16px;border-top:1px solid var(--rule)}
+  .app__noresume{font:600 13px/1.4 var(--f-sans);color:var(--ink-3)}
+  @media (max-width:620px){.app__qa{grid-template-columns:1fr;gap:4px 0}.app__qa dd{margin-bottom:10px}}
   .tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:#fff}
   table{width:100%;border-collapse:collapse;font:500 14px/1.4 var(--f-sans)}
   th{position:sticky;top:0;background:#fff;text-align:left;padding:12px 14px;font:700 11px/1.3 var(--f-sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);border-bottom:1px solid var(--rule);white-space:nowrap}
@@ -226,7 +249,7 @@ $shownNotes = array_values(array_filter($notes, function ($r) use ($q) { return 
       </form>
     </div>
 
-    <h1 class="wm"><?= $tab === 'notes' ? 'notes.' : 'registrations.' ?></h1>
+    <h1 class="wm"><?= $tab === 'notes' ? 'notes.' : ($tab === 'scholarships' ? 'scholarships.' : 'registrations.') ?></h1>
     <p class="adm__sub">Waitlist and registrations · Times shown in Eastern Time.</p>
 
     <?php if ($error !== ''): ?><p class="note" role="alert"><?= h($error) ?></p><?php endif; ?>
@@ -246,6 +269,7 @@ $shownNotes = array_values(array_filter($notes, function ($r) use ($q) { return 
       <nav class="tabs" aria-label="Views">
         <a href="/admin/?tab=registrations" <?= $tab === 'registrations' ? 'aria-current="page"' : '' ?>>Registrations (<?= count($registrations) ?>)</a>
         <a href="/admin/?tab=notes" <?= $tab === 'notes' ? 'aria-current="page"' : '' ?>>Volunteer and partner notes (<?= count($notes) ?>)</a>
+        <a href="/admin/?tab=scholarships" <?= $tab === 'scholarships' ? 'aria-current="page"' : '' ?>>Scholarship applications (<?= count($scholarships) ?>)</a>
       </nav>
       <div class="tools">
         <form method="get" action="/admin/" role="search">
@@ -253,7 +277,7 @@ $shownNotes = array_values(array_filter($notes, function ($r) use ($q) { return 
           <label class="sr" for="q">Search</label>
           <input id="q" name="q" type="search" value="<?= h($q) ?>" placeholder="Search name, email, phone">
         </form>
-        <a class="btn btn--sm" href="/admin/?export=<?= $tab === 'notes' ? 'notes' : 'registrations' ?>">Export CSV</a>
+        <a class="btn btn--sm" href="/admin/?export=<?= h($tab) ?>">Export CSV</a>
       </div>
     </div>
 
@@ -288,6 +312,48 @@ $shownNotes = array_values(array_filter($notes, function ($r) use ($q) { return 
           <?php endforeach; ?>
           </tbody>
         </table>
+      <?php endif; ?>
+    <?php elseif ($tab === 'scholarships'): ?>
+      <?php if (!$shownSchol): ?>
+        <p class="empty"><?= $q === '' ? 'No scholarship applications yet.' : 'Nothing matches that search.' ?></p>
+      <?php else: ?>
+        <ul class="apps">
+        <?php foreach ($shownSchol as $r): $d = $r['data']; ?>
+          <li class="app">
+            <div class="app__top">
+              <div>
+                <p class="app__name"><?= h($d['name'] ?? '') ?></p>
+                <p class="app__meta">
+                  <a href="mailto:<?= h($d['email'] ?? '') ?>"><?= h($d['email'] ?? '') ?></a>
+                  <?php if (($d['phone'] ?? '') !== ''): ?> &middot; <a href="tel:<?= h(preg_replace('/[^0-9+]/', '', $d['phone'])) ?>"><?= h($d['phone']) ?></a><?php endif; ?>
+                  &middot; <?= h($d['describes'] ?? '') ?>
+                  <?php if (($d['affiliation'] ?? '') !== ''): ?> &middot; <?= h($d['affiliation']) ?><?php endif; ?>
+                </p>
+              </div>
+              <p class="app__when"><?= h(et($r['created_at'])) ?></p>
+            </div>
+            <dl class="app__qa">
+              <dt>Why a scholarship</dt><dd><?= nl2br(h($d['why_request'] ?? '')) ?></dd>
+              <dt>Why attend</dt><dd><?= nl2br(h($d['why_attend'] ?? '')) ?></dd>
+              <dt>Hoping to gain</dt><dd><?= nl2br(h($d['hope_gain'] ?? '')) ?></dd>
+              <dt>Plans to attend</dt><dd><?= h($d['plan_attend'] ?? '') ?></dd>
+            </dl>
+            <div class="app__foot">
+              <?php if (($d['resume_file'] ?? '') !== ''): ?>
+                <a class="btn btn--sm" href="/api/resume.php?f=<?= h(urlencode($d['resume_file'])) ?>">Resume<?= ($d['resume_name'] ?? '') !== '' ? ' (' . h($d['resume_name']) . ')' : '' ?></a>
+              <?php else: ?>
+                <span class="app__noresume">No resume attached</span>
+              <?php endif; ?>
+              <form method="post" action="/admin/" onsubmit="return confirm('Delete this application? This cannot be undone.')">
+                <input type="hidden" name="csrf" value="<?= h($csrf) ?>">
+                <input type="hidden" name="tab" value="scholarships">
+                <input type="hidden" name="delete" value="<?= h($r['id']) ?>">
+                <button class="del" type="submit">Delete</button>
+              </form>
+            </div>
+          </li>
+        <?php endforeach; ?>
+        </ul>
       <?php endif; ?>
     <?php else: ?>
       <?php if (!$shownNotes): ?>

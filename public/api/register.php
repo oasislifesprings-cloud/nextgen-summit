@@ -22,12 +22,18 @@ function ngs_reply(bool $ok, string $kind, string $error, int $status, bool $jso
         exit;
     }
     if ($ok) {
-        header('Location: ' . (in_array($kind, ['waitlist', 'registration'], true) ? '/registration-received/' : '/thanks/'), true, 303);
+        $to = '/thanks/';
+        if (in_array($kind, ['waitlist', 'registration'], true)) {
+            $to = '/registration-received/';
+        } elseif ($kind === 'scholarship') {
+            $to = '/scholarship/received/';
+        }
+        header('Location: ' . $to, true, 303);
         exit;
     }
     http_response_code($status);
     header('Content-Type: text/html; charset=utf-8');
-    $back = in_array($kind, ['waitlist', 'registration'], true) ? '/#registration' : '/#involved';
+    $back = in_array($kind, ['waitlist', 'registration'], true) ? '/#registration' : ($kind === 'scholarship' ? '/scholarship/' : '/#involved');
     echo '<!doctype html><html lang="en"><head><meta charset="utf-8">'
         . '<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">'
         . '<title>Not sent yet · Next Gen Summit</title>'
@@ -98,6 +104,58 @@ if ($kind === 'waitlist') {
     }
     if (!in_array($data['volunteer_interest'], ['Yes', 'No'], true)) {
         $errors[] = 'Please tell us whether you would like to volunteer.';
+    }
+} elseif ($kind === 'scholarship') {
+    $data = [
+        'name' => ngs_text($_POST, 'name', 120),
+        'email' => $email,
+        'phone' => ngs_text($_POST, 'phone', 30),
+        'describes' => ngs_text($_POST, 'describes', 40),
+        'affiliation' => ngs_text($_POST, 'affiliation', 150),
+        'why_request' => ngs_text($_POST, 'why_request', 1500),
+        'why_attend' => ngs_text($_POST, 'why_attend', 1500),
+        'hope_gain' => ngs_text($_POST, 'hope_gain', 1500),
+        'plan_attend' => ngs_text($_POST, 'plan_attend', 10),
+    ];
+    if ($data['name'] === '') {
+        $errors[] = 'Please add your name.';
+    }
+    if (!$emailOk) {
+        $errors[] = 'Please check your email address.';
+    }
+    $digits = preg_replace('/\D+/', '', $data['phone']) ?? '';
+    if (strlen($digits) < 7 || strlen($digits) > 15) {
+        $errors[] = 'Please check your phone number.';
+    }
+    if (!in_array($data['describes'], ['High school student', 'College student', 'Young professional', 'Other'], true)) {
+        $errors[] = 'Please tell us what best describes you.';
+    }
+    foreach ([
+        'why_request' => 'Please tell us why you are requesting a scholarship ticket.',
+        'why_attend' => 'Please tell us why you would like to attend.',
+        'hope_gain' => 'Please tell us what you hope to gain.',
+    ] as $f => $msg) {
+        if ($data[$f] === '') {
+            $errors[] = $msg;
+        }
+    }
+    if (!in_array($data['plan_attend'], ['Yes', 'No', 'Unsure'], true)) {
+        $errors[] = 'Please tell us whether you plan to attend.';
+    }
+    if (ngs_text($_POST, 'understood', 5) !== 'yes') {
+        $errors[] = 'Please confirm you understand that a scholarship is not guaranteed.';
+    }
+    // the resume is optional, but a bad one should be said out loud rather than dropped
+    if (!$errors) {
+        try {
+            $resume = ngs_take_resume('resume');
+            if ($resume) {
+                $data['resume_file'] = $resume[0];
+                $data['resume_name'] = $resume[1];
+            }
+        } catch (RuntimeException $e) {
+            $errors[] = $e->getMessage();
+        }
     }
 } else {
     $data = [
