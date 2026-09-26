@@ -130,6 +130,7 @@ h1,h2,h3,p{margin:0}
   .count{padding-left:0}
   .count__u--hms,.count__to{display:none}
   .count__word{display:inline}
+  .count__u{gap:4px}          /* "33 days" reads as two words once the unit is spelled out */
   .count__n{font-size:14px}
   .count__l{font-size:10px;letter-spacing:.12em}
   .nav__links{gap:10px}
