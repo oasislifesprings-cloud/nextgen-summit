@@ -1,0 +1,54 @@
+/* ============================================================================
+   NextGen Summit — tickets
+   Composition only. Every colour here comes from the tokens in site.css, so the
+   page and the Eventbrite modal are branded from one source (--accent).
+   ========================================================================= */
+
+.tk{max-width:var(--maxw);margin:0 auto;padding:calc(var(--nav-h) + clamp(40px,8vh,90px)) var(--gutter) clamp(90px,15vh,170px)}
+.tk__head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-items:end;gap:26px clamp(30px,5vw,90px)}
+.tk__head .label{grid-column:1/-1}
+.tk__title{margin-top:clamp(18px,3vh,36px);font-size:clamp(44px,7.6vw,124px);line-height:.92}
+.tk__meta{margin:0}
+.tk__meta div{display:grid;grid-template-columns:minmax(4.5rem,auto) minmax(0,1fr);gap:6px 24px;align-items:baseline;padding:15px 0;border-top:1px solid var(--rule)}
+.tk__meta div:last-child{border-bottom:1px solid var(--rule)}
+.tk__meta dt{font:700 11px/1.3 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
+.tk__meta dd{margin:0;font:800 clamp(14px,1.2vw,18px)/1.3 var(--f-sans);letter-spacing:.02em;text-transform:uppercase}
+
+/* the three ways in */
+.tk__list{list-style:none;margin:clamp(46px,8vh,90px) 0 0;padding:0;border-top:1px solid var(--rule)}
+.tier{padding:clamp(28px,4.4vh,46px) 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:14px clamp(24px,4vw,70px)}
+.tier__head{grid-column:1;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px clamp(14px,2vw,28px)}
+.tier__name{font:800 clamp(22px,2.6vw,40px)/1.05 var(--f-sans);letter-spacing:.01em;text-transform:uppercase}
+.tier__price{font:800 clamp(26px,3.2vw,52px)/1 var(--f-sans);letter-spacing:-.02em;color:var(--accent-ink)}
+.tier__cur{color:var(--accent-ink)}
+.tier__per{font-size:.42em;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.tier__price--word{font:800 clamp(14px,1.2vw,18px)/1.3 var(--f-sans);letter-spacing:.14em;text-transform:uppercase}
+.tier__note{grid-column:1;max-width:52ch;font:500 15.5px/1.6 var(--f-sans);color:var(--ink-2)}
+.tier__cta{grid-column:2;grid-row:1 / span 2;justify-self:end}
+.tier__second{grid-column:1/-1;margin-top:4px;font:600 14px/1.6 var(--f-sans);color:var(--ink-2)}
+.tier--schol{border-bottom:0}
+.tk__fine{margin-top:clamp(24px,3.6vh,36px);font:600 13px/1.6 var(--f-sans);color:var(--ink-3);max-width:52ch}
+
+@media (max-width:860px){
+  .tk__head{grid-template-columns:1fr}
+  .tier{grid-template-columns:1fr}
+  .tier__cta{grid-column:1;grid-row:auto;justify-self:stretch;margin-top:8px}
+  .tier__cta .btn{width:100%;justify-content:center}
+}
+
+/* Eventbrite binds to this by id; it must stay in the layout to be clickable, so it is
+   taken out of view rather than display:none, and out of the tab order */
+.eb-trigger{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;pointer-events:none}
+
+/* ---------- ours, after their order goes through ---------- */
+.tkdone{padding:clamp(40px,8vh,90px) 0 0;outline:none}
+.tkdone[hidden]{display:none}
+.tkdone__title{margin-top:14px;font-size:clamp(56px,9vw,130px);line-height:.9;padding-bottom:.04em}
+.tkdone__copy{margin-top:clamp(12px,2vh,20px);max-width:40ch;font:600 clamp(17px,1.5vw,22px)/1.5 var(--f-sans)}
+.tkdone__small{margin-top:12px;max-width:44ch;font:500 15px/1.6 var(--f-sans);color:var(--ink-2)}
+.tkdone__cta{margin-top:clamp(26px,4vh,42px)}
+@media (max-width:560px){.tkdone__cta .btn{width:100%;justify-content:center}}
+
+@media (prefers-reduced-motion:reduce){
+  .tk__list .rv,.tkdone{transform:none}
+}

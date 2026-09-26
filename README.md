@@ -105,6 +105,27 @@ The original registration form and its confirmation are commented out inside the
 
 The form sends in place and shows its confirmation. With JavaScript off, the browser posts normally and lands on `/registration-received/`. On a plain local preview (file:// or localhost) nothing is sent and the confirmation says so.
 
+## Tickets and Eventbrite (monday-launch branch)
+
+`/tickets/` sells through Eventbrite's embedded checkout. Eventbrite is the source of truth for
+prices, inventory, quantity rules, payment and the hidden scholarship ticket; the site only opens
+their modal and shows a NextGen confirmation afterwards.
+
+- Event id `1999190304016`, public URL `https://www.eventbrite.com/e/nextgen-summit-tickets-1999190304016`.
+- Every ticket button is a real link to that URL first. `assets/js/tickets.js` upgrades those
+  clicks to the modal once Eventbrite's widget is up, so the page works with no JavaScript, with
+  the widget blocked, or if it fails to start.
+- **The embedded checkout only runs over https.** On `http://localhost` Eventbrite refuses and
+  logs a warning, so the buttons stay plain links. Test the modal on the https review host.
+- `brandColor` is read from the `--accent` token at runtime, so the checkout cannot drift from the
+  site. `#1FC7BE` in `tickets.js` is only the fallback if the variable cannot be read.
+- The scholarship access code is never in this repo. Approved applicants enter it in Eventbrite's
+  own checkout. `APPLY FOR A SCHOLARSHIP` currently opens an email; swap the href in
+  `public/tickets/index.html` when the application form exists.
+
+**Do not merge to `main` or deploy to production until leadership have signed off.** `main` is what
+is live at nextgensummit.us.
+
 ## Still to do
 
 - Announce the lineup. Section 04 holds three "to be announced" cards showing an empty stage, so nothing
