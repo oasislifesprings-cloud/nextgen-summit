@@ -123,90 +123,91 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- live ticket count from Eventbrite (counter.js). Hidden until a real count arrives.
        Set as a press proof: crop marks, a slug line, the count in CMY plates that settle into black,
        and one halftone dot per person holding a ticket, until opted-in names arrive and take their place. -->
+  <!-- Live from Eventbrite (counter.js) and who is coming (names.js). The count leads; the
+       credential hanging from the hero carries one registered person at a time, their name
+       written on by hand. Both are hidden until real data arrives. -->
   <section class="tally" data-tally data-nav="paper" aria-labelledby="tally-title" hidden>
-    <div class="tally__sheet">
-      <span class="tally__crop" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-      <svg class="tally__target tally__target--l" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6.5"/><path d="M12 0v24M0 12h24"/></svg>
-      <svg class="tally__target tally__target--r" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6.5"/><path d="M12 0v24M0 12h24"/></svg>
+    <div class="tally__main">
+      <p class="tally__n" aria-hidden="true" data-tally-n></p>
+      <h2 class="tally__k" id="tally-title"><span class="sr" data-tally-sr></span>People registered for NextGen</h2>
+      <p class="tally__x nm-demo" data-tally-sample hidden>Sample count</p>
+    </div>
 
-      <div class="tally__slug">
-        <p class="tally__live" data-tally-live><span class="tally__pulse" aria-hidden="true"></span>Live from Eventbrite<span class="nm-demo" data-tally-sample hidden>Sample count</span></p>
-        <p class="tally__run" aria-hidden="true">NextGen Summit <span>·</span> Fri 10.30 <span>·</span> Gordon Center, MD</p>
-        <span class="tally__bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-      </div>
+    <div class="tally__crowd">
+      <div class="lan" data-names-box hidden>
+        <div class="nm-view" data-names="badge">
+          <div class="nb__stage">
+            <div class="nb__hang">
+              <!-- the ribbon: filled shapes, not strokes, so it folds, twists and catches light -->
+              <svg class="nb__strap" viewBox="0 0 220 170" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                  <linearGradient id="lanFaceL" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" stop-color="#0E9E97"/><stop offset=".34" stop-color="#2BD3CA"/>
+                    <stop offset=".72" stop-color="#19B8B0"/><stop offset="1" stop-color="#0C8A84"/>
+                  </linearGradient>
+                  <linearGradient id="lanFaceR" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" stop-color="#0C8A84"/><stop offset=".3" stop-color="#19B8B0"/>
+                    <stop offset=".68" stop-color="#2BD3CA"/><stop offset="1" stop-color="#0E9E97"/>
+                  </linearGradient>
+                  <linearGradient id="lanFold" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#0A7F79"/><stop offset=".5" stop-color="#15A7A0"/>
+                    <stop offset="1" stop-color="#076E69"/>
+                  </linearGradient>
+                  <!-- woven texture: warp and weft, close enough to read as cloth -->
+                  <pattern id="lanWeave" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(26)">
+                    <rect width="4" height="4" fill="none"/>
+                    <path d="M0 0 V4 M2 0 V4" stroke="#05413E" stroke-width=".7" opacity=".3"/>
+                    <path d="M0 1 H4 M0 3 H4" stroke="#C7F7F3" stroke-width=".55" opacity=".2"/>
+                  </pattern>
+                  <!-- the round of the cloth: lit along one edge, shaded along the other -->
+                  <linearGradient id="lanRound" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" stop-color="#03312F" stop-opacity=".5"/>
+                    <stop offset=".22" stop-color="#FFFFFF" stop-opacity=".2"/>
+                    <stop offset=".55" stop-color="#FFFFFF" stop-opacity="0"/>
+                    <stop offset="1" stop-color="#03312F" stop-opacity=".46"/>
+                  </linearGradient>
+                </defs>
+                <!-- left ribbon, wider at the shoulder and narrowing into the fold -->
+                <path class="nb__ribbon" d="M2 0 C6 34 26 86 70 128 L96 150 L80 162 L46 126 C14 92 -2 40 -6 2 Z" fill="url(#lanFaceL)"/>
+                <path d="M2 0 C6 34 26 86 70 128 L96 150 L80 162 L46 126 C14 92 -2 40 -6 2 Z" fill="url(#lanWeave)"/>
+                <path d="M2 0 C6 34 26 86 70 128 L96 150 L80 162 L46 126 C14 92 -2 40 -6 2 Z" fill="url(#lanRound)"/>
+                <path d="M-1 1 C3 35 22 86 66 129 L90 151" fill="none" stroke="#06433F" stroke-width=".9" opacity=".33"/>
+                <path d="M2 0 C6 34 26 86 70 128 L96 150" fill="none" stroke="#8FF3EC" stroke-width="1.2" opacity=".55"/>
+                <!-- right ribbon, passing behind at the fold -->
+                <path class="nb__ribbon" d="M218 0 C214 34 194 86 150 128 L124 150 L140 162 L174 126 C206 92 222 40 226 2 Z" fill="url(#lanFaceR)"/>
+                <path d="M218 0 C214 34 194 86 150 128 L124 150 L140 162 L174 126 C206 92 222 40 226 2 Z" fill="url(#lanWeave)"/>
+                <path d="M218 0 C214 34 194 86 150 128 L124 150 L140 162 L174 126 C206 92 222 40 226 2 Z" fill="url(#lanRound)"/>
+                <path d="M221 1 C217 35 198 86 154 129 L130 151" fill="none" stroke="#06433F" stroke-width=".9" opacity=".3"/>
+                <path d="M218 0 C214 34 194 86 150 128 L124 150" fill="none" stroke="#8FF3EC" stroke-width="1.2" opacity=".5"/>
+                <!-- the twist where both ends gather into the hook -->
+                <path d="M96 150 L124 150 L132 166 L88 166 Z" fill="url(#lanFold)"/>
+                <path d="M96 150 L124 150 L132 166 L88 166 Z" fill="url(#lanWeave)"/>
+                <path d="M96 150 L124 150 L132 166 L88 166 Z" fill="url(#lanRound)"/>
+                <path d="M88 166 L132 166" stroke="#053D3A" stroke-width="1.8" opacity=".55"/>
+                <path d="M100 152 L104 164 M116 152 L120 164" stroke="#053D3A" stroke-width="1" opacity=".3"/>
+              </svg>
 
-      <div class="tally__main">
-        <div class="tally__lead">
-          <p class="tally__n reg" aria-hidden="true" data-tally-n><span class="reg__k"></span><span class="reg__p reg__p--c"></span><span class="reg__p reg__p--m"></span><span class="reg__p reg__p--y"></span></p>
-          <div class="tally__txt">
-            <h2 class="tally__k" id="tally-title"><span class="sr" data-tally-sr></span>Registered for NextGen</h2>
-            <p class="tally__x">Join them on Friday, October 30.</p>
-            <a class="btn tally__cta" href="/tickets/">Get tickets <span class="arr" aria-hidden="true">→</span></a>
-          </div>
-        </div>
-        <div class="tally__crowd">
-          <!-- WHO'S COMING (names.js, names.css): attendee names, first name and last initial (opt-in
-               check temporarily off in api/attendee-count.php; restore the note's wording with it).
-               Once there is at least one, they take the dots' place; until then the dots stay.
-               TRIAL: the switch flips between the two designs. Keep one: delete the other view, the
-               switch and the other design's rules in names.css. -->
-          <div class="tally__names" data-names-box hidden>
-            <div class="nm-bar">
-              <p class="tally__cap">Who&#8217;s coming<span class="nm-demo" data-names-demo hidden>Sample names</span></p>
-              <div class="nm-switch" role="group" aria-label="Design on trial">
-                <button type="button" aria-pressed="true" data-names-pick="badge">Badge</button>
-                <button type="button" aria-pressed="false" data-names-pick="book">Guest book</button>
-              </div>
-            </div>
-            <div class="nm-view" data-names="badge" aria-hidden="true">
-              <div class="nb__stage">
-                <div class="nb__hang">
-                  <svg class="nb__strap" viewBox="0 0 180 150" preserveAspectRatio="none"><path d="M8 0 L82 146"/><path d="M172 0 L98 146"/><path class="nb__print" d="M8 0 L82 146"/><path class="nb__print" d="M172 0 L98 146"/></svg>
-                  <span class="nb__clip"></span>
-                  <div class="nb__badge">
-                    <span class="nb__slot"></span>
-                    <div class="nb__head">
-                      <span class="nb__mark"><span class="wm">nextgen</span><span>Summit</span></span>
-                      <span class="nb__date">Oct 30 · 2026</span>
-                    </div>
-                    <div class="nb__body">
-                      <p class="nb__hello">Hello, I&#8217;m</p>
-                      <div class="nb__names"></div>
-                      <div class="nb__rule"></div>
-                      <p class="nb__stamp">Ready for<br>NextGen</p>
-                      <div class="nb__foot"><span>Fri 10.30 · Gordon Center, MD</span><span class="nb__tag">Attendee</span></div>
-                    </div>
-                  </div>
+              <span class="nb__hook" aria-hidden="true"></span>
+
+              <div class="nb__badge">
+                <span class="nb__slot" aria-hidden="true"></span>
+                <div class="nb__head">
+                  <span class="nb__mark"><span class="wm">nextgen</span><span>Summit</span></span>
+                  <span class="nb__date">Oct 30 &middot; 2026</span>
+                </div>
+                <div class="nb__body">
+                  <p class="nb__hello">Hello, I&rsquo;m</p>
+                  <div class="nb__names"></div>
+                  <p class="nb__ready">Ready for NextGen.</p>
+                  <div class="nb__foot"><span>Fri 10.30 &middot; Gordon Center, MD</span><span class="nb__tag">Attendee</span></div>
                 </div>
               </div>
-            </div>
-            <div class="nm-view" data-names="book" aria-hidden="true" hidden>
-              <div class="gb__sheet">
-                <div class="gb__top"><span>Guest book</span><span>NextGen Summit · 10.30</span></div>
-                <ol class="gb__lines"></ol>
-              </div>
-            </div>
-            <p class="sr" data-names-sr></p>
-            <div class="nm-foot">
-              <button class="toggle" type="button" aria-pressed="false" data-names-toggle aria-label="Pause the names"><span class="toggle__i" aria-hidden="true"></span><span class="toggle__t" aria-hidden="true">Pause</span></button>
-              <p class="nm-note">First name and last initial only.</p>
+              <span class="nb__shadow" aria-hidden="true"></span>
             </div>
           </div>
-          <div class="tally__screen">
-            <canvas data-tally-crowd aria-hidden="true"></canvas>
-            <p class="tally__tip" data-tally-tip aria-hidden="true" hidden><b></b><span></span></p>
-          </div>
-          <div class="tally__legend">
-            <p class="tally__cap tally__cap--one" aria-hidden="true"><span class="tally__key"></span><span class="tally__plain">One dot, one person with a ticket</span><span class="tally__inked">One dot per person · its colour is their state</span></p>
-            <p class="tally__cap tally__new" data-tally-new aria-live="polite"><span class="tally__key" aria-hidden="true"></span><span data-tally-new-t>+0 since you got here</span></p>
-          </div>
+          <p class="sr" data-names-sr></p>
+          <p class="nm-demo nb__demo" data-names-demo hidden>Sample names</p>
         </div>
-      </div>
-
-      <!-- filled by counter.js once Eventbrite has at least one attendee's state -->
-      <div class="tally__states" data-tally-states hidden>
-        <p class="tally__cap" id="tally-states-k">Where they're coming from</p>
-        <div class="tally__chips" role="group" aria-labelledby="tally-states-k" data-tally-chips></div>
       </div>
     </div>
   </section>

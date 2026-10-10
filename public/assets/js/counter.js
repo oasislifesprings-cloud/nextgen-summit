@@ -80,6 +80,9 @@
   function people(n) { return fmt(n) + (n === 1 ? ' person' : ' people'); }
   function write(n) {
     var s = fmt(n);
+    // the number is normally set in printing plates (.reg__k/.reg__p); where the markup has
+    // none, it is plain type and the element carries it itself
+    if (!layers.length) { num.textContent = s; return; }
     for (var i = 0; i < layers.length; i++) layers[i].textContent = s;
   }
   function inkFor(rank) {
