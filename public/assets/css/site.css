@@ -180,19 +180,70 @@ h1,h2,h3,p{margin:0}
 /* ---------- 02 what is next gen ---------- */
 /* live ticket count (counter.js): the bridge from the hero into "what is next gen".
    Hidden until Eventbrite answers; while it shows, it takes the top of that section's space. */
-.tally{max-width:var(--maxw);margin:0 auto;padding:clamp(72px,12vh,140px) var(--gutter) 0;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:end;gap:16px clamp(22px,3.4vw,56px)}
+/* ---------- the curtains, used entering and leaving the page ---------- */
+.curtain{position:fixed;inset:0;z-index:300;display:flex;pointer-events:none}
+.curtain__half{flex:1;background:linear-gradient(180deg,#0B0B0F 0%,#0E3B39 46%,#12514E 100%);will-change:transform}
+.curtain__half--l{transform:translate3d(-101%,0,0)}
+.curtain__half--r{transform:translate3d(101%,0,0)}
+.curtain.is-closing .curtain__half{transition:transform .5s cubic-bezier(.76,0,.24,1);transform:translate3d(0,0,0)}
+.curtain.is-open .curtain__half{transition:transform .72s cubic-bezier(.22,1,.36,1)}
+.curtain.is-open .curtain__half--l{transform:translate3d(-101%,0,0)}
+.curtain.is-open .curtain__half--r{transform:translate3d(101%,0,0)}
+/* a hairline of NextGen turquoise where the two halves meet */
+.curtain__half--l{border-right:1px solid rgba(31,199,190,.5)}
+.curtain__half--r{border-left:1px solid rgba(31,199,190,.5)}
+
+@media (prefers-reduced-motion:reduce){.curtain{display:none}}
+
+.xp__more{margin-top:clamp(30px,5vh,56px)}
+@media (max-width:560px){.xp__more .btn{width:100%}}
+
+/* the volunteer application, framed inside the drawer */
+.volform{margin-top:clamp(18px,2.6vh,26px)}
+.volform[hidden]{display:none}
+.volform iframe{display:block;width:100%;height:min(74vh,760px);border:0;border-radius:10px;background:#fff}
+.volform__wait{font:600 14px/1.5 var(--f-sans);color:var(--ink-2)}
+.volform__wait[hidden]{display:none}
+.volform__alt{margin-top:12px;font:600 13px/1.5 var(--f-sans);color:var(--ink-2)}
+
+/* live ticket count, and the credential it hangs beside. The straps run up out of the section
+   so the card reads as hanging from the hero photograph above it. */
+.tally{position:relative;max-width:var(--maxw);margin:0 auto;padding:clamp(96px,17vh,210px) var(--gutter) clamp(40px,7vh,90px);display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:clamp(30px,5vw,90px)}
 .tally[hidden]{display:none}
-.tally__n{font-family:var(--f-display);font-weight:900;font-variation-settings:"SOFT" 100,"WONK" 0,"opsz" 144;font-size:clamp(104px,15vw,236px);line-height:.78;letter-spacing:-.05em;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap;color:var(--ink)}
-.tally__txt{padding-bottom:.4em}
-.tally__k{font:800 clamp(15px,1.35vw,20px)/1.2 var(--f-sans);letter-spacing:.16em;text-transform:uppercase}
-.tally__k::before{content:"";display:block;width:40px;height:3px;margin-bottom:14px;background:var(--accent)}
-.tally__x{margin-top:8px;font:500 clamp(15px,1.15vw,17px)/1.5 var(--f-sans);color:var(--ink-2)}
-.tally:not([hidden]) + .what{padding-top:clamp(64px,11vh,130px)}
-@media (max-width:760px){
-  .tally{grid-template-columns:1fr;gap:14px;padding-top:clamp(56px,9vh,84px)}
-  .tally__n{font-size:clamp(92px,29vw,150px)}
-  .tally__txt{padding-bottom:0}
+.tally__main{padding-top:clamp(10px,4vh,54px)}
+.tally__n{font-family:var(--f-display);font-weight:900;font-variation-settings:"SOFT" 100,"WONK" 0,"opsz" 144;font-size:clamp(104px,15.5vw,250px);line-height:.76;letter-spacing:-.05em;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap;color:var(--ink)}
+.tally__k{margin-top:clamp(18px,2.6vh,30px);max-width:22ch;font:800 clamp(14px,1.25vw,19px)/1.25 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+.tally:not([hidden]) + .what{padding-top:clamp(90px,17vh,210px)}
+
+/* the credential */
+.lan{position:relative;align-self:start;width:clamp(150px,15vw,208px);margin-top:calc(-1 * clamp(96px,17vh,210px));padding-top:clamp(74px,12vh,150px);display:flex;justify-content:center;transform-origin:50% 0}
+.lan__strap{position:absolute;top:0;width:11px;background:linear-gradient(180deg,var(--accent) 0%,#15B3AB 100%);border-radius:0 0 2px 2px}
+.lan__strap--l{left:50%;height:calc(100% - 40px);transform:translateX(-50%) rotate(12.5deg);transform-origin:50% 0}
+.lan__strap--r{left:50%;height:calc(100% - 40px);transform:translateX(-50%) rotate(-12.5deg);transform-origin:50% 0}
+.lan__clip{position:absolute;top:calc(clamp(74px,12vh,150px) - 25px);left:50%;width:15px;height:28px;margin-left:-7.5px;border:3px solid #9AA0A6;border-radius:4px;background:linear-gradient(180deg,#D7DADD,#9AA0A6)}
+.lan__card{position:relative;z-index:1;width:100%;aspect-ratio:3/4.4;padding:clamp(17px,1.5vw,22px);border-radius:12px;background:linear-gradient(165deg,#12141A 0%,#0B0B0F 62%);color:#fff;box-shadow:0 22px 50px -24px rgba(6,6,9,.75),inset 0 1px 0 rgba(255,255,255,.07);display:flex;flex-direction:column;transform-origin:50% -14%;animation:lan-sway 7s var(--ease) infinite alternate}
+.lan__card::after{content:"";position:absolute;left:50%;top:9px;width:30px;height:7px;margin-left:-15px;border-radius:4px;background:#05060A;box-shadow:inset 0 1px 2px rgba(0,0,0,.9)}
+.lan__brand{margin-top:14px;font-family:var(--f-display);font-weight:900;font-variation-settings:"SOFT" 100,"WONK" 0,"opsz" 144;font-size:clamp(19px,1.9vw,25px);line-height:.95;letter-spacing:-.035em}
+.lan__brand i{display:block;font-family:var(--f-sans);font-style:normal;font-weight:700;font-size:8.5px;letter-spacing:.42em;text-transform:uppercase;color:var(--accent);margin-top:3px}
+.lan__line{margin-top:auto;padding-top:18px;font:700 clamp(13px,1.15vw,15.5px)/1.32 var(--f-sans);letter-spacing:.02em;text-wrap:balance}
+.lan__foot{margin-top:9px;padding-top:9px;border-top:1px solid rgba(255,255,255,.16);font:700 8.5px/1.4 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.62)}
+.lan__foot i{font-style:normal;color:var(--accent)}
+/* one identity at a time: the old line leaves before the new one arrives */
+.lan__line.is-out{opacity:0;transform:translate3d(0,-5px,0);transition:opacity .38s var(--ease),transform .38s var(--ease)}
+.lan__line.is-in{opacity:0;transform:translate3d(0,7px,0)}
+.lan__line{transition:opacity .55s var(--ease),transform .55s var(--ease)}
+@keyframes lan-sway{from{transform:rotate(-1.4deg)}to{transform:rotate(1.4deg)}}
+
+@media (max-width:820px){
+  .tally{grid-template-columns:minmax(0,1fr) auto;gap:clamp(16px,4vw,30px);padding-top:clamp(80px,13vh,130px)}
+  .lan{width:clamp(126px,34vw,162px);padding-top:clamp(56px,9vh,96px);margin-top:calc(-1 * clamp(80px,13vh,130px))}
+  .lan__clip{top:calc(clamp(56px,9vh,96px) - 25px)}
+  .tally__n{font-size:clamp(88px,22vw,150px)}
+  .tally__k{margin-top:14px;font-size:13px;letter-spacing:.14em}
 }
+@media (max-width:380px){.lan{width:116px}.tally__n{font-size:74px}}
+@media (prefers-reduced-motion:reduce){.lan__card{animation:none}}
+
 .what{position:relative;max-width:var(--maxw);margin:0 auto;padding:clamp(120px,22vh,250px) var(--gutter) clamp(110px,19vh,220px)}
 .what__title{margin-top:clamp(28px,6vh,70px);font-size:min(13.4vw,13rem);line-height:.92}
 .what__title > .wm{display:block}

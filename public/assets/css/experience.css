@@ -1,0 +1,64 @@
+/* ============================================================================
+   NextGen Summit — The Experience
+   One idea per screen, alternating light and ink so the page breathes between
+   acts. Composition only: tokens, faces and easing all come from site.css.
+   ========================================================================= */
+
+.nav__link.is-here{color:var(--accent-ink);cursor:default}
+.on-photo .nav__link.is-here{color:var(--accent)}
+
+/* ---------- ACT I: arrival ---------- */
+.xh{position:relative;z-index:71;min-height:86vh;min-height:86svh;display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:#0B0B0F}
+.xh__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 54%;filter:grayscale(1) contrast(1.12) brightness(.92)}
+.xh__shade{position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(6,6,9,.72) 0%,rgba(6,6,9,.18) 26%,rgba(6,6,9,.34) 56%,rgba(6,6,9,.88) 94%)}
+.xh__in{position:relative;width:100%;max-width:var(--maxw);margin:0 auto;padding:calc(var(--nav-h) + 24px) var(--gutter) clamp(34px,6vh,70px)}
+.xh__eyebrow{font:700 clamp(10px,.85vw,12px)/1.5 var(--f-sans);letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
+.xh__title{margin-top:clamp(14px,2.4vh,26px);font-size:clamp(50px,9.4vw,160px);line-height:.9;letter-spacing:-.04em;text-shadow:0 2px 44px rgba(6,6,9,.45)}
+.xh__scroll{margin-top:clamp(24px,4vh,44px);font:700 10px/1 var(--f-sans);letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.66)}
+.xh__scroll::after{content:"";display:block;width:1px;height:34px;margin-top:10px;background:linear-gradient(180deg,rgba(255,255,255,.66),transparent)}
+
+/* ---------- the acts ---------- */
+.act{max-width:var(--maxw);margin:0 auto;padding:clamp(78px,15vh,190px) var(--gutter)}
+.act--light{background:var(--paper);color:var(--ink)}
+.act--ink{max-width:none;background:var(--ink);color:#fff}
+.act--ink > *{max-width:var(--maxw);margin-inline:auto}
+.act__n{font:800 11px/1 var(--f-sans);letter-spacing:.3em;color:var(--accent-ink)}
+.act--ink .act__n{color:var(--accent)}
+.act__t{margin-top:clamp(16px,2.6vh,28px);font-size:clamp(46px,8.2vw,136px);line-height:.92;letter-spacing:-.04em}
+.act__p{margin-top:clamp(22px,3.4vh,36px);max-width:44ch;font:500 clamp(17px,1.5vw,23px)/1.52 var(--f-sans);color:var(--ink-2)}
+.act--ink .act__p{color:rgba(255,255,255,.76)}
+.act__link{margin-top:clamp(18px,2.6vh,26px);font:600 clamp(15px,1.2vw,17px)/1.5 var(--f-sans)}
+
+/* ---------- a single image, full width, no words ---------- */
+.plate{margin:0;position:relative}
+.plate img{display:block;width:100%;height:clamp(300px,64vh,660px);object-fit:cover;object-position:50% 42%;filter:grayscale(1) contrast(1.06)}
+.plate__cap{max-width:var(--maxw);margin:0 auto;padding:14px var(--gutter) 0;font:600 12px/1.5 var(--f-sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+
+/* ---------- three portraits, one row ---------- */
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--ink)}
+.strip__i{margin:0;overflow:hidden}
+.strip__i img{display:block;width:100%;height:clamp(230px,44vh,460px);object-fit:cover;object-position:50% 22%;filter:grayscale(1) contrast(1.04)}
+@media (max-width:640px){
+  .strip{grid-template-columns:1fr 1fr}
+  .strip__i:last-child{display:none}
+  .strip__i img{height:clamp(190px,32vh,280px)}
+}
+
+/* ---------- the quiet beat ---------- */
+.breath{display:grid;place-items:center;padding:clamp(90px,20vh,240px) var(--gutter);background:var(--paper)}
+.breath__t{font-size:clamp(64px,13vw,210px);line-height:.9;letter-spacing:-.05em;color:var(--ink)}
+
+/* ---------- ACT V: the invitation ---------- */
+.seat{position:relative;min-height:74vh;display:flex;align-items:center;overflow:hidden;background:#0B0B0F;color:#fff}
+.seat__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 56%;filter:grayscale(1)}
+.seat__shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,6,9,.84) 0%,rgba(6,6,9,.7) 50%,rgba(6,6,9,.9) 100%)}
+.seat__in{position:relative;width:100%;max-width:var(--maxw);margin:0 auto;padding:clamp(70px,13vh,150px) var(--gutter)}
+.seat__t{font-size:clamp(44px,7.8vw,124px);line-height:.96;letter-spacing:-.035em}
+.seat__m{margin-top:clamp(20px,3vh,30px);font:700 clamp(11px,1vw,13px)/1.6 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.74)}
+.seat__c{margin-top:clamp(26px,4vh,42px)}
+@media (max-width:560px){.seat__c .btn{width:100%}}
+
+@media (prefers-reduced-motion:reduce){
+  .xh__scroll::after{display:none}
+}

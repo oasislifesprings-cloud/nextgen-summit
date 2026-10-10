@@ -1573,7 +1573,121 @@
     });
   }
 
+
+  /* ---------- volunteer: the Google form opens inside the drawer ----------
+     The iframe is built only when someone asks for it, so the page stays light. If Google will
+     not frame (a sign-in wall, a blocked third-party frame), the link underneath still works. */
+  function initVolunteerForm() {
+    var btn = $('[data-vol-open]');
+    var wrap = $('[data-vol-form]');
+    if (!btn || !wrap) return;
+
+    btn.addEventListener('click', function () {
+      var open = wrap.hidden;
+      wrap.hidden = !open;
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      $('.btn__t', btn) ? ($('.btn__t', btn).textContent = open ? 'Hide the application' : 'Volunteer now') : (btn.textContent = open ? 'Hide the application' : 'Volunteer now');
+      if (!open || wrap.querySelector('iframe')) return;
+
+      var frame = el('iframe');
+      frame.src = wrap.getAttribute('data-src');
+      frame.title = 'NextGen Summit volunteer application';
+      frame.loading = 'lazy';
+      frame.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+      var wait = $('[data-vol-wait]', wrap);
+      frame.addEventListener('load', function () { if (wait) wait.hidden = true; });
+      wrap.insertBefore(frame, wrap.firstChild);
+      // if it has not drawn anything after a while, say so rather than leaving a blank panel
+      setTimeout(function () { if (wait && !wait.hidden) wait.textContent = 'The form is taking a moment. You can open it in a new tab instead.'; }, 9000);
+    });
+  }
+
+  /* ---------- the credential beside the count ----------
+     One identity at a time, never a grid. Eventbrite names are private: nothing from a
+     registration is shown unless a reviewed list of approved names is published to
+     window.NGS_APPROVED_NAMES, and until then the card carries the invitation instead. */
+  function initLanyard() {
+    var line = $('[data-lan-name]');
+    if (!line) return;
+    var names = Array.isArray(window.NGS_APPROVED_NAMES) ? window.NGS_APPROVED_NAMES.filter(function (n) {
+      return typeof n === 'string' && n.trim() && n.trim().length < 40;
+    }) : [];
+    if (names.length < 2 || reduceMQ.matches) return;            // nothing to rotate through
+
+    var i = 0;
+    setInterval(function () {
+      if (document.hidden) return;
+      i = (i + 1) % names.length;
+      var next = names[i];
+      line.classList.add('is-out');
+      setTimeout(function () {
+        line.textContent = next;
+        line.classList.remove('is-out');
+        line.classList.add('is-in');
+        requestAnimationFrame(function () { line.classList.remove('is-in'); });
+      }, 400);
+    }, 6500);
+  }
+
+
+  /* ---------- theatre curtains between the homepage and the Experience ----------
+     A link marked data-curtain closes the curtains, then navigates; the page it lands on
+     opens them. Nothing waits on the animation: with reduced motion, no JavaScript, a slow
+     network or a restored back-button page, the link is an ordinary link and the curtains
+     never appear. */
+  var CURTAIN_KEY = 'ngs-curtain';
+
+  function curtainEl() {
+    var c = el('div', 'curtain');
+    c.setAttribute('aria-hidden', 'true');
+    c.appendChild(el('span', 'curtain__half curtain__half--l'));
+    c.appendChild(el('span', 'curtain__half curtain__half--r'));
+    document.body.appendChild(c);
+    return c;
+  }
+
+  function initCurtain() {
+    if (reduceMQ.matches) return;
+
+    // arriving from a curtain link: start closed, then open on this page
+    var arriving = false;
+    try { arriving = sessionStorage.getItem(CURTAIN_KEY) === '1'; sessionStorage.removeItem(CURTAIN_KEY); } catch (e) {}
+    if (arriving) {
+      var open = curtainEl();
+      open.classList.add('is-closing');                       // sits closed over the new page
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          open.classList.add('is-open');
+          setTimeout(function () { open.remove(); }, 900);
+        });
+      });
+    }
+
+    $$('a[data-curtain]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button > 0) return;
+        e.preventDefault();
+        try { sessionStorage.setItem(CURTAIN_KEY, '1'); } catch (err) {}
+        var c = curtainEl();
+        requestAnimationFrame(function () { c.classList.add('is-closing'); });
+        var went = false;
+        var go = function () { if (!went) { went = true; window.location.href = a.href; } };
+        setTimeout(go, 520);                                   // matches the close, then leaves
+      });
+    });
+  }
+
+  // a page restored with the back button must never keep a curtain over it
+  addEventListener('pageshow', function (e) {
+    if (!e.persisted) return;
+    $$('.curtain').forEach(function (c) { c.remove(); });
+    try { sessionStorage.removeItem(CURTAIN_KEY); } catch (err) {}
+  });
+
   initExternalLinks();
+  initCurtain();
+  initVolunteerForm();
+  initLanyard();
   initMotionPrefs();
   initMotionClass();
   initSmoothScroll();
