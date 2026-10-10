@@ -79,7 +79,7 @@
 }
 
 @media (max-width:820px){
-  .lan{width:min(170px,41vw)}
+  .lan{width:min(158px,38vw)}
   .nb__stage{padding-top:calc(clamp(70px,11vh,120px) + 70px)}
   .nb__hang{transform-origin:50% calc(-1 * (clamp(70px,11vh,120px) + 70px));animation-duration:10s}
   .nb__strap{height:calc(clamp(70px,11vh,120px) + 70px);width:min(96px,58%)}
@@ -95,7 +95,7 @@
   .nb__shadow{bottom:-18px;height:18px}
 }
 @media (max-width:420px){
-  .lan{width:min(152px,42vw)}
+  .lan{width:min(138px,38vw)}
   .nb__mark .wm{font-size:17px}
   .nb__mark span:last-child,.nb__yr,.nb__where{display:none}
   .nb__head{padding:24px 10px 10px;gap:6px}
