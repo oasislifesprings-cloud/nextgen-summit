@@ -1,64 +1,140 @@
 /* ============================================================================
    NextGen Summit — The Experience
-   One idea per screen, alternating light and ink so the page breathes between
-   acts. Composition only: tokens, faces and easing all come from site.css.
+   Rides on site.css: same tokens, type, buttons, drawers, reveal system.
+   Nothing here redefines a token; this file is composition only.
    ========================================================================= */
 
 .nav__link.is-here{color:var(--accent-ink);cursor:default}
 .on-photo .nav__link.is-here{color:var(--accent)}
 
-/* ---------- ACT I: arrival ---------- */
-.xh{position:relative;z-index:71;min-height:86vh;min-height:86svh;display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:#0B0B0F}
-.xh__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 54%;filter:grayscale(1) contrast(1.12) brightness(.92)}
-.xh__shade{position:absolute;inset:0;background:
-  linear-gradient(180deg,rgba(6,6,9,.72) 0%,rgba(6,6,9,.18) 26%,rgba(6,6,9,.34) 56%,rgba(6,6,9,.88) 94%)}
-.xh__in{position:relative;width:100%;max-width:var(--maxw);margin:0 auto;padding:calc(var(--nav-h) + 24px) var(--gutter) clamp(34px,6vh,70px)}
-.xh__eyebrow{font:700 clamp(10px,.85vw,12px)/1.5 var(--f-sans);letter-spacing:.22em;text-transform:uppercase;color:var(--accent)}
-.xh__title{margin-top:clamp(14px,2.4vh,26px);font-size:clamp(50px,9.4vw,160px);line-height:.9;letter-spacing:-.04em;text-shadow:0 2px 44px rgba(6,6,9,.45)}
-.xh__scroll{margin-top:clamp(24px,4vh,44px);font:700 10px/1 var(--f-sans);letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.66)}
-.xh__scroll::after{content:"";display:block;width:1px;height:34px;margin-top:10px;background:linear-gradient(180deg,rgba(255,255,255,.66),transparent)}
+/* the turquoise full stop that ends every display line */
+.ex-dot{color:var(--accent)}
 
-/* ---------- the acts ---------- */
-.act{max-width:var(--maxw);margin:0 auto;padding:clamp(78px,15vh,190px) var(--gutter)}
-.act--light{background:var(--paper);color:var(--ink)}
-.act--ink{max-width:none;background:var(--ink);color:#fff}
-.act--ink > *{max-width:var(--maxw);margin-inline:auto}
-.act__n{font:800 11px/1 var(--f-sans);letter-spacing:.3em;color:var(--accent-ink)}
-.act--ink .act__n{color:var(--accent)}
-.act__t{margin-top:clamp(16px,2.6vh,28px);font-size:clamp(46px,8.2vw,136px);line-height:.92;letter-spacing:-.04em}
-.act__p{margin-top:clamp(22px,3.4vh,36px);max-width:44ch;font:500 clamp(17px,1.5vw,23px)/1.52 var(--f-sans);color:var(--ink-2)}
-.act--ink .act__p{color:rgba(255,255,255,.76)}
-.act__link{margin-top:clamp(18px,2.6vh,26px);font:600 clamp(15px,1.2vw,17px)/1.5 var(--f-sans)}
-
-/* ---------- a single image, full width, no words ---------- */
-.plate{margin:0;position:relative}
-.plate img{display:block;width:100%;height:clamp(300px,64vh,660px);object-fit:cover;object-position:50% 42%;filter:grayscale(1) contrast(1.06)}
-.plate__cap{max-width:var(--maxw);margin:0 auto;padding:14px var(--gutter) 0;font:600 12px/1.5 var(--f-sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
-
-/* ---------- three portraits, one row ---------- */
-.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--ink)}
-.strip__i{margin:0;overflow:hidden}
-.strip__i img{display:block;width:100%;height:clamp(230px,44vh,460px);object-fit:cover;object-position:50% 22%;filter:grayscale(1) contrast(1.04)}
-@media (max-width:640px){
-  .strip{grid-template-columns:1fr 1fr}
-  .strip__i:last-child{display:none}
-  .strip__i img{height:clamp(190px,32vh,280px)}
+/* ---------- hero: photograph, three lines, the last one turning over ---------- */
+.exh{position:relative;z-index:71;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:var(--ink)}
+.exh__media{position:absolute;inset:0;margin:0}
+.exh__img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;filter:grayscale(1) contrast(1.06)}
+.exh__shade{position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(6,6,9,.84) 0%,rgba(6,6,9,.52) 44%,rgba(6,6,9,.14) 74%,rgba(6,6,9,0) 100%),
+  linear-gradient(180deg,rgba(6,6,9,.6) 0%,rgba(6,6,9,.12) 22%,rgba(6,6,9,.24) 50%,rgba(6,6,9,.8) 84%,rgba(6,6,9,.94) 100%)}
+.exh__inner{position:relative;width:100%;max-width:var(--maxw);margin:0 auto;padding:calc(var(--nav-h) + 24px) var(--gutter) clamp(30px,6vh,64px)}
+.exh__eyebrow{font:700 clamp(10px,.82vw,12px)/1.4 var(--f-sans);letter-spacing:.24em;text-transform:uppercase;color:var(--accent)}
+/* sized so the longest turn, "thinking bigger.", still fits one line at every width */
+.exh__title{margin:clamp(14px,2.4vh,26px) 0 0;font-size:clamp(44px,12vw,160px);line-height:.9;text-shadow:0 2px 40px rgba(6,6,9,.4)}
+.exh__l{display:block}
+.exh__rotline{display:block}
+.exh__rot{color:var(--accent)}
+.exh__rot .what__dot{color:#fff}
+/* on the dark photo the print plates add light instead of ink, as .reg--light does */
+.exh__rot .reg__p{mix-blend-mode:screen}
+.exh__rot .reg__p--c{color:var(--red-l)}
+.exh__rot .reg__p--m{color:var(--green-l)}
+.exh__rot .reg__p--y{color:var(--blue-l)}
+.exh__foot{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:18px clamp(28px,4vw,72px);margin-top:clamp(22px,3.6vh,40px);padding-top:clamp(18px,2.6vh,28px);border-top:1px solid rgba(255,255,255,.28)}
+.exh__lede{max-width:52ch;font:500 clamp(15px,1.15vw,18px)/1.55 var(--f-sans);color:rgba(255,255,255,.92);text-shadow:0 1px 12px rgba(6,6,9,.6)}
+.exh__meta{margin-top:14px;font:700 clamp(11px,.85vw,12.5px)/1.8 var(--f-sans);letter-spacing:.14em;text-transform:uppercase;color:#fff;text-shadow:0 1px 10px rgba(6,6,9,.7)}
+.exh__cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px clamp(18px,2.4vw,34px);flex:none}
+.exh__toggle{color:rgba(255,255,255,.7)}
+.exh__toggle:hover{color:#fff}
+@media (max-width:860px){
+  .exh__foot{grid-template-columns:1fr;align-items:start}
+  .exh__cta{width:100%}
+  .exh__cta .btn{flex:1 1 auto;justify-content:center}
 }
 
-/* ---------- the quiet beat ---------- */
-.breath{display:grid;place-items:center;padding:clamp(90px,20vh,240px) var(--gutter);background:var(--paper)}
-.breath__t{font-size:clamp(64px,13vw,210px);line-height:.9;letter-spacing:-.05em;color:var(--ink)}
+/* ---------- the day at a glance: two blocks ---------- */
+.exd{max-width:var(--maxw);margin:0 auto;padding:clamp(90px,15vh,160px) var(--gutter) clamp(70px,11vh,120px)}
+.exd__intro{display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:28px clamp(40px,6vw,96px);margin:clamp(18px,3vh,30px) 0 clamp(36px,6vh,60px)}
+.exd__title{font-size:clamp(46px,6.4vw,104px)}
+.exd__lede{max-width:44ch;font:500 clamp(16px,1.2vw,18px)/1.6 var(--f-sans);color:var(--ink-2)}
+.exd__blocks{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong)}
+.exd__block{display:block;padding:clamp(26px,4vh,40px) clamp(24px,3vw,44px) clamp(26px,4vh,36px) 0;text-decoration:none;color:inherit}
+.exd__block + .exd__block{padding-left:clamp(24px,3vw,44px);border-left:1px solid var(--rule-strong)}
+.exd__time{font-size:clamp(56px,6.6vw,104px);line-height:.95;letter-spacing:-.03em;transition:color .5s var(--ease)}
+.exd__time small{margin-left:.35em;font:800 clamp(14px,1.1vw,18px)/1 var(--f-sans);letter-spacing:.04em}
+.exd__k{margin-top:18px;font:800 12px/1.4 var(--f-sans);letter-spacing:.2em;text-transform:uppercase}
+.exd__v{margin-top:8px;max-width:40ch;font:500 15px/1.6 var(--f-sans);color:var(--ink-2)}
+.exd__block .textlink{margin-top:10px}
+.exd__block:hover .exd__time{color:var(--accent-ink)}
+.exd__block:hover .textlink .arr{transform:translateY(4px)}
+.exd__note{margin-top:16px;font:500 13px/1.5 var(--f-sans);color:var(--ink-3)}
 
-/* ---------- ACT V: the invitation ---------- */
-.seat{position:relative;min-height:74vh;display:flex;align-items:center;overflow:hidden;background:#0B0B0F;color:#fff}
-.seat__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 56%;filter:grayscale(1)}
-.seat__shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,6,9,.84) 0%,rgba(6,6,9,.7) 50%,rgba(6,6,9,.9) 100%)}
-.seat__in{position:relative;width:100%;max-width:var(--maxw);margin:0 auto;padding:clamp(70px,13vh,150px) var(--gutter)}
-.seat__t{font-size:clamp(44px,7.8vw,124px);line-height:.96;letter-spacing:-.035em}
-.seat__m{margin-top:clamp(20px,3vh,30px);font:700 clamp(11px,1vw,13px)/1.6 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.74)}
-.seat__c{margin-top:clamp(26px,4vh,42px)}
-@media (max-width:560px){.seat__c .btn{width:100%}}
+/* ---------- a block in detail: the time, then three formats ---------- */
+.exp{max-width:var(--maxw);margin:0 auto;padding:clamp(80px,13vh,140px) var(--gutter)}
+.exp__head{display:grid;grid-template-columns:.7fr 1.3fr;align-items:start;gap:24px clamp(40px,6vw,96px);margin-bottom:clamp(40px,7vh,64px)}
+.exp__time{font-size:clamp(72px,8.6vw,140px);line-height:.9;letter-spacing:-.03em;white-space:nowrap}
+.exp__time small{margin-left:.2em;font:800 clamp(14px,1.1vw,18px)/1 var(--f-sans);letter-spacing:.04em}
+.exp__title{margin:clamp(14px,2.4vh,22px) 0 clamp(16px,2.6vh,24px);font-size:clamp(44px,5.6vw,92px)}
+.exp__lede{max-width:52ch;font:500 clamp(16px,1.2vw,18px)/1.6 var(--f-sans);color:var(--ink-2)}
+.exp__list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(28px,3vw,44px)}
+.exa{padding-top:clamp(20px,3vh,28px);border-top:1px solid var(--rule-strong)}
+.exa__k{font:700 11px/1.4 var(--f-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+.exa__t{margin:16px 0 14px;font-size:clamp(32px,3vw,46px)}
+.exa__v{max-width:40ch;font:500 15.5px/1.6 var(--f-sans);color:var(--ink-2)}
+.exa .textlink{margin-top:10px}
+.exa .textlink:hover{color:var(--accent-ink)}
+.exa .textlink:hover .exa__arr{transform:translateX(5px)}
+.exp__note{margin-top:clamp(30px,5vh,44px);font:500 14px/1.5 var(--f-sans);color:var(--ink-2)}
 
+/* the 4–7 block sits on the stage photograph, full bleed */
+.exp--dark{position:relative;max-width:none;padding:0;color:#fff;background:var(--ink);overflow:hidden;overflow:clip}
+.exp__media{position:absolute;inset:0;margin:0}
+.exp__media img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);opacity:.3}
+.exp__shade{position:absolute;inset:0;background:linear-gradient(0deg,var(--ink) 0%,rgba(11,11,15,.62) 100%)}
+.exp__in{position:relative;max-width:var(--maxw);margin:0 auto;padding:clamp(90px,15vh,160px) var(--gutter)}
+.exp__label{color:var(--accent)}
+.exp--dark .exp__lede,.exp--dark .exa__v,.exp--dark .exp__note{color:rgba(255,255,255,.84)}
+.exp--dark .exa{border-color:rgba(255,255,255,.3)}
+.exp--dark .exa__k{color:rgba(255,255,255,.66)}
+
+/* between the blocks: a band of the room */
+.exb{height:clamp(240px,38vh,380px);background:var(--ink);overflow:hidden}
+.exb img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;filter:grayscale(1)}
+
+/* ---------- the full agenda, still to come ---------- */
+.exg{display:grid;grid-template-columns:1fr 1fr;align-items:start;gap:26px clamp(40px,6vw,96px);max-width:var(--maxw);margin:0 auto;padding:clamp(90px,15vh,150px) var(--gutter) clamp(60px,10vh,100px)}
+.exg__title{margin-top:clamp(14px,2.4vh,22px);font-size:clamp(44px,5.6vw,92px)}
+.exg__body{padding-top:clamp(0px,3vh,40px)}
+.exg__lede{max-width:46ch;font:500 clamp(16px,1.2vw,18px)/1.6 var(--f-sans);color:var(--ink-2)}
+.exg__soon{display:inline-block;margin-top:24px;padding-top:14px;border-top:3px solid var(--accent);font:800 12px/1.4 var(--f-sans);letter-spacing:.18em;text-transform:uppercase}
+
+/* ---------- a few things to know ---------- */
+.exq{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter) clamp(90px,15vh,150px)}
+.exq__title{margin-bottom:clamp(24px,4vh,36px);font-size:clamp(34px,3.6vw,56px)}
+.exq__i{border-top:1px solid var(--rule-strong)}
+.exq__i:last-child{border-bottom:1px solid var(--rule-strong)}
+.exq__i summary{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:64px;padding:16px 0;font:700 clamp(15px,1.15vw,17px)/1.4 var(--f-sans);cursor:pointer;list-style:none}
+.exq__i summary::-webkit-details-marker{display:none}
+.exq__i summary:hover{color:var(--accent-ink)}
+.exq__plus{position:relative;flex:none;width:14px;height:14px}
+.exq__plus::before,.exq__plus::after{content:"";position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;background:currentColor;transition:transform .5s var(--ease)}
+.exq__plus::after{transform:rotate(90deg)}
+.exq__i[open] .exq__plus::after{transform:rotate(0deg)}
+.exq__i p{max-width:68ch;padding:0 0 22px;font:500 15.5px/1.65 var(--f-sans);color:var(--ink-2)}
+
+/* ---------- closing ---------- */
+.exc{position:relative;display:flex;align-items:center;min-height:clamp(520px,80vh,820px);color:#fff;overflow:hidden;background:var(--ink)}
+.exc__media{position:absolute;inset:0;margin:0}
+.exc__media img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
+.exc__shade{position:absolute;inset:0;background:rgba(11,11,15,.78)}
+.exc__in{position:relative;width:100%;max-width:var(--maxw);margin:0 auto;padding:clamp(80px,13vh,140px) var(--gutter)}
+.exc__title{margin:clamp(16px,2.6vh,26px) 0;font-size:clamp(56px,8.6vw,148px);line-height:.9}
+.exc__lede{max-width:40ch;font:500 clamp(16px,1.25vw,19px)/1.6 var(--f-sans);color:rgba(255,255,255,.9)}
+.exc__cta{margin-top:clamp(26px,4vh,40px)}
+
+@media (max-width:860px){
+  .exd__intro,.exp__head,.exg{grid-template-columns:1fr}
+  .exp__list{grid-template-columns:1fr}
+  .exa__v{max-width:52ch}
+}
+@media (max-width:640px){
+  .exd__blocks{grid-template-columns:1fr}
+  .exd__block,.exd__block + .exd__block{padding:28px 0;border-left:0}
+  .exd__block + .exd__block{border-top:1px solid var(--rule-strong)}
+  .exc__cta .btn{width:100%}
+}
+
+/* ---------- reduced motion: everything already arrived ---------- */
 @media (prefers-reduced-motion:reduce){
-  .xh__scroll::after{display:none}
+  .exq__plus::before,.exq__plus::after,.exd__time{transition:none}
 }
