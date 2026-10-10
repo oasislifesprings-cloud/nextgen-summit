@@ -14,11 +14,11 @@
 /* ---------- the hanging credential ---------- */
 .lan{position:relative;width:min(300px,78vw);margin-inline:auto}
 .lan[hidden]{display:none}
-.nb__stage{position:relative;display:flex;justify-content:center;padding-top:calc(clamp(104px,17vh,190px) + 34px)}
-.nb__hang{position:relative;width:100%;transform-origin:50% calc(-1 * (clamp(104px,17vh,190px) + 34px));animation:nb-sway 9s var(--ease) infinite alternate}
+.nb__stage{position:relative;display:flex;justify-content:center;padding-top:calc(clamp(104px,17vh,190px) + 96px)}
+.nb__hang{position:relative;width:100%;transform-origin:50% calc(-1 * (clamp(104px,17vh,190px) + 96px));animation:nb-sway 9s var(--ease) infinite alternate}
 
 /* the ribbon runs up out of the section, so it reads as hanging from the photograph above */
-.nb__strap{position:absolute;left:50%;bottom:100%;width:min(230px,74%);height:calc(clamp(104px,17vh,190px) + 34px);transform:translateX(-50%);overflow:visible;filter:drop-shadow(0 10px 14px rgba(6,40,38,.16))}
+.nb__strap{position:absolute;left:50%;bottom:100%;width:min(142px,48%);height:calc(clamp(104px,17vh,190px) + 96px);transform:translateX(-50%);overflow:visible;filter:drop-shadow(0 10px 14px rgba(6,40,38,.16))}
 
 /* a swivel hook, in brushed metal */
 .nb__hook{position:absolute;left:50%;top:-19px;z-index:3;width:17px;height:30px;margin-left:-8.5px;border-radius:4px;
@@ -79,10 +79,10 @@
 }
 
 @media (max-width:820px){
-  .lan{width:min(206px,46vw)}
-  .nb__stage{padding-top:clamp(70px,11vh,120px)}
-  .nb__hang{transform-origin:50% calc(-1 * clamp(70px,11vh,120px));animation-duration:10s}
-  .nb__strap{height:clamp(70px,11vh,120px);width:min(150px,80%)}
+  .lan{width:min(170px,41vw)}
+  .nb__stage{padding-top:calc(clamp(70px,11vh,120px) + 70px)}
+  .nb__hang{transform-origin:50% calc(-1 * (clamp(70px,11vh,120px) + 70px));animation-duration:10s}
+  .nb__strap{height:calc(clamp(70px,11vh,120px) + 70px);width:min(96px,58%)}
   .nb__head{padding:30px 16px 13px}
   .nb__mark .wm{font-size:23px}
   .nb__body{padding:17px 16px 15px}
@@ -95,12 +95,17 @@
   .nb__shadow{bottom:-18px;height:18px}
 }
 @media (max-width:420px){
-  .lan{width:min(176px,47vw)}
-  .nb__mark .wm{font-size:19px}
-  .nb__mark span:last-child{display:none}
-  .nb__head{padding:26px 12px 11px}
-  .nb__body{padding:14px 12px 13px}
-  .nb__names{font-size:clamp(23px,6.6vw,29px)}
+  .lan{width:min(152px,42vw)}
+  .nb__mark .wm{font-size:17px}
+  .nb__mark span:last-child,.nb__yr,.nb__where{display:none}
+  .nb__head{padding:24px 10px 10px;gap:6px}
+  .nb__date{font-size:6.5px;letter-spacing:.1em}
+  .nb__body{padding:13px 10px 12px}
+  .nb__names{font-size:clamp(22px,6.2vw,27px)}
+  .nb__hello{font-size:7.5px;letter-spacing:.16em}
+  .nb__ready{margin-top:9px;font-size:7.5px;letter-spacing:.08em}
+  .nb__foot{margin-top:10px;padding-top:8px;font-size:6.5px;letter-spacing:.06em;gap:5px}
+  .nb__tag{padding:2px 4px 1px}
 }
 
 @media (prefers-reduced-motion:reduce){
