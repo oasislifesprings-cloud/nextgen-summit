@@ -138,53 +138,60 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="nm-view" data-names="badge">
           <div class="nb__stage">
             <div class="nb__hang">
-              <!-- the ribbon: filled shapes, not strokes, so it folds, twists and catches light -->
-              <svg class="nb__strap" viewBox="0 0 220 170" preserveAspectRatio="none" aria-hidden="true">
+              <!-- the ribbon, traced from a lanyard photograph: a woven band that folds where it
+                   turns, gathers into a crimp above a gunmetal swivel hook, and casts a soft shadow -->
+              <svg class="nb__strap" viewBox="0 0 164 224" preserveAspectRatio="none" aria-hidden="true">
                 <defs>
-                  <linearGradient id="lanFaceL" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0" stop-color="#0E9E97"/><stop offset=".34" stop-color="#2BD3CA"/>
-                    <stop offset=".72" stop-color="#19B8B0"/><stop offset="1" stop-color="#0C8A84"/>
+                  <!-- across the band: shaded edge, lit centre, shaded edge, as woven tape sits -->
+                  <linearGradient id="lanBandL" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" stop-color="#5FB2A9"/><stop offset=".18" stop-color="#8FD8CF"/>
+                    <stop offset=".46" stop-color="#C2EFE9"/><stop offset=".78" stop-color="#92DACF"/>
+                    <stop offset="1" stop-color="#63ADA4"/>
                   </linearGradient>
-                  <linearGradient id="lanFaceR" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0" stop-color="#0C8A84"/><stop offset=".3" stop-color="#19B8B0"/>
-                    <stop offset=".68" stop-color="#2BD3CA"/><stop offset="1" stop-color="#0E9E97"/>
+                  <linearGradient id="lanBandR" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" stop-color="#63ADA4"/><stop offset=".22" stop-color="#92DACF"/>
+                    <stop offset=".54" stop-color="#C2EFE9"/><stop offset=".82" stop-color="#8FD8CF"/>
+                    <stop offset="1" stop-color="#5FB2A9"/>
                   </linearGradient>
-                  <linearGradient id="lanFold" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0" stop-color="#0A7F79"/><stop offset=".5" stop-color="#15A7A0"/>
-                    <stop offset="1" stop-color="#076E69"/>
+                  <!-- the underside shown where the band folds over -->
+                  <linearGradient id="lanBack" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0" stop-color="#3F8F87"/><stop offset="1" stop-color="#6CBDB3"/>
                   </linearGradient>
-                  <!-- woven texture: warp and weft, close enough to read as cloth -->
-                  <pattern id="lanWeave" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(26)">
-                    <rect width="4" height="4" fill="none"/>
-                    <path d="M0 0 V4 M2 0 V4" stroke="#05413E" stroke-width=".7" opacity=".3"/>
-                    <path d="M0 1 H4 M0 3 H4" stroke="#C7F7F3" stroke-width=".55" opacity=".2"/>
+                  <!-- the weave, read as a faint grain rather than drawn threads -->
+                  <pattern id="lanWeave" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(22)">
+                    <path d="M0 0 V3" stroke="#2E7F77" stroke-width=".6" opacity=".16"/>
+                    <path d="M0 1.5 H3" stroke="#FFFFFF" stroke-width=".5" opacity=".14"/>
                   </pattern>
-                  <!-- the round of the cloth: lit along one edge, shaded along the other -->
-                  <linearGradient id="lanRound" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0" stop-color="#03312F" stop-opacity=".5"/>
-                    <stop offset=".22" stop-color="#FFFFFF" stop-opacity=".2"/>
-                    <stop offset=".55" stop-color="#FFFFFF" stop-opacity="0"/>
-                    <stop offset="1" stop-color="#03312F" stop-opacity=".46"/>
-                  </linearGradient>
+                  <filter id="lanCast" x="-60%" y="-20%" width="240%" height="170%">
+                    <feDropShadow dx="2.5" dy="5" stdDeviation="4.5" flood-color="#13403C" flood-opacity=".26"/>
+                  </filter>
                 </defs>
-                <!-- left ribbon, wider at the shoulder and narrowing into the fold -->
-                <path class="nb__ribbon" d="M2 0 C6 34 26 86 70 128 L96 150 L80 162 L46 126 C14 92 -2 40 -6 2 Z" fill="url(#lanFaceL)"/>
-                <path d="M2 0 C6 34 26 86 70 128 L96 150 L80 162 L46 126 C14 92 -2 40 -6 2 Z" fill="url(#lanWeave)"/>
-                <path d="M2 0 C6 34 26 86 70 128 L96 150 L80 162 L46 126 C14 92 -2 40 -6 2 Z" fill="url(#lanRound)"/>
-                <path d="M-1 1 C3 35 22 86 66 129 L90 151" fill="none" stroke="#06433F" stroke-width=".9" opacity=".33"/>
-                <path d="M2 0 C6 34 26 86 70 128 L96 150" fill="none" stroke="#8FF3EC" stroke-width="1.2" opacity=".55"/>
-                <!-- right ribbon, passing behind at the fold -->
-                <path class="nb__ribbon" d="M218 0 C214 34 194 86 150 128 L124 150 L140 162 L174 126 C206 92 222 40 226 2 Z" fill="url(#lanFaceR)"/>
-                <path d="M218 0 C214 34 194 86 150 128 L124 150 L140 162 L174 126 C206 92 222 40 226 2 Z" fill="url(#lanWeave)"/>
-                <path d="M218 0 C214 34 194 86 150 128 L124 150 L140 162 L174 126 C206 92 222 40 226 2 Z" fill="url(#lanRound)"/>
-                <path d="M221 1 C217 35 198 86 154 129 L130 151" fill="none" stroke="#06433F" stroke-width=".9" opacity=".3"/>
-                <path d="M218 0 C214 34 194 86 150 128 L124 150" fill="none" stroke="#8FF3EC" stroke-width="1.2" opacity=".5"/>
-                <!-- the twist where both ends gather into the hook -->
-                <path d="M96 150 L124 150 L132 166 L88 166 Z" fill="url(#lanFold)"/>
-                <path d="M96 150 L124 150 L132 166 L88 166 Z" fill="url(#lanWeave)"/>
-                <path d="M96 150 L124 150 L132 166 L88 166 Z" fill="url(#lanRound)"/>
-                <path d="M88 166 L132 166" stroke="#053D3A" stroke-width="1.8" opacity=".55"/>
-                <path d="M100 152 L104 164 M116 152 L120 164" stroke="#053D3A" stroke-width="1" opacity=".3"/>
+
+                <g filter="url(#lanCast)">
+                  <!-- left band: down from the top edge, narrowing as it turns toward the crimp -->
+                  <path d="M30 0 C32 40 48 104 74 158 L82 186 L52 190 L44 160 C18 106 2 42 0 0 Z" fill="url(#lanBandL)"/>
+                  <path d="M30 0 C32 40 48 104 74 158 L82 186 L52 190 L44 160 C18 106 2 42 0 0 Z" fill="url(#lanWeave)"/>
+                  <!-- the fold: a short wedge of the band's underside where it twists -->
+                  <path d="M46 122 L70 114 L76 131 L52 139 Z" fill="url(#lanBack)" opacity=".5"/>
+                  <!-- stitched edges, and the sheen along the lit side -->
+                  <path d="M30 0 C32 40 48 104 74 158 L82 186" fill="none" stroke="#DCF8F3" stroke-width="1.4" opacity=".62"/>
+                  <path d="M0 0 C2 42 18 106 44 160 L52 190" fill="none" stroke="#3E8E86" stroke-width="1.1" opacity=".42"/>
+
+                  <!-- right band -->
+                  <path d="M134 0 C132 40 116 104 90 158 L82 186 L112 190 L120 160 C146 106 162 42 164 0 Z" fill="url(#lanBandR)"/>
+                  <path d="M134 0 C132 40 116 104 90 158 L82 186 L112 190 L120 160 C146 106 162 42 164 0 Z" fill="url(#lanWeave)"/>
+                  <path d="M118 122 L94 114 L88 131 L112 139 Z" fill="url(#lanBack)" opacity=".46"/>
+                  <path d="M134 0 C132 40 116 104 90 158 L82 186" fill="none" stroke="#DCF8F3" stroke-width="1.4" opacity=".55"/>
+                  <path d="M164 0 C162 42 146 106 120 160 L112 190" fill="none" stroke="#3E8E86" stroke-width="1.1" opacity=".38"/>
+
+                  <!-- both ends gathered, then the metal crimp that holds them -->
+                  <path d="M52 190 L112 190 L108 203 L56 203 Z" fill="url(#lanBandL)"/>
+                  <path d="M52 190 L112 190 L108 203 L56 203 Z" fill="url(#lanWeave)"/>
+                  <path d="M52 190 L112 190" stroke="#3E8E86" stroke-width="1.3" opacity=".45"/>
+                  <rect x="56" y="199" width="52" height="14" rx="7" fill="#9AA0A8"/>
+                  <rect x="56" y="199" width="52" height="14" rx="7" fill="none" stroke="#6E747C" stroke-width="1"/>
+                  <rect x="61" y="202" width="42" height="3.6" rx="1.8" fill="#D3D8DE" opacity=".75"/>
+                </g>
               </svg>
 
               <span class="nb__hook" aria-hidden="true"></span>
