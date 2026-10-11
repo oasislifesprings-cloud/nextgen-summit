@@ -304,9 +304,9 @@ h1,h2,h3,p{margin:0}
 .invite__small strong{font-weight:700;color:var(--ink)}
 
 /* the ticket: ink stock, a perforation with die-cut notches, tilts toward the pointer (site.js) */
-.ticket{perspective:1100px;filter:drop-shadow(0 30px 34px rgba(11,11,15,.28)) drop-shadow(0 8px 10px rgba(11,11,15,.18))}   /* a drop shadow follows the punched notches; a box shadow would not */
+.ticket{perspective:1100px;filter:drop-shadow(0 30px 34px rgba(11,11,15,.28)) drop-shadow(0 8px 10px rgba(11,11,15,.18));min-width:0}   /* a drop shadow follows the punched notches; a box shadow would not */
 /* the card turns over on click (site.js): both faces share one grid cell; the tilt is applied after the turn so it leans the same way on either side */
-.ticket__flip{--rx:0deg;--ry:0deg;--turn:0deg;display:grid;transform:rotateX(var(--rx)) rotateY(var(--ry)) rotateY(var(--turn));transform-style:preserve-3d;transition:transform .7s var(--ease);cursor:pointer}
+.ticket__flip{--rx:0deg;--ry:0deg;--turn:0deg;display:grid;transform:rotateX(var(--rx)) rotateY(var(--ry)) rotateY(var(--turn));transform-style:preserve-3d;transition:transform .7s var(--ease);cursor:pointer;min-width:0}
 .ticket.is-tilting .ticket__flip{transition:transform .12s linear}
 .ticket.is-turning .ticket__flip{transition:transform .95s var(--ease-io)}
 .ticket.is-flipped .ticket__flip{--turn:180deg}
@@ -344,7 +344,7 @@ h1,h2,h3,p{margin:0}
 .ticket__back{position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(18px,1.8vw,22px);border-radius:16px;background:var(--ink);color:#fff;transform:rotateY(180deg)}
 .ticket__back:focus{outline:none}
 .ticket__back:focus-visible{outline:2px solid var(--accent);outline-offset:-6px}
-.ticket__map{margin-top:14px;border-radius:10px;overflow:hidden;background:#F3EEE2}
+.ticket__map{margin-top:14px;border-radius:10px;overflow:hidden;background:#F3EEE2;min-width:0}
 .ticket__map svg{display:block;width:100%;height:auto}
 .ticket__foot{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:6px}
 .ticket__foot .ticket__turn{margin:0}
@@ -354,26 +354,13 @@ h1,h2,h3,p{margin:0}
 .ticket__dir:focus-visible{outline:2px solid #fff;outline-offset:3px}
 .ticket__note{font:600 10px/1.3 var(--f-sans);letter-spacing:.06em;color:rgba(255,255,255,.5)}
 
-/* the map: an orientation graphic, not a navigation app. One ring of turquoise on the venue,
-   two grey dots for the cities that place it, and the bay so the state reads at a glance. */
-.mp-land{fill:#004C53}
-.mp-water{fill:#436E74}
-.mp-line{fill:none;stroke:#DAEBEA;stroke-width:1.4;stroke-dasharray:6 7;opacity:.45}
-.mp-st{fill:#7FB0B2;font:800 11px/1 var(--f-sans);letter-spacing:.2em;text-transform:uppercase}
-.mp-dot{fill:#DAEBEA}
-.mp-city{fill:#DAEBEA;font:600 11.5px/1 var(--f-sans);letter-spacing:.06em}
-.mp-halo{fill:none;stroke:var(--accent);stroke-width:1.6;opacity:.45}
-.mp-here{fill:var(--accent);stroke:#003237;stroke-width:1.8}
-.mp-v{fill:#FFFFFF;font:800 14px/1 var(--f-sans);letter-spacing:.08em;text-transform:uppercase;text-anchor:middle}
-.mp-vs{fill:#45E0D7;font:700 10.5px/1 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;text-anchor:middle}
-@media (max-width:560px){
-  .mp-v{font-size:13px}
-  .mp-city{font-size:10.5px}
-  .mp-st{font-size:10px}
-}
+/* the map on the back of the ticket: an SVG built from OpenStreetMap data (assets/img/map-dmv.svg) */
+.mp{display:block;width:100%;max-width:100%;height:auto;border-radius:10px}
 
 @media (max-width:900px){
   .invite__body{grid-template-columns:1fr;align-items:start;gap:clamp(30px,5vh,46px)}
+  /* in one column everything shares it, or the ticket's own column survives as a phantom track */
+  .invite__ask,.ticket,.invite__cta{grid-column:1}
   .ticket{max-width:26rem}
   .invite__cta{margin-top:clamp(26px,4vh,36px)}
 }

@@ -38,15 +38,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preload" as="image" href="assets/img/hero-m-864.jpg" media="(max-aspect-ratio: 3/4)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/img/hero-1600.jpg" imagesrcset="assets/img/hero-800.jpg 800w, assets/img/hero-1200.jpg 1200w, assets/img/hero-1600.jpg 1600w, assets/img/hero-2048.jpg 2048w" imagesizes="(max-aspect-ratio: 16/9) 177.78vh, 100vw" media="not all and (max-aspect-ratio: 3/4)" fetchpriority="high">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;family=Caveat:wght@700&amp;display=swap">
-<link rel="stylesheet" href="assets/css/site.css?v=20261011-04">
-<link rel="stylesheet" href="assets/css/names.css?v=20261011-04">
-<script src="assets/js/liquid.js?v=20261011-04" defer></script>
+<link rel="stylesheet" href="assets/css/site.css?v=20261011-05">
+<link rel="stylesheet" href="assets/css/names.css?v=20261011-05">
+<script src="assets/js/liquid.js?v=20261011-05" defer></script>
 <!-- Lenis (smooth scrolling) and Motion (animation), vendored: see assets/vendor -->
 <script src="assets/vendor/lenis-1.3.26.min.js" defer></script>
 <script src="assets/vendor/motion-13.5.0.min.js" defer></script>
-<script src="assets/js/site.js?v=20261011-04" defer></script>
-<script src="assets/js/names.js?v=20261011-04" defer></script>
-<script src="assets/js/counter.js?v=20261011-04" defer></script>
+<script src="assets/js/site.js?v=20261011-05" defer></script>
+<script src="assets/js/names.js?v=20261011-05" defer></script>
+<script src="assets/js/counter.js?v=20261011-05" defer></script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -265,26 +265,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="ticket__back" id="ticket-map" tabindex="-1" aria-label="Getting here" inert>
           <p class="ticket__row"><span class="ticket__admit">Getting here</span><span class="ticket__no">Owings Mills, MD</span></p>
           <div class="ticket__map">
-              <svg class="mp" viewBox="0 0 400 300" role="img" aria-label="Central Maryland: the Gordon Center in Owings Mills, north-west of Baltimore, with Washington DC to the south-west.">
-                <rect class="mp-land" width="400" height="300"/>
-                <!-- the Chesapeake: one tapering shape, and the coast behind it, so the state reads at a glance -->
-                <path class="mp-water" d="M400 0 L400 300 L318 300 C330 262 322 236 338 206 C352 180 340 160 352 132 C364 104 352 74 368 44 C378 24 384 10 388 0 Z"/>
-                <path class="mp-water" d="M266 40 C276 74 266 96 274 126 C282 156 268 178 276 206 C284 234 272 262 280 300 L250 300 C244 262 254 236 246 206 C238 176 250 156 242 126 C234 96 246 72 238 40 Z"/>
-                <!-- the state line, drawn once -->
-                <path class="mp-line" d="M0 214 L214 206 L252 222"/>
-                <text class="mp-st" x="34" y="92">Maryland</text>
-                <text class="mp-st" x="40" y="258">Virginia</text>
-                <!-- the two cities that orient everyone -->
-                <circle class="mp-dot" cx="232" cy="150" r="3.6"/>
-                <text class="mp-city" x="243" y="154">Baltimore</text>
-                <circle class="mp-dot" cx="150" cy="214" r="3.6"/>
-                <text class="mp-city" x="161" y="218">Washington, DC</text>
-                <!-- the venue: the only turquoise, and the only thing with a ring around it -->
-                <circle class="mp-halo" cx="150" cy="112" r="21"/>
-                <circle class="mp-here" cx="150" cy="112" r="7.5"/>
-                <text class="mp-v" x="150" y="78">Gordon Center</text>
-                <text class="mp-vs" x="150" y="150">Owings Mills</text>
-              </svg>
+              <!-- roads and shoreline from OpenStreetMap, drawn in the Orion palette;
+                   see assets/img/map-dmv.svg -->
+              <img class="mp" src="assets/img/map-dmv.svg" width="400" height="300" loading="lazy" decoding="async"
+                alt="Map of central Maryland: the Gordon Center in Owings Mills, north-west of Baltimore, with Washington DC to the south-west.">
           </div>
           <p class="sr">Gordon Center for Performing Arts, 3506 Gwynnbrook Ave, Owings Mills, Maryland 21117 &mdash; north-west of Baltimore.</p>
           <div class="ticket__foot">
