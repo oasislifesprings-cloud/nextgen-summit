@@ -17,17 +17,10 @@
 .nb__stage{position:relative;display:flex;justify-content:center;padding-top:clamp(104px,18vh,230px)}
 .nb__hang{position:relative;width:100%;transform-origin:50% calc(-1 * clamp(104px,18vh,230px));animation:nb-sway 9s var(--ease) infinite alternate}
 
-/* the ribbon runs up out of the section, so it reads as hanging from the photograph above */
-.nb__strap{position:absolute;left:50%;bottom:100%;width:min(150px,52%);height:clamp(104px,18vh,230px);transform:translateX(-50%);overflow:visible;filter:drop-shadow(0 10px 14px rgba(6,40,38,.16))}
-
-/* a swivel hook, in brushed metal */
-.nb__hook{position:absolute;left:50%;top:-15px;z-index:3;width:14px;height:24px;margin-left:-7px;border-radius:3px;
-  background:linear-gradient(100deg,#6E747C 0%,#C9CED5 26%,#9AA1AA 52%,#5C6269 78%,#848B94 100%);
-  box-shadow:0 1px 2px rgba(6,6,9,.4),inset 0 1px 0 rgba(255,255,255,.5)}
-.nb__hook::before{content:"";position:absolute;left:50%;top:-9px;width:13px;height:13px;margin-left:-6.5px;border-radius:50%;
-  border:2.5px solid #8A9099;border-bottom-color:transparent;transform:rotate(45deg)}
-.nb__hook::after{content:"";position:absolute;left:50%;bottom:-7px;width:9px;height:9px;margin-left:-4.5px;border-radius:2px;
-  background:linear-gradient(180deg,#B9BEC6,#70767E)}
+/* the ribbon: a photographed lanyard, hung from the paper's top edge so no part of it
+   reaches the hero. Height drives it; the width follows the photograph. */
+.nb__strap{position:absolute;left:50%;bottom:100%;height:clamp(104px,18vh,230px);width:auto;transform:translateX(-50%);
+  filter:drop-shadow(2px 6px 7px rgba(8,30,29,.28))}
 
 /* the card: real thickness at the edge, a punched slot, and a printed face */
 .nb__badge{position:relative;border-radius:14px;background:linear-gradient(168deg,#FFFFFF 0%,#F7F7F4 62%,#EFEFEB 100%);color:var(--ink);overflow:hidden;
@@ -82,9 +75,11 @@
   .lan{width:min(158px,38vw)}
   .nb__stage{padding-top:clamp(84px,13vh,140px)}
   .nb__hang{transform-origin:50% calc(-1 * clamp(84px,13vh,140px));animation-duration:10s}
-  .nb__strap{height:clamp(84px,13vh,140px);width:min(108px,66%)}
-  .nb__head{padding:30px 16px 13px}
-  .nb__mark .wm{font-size:23px}
+  .nb__strap{height:clamp(84px,13vh,140px)}
+  .nb__head{padding:30px 14px 13px;gap:7px}
+  .nb__mark .wm{font-size:21px}
+  .nb__mark span:last-child,.nb__yr,.nb__where{display:none}
+  .nb__date{font-size:7px;letter-spacing:.12em}
   .nb__body{padding:17px 16px 15px}
   .nb__names{font-size:clamp(26px,7.4vw,34px);height:1.24em}
   .nb__hello{font-size:8.5px;letter-spacing:.2em}
@@ -97,7 +92,6 @@
 @media (max-width:420px){
   .lan{width:min(138px,38vw)}
   .nb__mark .wm{font-size:17px}
-  .nb__mark span:last-child,.nb__yr,.nb__where{display:none}
   .nb__head{padding:24px 10px 10px;gap:6px}
   .nb__date{font-size:6.5px;letter-spacing:.1em}
   .nb__body{padding:13px 10px 12px}

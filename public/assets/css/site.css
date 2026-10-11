@@ -197,28 +197,15 @@ h1,h2,h3,p{margin:0}
   .tally__crowd{margin-top:calc(-1 * clamp(84px,13vh,140px))}
   .tally{grid-template-columns:minmax(0,1fr) auto;gap:clamp(28px,9vw,48px);padding-top:clamp(84px,13vh,140px);padding-bottom:clamp(40px,7vh,70px)}
   .tally__main{padding-top:clamp(8px,3vh,30px)}
-  .tally__n{font-size:clamp(50px,13vw,92px)}
+  .tally__n{font-size:clamp(72px,21vw,118px)}
   .tally__k{margin-top:14px;font-size:12.5px;letter-spacing:.13em;max-width:11ch}
 }
-@media (max-width:380px){.tally__n{font-size:46px}}
+@media (max-width:380px){.tally__n{font-size:66px}}
 
 
 .tally:not([hidden]) + .what{padding-top:clamp(96px,18vh,230px)}
 @media (max-width:1000px){
   .tally__run{display:none}
-}
-@media (max-width:900px){
-  .tally__target{display:none}
-}
-@media (max-width:760px){
-  .tally{padding-top:clamp(56px,9vh,84px)}
-  .tally__main{grid-template-columns:1fr;gap:28px;padding-top:26px}
-  .tally__txt{margin-top:8px}
-  .tally__crowd{padding-top:22px;border-top:1px solid var(--rule)}
-  .tally__crowd canvas{--crowd-h:190px}
-  .tally__states{margin-top:6px}
-  .tally__n{font-size:clamp(104px,33vw,172px)}
-  .tally__cta{width:100%}
 }
 .what{position:relative;max-width:var(--maxw);margin:0 auto;padding:clamp(120px,22vh,250px) var(--gutter) clamp(110px,19vh,220px);container-type:inline-size}
 .what__top{display:flex;align-items:center;justify-content:space-between;gap:20px}
