@@ -348,23 +348,24 @@ h1,h2,h3,p{margin:0}
 .ticket__map svg{display:block;width:100%;height:auto}
 .ticket__foot{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:6px}
 .ticket__foot .ticket__turn{margin:0}
-.ticket__dir{display:inline-flex;align-items:center;gap:7px;min-height:44px;font:700 11px/1 var(--f-sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
-.ticket__dir:hover{color:#fff}
-.ticket__dir:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}
+.ticket__dir{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;background:var(--accent);color:#0B0B0F;font:800 11px/1 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:background-color .3s var(--ease),transform .3s var(--ease)}
+@media (hover:hover){.ticket__dir:hover{background:#45E0D7}}
+.ticket__dir:active{transform:translateY(1px)}
+.ticket__dir:focus-visible{outline:2px solid #fff;outline-offset:3px}
 .ticket__note{font:600 10px/1.3 var(--f-sans);letter-spacing:.06em;color:rgba(255,255,255,.5)}
 
 /* the map: an orientation graphic, not a navigation app. One ring of turquoise on the venue,
    two grey dots for the cities that place it, and the bay so the state reads at a glance. */
-.mp-land{fill:#F4F0E6}
-.mp-water{fill:#CFE4EA}
-.mp-line{fill:none;stroke:#C9C2B2;stroke-width:1.6;stroke-dasharray:6 7}
-.mp-st{fill:#A79F8C;font:800 11px/1 var(--f-sans);letter-spacing:.2em;text-transform:uppercase}
-.mp-dot{fill:#6E6A60}
-.mp-city{fill:#56524A;font:600 11.5px/1 var(--f-sans);letter-spacing:.06em}
+.mp-land{fill:#004C53}
+.mp-water{fill:#436E74}
+.mp-line{fill:none;stroke:#DAEBEA;stroke-width:1.4;stroke-dasharray:6 7;opacity:.45}
+.mp-st{fill:#7FB0B2;font:800 11px/1 var(--f-sans);letter-spacing:.2em;text-transform:uppercase}
+.mp-dot{fill:#DAEBEA}
+.mp-city{fill:#DAEBEA;font:600 11.5px/1 var(--f-sans);letter-spacing:.06em}
 .mp-halo{fill:none;stroke:var(--accent);stroke-width:1.6;opacity:.45}
-.mp-here{fill:var(--accent);stroke:#0B0B0F;stroke-width:1.6}
-.mp-v{fill:#0B0B0F;font:800 14px/1 var(--f-sans);letter-spacing:.08em;text-transform:uppercase;text-anchor:middle}
-.mp-vs{fill:#0A7F79;font:700 10.5px/1 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;text-anchor:middle}
+.mp-here{fill:var(--accent);stroke:#003237;stroke-width:1.8}
+.mp-v{fill:#FFFFFF;font:800 14px/1 var(--f-sans);letter-spacing:.08em;text-transform:uppercase;text-anchor:middle}
+.mp-vs{fill:#45E0D7;font:700 10.5px/1 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;text-anchor:middle}
 @media (max-width:560px){
   .mp-v{font-size:13px}
   .mp-city{font-size:10.5px}
