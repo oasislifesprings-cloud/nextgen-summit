@@ -1,6 +1,8 @@
 /* NextGen Summit — Pitch Competition page.
    Rides on site.js (nav, countdown, reveals, drawers). This file owns the five-step progression,
-   the two tabs and the People's Choice panel. The application link is plain HTML in /pitch/index.html. */
+   the two tabs and the People's Choice panel. The application link is plain HTML in /pitch/index.html.
+   /exhibitors/ loads it too, for its steps and in-page links; each part does nothing where its
+   markup is absent. */
 (function () {
   'use strict';
 

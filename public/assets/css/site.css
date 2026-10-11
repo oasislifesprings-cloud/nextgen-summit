@@ -117,7 +117,7 @@ h1,h2,h3,p{margin:0}
 .nav.on-paper .count__l{color:var(--accent-ink)}
 .count__to{font:700 9.5px/1 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;opacity:.6}
 .count__word{display:none}
-.nav__link{position:relative;display:inline-flex;align-items:center;min-height:44px;font:700 12px/1 var(--f-sans);letter-spacing:.16em;text-transform:uppercase}
+.nav__link{position:relative;display:inline-flex;align-items:center;min-height:44px;font:700 12px/1 var(--f-sans);letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
 .nav__link::after{content:"";position:absolute;left:0;right:0;bottom:11px;height:1.5px;background:currentColor;transform:scaleX(0);transform-origin:100% 50%;transition:transform .55s var(--ease)}
 .nav__link:hover::after,.nav__link:focus-visible::after{transform:scaleX(1);transform-origin:0 50%}
 .nav__menu{display:none}
@@ -140,6 +140,13 @@ h1,h2,h3,p{margin:0}
   .nav__link{display:none}
   .nav__menu{display:inline-flex}
   .count__to{display:none}
+}
+/* small laptops: the homepage bar carries five links (Exhibitors joined it), so the countdown
+   reads as it does on phones, "19 days", until there is room for the full clock */
+@media (min-width:1001px) and (max-width:1240px){
+  .count__u--hms,.count__to{display:none}
+  .count__word{display:inline}
+  .count__u{gap:4px}
 }
 /* small phones: the CTA keeps its full wording by tightening, so it never crowds MENU */
 @media (max-width:440px){
@@ -530,6 +537,12 @@ main:has(> .finale:last-child) + .foot{border-top-color:transparent}   /* the fi
 .mini__note{font:600 12.5px/1.45 var(--f-sans);color:var(--ink-2)}
 .mini__done{padding:6px 0 30px;font:700 17px/1.45 var(--f-sans)}
 .mini__done small{display:block;margin-top:6px;font:600 13px/1.45 var(--f-sans);color:var(--ink-2)}
+/* a framed Typeform (the vendor application on /exhibitors/), tall enough for a question and
+   its buttons on a phone, with the plain link to the same form under it */
+.tf{padding:2px 0 30px}
+.tf__frame{display:block;width:100%;height:560px;height:clamp(460px,calc(100dvh - 190px),660px);border:1.5px solid var(--rule);border-radius:8px;background:var(--paper)}
+.tf__alt{margin-top:12px;font:600 13px/1.45 var(--f-sans);color:var(--ink-2)}
+.tf__alt .linkish{font-size:13px}
 
 .faq{border-top:1px solid var(--rule)}
 .faq details{border-bottom:1px solid var(--rule)}
