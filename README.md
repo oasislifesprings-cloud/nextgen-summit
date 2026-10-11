@@ -21,6 +21,7 @@ nextgen-summit/
     ├── data/                     fallback data folder, locked by .htaccess
     ├── registration-received/    confirmation page when JavaScript is off
     ├── thanks/                   volunteer and partner confirmation page
+    ├── exhibitors/               exhibitor tiers, schedule and the vendor application: /exhibitors/
     └── assets/                   css, js, images
 ```
 
@@ -126,6 +127,30 @@ Then upload the new `config.php` to `public_html/api/`. Replacing it also change
 - A hidden honeypot field (`bot-field`). Anything that fills it is quietly discarded while the bot sees a success.
 - Server-side validation of every field.
 - At most 30 submissions per hour from one connection (enough for a whole class on one campus network).
+
+## Exhibitors page and the vendor application (Typeform)
+
+`/exhibitors/` is the exhibitor page, a header tab beside Pitch Competition on every page. It is
+built from the pitch page's sections (`pitch.css`, `pitch.js`) and the ticket cards
+(`tickets.css`); `exhibitors.css` only arranges them. Tiers, prices and the exhibitor schedule
+are plain HTML in `public/exhibitors/index.html`. Exhibitor questions go to
+exhibitions@nextgensummit.us.
+
+Its How to apply section frames the Next Gen Vendor Application Form (Typeform `kMboIe7w`), so
+vendors apply without leaving the site; the frame loads lazily as the section nears the screen.
+Answers go to Typeform, not to the admin page. A link under the frame opens the same form in a
+new tab for anyone whose browser blocks it. To use a different form, change the frame's `src` and
+that link.
+
+The site cannot style a framed Typeform (browsers keep another site's page out of reach), so
+the form's look comes from its theme in Typeform. Both NextGen forms use the account's
+**NextGen Summit** theme, the one made for the pitch application (`XYDhoClo`): Montserrat,
+turquoise buttons, white type over a darkened photo. In Typeform: open the form, Design, choose
+NextGen Summit, Publish.
+
+The page's four photos were generated with Higgsfield (Soul 2.0). The originals are kept locally
+in `source-images/exhibit/` (ignored by git). To rebuild the web sizes, run
+`python tools/make-exhibit-images.py` (needs Pillow).
 
 ## Waitlist form fields
 

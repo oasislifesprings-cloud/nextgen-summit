@@ -1,0 +1,38 @@
+/* ============================================================================
+   NextGen Summit — Exhibitors
+   Built from the Pitch Competition's sections (pitch.css) and the ticket cards (tickets.css).
+   Nothing here redefines a token; this file only arranges what those two already style.
+   ========================================================================= */
+
+/* ---------- about: the section head on its own, two short paragraphs ---------- */
+.xb-about{padding-bottom:clamp(70px,11vh,130px)}
+.xb-about .road__lede p + p{margin-top:1em}
+
+/* ---------- tiers: the ticket cards, two by two ---------- */
+.xb-tiers .tk__opts{margin-top:clamp(34px,5.4vh,62px)}
+.tk__opts--four .opt:nth-child(odd){padding-left:0;padding-right:clamp(24px,4vw,72px);border-left:0}
+.tk__opts--four .opt:nth-child(even){padding-left:clamp(24px,4vw,72px);padding-right:0;border-left:1px solid var(--rule)}
+.tk__opts--four .opt:nth-child(n+3){border-top:1px solid var(--rule)}
+.tk__opts--four .opt__price{font-size:clamp(72px,9vw,150px)}
+.xb-tiers .tk__fine .linkish{font-size:13px}
+/* what each space comes with, ruled like the lists on the pitch page */
+.opt__list{list-style:none;width:100%;max-width:44ch;margin:clamp(18px,2.6vh,26px) 0 0;padding:0;border-top:1px solid var(--rule)}
+.opt__list li{padding:11px 0;border-bottom:1px solid var(--rule);font:600 15px/1.45 var(--f-sans);color:var(--ink)}
+@media (max-width:760px){
+  .tk__opts--four .opt:nth-child(n){padding:clamp(28px,4.6vh,40px) 0;border-left:0}
+  .tk__opts--four .opt + .opt{border-top:1px solid var(--rule)}
+}
+
+/* ---------- what's included: one label column, so the four descriptions start on one line ---------- */
+.xb-included .subm__list li{grid-template-columns:minmax(0,11.5rem) minmax(0,1fr)}
+@media (max-width:560px){.xb-included .subm__list li{grid-template-columns:minmax(0,8.5rem) minmax(0,1fr)}}
+
+/* ---------- the day: the showcase hours carry the accent, as the total does on the pitch page ---------- */
+.fmt__i--peak .fmt__n,.fmt__i--peak .fmt__k{color:var(--accent)}
+
+/* ---------- how to apply: the steps, with the application beside them ---------- */
+.xb-apply{padding-bottom:clamp(70px,11vh,130px)}
+.xb-apply .road__body{grid-template-columns:minmax(0,.9fr) minmax(0,1fr)}
+.xb-apply .road__aside{position:static}
+.xb-apply + .pend{border-top:1px solid var(--rule)}
+@media (max-width:960px){.xb-apply .road__body{grid-template-columns:1fr}}
