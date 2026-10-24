@@ -2,7 +2,8 @@
    NextGen Summit — the extended pitch deadline
    1. .dl  the old date struck through in red, the new
            date written in beside it. Drawn once when it scrolls into view.
-   Colours come from the tokens in site.css. The pop-up that shared this file was removed after October 20.
+   2. .ann/.pcp the People's Choice voting pop-up (announce.js decides when it shows).
+   Colours come from the tokens in site.css.
    ========================================================================= */
 
 /* ---------- 1. the struck date ---------- */
@@ -18,6 +19,68 @@
 .js .dl:not(.is-on) .dl__old::after{transform:scaleX(0)}
 .js .dl:not(.is-on) .dl__new{opacity:0;transform:translate3d(0,.35em,0)}
 
+/* ---------- 2. the pop-up shell (.ann) and the People's Choice invitation (.pcp) ---------- */
+.ann{width:min(520px,calc(100% - 32px));max-height:calc(100% - 32px);margin:auto;padding:0;border:0;border-radius:14px;background:var(--paper);color:var(--ink);box-shadow:0 30px 80px -20px rgba(var(--shade),.45);overflow:auto;overscroll-behavior:contain}
+.ann::backdrop{background:rgba(var(--shade),.55)}
+.ann[open]{animation:ann-in .7s var(--ease) both}
+.ann[open]::backdrop{animation:ann-fade .5s var(--ease) both}
+.ann.is-leaving{animation:ann-out .3s var(--ease-io) both}
+.ann.is-leaving::backdrop{animation:ann-fade .3s var(--ease-io) reverse both}
+@keyframes ann-in{from{opacity:0;transform:translate3d(0,24px,0) scale(.97)}to{opacity:1;transform:none}}
+@keyframes ann-out{to{opacity:0;transform:translate3d(0,12px,0) scale(.98)}}
+@keyframes ann-fade{from{opacity:0}to{opacity:1}}
+.ann__bar{height:6px;background:linear-gradient(90deg,var(--cyan) 0 33.3%,var(--magenta) 33.3% 66.6%,var(--yellow) 66.6%)}
+.ann__in{position:relative;outline:none;padding:clamp(26px,5vw,40px) clamp(22px,5vw,40px) clamp(24px,4.6vw,34px)}
+.ann__close{position:absolute;top:10px;right:10px;z-index:2;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:8px;transition:background-color .3s var(--ease)}
+.ann__close:hover{background:var(--paper-2)}
+.ann__close svg{width:16px;height:16px}
+.ann__kicker{display:inline-flex;align-items:center;gap:10px;font:700 11px/1.3 var(--f-sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent-ink)}
+.ann__title{margin-top:14px;padding-right:28px;font-size:clamp(40px,8vw,58px);line-height:.9;padding-bottom:.04em}
+.ann__copy{margin-top:12px;max-width:40ch;font:500 16px/1.55 var(--f-sans);color:var(--ink-2)}
+.ann__cta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px;margin-top:clamp(20px,3.6vw,28px)}
+.ann__later{min-height:44px;font:700 12px/1 var(--f-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);transition:color .3s var(--ease)}
+.ann__later:hover{color:var(--ink)}
+@media (max-width:480px){
+  .ann__cta .btn{width:100%}
+  .ann__later{width:100%;text-align:center}
+}
+
+/* the People's Choice invitation: the dark stage, a live dot, five founders and a burst of print colour */
+.pcp{background:var(--ink);color:#fff;box-shadow:0 40px 100px -24px rgba(var(--shade),.7)}
+.pcp :focus-visible{outline-color:#fff}
+.pcp .ann__close:hover{background:rgba(255,255,255,.1)}
+.pcp__kicker{color:var(--accent)}
+.pcp__live{position:relative;width:8px;height:8px;border-radius:50%;background:var(--red-l);flex:none}
+.pcp__live::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--red-l);animation:pcp-ping 1.6s var(--ease) infinite}
+@keyframes pcp-ping{from{transform:scale(1);opacity:.7}to{transform:scale(2.8);opacity:0}}
+
+.pcp__stage{position:relative;display:flex;justify-content:flex-start;margin-top:clamp(18px,3.4vw,24px);height:clamp(64px,13vw,80px)}
+.pcp__faces{position:relative;z-index:1;display:flex;margin:0;padding:0;list-style:none}
+.pcp__face{width:clamp(64px,13vw,80px);height:clamp(64px,13vw,80px);border-radius:50%;overflow:hidden;background:#222;box-shadow:0 0 0 3px var(--ink);animation:pcp-pop .7s cubic-bezier(.34,1.56,.64,1) both;animation-delay:calc(.25s + var(--i) * .09s)}
+.pcp__face + .pcp__face{margin-left:clamp(-18px,-3vw,-14px)}
+.pcp__face img{width:100%;height:100%;object-fit:cover}
+@keyframes pcp-pop{from{opacity:0;transform:translate3d(0,18px,0) scale(.6)}to{opacity:1;transform:none}}
+
+/* fourteen bits of cyan, magenta and yellow thrown out from behind the faces, once */
+.pcp__burst{position:absolute;left:clamp(120px,25vw,150px);top:50%;width:0;height:0}
+.pcp__bit{position:absolute;left:0;top:0;width:8px;height:8px;border-radius:2px;opacity:0;
+  --a:calc(var(--k) * 25.7deg);background:var(--cyan);
+  animation:pcp-burst 1.1s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(.45s + var(--k) * .015s)}
+.pcp__bit:nth-child(3n+2){background:var(--magenta);width:6px;height:10px}
+.pcp__bit:nth-child(3n){background:var(--yellow);border-radius:50%}
+@keyframes pcp-burst{
+  0%{opacity:0;transform:rotate(var(--a)) translate3d(0,0,0) scale(.4)}
+  15%{opacity:1}
+  100%{opacity:0;transform:rotate(var(--a)) translate3d(clamp(110px,26vw,170px),0,0) rotate(200deg) scale(1)}}
+
+.pcp__title{margin-top:clamp(16px,3vw,22px);color:#fff}
+.pcp__copy{color:rgba(255,255,255,.8)}
+.pcp__copy strong{color:#fff;font-weight:700;white-space:nowrap}
+.pcp .ann__later{color:rgba(255,255,255,.72)}
+.pcp .ann__later:hover{color:#fff}
+
 @media (prefers-reduced-motion:reduce){
   .js .dl__old::after,.js .dl__new{transition:none}
+  .ann[open],.ann[open]::backdrop,.ann.is-leaving,.ann.is-leaving::backdrop,.pcp__face{animation:none}
+  .pcp__live::after,.pcp__bit{animation:none;display:none}
 }
