@@ -188,8 +188,19 @@ function ngd_seed_accounts(bool $fresh = false): array
        text and never executed, which is exactly the sentence that makes somebody reach for
        PHP comment syntax and expect it to mean something. So now it does. */
     $inComment = false;
-    foreach (explode("
-", $raw) as $line) {
+    /* Split on ANY line ending.
+
+       The delimiter here used to be a literal newline inside a double-quoted string. In a
+       checkout that writes CRLF -- which this repository does, core.autocrlf is true -- that
+       literal IS "\r\n", while config.ngd.php is written by tools/make-ngd-user.php with "\n".
+       So the whole file came back as ONE element, that one element contained the header
+       comment, the "account inside a block comment" guard below matched it, and every
+       provisioned account was dropped without a word. Leadership could not sign in to
+       /insights/ at all; the owner PIN was the only door, which is the opposite of what the
+       accounts are for. tools/test-ngd-reporting.php had been failing on it.
+
+       A newline is never written as a bare line break here again. */
+    foreach (preg_split("/\r\n|\n|\r/", $raw) ?: [] as $line) {
         $opens  = substr_count($line, "/" . "*");
         $closes = substr_count($line, "*" . "/");
         $started = $inComment;
