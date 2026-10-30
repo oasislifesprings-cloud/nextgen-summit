@@ -51,7 +51,7 @@
     'open':        { pill: 'Voting open', vote: 'Vote for this pitch',
       note: 'Your vote could change their future. Vote once a day through October 28!' },
     'closed':      { pill: 'Voting closed', vote: 'Voting closed',
-      note: 'Voting has closed. Thank you to everyone who voted \u2014 more about the Top 10 will be announced soon.' },
+      note: 'Voting has closed. Thank you to everyone who voted — more about the Top 10 will be announced soon.' },
     'results':     { pill: 'Results published', vote: 'Voting closed',
       note: 'Voting has closed and the result has been published.' }
   };
@@ -153,6 +153,13 @@
     var d = { event: 'ngs_pc_' + name };
     if (params) for (var k in params) if (params.hasOwnProperty(k)) d[k] = params[k];
     try { (window.dataLayer = window.dataLayer || []).push(d); } catch (e) {}
+    /* The same events, also to NextGen Data. On its own guard, because five of the call
+       sites below sit immediately before the UI continuation a voter is waiting on, and
+       several of those are inside a promise callback where a throw would be swallowed and
+       the screen would simply never advance. ngd-track.js is fire-and-forget by
+       construction; if it failed to load, NGD_BEACON is undefined and this line does
+       nothing. Nothing here is awaited and nothing is returned. */
+    try { if (window.NGD_BEACON) window.NGD_BEACON(name, params); } catch (e) {}
   }
 
   /* ---------- 4. no local ballot ----------
@@ -631,6 +638,21 @@
 
   function routeFor(d, entrantId) {
     if (!d || !d.ok || !d.verified) return 'verify';
+
+    /* Under the flexible rule the only question is whether this voter has a vote left.
+
+       This is where the experiment was actually broken, and the labels made it worse rather
+       than better: the card correctly invited you with "Vote - 2 left", and then clicking it
+       sent you to the "you backed someone else today" screen, because the line below returns
+       'other' the moment today_entrant exists -- whatever the balance is. A registered
+       attendee could not place their second vote anywhere at all.
+
+       Spreading votes IS the feature, so under this rule there is no such thing as backing
+       someone else: there is only how many you have left. */
+    if (spread(d)) {
+      return (typeof d.remaining === 'number' && d.remaining > 0) ? 'confirm' : 'all-done';
+    }
+
     var today = d.today_entrant || null;
     if (today && today !== entrantId) return 'other';
     if (!today) return (d.remaining > 0) ? 'confirm' : 'all-done';
@@ -667,9 +689,19 @@
     var used = (d && typeof d.used === 'number') ? d.used : 0;
     var bonus = Math.max(0, used - 1);
     $$('[data-pc-sum-total]', vDlg).forEach(function (n) { n.textContent = String(used); });
-    $$('[data-pc-sum-bonus-row]', vDlg).forEach(function (n) { n.hidden = bonus <= 0; });
+    /* Under the flexible rule there is no bonus line to show: every vote is the same kind of
+       vote, so splitting the total into "one plus a bonus" would be describing a rule that
+       is not running. */
+    $$('[data-pc-sum-bonus-row]', vDlg).forEach(function (n) {
+      n.hidden = spread(d) || bonus <= 0;
+    });
     $$('[data-pc-sum-bonus]', vDlg).forEach(function (n) { n.textContent = '+' + bonus; });
     $$('[data-pc-done-title]', vDlg).forEach(function (n) {
+      if (spread(d)) {
+        n.textContent = used === 1 ? 'your vote is counted!'
+          : 'you gave ' + used + ' votes today!';
+        return;
+      }
       n.textContent = used >= 3 ? 'you gave 3 points today!'
         : (used === 1 ? 'your vote is counted!' : 'you gave ' + used + ' points today!');
     });
@@ -940,8 +972,34 @@
             again.hidden = true;
           }
         }
+        /* Under the flexible rule, say what is left and offer the way back. The old screen
+           ended the journey here because the remaining points had nowhere else to go. */
+        var sp = $('[data-pc-spread]', vDlg);
+        if (sp && d.spread) {
+          var n = typeof d.remaining === 'number' ? d.remaining : 0;
+          var k = $('[data-pc-spread-k]', sp), t = $('[data-pc-spread-p]', sp);
+          var more = $('[data-pc-spread-more]', sp);
+          if (n > 0) {
+            if (k) k.textContent = 'Vote confirmed!';
+            if (t) t.textContent = 'You have ' + n + (n === 1 ? ' vote' : ' votes') +
+              ' left today, and you can give ' + (n === 1 ? 'it' : 'them') + ' to any founder you like.';
+            if (more) more.hidden = false;
+          } else {
+            if (k) k.textContent = 'You’ve used all your votes today!';
+            if (t) t.textContent = 'Come back tomorrow to support your favourite founders again.';
+            if (more) more.hidden = true;
+          }
+          sp.hidden = false;
+          if (again) again.hidden = true;        // the panel says it better, and says it once
+        } else if (sp) {
+          sp.hidden = true;
+        }
+
         step('done');
-        paintBonus();          // invitation, or "already linked", decided by the server
+        /* The registration check still runs under either rule: unlinked, it is the invitation
+           that unlocks the larger allowance. It is only skipped once there is nothing it
+           could add. */
+        if (!(d.spread && d.ticket_verified)) paintBonus();
         track('vote_success', { entrant_id: who.id, entrant_slot: who.n,
                                 simulated: !!d.simulated, mode: d.mode });
         repaintAfterVote();
@@ -1006,12 +1064,38 @@
     return b.getAttribute('data-pc-idle') || (b.closest('.pce') ? 'Vote' : COPY[STATE].vote);
   }
 
+  /* How many votes this visitor still has, and whether the flexible rule is in force.
+     Both come from the server; neither is inferred here. */
+  function left(d) { return (d && d.verified && typeof d.remaining === 'number') ? d.remaining : null; }
+  function spread(d) { return !!(d && d.spread); }
+
   function labelVoteButton(b, d) {
     var id = b.getAttribute('data-pc-vote');
     var today = (d && d.verified) ? (d.today_entrant || null) : null;
     if (STATE !== 'open') {
       b.disabled = true; b.classList.remove('btn--ghost'); b.textContent = idleLabel(b); return;
     }
+
+    /* Under the flexible rule the question is "how many votes are left", not "which founder
+       did you back". A voter with two still to place must see an invitation on all twenty
+       cards, not "today's vote is used" on nineteen of them. */
+    if (spread(d)) {
+      var n = left(d);
+      if (n === null) { b.disabled = false; b.classList.remove('btn--ghost'); b.textContent = idleLabel(b); return; }
+      if (n > 0) {
+        b.disabled = false;
+        b.classList.remove('btn--ghost');
+        b.textContent = (d.allowance > 1 && n < d.allowance)
+          ? 'Vote · ' + n + ' left'
+          : idleLabel(b);
+        return;
+      }
+      b.disabled = false;
+      b.classList.add('btn--ghost');
+      b.textContent = 'All votes used today';
+      return;
+    }
+
     if (!today) {
       b.disabled = false; b.classList.remove('btn--ghost'); b.textContent = idleLabel(b); return;
     }
@@ -1058,6 +1142,19 @@
          Leadership read it exactly that way: "sounds like if I did it yesterday, I won't
          have to do it today". The word earned nothing and was costing trust. */
       txt = 'Verify to vote';
+    } else if (d.spread) {
+      /* The flexible rule counts VOTES, and says whether they are a fresh allowance or
+         what is left of one -- "3 votes available today" and "2 votes remaining" are
+         different facts and a voter notices which they are being told. */
+      var n = typeof d.remaining === 'number' ? d.remaining : 0;
+      var all = typeof d.allowance === 'number' ? d.allowance : n;
+      if (n <= 0) {
+        txt = 'All votes used today';
+      } else if (n === all) {
+        txt = n + (n === 1 ? ' vote available today' : ' votes available today');
+      } else {
+        txt = n + (n === 1 ? ' vote remaining' : ' votes remaining');
+      }
     } else if (typeof d.remaining === 'number' && d.remaining > 0) {
       txt = d.remaining + (d.remaining === 1 ? ' point to give' : ' points to give');
     } else if (d.bonus_eligible) {
@@ -1083,6 +1180,19 @@
     if (STATE !== 'open') {
       b.disabled = true;
       small.textContent = STATE === 'coming-soon' ? 'Soon' : 'Closed';
+      return;
+    }
+    if (spread(d)) {
+      var n = left(d);
+      b.disabled = false;
+      if (n === null) { b.classList.remove('reel__act--on'); small.textContent = 'Vote'; return; }
+      if (n > 0) {
+        b.classList.remove('reel__act--on');
+        small.textContent = (d.allowance > 1 && n < d.allowance) ? n + ' left' : 'Vote';
+        return;
+      }
+      b.classList.add('reel__act--on');
+      small.textContent = 'Used';
       return;
     }
     if (!today) { b.disabled = false; small.textContent = 'Vote'; return; }
@@ -1183,6 +1293,13 @@
     if (t.closest('[data-ff-prev]')) { railStep(-1); return; }
     if (t.closest('[data-ff-next-rail]')) { railStep(1); return; }
     if (t.closest('[data-fci-skip]')) { introEnd(true); return; }
+    if (t.closest('[data-pc-spread-more]')) {
+      /* Back to the founders with votes still in hand. Closing is the whole action: the
+         rail, the cards and the reels are all behind this dialog, and every one of them has
+         just been repainted with the new remaining count. */
+      vDlg.close();
+      return;
+    }
     if (t.closest('[data-reel-exit]')) { reelExit(); return; }
     if (t.closest('[data-reel-prev]')) { reelStep(-1); return; }
     if (t.closest('[data-reel-next]')) { reelStep(1); return; }
@@ -1434,6 +1551,31 @@
           if (ce) { ce.textContent = bonusText(d); ce.hidden = false; }
           return;
         }
+
+        /* Under the flexible rule linking a registration awards nothing. It raises the daily
+           allowance from one vote to three, and the voter spends what is left wherever they
+           like -- so this screen reports the balance and sends them back to the founders
+           rather than announcing points nobody has placed yet. */
+        if (d.spread) {
+          var n2 = typeof d.remaining === 'number' ? d.remaining : 0;
+          var sp2 = $('[data-pc-spread]', vDlg);
+          $$('[data-pc-bonus-yes]', vDlg).forEach(function (n) { n.hidden = true; });
+          if (sp2) {
+            var k2 = $('[data-pc-spread-k]', sp2), t2 = $('[data-pc-spread-p]', sp2);
+            var m2 = $('[data-pc-spread-more]', sp2);
+            if (k2) k2.textContent = 'You’re registered for NextGen!';
+            if (t2) t2.textContent = n2 > 0
+              ? 'That unlocks three votes a day. You have ' + n2 +
+                (n2 === 1 ? ' vote' : ' votes') + ' left today, for any founders you like.'
+              : 'That unlocks three votes a day. You have used today’s — come back tomorrow.';
+            if (m2) m2.hidden = n2 <= 0;
+            sp2.hidden = false;
+          }
+          track('attendee_unlocked', { remaining: n2 });
+          refreshMe();
+          return;
+        }
+
         var tot = $('[data-pc-bonus-total]', vDlg);
         if (tot) tot.textContent = '+' + (d.used || 3) + ' points';
         /* The founder comes from the server's answer -- d.entrant is the row pc-bonus.php read
