@@ -85,7 +85,7 @@ CONTENT = [
     ('/', ['nextgen', 'Gordon', 'tickets'], 'the Summit page'),
     ('/tickets/', ['eventbrite', 'NEXTSTAR'], 'Get tickets'),
     ('/pitch/peoples-choice/', ['People', 'peoples-choice.js'], "People's Choice"),
-    ('/music/', ['soundcloud.com', 'SHOW ME'], 'Music'),
+    ('/music/', ['open.spotify.com', 'music.apple.com', 'SHOW ME'], 'Music'),
 ]
 
 ASSET_RE = re.compile(

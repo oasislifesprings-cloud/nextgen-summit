@@ -73,14 +73,14 @@
 }
 
 /* ---------- the player ----------
-   SoundCloud's own iframe, unmodified and not autoplaying. It is given a plain black frame
+   Spotify's own iframe, unmodified and not autoplaying. It is given a plain black frame
    and a hairline above it so it reads as part of the page rather than as a widget dropped
    on top of one -- the one thing the brief asks this page not to feel like. */
 .mu__player{
   width:min(100%,680px);margin:clamp(18px,2.8vh,30px) auto 0;
   padding-top:clamp(16px,2.4vh,24px);border-top:1px solid rgba(244,241,234,.16);
 }
-.mu__player iframe{display:block;width:100%;height:166px;border:0;background:#000}
+.mu__player iframe{display:block;width:100%;height:152px;border:0;background:#000}
 .mu__note{
   margin:clamp(11px,1.6vh,15px) 0 0;
   font:500 12.5px/1.6 var(--f-sans);color:rgba(244,241,234,.46);
@@ -98,13 +98,13 @@
 .mu__back:hover{color:#fff}
 
 /* ---------- phones ----------
-   The sleeve takes the full measure and the player sits directly under it. 166px is
-   SoundCloud's own compact height and it stays legible at 320px, so nothing is overridden
+   The sleeve takes the full measure and the player sits directly under it. 152px is
+   Spotify's own compact height and it stays legible at 320px, so nothing is overridden
    here except the room around it. */
 @media (max-width:560px){
   .mu{justify-content:flex-start;padding-top:calc(var(--nav-h) + 20px)}
   .mu__art{width:100%}
-  .mu__player iframe{height:166px}
+  .mu__player iframe{height:152px}
 }
 
 /* Short, wide windows -- a laptop in a browser with bookmarks and a dock -- are the case
