@@ -8,6 +8,7 @@
 <meta name="description" content="What NextGen Summit is: a one-day experience for students and young adults to grow, connect, and see what's possible for their future.">
 <meta name="theme-color" content="#FAFAF8">
 <link rel="canonical" href="https://nextgensummit.us/explore/">
+
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -17,9 +18,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
 <link rel="stylesheet" href="/assets/css/site.css?v=wtn-dev">
 <link rel="stylesheet" href="/assets/css/about.css?v=wtn-dev">
+<link rel="stylesheet" href="/assets/css/film.css?v=wtn-dev">
 <link rel="stylesheet" href="/assets/css/wtn.css?v=wtn-dev">
 <script src="/assets/js/site.js?v=wtn-dev" defer></script>
 <script src="/assets/js/wtn.js?v=wtn-dev" defer></script>
+<script src="/assets/js/film.js?v=wtn-dev" defer></script>
 </head>
 <body class="wtn-page">
 <a class="skip" href="#main">Skip to content</a>
@@ -51,6 +54,13 @@
     <p class="ab__p">NextGen Summit is a one-day experience built to close that gap. It brings together people, ideas and opportunities so that what felt out of reach starts to look like a plan.</p>
   </section>
 
+  <!-- the Convener's film, verbatim from About: film.js builds the inline player in data-film-inline -->
+  <section class="ab ab--film" id="message" aria-labelledby="ab-film">
+    <h2 class="ab__k" id="ab-film">A message from our Convener</h2>
+    <p class="ab__film-t wm">what is nextgen?</p>
+    <div class="ab__film" data-film-inline></div>
+  </section>
+
   <section class="ab ab--quote" aria-labelledby="ab-believe">
     <h2 class="sr" id="ab-believe">What we believe</h2>
     <figure class="ab__shot">
@@ -67,7 +77,9 @@
     <p class="ab__p">Four things shape every part of the experience. We call them ROAD.</p>
     <ol class="road">
       <li><span class="road__k">Relationships</span><span class="road__v">The people you meet are the point, not the programming around them.</span></li>
-      <li><span class="road__k">Opportunity</span><span class="road__v">Ten founders pitch live for a share of $10,000. Others find the opening they were looking for.</span></li>
+      <!-- FOR APPROVAL: the live line ("Ten founders pitch live for a share of $10,000.") presented the
+           2026 programme as permanent. Re-anchored to 2026 as a fact; the second sentence is unchanged. -->
+      <li><span class="road__k">Opportunity</span><span class="road__v">At NextGen 2026, ten founders were selected to pitch live for a share of $10,000. Others find the opening they were looking for.</span></li>
       <li><span class="road__k">Access</span><span class="road__v">Candid conversations with people who have already walked it, in the same room as you.</span></li>
       <li><span class="road__k">Direction</span><span class="road__v">You leave knowing your next move, not just feeling good about the day.</span></li>
     </ol>
@@ -148,11 +160,17 @@
     </div>
   </section>
 
-  <section class="wtn-band" data-nav="photo" aria-labelledby="band-t">
-    <div class="wtn-band__in">
-      <h2 class="wtn-band__t wm" id="band-t">where to next?</h2>
-      
-      <p class="wtn-band__act"><a class="btn btn--lg" href="/2027/">NextGen 2027</a> <a class="btn btn--lg btn--ghost" href="/2026/">Look back at 2026</a></p>
+  <section class="wtn-next" data-nav="photo" aria-labelledby="next-t">
+    <div class="wtn-next__in">
+      <h2 class="wtn-next__t wm" id="next-t">where to next<span style="color:var(--accent)">?</span></h2>
+      <nav aria-label="Where to next">
+      <ul class="wtn-next__signs">
+        <li><span class="wtn-sign wtn-sign--left is-here" aria-current="page"><span class="wtn-sign__name wm">explore</span><span class="wtn-sign__sub">You are here</span></span></li>
+        <li><a class="wtn-sign wtn-sign--left" href="/2026/" data-travel="back"><span class="wtn-sign__name wm">2026</span><span class="wtn-sign__sub">The summit archive</span></a></li>
+        <li><a class="wtn-sign wtn-sign--right wtn-sign--next" href="/2027/" data-travel="right"><span class="wtn-sign__name wm">2027</span><span class="wtn-sign__sub">Coming soon</span></a></li>
+      </ul>
+      </nav>
+      <p class="wtn-next__foot"><a class="wtn-down" href="/#waitlist">Join the 2027 waitlist</a> <a class="wtn-down" href="/" data-travel="back">Back to the street</a></p>
     </div>
   </section>
 </main>

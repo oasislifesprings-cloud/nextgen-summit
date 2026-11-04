@@ -6,7 +6,7 @@
 <!-- DEVELOPMENT BUILD of the future homepage (branch where-to-next). Not released.
      Analytics (GTM / gtag) is left out until launch so local previews never reach Google. -->
 <title>NextGen Summit · Where To Next?</title>
-<meta name="description" content="NextGen Summit: explore the NextGen brand, look back at the 2026 summit, or join the waitlist for NextGen 2027.">
+<meta name="description" content="NextGen Summit: explore what NextGen is, look back at the 2026 summit, or join the waitlist for NextGen 2027.">
 <meta name="theme-color" content="#0B0B0F">
 <link rel="canonical" href="https://nextgensummit.us/">
 <meta property="og:type" content="website">
@@ -66,7 +66,7 @@
           <li class="wtn-post__item wtn-post__item--left">
             <a class="wtn-sign wtn-sign--left" href="/explore/" data-travel="left">
               <span class="wtn-sign__name wm">explore</span>
-              <span class="wtn-sign__sub">The NextGen brand</span>
+              <span class="wtn-sign__sub">What NextGen is</span>
             </a>
           </li>
           <li class="wtn-post__item wtn-post__item--left">
@@ -102,14 +102,25 @@
       </div>
 
       <div class="wtn-ticket" data-eventbrite data-eventbrite-event="" data-eventbrite-url="">
-        <p class="label wtn-ticket__k">NextGen Summit 2027</p>
+        <p class="label wtn-ticket__k">NextGen 2027</p>
         <p class="wtn-ticket__t wm">save your place.</p>
         <p class="wtn-ticket__status" data-eventbrite-status aria-live="polite">The waitlist opens on Eventbrite soon.</p>
+        <!-- City interest. Nothing is collected here: each city is a link to its own Eventbrite
+             waitlist (or the shared one with a city question asked by Eventbrite). The cities
+             themselves are not decided yet, so the slots are placeholders. -->
+        <div class="wtn-cities" data-cities>
+          <p class="label wtn-cities__k" id="cities-k">Your city</p>
+          <ul class="wtn-cities__list" aria-labelledby="cities-k">
+            <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
+            <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
+            <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
+          </ul>
+        </div>
         <div class="wtn-ticket__act">
           <a class="btn btn--lg" id="eb-waitlist" href="#waitlist" aria-disabled="true" data-eventbrite-button><span data-label>Waitlist opening soon</span></a>
           <p class="wtn-ticket__help">Questions? <a href="mailto:hello@nextgensummit.us">hello@nextgensummit.us</a></p>
         </div>
-        <p class="wtn-dev"><b>Development note</b><br>Eventbrite is not connected. Set <code>data-eventbrite-event</code> (embedded checkout) or <code>data-eventbrite-url</code> on this card; nothing else changes. Remove this note at launch.</p>
+        <p class="wtn-dev"><b>Development note</b><br>Eventbrite is not connected. Set <code>data-eventbrite-event</code> (embedded checkout) or <code>data-eventbrite-url</code> on this card. City slots: replace each label with a confirmed city and set its own <code>data-eventbrite-url</code>, or delete the block if Eventbrite asks the city. Remove this note at launch.</p>
       </div>
     </div>
   </section>

@@ -153,3 +153,71 @@
 .wtn-band__act{display:flex;flex-wrap:wrap;gap:14px;margin:8px 0 0}
 .wtn-page main:focus{outline:none}
 .wtn-hero__title,.wtn-open__title,.wtn-band__t,.wtn-ticket__t,.wtn-door__t{text-wrap:balance}
+
+/* ---------- where to next? strip: the same three signs closing every section page ---------- */
+.wtn-next{background:var(--ink);color:#fff;padding:clamp(64px,10vh,120px) var(--gutter) clamp(48px,8vh,96px)}
+.wtn-next__in{max-width:var(--maxw);margin:0 auto;display:grid;gap:clamp(24px,4vh,40px)}
+.wtn-next__t{margin:0;font-size:clamp(54px,8vw,128px);color:#fff}
+.wtn-next__signs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,24px)}
+.wtn-next__signs .wtn-sign{width:100%;min-width:0;height:100%}
+.wtn-sign.is-here{background:rgba(255,255,255,.14);color:#fff;box-shadow:none}
+.wtn-sign.is-here .wtn-sign__sub{color:var(--accent)}
+.wtn-next__foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+@media (max-width:760px){.wtn-next__signs{grid-template-columns:1fr}}
+
+/* ---------- city interest (non-collecting: each city is a link to its own Eventbrite waitlist) ---------- */
+.wtn-cities{margin:22px 0 0}
+.wtn-cities__k{margin:0}
+.wtn-cities__list{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.wtn-city{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--ink);color:var(--ink);text-decoration:none;font:700 12px/1 var(--f-sans);letter-spacing:.12em;text-transform:uppercase;transition:background-color .3s var(--ease)}
+.wtn-city:hover{background:var(--accent)}
+.wtn-city[aria-disabled="true"]{box-shadow:inset 0 0 0 1.5px var(--rule-strong);color:var(--ink-2);border:1px dashed transparent;cursor:not-allowed;background:repeating-linear-gradient(135deg,rgba(11,11,15,.05) 0 8px,transparent 8px 16px)}
+
+/* ---------- 2027: the approved Coming Soon lockup (nextgen-2027 branch, 665436b), as this page's
+   opening scene. Light layers, animations, contrast and the reduced-motion, more-contrast and
+   forced-colours rules are carried over unchanged; only the field is scoped to the section
+   (absolute, not fixed) so the page can continue below it. ---------- */
+.y27{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:calc(var(--nav-h) + 24px) 20px max(48px,env(safe-area-inset-bottom));text-align:center;background:#07070A;color:var(--paper);overflow:hidden;isolation:isolate}
+.y27__f{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden;isolation:isolate}
+.y27__base{position:absolute;inset:0;background:linear-gradient(180deg,#05050A 0%,#06060C 46%,#09090F 100%)}
+.y27__glow{position:absolute;left:50%;top:54%;width:156%;height:124%;transform:translateX(-50%);mix-blend-mode:screen;background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(31,199,190,.85) 0%,rgba(31,199,190,.45) 25%,rgba(31,199,190,.19) 50%,rgba(31,199,190,.04) 75%,rgba(31,199,190,0) 100%);animation:y27-breathe 24s ease-in-out infinite}
+.y27__deep{position:absolute;left:50%;top:60%;width:230%;height:140%;transform:translateX(-50%);mix-blend-mode:screen;background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(0,163,230,.42) 0%,rgba(0,163,230,.22) 25%,rgba(0,163,230,.09) 50%,rgba(0,163,230,.02) 75%,rgba(0,163,230,0) 100%);animation:y27-drift 41s ease-in-out infinite}
+.y27__horizon{position:absolute;left:50%;top:61.5%;width:92%;height:17%;transform:translateX(-50%);mix-blend-mode:screen;background:linear-gradient(90deg,transparent 0%,rgba(31,199,190,.45) 22%,rgba(206,255,251,.70) 50%,rgba(31,199,190,.45) 78%,transparent 100%) center/100% 1.5px no-repeat,radial-gradient(ellipse 50% 50% at 50% 50%,rgba(31,199,190,.50) 0%,rgba(31,199,190,.20) 40%,rgba(31,199,190,0) 100%);animation:y27-shimmer 17s ease-in-out infinite}
+.y27__halo{position:absolute;left:50%;top:22%;width:104%;height:40%;transform:translateX(-50%);mix-blend-mode:screen;background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(31,199,190,.18) 0%,rgba(31,199,190,.07) 45%,rgba(31,199,190,0) 100%);animation:y27-breathe 31s ease-in-out infinite reverse}
+.y27__grain{position:absolute;inset:-4%;opacity:.07;background-size:220px 220px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.35'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");animation:y27-grain 2s steps(1) infinite}
+.y27__vig{position:absolute;inset:0;background:radial-gradient(ellipse 80% 86% at 50% 50%,transparent 38%,rgba(0,0,0,.68) 100%)}
+@keyframes y27-breathe{0%,100%{opacity:.80;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.05)}}
+@keyframes y27-drift{0%,100%{opacity:.75;transform:translateX(-53%)}50%{opacity:1;transform:translateX(-47%)}}
+@keyframes y27-shimmer{0%,100%{opacity:.62}50%{opacity:.95}}
+@keyframes y27-grain{0%{transform:translate(0,0)}12.5%{transform:translate(-1.2%,-0.8%)}25%{transform:translate(0.9%,-1.4%)}37.5%{transform:translate(-0.7%,1.1%)}50%{transform:translate(1.3%,0.6%)}62.5%{transform:translate(-1.1%,-1.2%)}75%{transform:translate(0.6%,1.3%)}87.5%{transform:translate(-0.9%,0.5%)}}
+.y27__in{width:100%;max-width:1200px}
+.y27__mark{margin:0;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;column-gap:.22em;font-family:var(--f-display);font-weight:900;font-style:normal;font-variation-settings:"SOFT" 100,"WONK" 0,"opsz" 144;letter-spacing:-.04em;line-height:1.04;font-size:clamp(3.1rem,11.2vw,11.5rem);color:var(--paper)}
+.y27__mark .yr{color:var(--accent)}
+.y27__rule{width:clamp(68px,7vw,116px);height:1px;margin:clamp(22px,3.4vh,40px) auto 0;background:var(--accent);opacity:.62}
+.y27__cs{margin:clamp(18px,2.8vh,30px) 0 0;font-weight:700;font-size:clamp(.82rem,1.55vw,1.32rem);letter-spacing:.22em;text-indent:.22em;text-transform:uppercase;color:var(--paper)}
+.y27__st{margin:clamp(12px,1.9vh,20px) 0 0;font-weight:500;font-size:clamp(.82rem,1.15vw,1.06rem);letter-spacing:.012em;color:rgba(250,250,248,.62)}
+/* the waitlist call sits below the threshold, so the approved lockup above it is untouched */
+.y27__act{position:absolute;left:0;right:0;bottom:max(36px,env(safe-area-inset-bottom));margin:0}
+@media (max-width:640px){
+  .y27__mark{column-gap:0;font-size:clamp(3.4rem,17vw,5.4rem)}
+  .y27__mark .wm{flex:0 0 100%}
+  .y27__st{max-width:22ch;margin-left:auto;margin-right:auto}
+  .y27__horizon{top:70%}
+  .y27__glow{top:58%}
+}
+@media (max-height:520px) and (orientation:landscape){
+  .y27__mark{font-size:clamp(2.4rem,8.2vw,4.6rem)}
+  .y27__rule{margin-top:14px}.y27__cs{margin-top:12px}.y27__st{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  .y27__glow,.y27__deep,.y27__horizon,.y27__halo,.y27__grain{animation:none}
+  .y27__glow{opacity:.92}.y27__deep{opacity:.88;transform:translateX(-50%)}.y27__horizon{opacity:.80}.y27__halo{opacity:.92}
+}
+@media (prefers-contrast:more){
+  .y27__st{color:rgba(250,250,248,.86)}.y27__rule{opacity:1}
+  .y27__vig{background:radial-gradient(ellipse 78% 78% at 50% 50%,transparent 46%,rgba(0,0,0,.66) 100%)}
+}
+@media (forced-colors:active){.y27__f{display:none}.y27__mark .yr{color:LinkText}.y27__rule{background:CanvasText;opacity:1}}
+
+/* a page that opens on a full-bleed dark scene starts under the nav, like the homepage */
+.wtn-page:has(> main > .y27:first-child){padding-top:0}

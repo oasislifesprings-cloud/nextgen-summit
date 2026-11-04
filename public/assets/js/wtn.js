@@ -64,6 +64,7 @@
       btn.href = url;
       btn.target = '_blank';
       btn.rel = 'noopener';
+      btn.insertAdjacentHTML('beforeend', '<span class="sr"> (opens Eventbrite in a new tab)</span>');
     }
     function enable(label) {
       btn.removeAttribute('aria-disabled');
@@ -72,6 +73,18 @@
       if (status) status.textContent = 'Opens Eventbrite to reserve your place.';
     }
   }
+  /* City interest: each confirmed city gets its own Eventbrite waitlist link. A slot with no
+     valid Eventbrite URL stays a disabled placeholder. Nothing is stored or sent from this page. */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-cities] .wtn-city'), function (a) {
+    var u = (a.getAttribute('data-eventbrite-url') || '').trim();
+    if (!/^https:\/\/(www\.)?eventbrite\.[a-z.]+\//.test(u)) return;
+    a.href = u;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.removeAttribute('aria-disabled');
+    a.insertAdjacentHTML('beforeend', '<span class="sr"> (opens Eventbrite in a new tab)</span>');
+  });
+
   function loadEventbrite(done) {
     if (window.EBWidgets) return done();
     var s = document.createElement('script');

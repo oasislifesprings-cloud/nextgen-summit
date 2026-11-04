@@ -4,10 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- DEVELOPMENT BUILD (branch where-to-next). Not released. Analytics left out until launch. -->
-<title>NextGen 2027 · NextGen Summit</title>
-<meta name="description" content="NextGen 2027 is coming soon. Join the waitlist or partner with the summit.">
-<meta name="theme-color" content="#FAFAF8">
+<title>NextGen 2027 · Coming Soon</title>
+<meta name="description" content="NextGen 2027 is coming. Stay tuned for more info.">
+<meta name="theme-color" content="#07070A">
 <link rel="canonical" href="https://nextgensummit.us/2027/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="NextGen 2027 &middot; Coming Soon">
+<meta property="og:description" content="NextGen 2027 is coming. Stay tuned for more info.">
+<meta property="og:url" content="https://nextgensummit.us/2027/">
+<meta property="og:image" content="https://nextgensummit.us/2027/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="nextgen 2027, Coming Soon, in white and turquoise on a dark field with light rising beneath it.">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -19,11 +28,12 @@
 <link rel="stylesheet" href="/assets/css/wtn.css?v=wtn-dev">
 <script src="/assets/js/site.js?v=wtn-dev" defer></script>
 <script src="/assets/js/wtn.js?v=wtn-dev" defer></script>
+
 </head>
 <body class="wtn-page">
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="nav on-paper">
+<header class="nav on-photo">
   <a class="nav__mark" href="/" aria-label="NextGen Summit, home">
     <span class="wm" aria-hidden="true">nextgen</span><span class="nav__summit" aria-hidden="true">Summit</span>
   </a>
@@ -37,24 +47,38 @@
 </header>
 
 <main id="main" tabindex="-1">
-  <section class="wtn-open" aria-labelledby="y27-title">
-    <a class="wtn-crumb" href="/" data-travel="back"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Where to next?</a>
-    <p class="label" style="margin-top:18px">NextGen Summit 2027</p>
-    <h1 class="wtn-open__title wm" id="y27-title">nextgen 2027</h1>
-    <p class="wtn-open__lede">Coming soon. Stay tuned for more info.</p>
-    <p style="margin-top:28px"><a class="btn btn--lg" href="/#waitlist">Join the waitlist</a></p>
+  <!-- Opening scene: the approved Coming Soon lockup from the nextgen-2027 branch (665436b),
+       copy and composition unchanged; see the .y27 rules in wtn.css. -->
+  <section class="y27" data-nav="photo" aria-labelledby="y27-title">
+    <div class="y27__f" aria-hidden="true">
+      <div class="y27__base"></div><div class="y27__deep"></div><div class="y27__glow"></div>
+      <div class="y27__horizon"></div><div class="y27__halo"></div><div class="y27__vig"></div><div class="y27__grain"></div>
+    </div>
+    <div class="y27__in">
+      <h1 class="y27__mark" id="y27-title" aria-label="NextGen 2027"><span class="wm">nextgen</span><span class="yr">2027</span></h1>
+      <div class="y27__rule" aria-hidden="true"></div>
+      <p class="y27__cs">Coming Soon</p>
+      <p class="y27__st">Stay tuned for more info</p>
+      <p class="y27__act"><a class="btn btn--lg" href="/#waitlist">Join the waitlist</a></p>
+    </div>
   </section>
-  <section class="wtn-open" aria-labelledby="y27-partner" style="padding-top:0">
+  <section class="wtn-open" aria-labelledby="y27-partner">
     <p class="label">Partner</p>
     <h2 class="wtn-band__t wm" id="y27-partner" style="color:var(--ink);margin-top:14px">want your brand here?</h2>
     <p class="wtn-open__lede">Support the summit as an organization.</p>
     <p style="margin-top:28px"><a class="btn btn--lg btn--ghost" href="mailto:hello@nextgensummit.us?subject=NextGen%202027%20partnership">Become a sponsor</a></p>
   </section>
-  <section class="wtn-band" data-nav="photo" aria-labelledby="band-t">
-    <div class="wtn-band__in">
-      <h2 class="wtn-band__t wm" id="band-t">where to next?</h2>
-      
-      <p class="wtn-band__act"><a class="btn btn--lg btn--ghost" href="/explore/">Explore NextGen</a> <a class="btn btn--lg btn--ghost" href="/2026/">Look back at 2026</a></p>
+  <section class="wtn-next" data-nav="photo" aria-labelledby="next-t">
+    <div class="wtn-next__in">
+      <h2 class="wtn-next__t wm" id="next-t">where to next<span style="color:var(--accent)">?</span></h2>
+      <nav aria-label="Where to next">
+      <ul class="wtn-next__signs">
+        <li><a class="wtn-sign wtn-sign--left" href="/explore/" data-travel="left"><span class="wtn-sign__name wm">explore</span><span class="wtn-sign__sub">What NextGen is</span></a></li>
+        <li><a class="wtn-sign wtn-sign--left" href="/2026/" data-travel="back"><span class="wtn-sign__name wm">2026</span><span class="wtn-sign__sub">The summit archive</span></a></li>
+        <li><span class="wtn-sign wtn-sign--right is-here" aria-current="page"><span class="wtn-sign__name wm">2027</span><span class="wtn-sign__sub">You are here</span></span></li>
+      </ul>
+      </nav>
+      <p class="wtn-next__foot"><a class="wtn-down" href="/#waitlist">Join the 2027 waitlist</a> <a class="wtn-down" href="/" data-travel="back">Back to the street</a></p>
     </div>
   </section>
 </main>
