@@ -1,24 +1,49 @@
 /* "Where To Next?" gateway behaviour. Runs after site.js (nav, drawer, reveals).
    Everything here is an enhancement: without JavaScript every sign is a plain link, the waitlist
-   shows its static state, and archive links point at the production archive address. */
+   shows its static state, and the chapter rail is a plain list of in-page links.
+   This website never links to the 2026 archive (archive.nextgensummit.us is a separate site). */
 (function () {
   'use strict';
   var doc = document.documentElement;
   var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)');
 
-  /* ---------- archive links ----------
-     Production: https://archive.nextgensummit.us/ (not live yet, see docs/2026-archive-plan.md).
-     On a local preview the same links open the local archive build instead, so the 2026
-     destination can be reviewed end to end before the archive exists. */
-  var LOCAL = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
-  var LOCAL_ARCHIVE = 'http://127.0.0.1:8811';
-  if (LOCAL) {
-    Array.prototype.forEach.call(document.querySelectorAll('a[data-archive]'), function (a) {
-      var u = new URL(a.href);
-      a.href = LOCAL_ARCHIVE + u.pathname + u.search + u.hash;
-      a.setAttribute('data-archive-local', '');
-    });
+  /* ---------- 2026 Moments: mark the chapter in view on the rail ---------- */
+  var rail = document.querySelector('.mo-rail');
+  if (rail && 'IntersectionObserver' in window) {
+    var links = {};
+    Array.prototype.forEach.call(rail.querySelectorAll('a[href^="#"]'), function (a) { links[a.getAttribute('href').slice(1)] = a; });
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting || !links[e.target.id]) return;
+        Object.keys(links).forEach(function (k) { links[k].removeAttribute('aria-current'); });
+        var a = links[e.target.id];
+        a.setAttribute('aria-current', 'location');
+        // keep the marked chapter visible on a narrow rail, without moving the page
+        var list = a.parentNode.parentNode;
+        list.scrollTo({ left: a.offsetLeft - 16, behavior: reduced && reduced.matches ? 'auto' : 'smooth' });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-chapter]'), function (s) { io.observe(s); });
   }
+
+  /* ---------- Explore: the Spotify player loads only when asked for ----------
+     Nothing from Spotify is requested until the visitor presses the button. Without JavaScript the
+     button stays hidden and the Spotify and Apple Music links below it do the job. */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-embed]'), function (box) {
+    var btn = box.querySelector('[data-embed-load]');
+    var src = box.getAttribute('data-src') || '';
+    if (!btn || !/^https:\/\/open\.spotify\.com\/embed\//.test(src)) return;
+    btn.hidden = false;
+    btn.addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.title = box.getAttribute('data-title') || 'Player';
+      f.width = '100%'; f.height = '152';
+      f.allow = 'encrypted-media; clipboard-write; picture-in-picture';
+      f.src = src;
+      box.replaceWith(f);
+      f.focus();
+    });
+  });
 
   /* ---------- travel between destinations (provisional) ----------
      A sign click sets html[data-travel=<direction>] so CSS can move the scene, then navigates.

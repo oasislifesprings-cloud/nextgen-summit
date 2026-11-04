@@ -4,9 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- DEVELOPMENT BUILD (branch where-to-next). Not released. Analytics left out until launch. -->
-<title>2026 · NextGen Summit</title>
-<meta name="description" content="NextGen Summit 2026: Friday, October 30, 2026, Gordon Center for Performing Arts, Maryland. The pitch competition, People's Choice, the experience and the music.">
-<meta name="theme-color" content="#FAFAF8">
+<!-- 2026 Moments: what NextGen 2026 felt like. It is NOT the archive (archive.nextgensummit.us is a
+     separate site and this website never links to it). No competition records, no voting, no results.
+     Every .mo-media is a labelled slot: see docs/where-to-next/README.md, "2026 Moments", for how media drops in. -->
+<title>2026 Moments · NextGen Summit</title>
+<meta name="description" content="NextGen Summit 2026, October 30, Gordon Center for Performing Arts, Maryland: the moments from the day.">
+<meta name="theme-color" content="#0B0B0F">
 <link rel="canonical" href="https://nextgensummit.us/2026/">
 
 <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -18,20 +21,21 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
 <link rel="stylesheet" href="/assets/css/site.css?v=wtn-dev">
 <link rel="stylesheet" href="/assets/css/wtn.css?v=wtn-dev">
+<link rel="preload" as="image" href="/assets/img/hero-1600.jpg" imagesrcset="/assets/img/hero-800.jpg 800w, /assets/img/hero-1200.jpg 1200w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2048.jpg 2048w" imagesizes="(max-aspect-ratio: 16/9) 177.78vh, 100vw" fetchpriority="high">
+<script src="/assets/vendor/motion-13.5.0.min.js" defer></script>
 <script src="/assets/js/site.js?v=wtn-dev" defer></script>
 <script src="/assets/js/wtn.js?v=wtn-dev" defer></script>
-
 </head>
-<body class="wtn-page">
+<body class="wtn-page mo-page">
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="nav on-paper">
+<header class="nav on-photo">
   <a class="nav__mark" href="/" aria-label="NextGen Summit, home">
     <span class="wm" aria-hidden="true">nextgen</span><span class="nav__summit" aria-hidden="true">Summit</span>
   </a>
   <nav class="nav__links" aria-label="Main">
     <a class="nav__link" href="/explore/">Explore</a>
-    <span class="nav__link is-here" aria-current="page">2026</span>
+    <span class="nav__link is-here" aria-current="page">2026 Moments</span>
     <a class="nav__link" href="/2027/">2027</a>
     <a class="btn btn--sm" href="/#waitlist">Join the waitlist</a>
     <button class="nav__link nav__menu" type="button" data-open="menu">Menu</button>
@@ -39,52 +43,211 @@
 </header>
 
 <main id="main" tabindex="-1">
-  <section class="wtn-open" aria-labelledby="y26-title">
-    <a class="wtn-crumb" href="/" data-travel="back"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Where to next?</a>
-    <p class="label" style="margin-top:18px">NextGen Summit 2026</p>
-    <h1 class="wtn-open__title wm" id="y26-title">2026</h1>
-    <p class="wtn-open__lede">A one-day summit for ages 17&ndash;29, Oct 30, Maryland.</p>
-  </section>
-  <ul class="wtn-facts" aria-label="The 2026 summit">
-    <li><b>When</b><span>Friday, October 30, 2026</span></li>
-    <li><b>Where</b><span>Gordon Center for Performing Arts, Maryland</span></li>
-    <li><b>Who</b><span>Ages 17&ndash;29</span></li>
-  </ul>
-  <section aria-labelledby="y26-doors">
-    <h2 class="sr" id="y26-doors">Inside the 2026 archive</h2>
-    <ul class="wtn-doors">
-      <li><a class="wtn-door" href="https://archive.nextgensummit.us/pitch/" data-archive>
-        <img src="/assets/img/pitch-stage-1200.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="A founder seen from behind at the centre of a stage, facing a full auditorium, a microphone in front of him.">
-        <span class="wtn-door__b"><span class="wtn-door__t wm">pitch competition</span><span class="wtn-door__d">Ten founders. A share of $10,000.</span></span>
-      </a></li>
-      <li><a class="wtn-door" href="https://archive.nextgensummit.us/pitch/peoples-choice/" data-archive>
-        <img src="/assets/img/pitch-crowd-1200.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="A packed auditorium seen from the edge of the stage, faces lit by a beam of light through haze.">
-        <span class="wtn-door__b"><span class="wtn-door__t wm">people&rsquo;s choice</span><span class="wtn-door__d">The audience vote and the Top 10.</span></span>
-      </a></li>
-      <li><a class="wtn-door" href="https://archive.nextgensummit.us/experience/" data-archive>
-        <img src="/assets/img/gordon-hero-1200.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="The auditorium of the Gordon Center for Performing Arts: rows of seats facing a wide stage, the curtain lit blue.">
-        <span class="wtn-door__b"><span class="wtn-door__t wm">the experience</span><span class="wtn-door__d">The day at the Gordon Center.</span></span>
-      </a></li>
-      <li><a class="wtn-door" href="https://archive.nextgensummit.us/music/" data-archive>
-        <img src="/assets/img/music/show-me-900.webp" width="900" height="900" loading="lazy" decoding="async" alt="The SHOW ME cover artwork: the words SHOW ME set in diamonds on a black ground, with the nextgen wordmark beneath.">
-        <span class="wtn-door__b"><span class="wtn-door__t wm">music</span><span class="wtn-door__d">The NextGen soundtrack.</span></span>
-      </a></li>
-    </ul>
-  </section>
-  <section class="wtn-band" data-nav="photo" aria-labelledby="band-t">
-    <div class="wtn-band__in">
-      <h2 class="wtn-band__t wm" id="band-t">the 2026 archive</h2>
-      <p class="wtn-band__p">The 2026 summit site, preserved as a read-only archive.</p>
-      <p class="wtn-band__act"><a class="btn btn--lg" href="https://archive.nextgensummit.us/" data-archive>Enter the 2026 archive</a></p>
+  <!-- The 2026 hero, reused as it is on the 2026 homepage: the photograph is the first frame and the
+       fallback; the film (site.js initHeroFilm) fades in once it plays, muted and looping, and is never
+       loaded with reduced motion or Data Saver. -->
+  <section class="hero mo-hero" id="top" data-nav="photo" aria-labelledby="hero-title">
+    <div class="hero__media">
+    <picture class="hero__pic">
+      <source media="(max-aspect-ratio: 3/4)" srcset="/assets/img/hero-m-864.jpg" width="864" height="1152">
+      <img class="hero__img"
+        src="/assets/img/hero-1600.jpg"
+        srcset="/assets/img/hero-800.jpg 800w, /assets/img/hero-1200.jpg 1200w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2048.jpg 2048w"
+        sizes="(max-aspect-ratio: 16/9) 177.78vh, 100vw" width="2048" height="1152" fetchpriority="high" decoding="async"
+        style="--pos:50% 42%;--pos-m:50% 46%"
+        alt="Seven young people in modern business casual, walking together in late afternoon light and looking ahead.">
+    </picture>
+    <video class="hero__video" data-src="/assets/nextgen-take-1.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+    </div>
+    <div class="hero__shade" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <a class="wtn-crumb mo-crumb" href="/" data-travel="back"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Where to next?</a>
+      <p class="label hero__meta rv" style="--d:.1s">Friday, Oct 30, 2026</p>
+      <h1 class="hero__title rv" id="hero-title" style="--d:.22s">
+        <span class="sr">NextGen 2026 Moments</span>
+        <span class="lockup" aria-hidden="true"><span class="wm reg reg--light">2026</span><span class="lockup__summit">Moments</span></span>
+      </h1>
+      <div class="hero__row rv" style="--d:.5s">
+        <div class="hero__copy">
+          <p class="hero__line">What NextGen 2026 felt like.</p>
+        </div>
+        <div class="hero__actions">
+          <a class="textlink" href="#highlights">Scroll the day <span class="arr" aria-hidden="true">↓</span></a>
+        </div>
+      </div>
     </div>
   </section>
-  <p class="wtn-dev" style="max-width:var(--maxw);margin:18px auto 40px;width:calc(100% - 2 * var(--gutter))"><b>Development note</b><br>archive.nextgensummit.us is not live yet. On a local preview these links open the local archive build (127.0.0.1:8811). Remove this note at launch.</p>
+
+  <!-- the chapter rail: sticky under the nav, the current chapter marked as you scroll (wtn.js);
+       the bar fills with scroll progress where CSS scroll timelines exist -->
+  <nav class="mo-rail" aria-label="2026 Moments chapters">
+    <ol class="mo-rail__list">
+      <li><a href="#highlights"><span aria-hidden="true">01</span> Highlights</a></li>
+      <li><a href="#speakers"><span aria-hidden="true">02</span> Speakers</a></li>
+      <li><a href="#words"><span aria-hidden="true">03</span> In their words</a></li>
+      <li><a href="#room"><span aria-hidden="true">04</span> The room</a></li>
+      <li><a href="#backstage"><span aria-hidden="true">05</span> Behind the scenes</a></li>
+      <li><a href="#more"><span aria-hidden="true">06</span> More moments</a></li>
+    </ol>
+    <span class="mo-rail__bar" aria-hidden="true"></span>
+  </nav>
+
+  <p class="wtn-dev mo-devnote"><b>Development note</b><br>Every striped box and every dashed line is a slot for real 2026 media or words, waiting for what Brother Emmanuel and Sister Pedrocia supply. Nothing in a slot is real yet. Quotes go in only once verified against the recording or approved by the speaker. Remove this note and any empty slots at launch.</p>
+
+  <!-- 01 -->
+  <section class="mo-ch mo-ch--dark" id="highlights" data-nav="photo" data-chapter aria-labelledby="ch1">
+    <header class="mo-head rv">
+      <p class="mo-no" aria-hidden="true">01</p>
+      <h2 class="mo-t wm" id="ch1">highlights</h2>
+      <p class="mo-d">The day in motion.</p>
+    </header>
+    <div class="mo-grid mo-grid--feature">
+      <figure class="mo-slot mo-slot--lead rv" data-slot="highlight-clip">
+        <div class="mo-media wtn-ph" style="--ar:16/9"><span class="wtn-ph__tag">Highlight clip · lead<small>16:9 video, 45–90 s, captioned, with a poster frame. The film of the day.</small></span></div>
+        <figcaption class="mo-cap"><span class="mo-ph-text">Caption</span></figcaption>
+      </figure>
+      <figure class="mo-slot rv" style="--d:.1s" data-slot="highlight-clip">
+        <div class="mo-media wtn-ph" style="--ar:9/16"><span class="wtn-ph__tag">Highlight clip<small>9:16 vertical, 15–30 s, captioned</small></span></div>
+        <figcaption class="mo-cap"><span class="mo-ph-text">Caption</span></figcaption>
+      </figure>
+      <figure class="mo-slot rv" style="--d:.2s" data-slot="highlight-clip">
+        <div class="mo-media wtn-ph" style="--ar:9/16"><span class="wtn-ph__tag">Highlight clip<small>9:16 vertical, 15–30 s, captioned</small></span></div>
+        <figcaption class="mo-cap"><span class="mo-ph-text">Caption</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="mo-ch" id="speakers" data-nav="paper" data-chapter aria-labelledby="ch2">
+    <header class="mo-head rv">
+      <p class="mo-no" aria-hidden="true">02</p>
+      <h2 class="mo-t wm" id="ch2">speaker moments</h2>
+      <p class="mo-d">On stage at the Gordon Center.</p>
+    </header>
+    <div class="mo-grid mo-grid--three">
+      <figure class="mo-slot rv" data-slot="speaker-moment">
+        <div class="mo-media wtn-ph wtn-ph--paper" style="--ar:4/5"><span class="wtn-ph__tag">Speaker moment<small>Photo (4:5) or clip, on stage</small></span></div>
+        <figcaption class="mo-cap"><span class="mo-ph-text">Speaker name</span><span class="mo-ph-text mo-ph-text--s">Role or talk title</span></figcaption>
+      </figure>
+      <figure class="mo-slot rv" style="--d:.1s" data-slot="speaker-moment">
+        <div class="mo-media wtn-ph wtn-ph--paper" style="--ar:4/5"><span class="wtn-ph__tag">Speaker moment<small>Photo (4:5) or clip, on stage</small></span></div>
+        <figcaption class="mo-cap"><span class="mo-ph-text">Speaker name</span><span class="mo-ph-text mo-ph-text--s">Role or talk title</span></figcaption>
+      </figure>
+      <figure class="mo-slot rv" style="--d:.2s" data-slot="speaker-moment">
+        <div class="mo-media wtn-ph wtn-ph--paper" style="--ar:4/5"><span class="wtn-ph__tag">Speaker moment<small>Photo (4:5) or clip, on stage</small></span></div>
+        <figcaption class="mo-cap"><span class="mo-ph-text">Speaker name</span><span class="mo-ph-text mo-ph-text--s">Role or talk title</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 03: verified quotes only. data-verified flips to "true" once the wording is checked against the
+       recording or approved by the speaker; tests refuse a published quote that is not verified. -->
+  <section class="mo-ch mo-ch--accent" id="words" data-nav="paper" data-chapter aria-labelledby="ch3">
+    <header class="mo-head rv">
+      <p class="mo-no" aria-hidden="true">03</p>
+      <h2 class="mo-t wm" id="ch3">in their words</h2>
+      <p class="mo-d">From the stage, word for word.</p>
+    </header>
+    <div class="mo-quotes">
+      <figure class="mo-quote rv" data-slot="speaker-quote" data-verified="false">
+        <blockquote class="mo-quote__q"><p class="mo-ph-text mo-ph-text--q">Verified speaker quote</p></blockquote>
+        <figcaption class="mo-quote__by"><span class="mo-ph-text">Speaker name, role</span></figcaption>
+      </figure>
+      <figure class="mo-quote rv" style="--d:.1s" data-slot="speaker-quote" data-verified="false">
+        <blockquote class="mo-quote__q"><p class="mo-ph-text mo-ph-text--q">Verified speaker quote</p></blockquote>
+        <figcaption class="mo-quote__by"><span class="mo-ph-text">Speaker name, role</span></figcaption>
+      </figure>
+      <figure class="mo-quote rv" style="--d:.2s" data-slot="speaker-quote" data-verified="false">
+        <blockquote class="mo-quote__q"><p class="mo-ph-text mo-ph-text--q">Verified speaker quote</p></blockquote>
+        <figcaption class="mo-quote__by"><span class="mo-ph-text">Speaker name, role</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="mo-ch mo-ch--dark" id="room" data-nav="photo" data-chapter aria-labelledby="ch4">
+    <header class="mo-head rv">
+      <p class="mo-no" aria-hidden="true">04</p>
+      <h2 class="mo-t wm" id="ch4">the room</h2>
+      <p class="mo-d">The audience, in the moment.</p>
+    </header>
+    <div class="mo-grid mo-grid--mosaic">
+      <figure class="mo-slot mo-slot--tall rv" data-slot="audience-reaction">
+        <div class="mo-media wtn-ph" style="--ar:9/16"><span class="wtn-ph__tag">Audience reaction<small>9:16 clip or photo</small></span></div>
+      </figure>
+      <figure class="mo-slot rv" style="--d:.08s" data-slot="audience-reaction">
+        <div class="mo-media wtn-ph" style="--ar:4/3"><span class="wtn-ph__tag">Audience reaction<small>Photo, 4:3</small></span></div>
+      </figure>
+      <figure class="mo-slot rv" style="--d:.16s" data-slot="audience-reaction">
+        <div class="mo-media wtn-ph" style="--ar:4/3"><span class="wtn-ph__tag">Audience reaction<small>Photo, 4:3</small></span></div>
+      </figure>
+      <figure class="mo-slot mo-slot--wide rv" style="--d:.24s" data-slot="audience-reaction">
+        <div class="mo-media wtn-ph" style="--ar:16/9"><span class="wtn-ph__tag">The room, wide<small>Wide photo or clip of the full auditorium</small></span></div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section class="mo-ch" id="backstage" data-nav="paper" data-chapter aria-labelledby="ch5">
+    <header class="mo-head rv">
+      <p class="mo-no" aria-hidden="true">05</p>
+      <h2 class="mo-t wm" id="ch5">behind the scenes</h2>
+      <p class="mo-d">Backstage and between sessions.</p>
+    </header>
+    <div class="mo-grid mo-grid--three">
+      <figure class="mo-slot rv" data-slot="behind-the-scenes">
+        <div class="mo-media wtn-ph wtn-ph--paper" style="--ar:1/1"><span class="wtn-ph__tag">Behind the scenes<small>Photo or clip, 1:1</small></span></div>
+        <figcaption class="mo-cap"><span class="mo-ph-text">Caption</span></figcaption>
+      </figure>
+      <figure class="mo-slot rv" style="--d:.1s" data-slot="behind-the-scenes">
+        <div class="mo-media wtn-ph wtn-ph--paper" style="--ar:1/1"><span class="wtn-ph__tag">Behind the scenes<small>Photo or clip, 1:1</small></span></div>
+        <figcaption class="mo-cap"><span class="mo-ph-text">Caption</span></figcaption>
+      </figure>
+      <figure class="mo-slot rv" style="--d:.2s" data-slot="behind-the-scenes">
+        <div class="mo-media wtn-ph wtn-ph--paper" style="--ar:1/1"><span class="wtn-ph__tag">Behind the scenes<small>Photo or clip, 1:1</small></span></div>
+        <figcaption class="mo-cap"><span class="mo-ph-text">Caption</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 06: open space for further authentic media. Add or remove .mo-slot items freely; the grid
+       reflows. Each slot accepts a photo or a clip in any of the ratios used above. -->
+  <section class="mo-ch mo-ch--dark" id="more" data-nav="photo" data-chapter aria-labelledby="ch6">
+    <header class="mo-head rv">
+      <p class="mo-no" aria-hidden="true">06</p>
+      <h2 class="mo-t wm" id="ch6">more moments</h2>
+      <p class="mo-d">More from the day, as it comes in.</p>
+    </header>
+    <div class="mo-grid mo-grid--open">
+      <figure class="mo-slot rv" data-slot="additional-media">
+        <div class="mo-media wtn-ph" style="--ar:4/5"><span class="wtn-ph__tag">Reserved<small>Additional media from Brother Emmanuel or Sister Pedrocia</small></span></div>
+      </figure>
+      <figure class="mo-slot rv" style="--d:.08s" data-slot="additional-media">
+        <div class="mo-media wtn-ph" style="--ar:4/5"><span class="wtn-ph__tag">Reserved<small>Additional media from Brother Emmanuel or Sister Pedrocia</small></span></div>
+      </figure>
+      <figure class="mo-slot rv" style="--d:.16s" data-slot="additional-media">
+        <div class="mo-media wtn-ph" style="--ar:4/5"><span class="wtn-ph__tag">Reserved<small>Additional media from Brother Emmanuel or Sister Pedrocia</small></span></div>
+      </figure>
+      <figure class="mo-slot rv" style="--d:.24s" data-slot="additional-media">
+        <div class="mo-media wtn-ph" style="--ar:4/5"><span class="wtn-ph__tag">Reserved<small>Additional media from Brother Emmanuel or Sister Pedrocia</small></span></div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="mo-close" data-nav="paper" aria-labelledby="close-t">
+    <div class="mo-close__in rv">
+      <p class="label">Next up</p>
+      <h2 class="mo-close__t wm" id="close-t">see you in 2027<span style="color:var(--accent-ink)">.</span></h2>
+      <p class="mo-close__act"><a class="btn btn--lg" href="/#waitlist">Join the waitlist</a> <a class="btn btn--lg btn--ghost" href="/2027/" data-travel="right">What&rsquo;s next</a></p>
+    </div>
+  </section>
+
   <section class="wtn-next" data-nav="photo" aria-labelledby="next-t">
     <div class="wtn-next__in">
       <h2 class="wtn-next__t wm" id="next-t">where to next<span style="color:var(--accent)">?</span></h2>
       <nav aria-label="Where to next">
       <ul class="wtn-next__signs">
-        <li><a class="wtn-sign wtn-sign--left" href="/explore/" data-travel="left"><span class="wtn-sign__name wm">explore</span><span class="wtn-sign__sub">What NextGen is</span></a></li>
+        <li><a class="wtn-sign wtn-sign--left" href="/explore/" data-travel="left"><span class="wtn-sign__name wm">explore</span><span class="wtn-sign__sub">Music, photos, testimonials</span></a></li>
         <li><span class="wtn-sign wtn-sign--left is-here" aria-current="page"><span class="wtn-sign__name wm">2026</span><span class="wtn-sign__sub">You are here</span></span></li>
         <li><a class="wtn-sign wtn-sign--right wtn-sign--next" href="/2027/" data-travel="right"><span class="wtn-sign__name wm">2027</span><span class="wtn-sign__sub">Coming soon</span></a></li>
       </ul>
@@ -109,7 +272,7 @@
     <ul>
       <li><a href="/">Where to next?</a></li>
       <li><a href="/explore/">Explore</a></li>
-      <li><a href="/2026/">2026</a></li>
+      <li><a href="/2026/">2026 Moments</a></li>
       <li><a href="/2027/">2027</a></li>
       <li><a class="foot__mail" href="mailto:hello@nextgensummit.us">hello@nextgensummit.us</a></li>
     </ul>
@@ -128,7 +291,7 @@
     <ul class="menu__list">
       <li><a href="/">Where to next?</a></li>
       <li><a href="/explore/">Explore</a></li>
-      <li><a href="/2026/" aria-current="page">2026</a></li>
+      <li><a href="/2026/" aria-current="page">2026 Moments</a></li>
       <li><a href="/2027/">2027</a></li>
       <li><a href="/#waitlist">Join the waitlist</a></li>
     </ul>

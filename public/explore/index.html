@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- DEVELOPMENT BUILD (branch where-to-next). Not released. Analytics left out until launch. -->
 <title>Explore · NextGen Summit</title>
-<meta name="description" content="What NextGen Summit is: a one-day experience for students and young adults to grow, connect, and see what's possible for their future.">
+<meta name="description" content="Explore NextGen Summit: the music, the photography and the testimonials.">
 <meta name="theme-color" content="#FAFAF8">
 <link rel="canonical" href="https://nextgensummit.us/explore/">
 
@@ -17,12 +17,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
 <link rel="stylesheet" href="/assets/css/site.css?v=wtn-dev">
-<link rel="stylesheet" href="/assets/css/about.css?v=wtn-dev">
-<link rel="stylesheet" href="/assets/css/film.css?v=wtn-dev">
 <link rel="stylesheet" href="/assets/css/wtn.css?v=wtn-dev">
 <script src="/assets/js/site.js?v=wtn-dev" defer></script>
 <script src="/assets/js/wtn.js?v=wtn-dev" defer></script>
-<script src="/assets/js/film.js?v=wtn-dev" defer></script>
 </head>
 <body class="wtn-page">
 <a class="skip" href="#main">Skip to content</a>
@@ -33,7 +30,7 @@
   </a>
   <nav class="nav__links" aria-label="Main">
     <span class="nav__link is-here" aria-current="page">Explore</span>
-    <a class="nav__link" href="/2026/">2026</a>
+    <a class="nav__link" href="/2026/">2026 Moments</a>
     <a class="nav__link" href="/2027/">2027</a>
     <a class="btn btn--sm" href="/#waitlist">Join the waitlist</a>
     <button class="nav__link nav__menu" type="button" data-open="menu">Menu</button>
@@ -46,117 +43,100 @@
     <p class="label" style="margin-top:18px">Explore</p>
     <h1 class="wtn-open__title wm" id="ex-title">nextgen.</h1>
     <p class="wtn-open__lede">A one-day experience for students and young adults to grow, connect, and see what&#8217;s possible for their future.</p>
+    <nav class="ex-jump" aria-label="On this page">
+      <p class="wtn-next__foot" style="margin-top:28px"><a class="textlink" href="#music">Music <span class="arr" aria-hidden="true">↓</span></a> <a class="textlink" href="#photography">Photography <span class="arr" aria-hidden="true">↓</span></a> <a class="textlink" href="#testimonials">Testimonials <span class="arr" aria-hidden="true">↓</span></a></p>
+    </nav>
   </section>
 
-  <section class="ab" aria-labelledby="ab-why">
-    <h2 class="ab__k" id="ab-why">Why NextGen exists</h2>
-    <p class="ab__p">Most people do not lack ambition. They lack access: to the room, to the person who has done it, to the honest answer about what comes next.</p>
-    <p class="ab__p">NextGen Summit is a one-day experience built to close that gap. It brings together people, ideas and opportunities so that what felt out of reach starts to look like a plan.</p>
-  </section>
-
-  <!-- the Convener's film, verbatim from About: film.js builds the inline player in data-film-inline -->
-  <section class="ab ab--film" id="message" aria-labelledby="ab-film">
-    <h2 class="ab__k" id="ab-film">A message from our Convener</h2>
-    <p class="ab__film-t wm">what is nextgen?</p>
-    <div class="ab__film" data-film-inline></div>
-  </section>
-
-  <section class="ab ab--quote" aria-labelledby="ab-believe">
-    <h2 class="sr" id="ab-believe">What we believe</h2>
-    <figure class="ab__shot">
-      <img src="/assets/img/closing-1200.jpg"
-        srcset="/assets/img/closing-800.jpg 800w, /assets/img/closing-1200.jpg 1200w, /assets/img/closing-1600.jpg 1600w, /assets/img/closing-2048.jpg 2048w"
-        sizes="100vw" width="2048" height="1152" loading="lazy" decoding="async"
-        alt="Five young people talking and laughing together on wide steps, one explaining an idea with their hands.">
-    </figure>
-    <p class="ab__quote wm">Come for fresh perspective.<br> Leave with direction.</p>
-  </section>
-
-  <section class="ab" aria-labelledby="ab-road">
-    <h2 class="ab__k" id="ab-road">What guides the day</h2>
-    <p class="ab__p">Four things shape every part of the experience. We call them ROAD.</p>
-    <ol class="road">
-      <li><span class="road__k">Relationships</span><span class="road__v">The people you meet are the point, not the programming around them.</span></li>
-      <!-- FOR APPROVAL: the live line ("Ten founders pitch live for a share of $10,000.") presented the
-           2026 programme as permanent. Re-anchored to 2026 as a fact; the second sentence is unchanged. -->
-      <li><span class="road__k">Opportunity</span><span class="road__v">At NextGen 2026, ten founders were selected to pitch live for a share of $10,000. Others find the opening they were looking for.</span></li>
-      <li><span class="road__k">Access</span><span class="road__v">Candid conversations with people who have already walked it, in the same room as you.</span></li>
-      <li><span class="road__k">Direction</span><span class="road__v">You leave knowing your next move, not just feeling good about the day.</span></li>
-    </ol>
-  </section>
-
-  <section class="gen" id="who" data-nav="paper" aria-labelledby="gen-title">
-    <div class="gen__head">
-      <p class="label rv">The audience</p>
-      <div class="gen__intro">
-        <h2 class="gen__title wm rv" id="gen-title" style="--d:.1s">one generation.<br> many stages.</h2>
-        <p class="gen__lede rv" style="--d:.2s">High school students. College students. Young professionals. All building what comes next.</p>
+  <!-- Music: the SHOW ME release, as on /music/ (artwork, credit, links verbatim). The Spotify player
+       loads only when the visitor asks for it (wtn.js [data-embed]); nothing is requested before. -->
+  <section class="ex-sec ex-sec--dark" id="music" data-nav="photo" aria-labelledby="ex-music-t">
+    <div class="ex-in">
+      <header class="ex-head">
+        <p class="label">Music</p>
+        <h2 class="ex-t wm" id="ex-music-t">the soundtrack</h2>
+      </header>
+      <div class="ex-music">
+        <figure class="ex-music__art">
+          <img src="/assets/img/music/show-me-900.webp"
+               srcset="/assets/img/music/show-me-560.webp 560w, /assets/img/music/show-me-900.webp 900w, /assets/img/music/show-me-1400.webp 1400w"
+               sizes="(max-width: 900px) 88vw, 40vw" width="1400" height="1400" loading="lazy" decoding="async"
+               alt="The SHOW ME cover artwork: the words SHOW ME set in diamonds on a black ground, with the nextgen wordmark beneath.">
+        </figure>
+        <div>
+          <p class="label">New release</p>
+          <h3 class="ex-music__t">Show Me</h3>
+          <p class="ex-music__by">OASIS MUSIC</p>
+          <div class="ex-embed" data-embed
+               data-src="https://open.spotify.com/embed/track/5bSClnEoEW3e8lt58nxmx9?theme=0"
+               data-title="SHOW ME by OASIS MUSIC on Spotify">
+            <button class="btn" type="button" data-embed-load hidden>Load the Spotify player</button>
+            <p>The player comes from Spotify and loads only if you choose it.</p>
+          </div>
+          <p class="ex-music__note">Spotify plays the whole track if you are signed in, 30 seconds if not.
+            Open it on <a href="https://open.spotify.com/album/6SIyGpzOoJgWXDkrQJvBSg" target="_blank" rel="noopener noreferrer">Spotify<span class="sr"> (opens in a new tab)</span></a>
+            or <a href="https://music.apple.com/us/album/show-me-feat-akil-foster-bria-noel-myron/6828682404?i=6828682405" target="_blank" rel="noopener noreferrer">Apple&nbsp;Music<span class="sr"> (opens in a new tab)</span></a>.</p>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="gen__art">
-      <!-- one hairline running the length of the composition, behind the photographs: the three
-           panels read as one continuous run rather than three cards. It draws in as you scroll. -->
-      <span class="gen__rail" aria-hidden="true"></span>
-      <ol class="gen__set">
-        <li class="gen__stage gen__stage--hs rv" style="--d:0s">
-          <article class="gen__card" tabindex="0" aria-labelledby="gen-t-hs">
-            <div class="gen__shot">
-              <img src="/assets/img/gen-high-school-900.jpg" srcset="/assets/img/gen-high-school-600.jpg 600w, /assets/img/gen-high-school-900.jpg 900w, /assets/img/gen-high-school-1200.jpg 1200w"
-                sizes="(max-width:760px) 88vw, (max-width:1560px) 31vw, 454px" width="1200" height="1600" loading="lazy" decoding="async" style="--pos:50% 26%"
-                alt="A young man in an oversized blazer and white t-shirt, a tote on his shoulder, looking toward the horizon in low sun.">
-            </div>
-            <div class="gen__plate">
-              <p class="gen__no" aria-hidden="true">01</p>
-              <h3 class="gen__name wm" id="gen-t-hs">high<br>school</h3>
-              <div class="gen__reveal">
-                <p class="gen__line">See what’s ahead.</p>
-                <p class="gen__copy">Explore what could be possible before your next chapter begins.</p>
-              </div>
-            </div>
-          </article>
-        </li>
-        <li class="gen__stage gen__stage--college rv" style="--d:.16s">
-          <article class="gen__card" tabindex="0" aria-labelledby="gen-t-college">
-            <div class="gen__shot">
-              <img src="/assets/img/gen-college-900.jpg" srcset="/assets/img/gen-college-600.jpg 600w, /assets/img/gen-college-900.jpg 900w, /assets/img/gen-college-1200.jpg 1200w"
-                sizes="(max-width:760px) 88vw, (max-width:1560px) 31vw, 454px" width="1200" height="1600" loading="lazy" decoding="async" style="--pos:50% 42%"
-                alt="Three friends walking and talking outdoors, one explaining an idea with her hands while the others listen and laugh.">
-            </div>
-            <div class="gen__plate">
-              <p class="gen__no" aria-hidden="true">02</p>
-              <h3 class="gen__name wm" id="gen-t-college">college</h3>
-              <div class="gen__reveal">
-                <p class="gen__line">Expand what’s possible.</p>
-                <p class="gen__copy">Meet people and ideas that can broaden where you go next.</p>
-              </div>
-            </div>
-          </article>
-        </li>
-        <li class="gen__stage gen__stage--pro rv" style="--d:.32s">
-          <article class="gen__card" tabindex="0" aria-labelledby="gen-t-pro">
-            <div class="gen__shot">
-              <img src="/assets/img/gen-young-professional-900.jpg" srcset="/assets/img/gen-young-professional-600.jpg 600w, /assets/img/gen-young-professional-900.jpg 900w, /assets/img/gen-young-professional-1200.jpg 1200w"
-                sizes="(max-width:760px) 88vw, (max-width:1560px) 31vw, 454px" width="1200" height="1600" loading="lazy" decoding="async" style="--pos:50% 26%"
-                alt="A young designer with curly hair at a studio worktable, one hand on pinned sketches, looking toward the window light.">
-            </div>
-            <div class="gen__plate">
-              <p class="gen__no" aria-hidden="true">03</p>
-              <h3 class="gen__name wm" id="gen-t-pro">young<br>professionals</h3>
-              <div class="gen__reveal">
-                <p class="gen__line">Build what’s next.</p>
-                <p class="gen__copy">Connect with people shaping careers, ideas and opportunities.</p>
-              </div>
-            </div>
-          </article>
-        </li>
-      </ol>
+  <!-- Photography: slots for real NextGen photography only (same slot contract as 2026 Moments:
+       replace each .wtn-ph with an <img> of the same ratio, credit in the caption). -->
+  <section class="ex-sec" id="photography" data-nav="paper" aria-labelledby="ex-photo-t">
+    <div class="ex-in">
+      <header class="ex-head">
+        <p class="label">Photography</p>
+        <h2 class="ex-t wm" id="ex-photo-t">through the lens</h2>
+      </header>
+      <div class="ex-photos">
+        <figure class="mo-slot" data-slot="photograph">
+          <div class="mo-media wtn-ph wtn-ph--paper" style="--ar:3/2"><span class="wtn-ph__tag">Photograph · lead<small>Landscape, 3:2, with photographer credit</small></span></div>
+          <figcaption class="mo-cap"><span class="mo-ph-text mo-ph-text--s">Photo credit</span></figcaption>
+        </figure>
+        <figure class="mo-slot" data-slot="photograph">
+          <div class="mo-media wtn-ph wtn-ph--paper" style="--ar:4/5"><span class="wtn-ph__tag">Photograph<small>Portrait, 4:5</small></span></div>
+          <figcaption class="mo-cap"><span class="mo-ph-text mo-ph-text--s">Photo credit</span></figcaption>
+        </figure>
+        <figure class="mo-slot" data-slot="photograph">
+          <div class="mo-media wtn-ph wtn-ph--paper" style="--ar:1/1"><span class="wtn-ph__tag">Photograph<small>Square</small></span></div>
+          <figcaption class="mo-cap"><span class="mo-ph-text mo-ph-text--s">Photo credit</span></figcaption>
+        </figure>
+        <figure class="mo-slot" data-slot="photograph">
+          <div class="mo-media wtn-ph wtn-ph--paper" style="--ar:1/1"><span class="wtn-ph__tag">Photograph<small>Square</small></span></div>
+          <figcaption class="mo-cap"><span class="mo-ph-text mo-ph-text--s">Photo credit</span></figcaption>
+        </figure>
+        <figure class="mo-slot" data-slot="photograph">
+          <div class="mo-media wtn-ph wtn-ph--paper" style="--ar:1/1"><span class="wtn-ph__tag">Photograph<small>Square</small></span></div>
+          <figcaption class="mo-cap"><span class="mo-ph-text mo-ph-text--s">Photo credit</span></figcaption>
+        </figure>
+      </div>
     </div>
+  </section>
 
-    <div class="gen__end">
-      <p class="gen__end-kicker rv">One room</p>
-      <p class="gen__end-title wm rv" style="--d:.1s">many paths.<br> one future.</p>
-      <p class="gen__close rv" style="--d:.2s">From high school to college to the start of your career, NextGen brings young people ages 17–29 into one room.</p>
+  <!-- Testimonials: real attendees' words only, with their permission (data-verified="true" once
+       confirmed; the tests refuse a filled-in testimonial that is not). -->
+  <section class="ex-sec" id="testimonials" data-nav="paper" aria-labelledby="ex-voice-t" style="padding-top:0">
+    <div class="ex-in">
+      <header class="ex-head">
+        <p class="label">Testimonials</p>
+        <h2 class="ex-t wm" id="ex-voice-t">in their words</h2>
+      </header>
+      <div class="ex-voices">
+        <figure class="ex-voice" data-slot="testimonial" data-verified="false">
+          <blockquote><p class="mo-ph-text mo-ph-text--q">Testimonial, with permission</p></blockquote>
+          <figcaption><span class="mo-ph-text">First name</span><span class="mo-ph-text mo-ph-text--s">High school, college or young professional</span></figcaption>
+        </figure>
+        <figure class="ex-voice" data-slot="testimonial" data-verified="false">
+          <blockquote><p class="mo-ph-text mo-ph-text--q">Testimonial, with permission</p></blockquote>
+          <figcaption><span class="mo-ph-text">First name</span><span class="mo-ph-text mo-ph-text--s">High school, college or young professional</span></figcaption>
+        </figure>
+        <figure class="ex-voice" data-slot="testimonial" data-verified="false">
+          <blockquote><p class="mo-ph-text mo-ph-text--q">Testimonial, with permission</p></blockquote>
+          <figcaption><span class="mo-ph-text">First name</span><span class="mo-ph-text mo-ph-text--s">High school, college or young professional</span></figcaption>
+        </figure>
+      </div>
+      <p class="wtn-dev"><b>Development note</b><br>Photography and testimonial slots wait for real NextGen material. Testimonials need the person&rsquo;s permission before they go in. Remove this note and any empty slots at launch.</p>
     </div>
   </section>
 
@@ -166,7 +146,7 @@
       <nav aria-label="Where to next">
       <ul class="wtn-next__signs">
         <li><span class="wtn-sign wtn-sign--left is-here" aria-current="page"><span class="wtn-sign__name wm">explore</span><span class="wtn-sign__sub">You are here</span></span></li>
-        <li><a class="wtn-sign wtn-sign--left" href="/2026/" data-travel="back"><span class="wtn-sign__name wm">2026</span><span class="wtn-sign__sub">The summit archive</span></a></li>
+        <li><a class="wtn-sign wtn-sign--left" href="/2026/" data-travel="back"><span class="wtn-sign__name wm">2026</span><span class="wtn-sign__sub">Moments</span></a></li>
         <li><a class="wtn-sign wtn-sign--right wtn-sign--next" href="/2027/" data-travel="right"><span class="wtn-sign__name wm">2027</span><span class="wtn-sign__sub">Coming soon</span></a></li>
       </ul>
       </nav>
@@ -190,7 +170,7 @@
     <ul>
       <li><a href="/">Where to next?</a></li>
       <li><a href="/explore/">Explore</a></li>
-      <li><a href="/2026/">2026</a></li>
+      <li><a href="/2026/">2026 Moments</a></li>
       <li><a href="/2027/">2027</a></li>
       <li><a class="foot__mail" href="mailto:hello@nextgensummit.us">hello@nextgensummit.us</a></li>
     </ul>
@@ -209,7 +189,7 @@
     <ul class="menu__list">
       <li><a href="/">Where to next?</a></li>
       <li><a href="/explore/" aria-current="page">Explore</a></li>
-      <li><a href="/2026/">2026</a></li>
+      <li><a href="/2026/">2026 Moments</a></li>
       <li><a href="/2027/">2027</a></li>
       <li><a href="/#waitlist">Join the waitlist</a></li>
     </ul>
