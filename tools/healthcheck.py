@@ -87,6 +87,9 @@ CONTENT = [
     ('/pitch/peoples-choice/', ['People', 'peoples-choice.js'], "People's Choice"),
     ('/music/', ['open.spotify.com', 'music.apple.com', 'SHOW ME'], 'Music'),
 ]
+# Since 2026-11-04 staging reviews the "Where To Next?" homepage (branch where-to-next), so its
+# home page is the gateway to 2026 Moments, Explore and 2027, not the 2026 Summit page.
+STAGING_HOME = ('/', ['where to next', '/2026/', '/explore/', '/2027/', 'waitlist'], 'the Where To Next? homepage')
 
 ASSET_RE = re.compile(
     r'(?:src|href)\s*=\s*["\']([^"\']+\.(?:css|js|webp|png|jpg|jpeg|svg|mp4|ico|woff2?))(?:\?[^"\']*)?["\']',
@@ -284,7 +287,10 @@ def check_certificate(base, rep):
 
 
 def check_content(base, bodies, rep):
+    staging = '://staging.' in base
     for path, needles, label in CONTENT:
+        if staging and path == '/':
+            path, needles, label = STAGING_HOME
         html = bodies.get(path)
         if html is None:
             continue                                    # already reported as a failed page
