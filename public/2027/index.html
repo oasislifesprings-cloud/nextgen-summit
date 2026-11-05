@@ -24,10 +24,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261105-r01">
-<link rel="stylesheet" href="/assets/css/wtn.css?v=20261105-r01">
-<script src="/assets/js/site.js?v=20261105-r01" defer></script>
-<script src="/assets/js/wtn.js?v=20261105-r01" defer></script>
+<link rel="stylesheet" href="/assets/css/site.css?v=20261105-h01">
+<link rel="stylesheet" href="/assets/css/wtn.css?v=20261105-h01">
+<script src="/assets/js/site.js?v=20261105-h01" defer></script>
+<script src="/assets/js/wtn.js?v=20261105-h01" defer></script>
 
 </head>
 <body class="wtn-page">
@@ -38,10 +38,10 @@
     <span class="wm" aria-hidden="true">nextgen</span><span class="nav__summit" aria-hidden="true">Summit</span>
   </a>
   <nav class="nav__links" aria-label="Main">
-    <a class="nav__link" href="/explore/">Explore</a>
     <a class="nav__link" href="/2026/">2026 Moments</a>
+    <a class="nav__link" href="/explore/">Explore</a>
     <span class="nav__link is-here" aria-current="page">2027</span>
-    <a class="btn btn--sm" href="/#waitlist">Join the waitlist</a>
+    <a class="btn btn--sm" href="#waitlist">Join the waitlist</a>
     <button class="nav__link nav__menu" type="button" data-open="menu">Menu</button>
   </nav>
 </header>
@@ -59,41 +59,84 @@
       <div class="y27__rule" aria-hidden="true"></div>
       <p class="y27__cs">Coming Soon</p>
       <p class="y27__st">Stay tuned for more info</p>
-      <p class="y27__act"><a class="btn btn--lg" href="/#waitlist">Join the waitlist</a></p>
+      <p class="y27__act"><a class="btn btn--lg" href="#waitlist">Join the waitlist</a></p>
     </div>
   </section>
-  <!-- Future possibilities: only what is honestly known, that each of these is still to come.
-       Replace a "To be announced" with the real detail once it is approved. -->
-  <section class="wtn-open y27-chapter" aria-labelledby="y27-next-t">
+  <!-- What is honestly known: each of these is still to come. Replace a "To be announced" with the
+       real detail once it is approved. -->
+  <section class="y27-chapter" data-nav="paper" aria-labelledby="y27-next-t">
     <div class="y27-chapter__copy">
-    <h2 class="wtn-band__t wm" id="y27-next-t">the next chapter.</h2>
-    <p class="wtn-open__lede">Be the first to hear when each one is announced.</p>
+      <h2 class="y27-chapter__t wm" id="y27-next-t">the next chapter<span class="q">.</span></h2>
+      <p class="y27-chapter__lede">Each of these is still to come.</p>
+    </div>
     <ul class="y27-next" aria-label="NextGen 2027 details">
       <li><b>The date</b><span>To be announced</span></li>
       <li><b>The city</b><span>To be announced</span></li>
       <li><b>The lineup</b><span>To be announced</span></li>
     </ul>
-    <p class="y27-chapter__act"><a class="btn btn--lg" href="/#waitlist">Join the waitlist</a></p>
+  </section>
+
+  <!-- A seat at what's next: the same edited Gordon Center photograph and the same ticket as the
+       homepage waitlist. Configure Eventbrite on both tickets (same attributes). -->
+  <section class="seat seat--invite" id="waitlist" data-nav="photo" aria-labelledby="y27-seat-t">
+    <div class="seat__stage">
+      <picture class="seat__pic">
+        <source media="(max-aspect-ratio: 4/5)" srcset="/assets/img/seat-m-640.jpg 640w, /assets/img/seat-m-960.jpg 960w" sizes="100vw" width="960" height="1200">
+        <img src="/assets/img/seat-1200.jpg" srcset="/assets/img/seat-800.jpg 800w, /assets/img/seat-1200.jpg 1200w, /assets/img/seat-1800.jpg 1800w" sizes="100vw" width="1800" height="1200" loading="lazy" decoding="async"
+          alt="The Gordon Center auditorium in black and white, every seat empty, one seat in NextGen teal.">
+      </picture>
+      <div class="seat__head">
+        <p class="label seat__k">The 2027 waitlist</p>
+        <h2 class="seat__t wm" id="y27-seat-t"><span>a seat at</span> <span>what&rsquo;s next<span class="q">.</span></span></h2>
+        <p class="seat__lede">Come for fresh perspective. Leave with direction. Be the first to hear when the date, the city and the lineup are announced.</p>
+      </div>
     </div>
-    <figure class="y27-chapter__art"><img src="/assets/img/gen-college-900.jpg" srcset="/assets/img/gen-college-600.jpg 600w, /assets/img/gen-college-900.jpg 900w, /assets/img/gen-college-1200.jpg 1200w" sizes="(max-width: 900px) 100vw, 40vw" loading="lazy" decoding="async" style="--pos:50% 40%" alt="Three young people laughing as they walk together."></figure>
+    <div class="seat__row">
+      <!-- Eventbrite is not connected yet. Set data-eventbrite-event (embedded checkout) or
+           data-eventbrite-url on this ticket. City slots: replace each label with a confirmed city and
+           set its own data-eventbrite-url, or delete the block if Eventbrite asks the city. While every
+           city is a placeholder the block stays hidden; the ticket already says the city is to come. -->
+      <div class="tkt" data-eventbrite data-eventbrite-event="" data-eventbrite-url="">
+        <div class="tkt__main">
+          <p class="tkt__k">Admit one</p>
+          <p class="tkt__t wm">nextgen 2027</p>
+          <dl class="tkt__meta">
+            <div><dt>Date</dt><dd>To be announced</dd></div>
+            <div><dt>City</dt><dd>To be announced</dd></div>
+            <div><dt>Seat</dt><dd>Yours</dd></div>
+          </dl>
+        </div>
+        <div class="tkt__act">
+          <p class="tkt__status" data-eventbrite-status aria-live="polite">The waitlist opens on Eventbrite soon.</p>
+          <div class="wtn-cities" data-cities>
+            <p class="label wtn-cities__k" id="cities-k">Your city</p>
+            <ul class="wtn-cities__list" aria-labelledby="cities-k">
+              <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
+              <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
+              <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
+            </ul>
+          </div>
+          <a class="btn btn--lg" id="eb-waitlist" href="#waitlist" aria-disabled="true" data-eventbrite-button><span data-label>Waitlist opening soon</span></a>
+          <p class="tkt__help">Questions? <a href="mailto:hello@nextgensummit.us">hello@nextgensummit.us</a></p>
+        </div>
+      </div>
+    </div>
   </section>
-  <section class="wtn-open y27-partner" data-nav="photo" aria-labelledby="y27-partner">
-    <img class="y27-partner__bg" src="/assets/img/gordon-seats-1800.jpg" srcset="/assets/img/gordon-seats-1200.jpg 1200w, /assets/img/gordon-seats-1800.jpg 1800w" sizes="100vw" loading="lazy" decoding="async" style="--pos:50% 55%" alt="">
-    <h2 class="wtn-band__t wm" id="y27-partner">want your brand here?</h2>
-    <p class="wtn-open__lede">Support the summit as an organization.</p>
-    <p style="margin-top:28px"><a class="btn btn--lg btn--ghost" href="mailto:hello@nextgensummit.us?subject=NextGen%202027%20partnership">Become a sponsor</a></p>
+
+  <section class="y27-partner" data-nav="paper" aria-labelledby="y27-partner">
+    <h2 class="y27-partner__t wm" id="y27-partner">want your brand here<span class="q">?</span></h2>
+    <p class="y27-partner__lede">Support the summit as an organization.</p>
+    <p class="y27-partner__act"><a class="btn btn--lg btn--ghost" href="mailto:hello@nextgensummit.us?subject=NextGen%202027%20partnership">Become a sponsor</a></p>
   </section>
-  <section class="wtn-next" data-nav="photo" aria-labelledby="next-t">
-    <div class="wtn-next__in">
-      <h2 class="wtn-next__t wm" id="next-t">where to next<span style="color:var(--accent)">?</span></h2>
-      <nav aria-label="Where to next">
-      <ul class="wtn-next__signs">
-        <li><a class="wtn-sign wtn-sign--left" href="/explore/" data-travel="left"><span class="wtn-sign__name wm">explore</span><span class="wtn-sign__sub">Music, photos, testimonials</span></a></li>
-        <li><a class="wtn-sign wtn-sign--left" href="/2026/" data-travel="back"><span class="wtn-sign__name wm">2026</span><span class="wtn-sign__sub">Moments</span></a></li>
-        <li><span class="wtn-sign wtn-sign--right is-here" aria-current="page"><span class="wtn-sign__name wm">2027</span><span class="wtn-sign__sub">You are here</span></span></li>
-      </ul>
-      </nav>
-      <p class="wtn-next__foot"><a class="textlink" href="/" data-travel="back">Back to the homepage</a></p>
+  <section class="nx" data-nav="photo" aria-labelledby="next-t">
+    <div class="nx__in">
+      <h2 class="nx__t wm" id="next-t">where to next<span class="q">?</span></h2>
+      <nav class="idx" aria-label="Where to go next"><ol class="idx__list">
+      <li><a class="idx__a" href="/2026/"><span class="idx__no" aria-hidden="true">01</span><span class="idx__t wm">2026 moments</span><span class="idx__d">What NextGen 2026 felt like</span><span class="idx__go"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+      <li><a class="idx__a" href="/explore/"><span class="idx__no" aria-hidden="true">02</span><span class="idx__t wm">explore</span><span class="idx__d">Music, photography, testimonials</span><span class="idx__go"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+      <li><span class="idx__a idx__a--next" aria-current="page"><span class="idx__no" aria-hidden="true">03</span><span class="idx__t wm">2027</span><span class="idx__d">You are here</span><span class="idx__go" aria-hidden="true"></span></span></li>
+    </ol></nav>
+      <p class="nx__home"><a class="textlink" href="/">Back to the homepage</a></p>
     </div>
   </section>
 </main>
@@ -111,10 +154,6 @@
   </ul>
   <nav class="foot__nav" aria-label="Footer">
     <ul>
-      <li><a href="/">Where to next?</a></li>
-      <li><a href="/explore/">Explore</a></li>
-      <li><a href="/2026/">2026 Moments</a></li>
-      <li><a href="/2027/">2027</a></li>
       <li><a class="foot__mail" href="mailto:hello@nextgensummit.us">hello@nextgensummit.us</a></li>
     </ul>
   </nav>
@@ -130,11 +169,11 @@
       </button>
     </div>
     <ul class="menu__list">
-      <li><a href="/">Where to next?</a></li>
-      <li><a href="/explore/">Explore</a></li>
+      <li><a href="/">Home</a></li>
       <li><a href="/2026/">2026 Moments</a></li>
+      <li><a href="/explore/">Explore</a></li>
       <li><a href="/2027/" aria-current="page">2027</a></li>
-      <li><a href="/#waitlist">Join the waitlist</a></li>
+      <li><a href="#waitlist" data-close>Join the waitlist</a></li>
     </ul>
   </div>
 </dialog>

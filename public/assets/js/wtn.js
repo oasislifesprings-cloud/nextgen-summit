@@ -7,11 +7,11 @@
   var doc = document.documentElement;
   var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)');
 
-  /* ---------- homepage scene: the 2026 hero film over its photograph ----------
+  /* ---------- homepage hero: the 2026 campaign film over its photograph ----------
      Same rules as the 2026 hero (site.js initHeroFilm): never loaded with reduced motion or Data
      Saver, requested only once the page is idle, shown only when frames are playing, paused when
      the hero is off screen or the tab is hidden. Without JavaScript the photograph stays. */
-  var film = document.querySelector('.wtn-scene__video');
+  var film = document.querySelector('.hh__video');
   if (film) {
     var saver = navigator.connection && navigator.connection.saveData;
     if (saver || (reduced && reduced.matches) || typeof film.play !== 'function') film.remove();
@@ -82,61 +82,41 @@
     });
   });
 
-  /* ---------- travel between destinations (provisional) ----------
-     A sign click sets html[data-travel=<direction>] so CSS can move the scene, then navigates.
-     The choreography is a placeholder until the artwork exists; the contract is the attribute
-     and TRAVEL_MS. Only the homepage has a scene to move: everywhere else, and with reduced motion,
-     modified clicks or new-tab clicks, a link navigates immediately (the page cross-fade is CSS). */
-  var TRAVEL_MS = 420;
-  var scene = document.querySelector('.wtn-scene');
-  document.addEventListener('click', function (e) {
-    var a = e.target.closest && e.target.closest('a[data-travel]');
-    if (!a) return;
-    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    if (a.target && a.target !== '_self') return;
-    if (!scene || (reduced && reduced.matches)) return;
-    e.preventDefault();
-    doc.setAttribute('data-travel', a.getAttribute('data-travel'));
-    setTimeout(function () { location.href = a.href; }, TRAVEL_MS);
-  });
-  // returning with the back button restores a page from the bfcache mid-transition: reset it
-  window.addEventListener('pageshow', function () { doc.removeAttribute('data-travel'); });
-
   /* ---------- Eventbrite waitlist ----------
      Configure on the [data-eventbrite] element, nothing else:
        data-eventbrite-event="<event id>"   embedded Eventbrite checkout in a modal (preferred)
        data-eventbrite-url="<event url>"    plain link to the Eventbrite page
      With neither set, the button stays in its "opening soon" state. No data is collected here;
      Eventbrite's own script is loaded only when an event id is configured and the button is used. */
-  var box = document.querySelector('[data-eventbrite]');
-  if (box) {
-    var btn = box.querySelector('[data-eventbrite-button]');
-    var status = box.querySelector('[data-eventbrite-status]');
-    var id = (box.getAttribute('data-eventbrite-event') || '').trim();
-    var url = (box.getAttribute('data-eventbrite-url') || '').trim();
-    if (btn && id && /^\d+$/.test(id)) {
-      enable('Join the waitlist');
-      btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        loadEventbrite(function () {
-          window.EBWidgets.createWidget({ widgetType: 'checkout', eventId: id, modal: true, modalTriggerElementId: btn.id });
-          btn.click();
-        });
-      }, { once: true });
-    } else if (btn && url && /^https:\/\/(www\.)?eventbrite\.[a-z.]+\//.test(url)) {
-      enable('Join the waitlist');
-      btn.href = url;
-      btn.target = '_blank';
-      btn.rel = 'noopener';
-      btn.insertAdjacentHTML('beforeend', '<span class="sr"> (opens Eventbrite in a new tab)</span>');
-    }
-    function enable(label) {
-      btn.removeAttribute('aria-disabled');
-      btn.removeAttribute('tabindex');
-      btn.querySelector('[data-label]').textContent = label;
-      if (status) status.textContent = 'Opens Eventbrite to reserve your place.';
-    }
-  }
+  Array.prototype.forEach.call(document.querySelectorAll('[data-eventbrite]'), function (box) {
+      var btn = box.querySelector('[data-eventbrite-button]');
+      var status = box.querySelector('[data-eventbrite-status]');
+      var id = (box.getAttribute('data-eventbrite-event') || '').trim();
+      var url = (box.getAttribute('data-eventbrite-url') || '').trim();
+      if (btn && id && /^\d+$/.test(id)) {
+        enable('Join the waitlist');
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          loadEventbrite(function () {
+            window.EBWidgets.createWidget({ widgetType: 'checkout', eventId: id, modal: true, modalTriggerElementId: btn.id });
+            btn.click();
+          });
+        }, { once: true });
+      } else if (btn && url && /^https:\/\/(www\.)?eventbrite\.[a-z.]+\//.test(url)) {
+        enable('Join the waitlist');
+        btn.href = url;
+        btn.target = '_blank';
+        btn.rel = 'noopener';
+        btn.insertAdjacentHTML('beforeend', '<span class="sr"> (opens Eventbrite in a new tab)</span>');
+      }
+      function enable(label) {
+        btn.removeAttribute('aria-disabled');
+        btn.removeAttribute('tabindex');
+        btn.querySelector('[data-label]').textContent = label;
+        if (status) status.textContent = 'Opens Eventbrite to reserve your place.';
+      }
+
+  });
   /* City interest: each confirmed city gets its own Eventbrite waitlist link. A slot with no
      valid Eventbrite URL stays a disabled placeholder. Nothing is stored or sent from this page. */
   Array.prototype.forEach.call(document.querySelectorAll('[data-cities] .wtn-city'), function (a) {

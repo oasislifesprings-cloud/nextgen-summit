@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- DEVELOPMENT BUILD of the future homepage (branch where-to-next). Not released.
      Analytics (GTM / gtag) is left out until launch so local previews never reach Google. -->
-<title>NextGen Summit · Where To Next?</title>
+<title>NextGen Summit</title>
 <meta name="description" content="NextGen Summit: relive the 2026 moments, explore the music, photography and testimonials, or join the waitlist for NextGen 2027.">
 <meta name="theme-color" content="#0B0B0F">
 <link rel="canonical" href="https://nextgensummit.us/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="NextGen Summit · Where To Next?">
+<meta property="og:title" content="NextGen Summit">
 <meta property="og:url" content="https://nextgensummit.us/">
 <meta property="og:site_name" content="NextGen Summit">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -20,111 +20,95 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261105-r01">
-<link rel="stylesheet" href="/assets/css/wtn.css?v=20261105-r01">
-<script src="/assets/js/site.js?v=20261105-r01" defer></script>
-<script src="/assets/js/wtn.js?v=20261105-r01" defer></script>
+<link rel="stylesheet" href="/assets/css/site.css?v=20261105-h01">
+<link rel="stylesheet" href="/assets/css/wtn.css?v=20261105-h01">
+<script src="/assets/js/site.js?v=20261105-h01" defer></script>
+<script src="/assets/js/wtn.js?v=20261105-h01" defer></script>
 </head>
 <body>
-<a class="skip" href="#wtn-title">Skip to content</a>
+<a class="skip" href="#main">Skip to content</a>
 
 <header class="nav on-photo">
   <a class="nav__mark" href="/" aria-label="NextGen Summit, home">
     <span class="wm" aria-hidden="true">nextgen</span><span class="nav__summit" aria-hidden="true">Summit</span>
   </a>
   <nav class="nav__links" aria-label="Main">
-    <a class="nav__link" href="/explore/">Explore</a>
     <a class="nav__link" href="/2026/">2026 Moments</a>
+    <a class="nav__link" href="/explore/">Explore</a>
     <a class="nav__link" href="/2027/">2027</a>
     <a class="btn btn--sm" href="#waitlist">Join the waitlist</a>
     <button class="nav__link nav__menu" type="button" data-open="menu">Menu</button>
   </nav>
 </header>
 
-<main>
-  <!-- 01: the street. Three directions, one question. -->
-  <section class="wtn-hero" id="top" data-nav="photo" aria-labelledby="wtn-title">
-    <!-- The scene: the 2026 hero photograph and film stand in for the street artwork in production.
-         The final plate, character and signpost art replace these layers. -->
-    <div class="wtn-scene" aria-hidden="true">
-      <picture class="wtn-scene__photo">
-        <source media="(max-aspect-ratio: 3/4)" srcset="/assets/img/hero-m-864.jpg" width="864" height="1152">
-        <img src="/assets/img/hero-1600.jpg" srcset="/assets/img/hero-800.jpg 800w, /assets/img/hero-1200.jpg 1200w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2048.jpg 2048w" sizes="100vw" width="2048" height="1152" fetchpriority="high" decoding="async" alt="">
-      </picture>
-      <video class="wtn-scene__video" data-src="/assets/nextgen-take-1.mp4" muted loop playsinline preload="none" tabindex="-1"></video>
+<main id="main" tabindex="-1">
+  <!-- The front door: a paper cover. The campaign photograph of friends in conversation (black and
+       white, as the whole site) beside the question; the three destinations are the page's index,
+       in the hero, so they are seen before anything else. -->
+  <section class="hh" id="top" data-nav="paper" aria-labelledby="hh-title">
+    <div class="hh__in">
+      <h1 class="hh__t wm" id="hh-title">where to next<span class="q">?</span></h1>
+      <figure class="hh__pic">
+        <img src="/assets/img/closing-1600.jpg" srcset="/assets/img/closing-800.jpg 800w, /assets/img/closing-1200.jpg 1200w, /assets/img/closing-1600.jpg 1600w, /assets/img/closing-2048.jpg 2048w" sizes="(max-width: 860px) 100vw, 58vw" width="2048" height="1152" fetchpriority="high" decoding="async"
+          alt="Five young people in conversation on a flight of stone steps, laughing.">
+      </figure>
+      <p class="hh__lede">A one-day experience for students and young adults to grow, connect, and see what&rsquo;s possible for their future.</p>
+      <p class="hh__act"><a class="btn btn--lg" href="#waitlist">Join the 2027 waitlist</a></p>
     </div>
-
-    <div class="wtn-hero__in">
-      <div class="wtn-hero__copy">
-        <p class="label label--light wtn-hero__k">NextGen Summit</p>
-        <h1 class="wtn-hero__title wm" id="wtn-title">where to next<span class="q">?</span></h1>
-        <p class="wtn-hero__lede">Come for fresh perspective. Leave with direction.</p>
-      </div>
-
-      <nav class="wtn-post" aria-label="Choose where to go next">
-        <div class="wtn-post__pole" aria-hidden="true"></div>
-        <ul class="wtn-post__list">
-          <li class="wtn-post__item wtn-post__item--left">
-            <a class="wtn-sign wtn-sign--left" href="/explore/" data-travel="left">
-              <span class="wtn-sign__name wm">explore</span>
-              <span class="wtn-sign__sub">Music, photos, testimonials</span>
-            </a>
-          </li>
-          <li class="wtn-post__item wtn-post__item--left">
-            <a class="wtn-sign wtn-sign--left" href="/2026/" data-travel="back">
-              <span class="wtn-sign__name wm">2026</span>
-              <span class="wtn-sign__sub">Moments</span>
-            </a>
-          </li>
-          <li class="wtn-post__item wtn-post__item--right">
-            <a class="wtn-sign wtn-sign--right wtn-sign--next" href="/2027/" data-travel="right">
-              <span class="wtn-sign__name wm">2027</span>
-              <span class="wtn-sign__sub">Coming soon</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-
-    <div class="wtn-hero__foot">
-      <a class="wtn-down" href="#waitlist">Join the 2027 waitlist
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v11M3 8l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+    <div class="hh__idx">
+      <nav class="idx idx--paper" aria-label="Choose where to go"><ol class="idx__list">
+      <li><a class="idx__a" href="/2026/"><span class="idx__no" aria-hidden="true">01</span><span class="idx__t wm">2026 moments</span><span class="idx__d">What NextGen 2026 felt like</span><span class="idx__go"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+      <li><a class="idx__a" href="/explore/"><span class="idx__no" aria-hidden="true">02</span><span class="idx__t wm">explore</span><span class="idx__d">Music, photography, testimonials</span><span class="idx__go"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+      <li><a class="idx__a idx__a--next" href="/2027/"><span class="idx__no" aria-hidden="true">03</span><span class="idx__t wm">2027</span><span class="idx__d">What&rsquo;s next, and the waitlist</span><span class="idx__go"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+    </ol></nav>
     </div>
   </section>
 
-  <!-- 02: the waitlist. Eventbrite takes the sign-ups; this page collects nothing. -->
-  <section class="wtn-wait" id="waitlist" data-nav="paper" aria-labelledby="wait-title">
-    <div class="wtn-wait__in">
-      <div>
-        <p class="label wtn-wait__k">The waitlist</p>
-        <h2 class="wtn-wait__title wm" id="wait-title"><span>nextgen</span><span>2027</span></h2>
-        <p class="wtn-wait__lede">Coming soon. Stay tuned for more info.</p>
+  <!-- The waitlist: a seat at what's next. The photograph is the Gordon Center auditorium, edited:
+       black and white, one seat tinted NextGen teal (assets/img/seat-*; provenance in the README).
+       Eventbrite takes the sign-ups; this page collects nothing. -->
+  <section class="seat" id="waitlist" data-nav="photo" aria-labelledby="wait-title">
+    <div class="seat__stage">
+      <picture class="seat__pic">
+        <source media="(max-aspect-ratio: 4/5)" srcset="/assets/img/seat-m-640.jpg 640w, /assets/img/seat-m-960.jpg 960w" sizes="100vw" width="960" height="1200">
+        <img src="/assets/img/seat-1200.jpg" srcset="/assets/img/seat-800.jpg 800w, /assets/img/seat-1200.jpg 1200w, /assets/img/seat-1800.jpg 1800w" sizes="100vw" width="1800" height="1200" loading="lazy" decoding="async"
+          alt="The Gordon Center auditorium in black and white, every seat empty, one seat in NextGen teal.">
+      </picture>
+      <div class="seat__head">
+        <p class="label seat__k">The 2027 waitlist</p>
+        <h2 class="seat__t wm" id="wait-title"><span>a seat at</span> <span>what&rsquo;s next<span class="q">.</span></span></h2>
+        <p class="seat__lede">Come for fresh perspective. Leave with direction. Be the first to hear when the date, the city and the lineup for NextGen 2027 are announced.</p>
       </div>
+    </div>
+    <div class="seat__row">
 
-      <div class="wtn-ticket" data-eventbrite data-eventbrite-event="" data-eventbrite-url="">
-        <p class="wtn-ticket__t wm">save your place.</p>
-        <p class="wtn-ticket__status" data-eventbrite-status aria-live="polite">The waitlist opens on Eventbrite soon.</p>
-        <!-- City interest. Nothing is collected here: each city is a link to its own Eventbrite
-             waitlist (or the shared one with a city question asked by Eventbrite). The cities
-             themselves are not decided yet, so the slots are placeholders. -->
-        <div class="wtn-cities" data-cities>
-          <p class="label wtn-cities__k" id="cities-k">Your city</p>
-          <ul class="wtn-cities__list" aria-labelledby="cities-k">
-            <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
-            <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
-            <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
-          </ul>
-          <p class="wtn-cities__tba">Cities to be announced.</p>
+      <!-- Eventbrite is not connected yet. Set data-eventbrite-event (embedded checkout) or
+           data-eventbrite-url on this ticket. City slots: replace each label with a confirmed city and
+           set its own data-eventbrite-url, or delete the block if Eventbrite asks the city. While every
+           city is a placeholder the block stays hidden; the ticket already says the city is to come. -->
+      <div class="tkt" data-eventbrite data-eventbrite-event="" data-eventbrite-url="">
+        <div class="tkt__main">
+          <p class="tkt__k">Admit one</p>
+          <p class="tkt__t wm">nextgen 2027</p>
+          <dl class="tkt__meta">
+            <div><dt>Date</dt><dd>To be announced</dd></div>
+            <div><dt>City</dt><dd>To be announced</dd></div>
+            <div><dt>Seat</dt><dd>Yours</dd></div>
+          </dl>
         </div>
-        <div class="wtn-ticket__act">
+        <div class="tkt__act">
+          <p class="tkt__status" data-eventbrite-status aria-live="polite">The waitlist opens on Eventbrite soon.</p>
+          <div class="wtn-cities" data-cities>
+            <p class="label wtn-cities__k" id="cities-k">Your city</p>
+            <ul class="wtn-cities__list" aria-labelledby="cities-k">
+              <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
+              <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
+              <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
+            </ul>
+          </div>
           <a class="btn btn--lg" id="eb-waitlist" href="#waitlist" aria-disabled="true" data-eventbrite-button><span data-label>Waitlist opening soon</span></a>
-          <p class="wtn-ticket__help">Questions? <a href="mailto:hello@nextgensummit.us">hello@nextgensummit.us</a></p>
+          <p class="tkt__help">Questions? <a href="mailto:hello@nextgensummit.us">hello@nextgensummit.us</a></p>
         </div>
-        <!-- Eventbrite is not connected yet. Set data-eventbrite-event (embedded checkout) or
-             data-eventbrite-url on this card. City slots: replace each label with a confirmed city and
-             set its own data-eventbrite-url, or delete the block if Eventbrite asks the city. While every
-             city is a placeholder the list is hidden and "Cities to be announced." shows instead. -->
       </div>
     </div>
   </section>
@@ -143,8 +127,8 @@
   </ul>
   <nav class="foot__nav" aria-label="Footer">
     <ul>
-      <li><a href="/explore/">Explore</a></li>
       <li><a href="/2026/">2026 Moments</a></li>
+      <li><a href="/explore/">Explore</a></li>
       <li><a href="/2027/">2027</a></li>
       <li><a class="foot__mail" href="mailto:hello@nextgensummit.us">hello@nextgensummit.us</a></li>
     </ul>
@@ -161,9 +145,9 @@
       </button>
     </div>
     <ul class="menu__list">
-      <li><a href="/" aria-current="page">Where to next?</a></li>
-      <li><a href="/explore/">Explore</a></li>
+      <li><a href="/" aria-current="page">Home</a></li>
       <li><a href="/2026/">2026 Moments</a></li>
+      <li><a href="/explore/">Explore</a></li>
       <li><a href="/2027/">2027</a></li>
       <li><a href="#waitlist" data-close>Join the waitlist</a></li>
     </ul>

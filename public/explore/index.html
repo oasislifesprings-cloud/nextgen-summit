@@ -16,21 +16,21 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261105-r01">
-<link rel="stylesheet" href="/assets/css/wtn.css?v=20261105-r01">
-<script src="/assets/js/site.js?v=20261105-r01" defer></script>
-<script src="/assets/js/wtn.js?v=20261105-r01" defer></script>
+<link rel="stylesheet" href="/assets/css/site.css?v=20261105-h01">
+<link rel="stylesheet" href="/assets/css/wtn.css?v=20261105-h01">
+<script src="/assets/js/site.js?v=20261105-h01" defer></script>
+<script src="/assets/js/wtn.js?v=20261105-h01" defer></script>
 </head>
 <body class="wtn-page">
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="nav on-paper">
+<header class="nav on-photo">
   <a class="nav__mark" href="/" aria-label="NextGen Summit, home">
     <span class="wm" aria-hidden="true">nextgen</span><span class="nav__summit" aria-hidden="true">Summit</span>
   </a>
   <nav class="nav__links" aria-label="Main">
-    <span class="nav__link is-here" aria-current="page">Explore</span>
     <a class="nav__link" href="/2026/">2026 Moments</a>
+    <span class="nav__link is-here" aria-current="page">Explore</span>
     <a class="nav__link" href="/2027/">2027</a>
     <a class="btn btn--sm" href="/#waitlist">Join the waitlist</a>
     <button class="nav__link nav__menu" type="button" data-open="menu">Menu</button>
@@ -38,18 +38,17 @@
 </header>
 
 <main id="main" tabindex="-1">
-  <section class="wtn-open ex-open" aria-labelledby="ex-title">
-    <div class="ex-open__copy">
-    <a class="wtn-crumb" href="/" data-travel="back"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Where to next?</a>
-    <p class="label" style="margin-top:18px">Explore</p>
-    <h1 class="wtn-open__title wm" id="ex-title">nextgen.</h1>
-    <p class="wtn-open__lede">A one-day experience for students and young adults to grow, connect, and see what&#8217;s possible for their future.</p>
-    <nav class="ex-jump" aria-label="On this page"><a href="#music">Music</a> <a href="#photography">Photography</a> <a href="#testimonials">Testimonials</a></nav>
+  <section class="xo" aria-labelledby="ex-title">
+    <a class="wtn-crumb" href="/"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Home</a>
+    <div class="xo__head">
+      <h1 class="xo__t wm" id="ex-title">explore<span class="q">.</span></h1>
+      <p class="xo__lede">A one-day experience for students and young adults to grow, connect, and see what&#8217;s possible for their future. Here is what it sounds like, looks like, and means to the people who were there.</p>
     </div>
-    <div class="ex-open__art" aria-hidden="true">
-      <img class="ex-open__a" src="/assets/img/gen-young-professional-900.jpg" srcset="/assets/img/gen-young-professional-600.jpg 600w, /assets/img/gen-young-professional-900.jpg 900w, /assets/img/gen-young-professional-1200.jpg 1200w" sizes="(max-width: 900px) 70vw, 30vw" decoding="async" style="--pos:50% 30%" alt="">
-      <img class="ex-open__b" src="/assets/img/stage-1-700.jpg" srcset="/assets/img/stage-1-480.jpg 480w, /assets/img/stage-1-700.jpg 700w, /assets/img/stage-1-900.jpg 900w" sizes="(max-width: 900px) 40vw, 16vw" decoding="async" style="--pos:60% 50%" alt="">
-    </div>
+      <nav class="idx idx--paper idx--rooms" aria-label="On this page"><ol class="idx__list">
+        <li><a class="idx__a" href="#music"><span class="idx__no" aria-hidden="true">01</span><span class="idx__t wm">music</span><span class="idx__d">Show Me, by Oasis Music</span><span class="idx__go"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 4v11M5 11l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+        <li><a class="idx__a" href="#photography"><span class="idx__no" aria-hidden="true">02</span><span class="idx__t wm">photography</span><span class="idx__d">Through the lens</span><span class="idx__go"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 4v11M5 11l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+        <li><a class="idx__a" href="#testimonials"><span class="idx__no" aria-hidden="true">03</span><span class="idx__t wm">testimonials</span><span class="idx__d">In their words</span><span class="idx__go"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 4v11M5 11l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+      </ol></nav>
   </section>
 
   <!-- Music: the SHOW ME release, as on /music/ (artwork, credit, links verbatim). The Spotify player
@@ -149,17 +148,15 @@
     </div>
   </section>
 
-  <section class="wtn-next" data-nav="photo" aria-labelledby="next-t">
-    <div class="wtn-next__in">
-      <h2 class="wtn-next__t wm" id="next-t">where to next<span style="color:var(--accent)">?</span></h2>
-      <nav aria-label="Where to next">
-      <ul class="wtn-next__signs">
-        <li><span class="wtn-sign wtn-sign--left is-here" aria-current="page"><span class="wtn-sign__name wm">explore</span><span class="wtn-sign__sub">You are here</span></span></li>
-        <li><a class="wtn-sign wtn-sign--left" href="/2026/" data-travel="back"><span class="wtn-sign__name wm">2026</span><span class="wtn-sign__sub">Moments</span></a></li>
-        <li><a class="wtn-sign wtn-sign--right wtn-sign--next" href="/2027/" data-travel="right"><span class="wtn-sign__name wm">2027</span><span class="wtn-sign__sub">Coming soon</span></a></li>
-      </ul>
-      </nav>
-      <p class="wtn-next__foot"><a class="textlink" href="/" data-travel="back">Back to the homepage</a></p>
+  <section class="nx" data-nav="photo" aria-labelledby="next-t">
+    <div class="nx__in">
+      <h2 class="nx__t wm" id="next-t">where to next<span class="q">?</span></h2>
+      <nav class="idx" aria-label="Where to go next"><ol class="idx__list">
+      <li><a class="idx__a" href="/2026/"><span class="idx__no" aria-hidden="true">01</span><span class="idx__t wm">2026 moments</span><span class="idx__d">What NextGen 2026 felt like</span><span class="idx__go"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+      <li><span class="idx__a" aria-current="page"><span class="idx__no" aria-hidden="true">02</span><span class="idx__t wm">explore</span><span class="idx__d">You are here</span><span class="idx__go" aria-hidden="true"></span></span></li>
+      <li><a class="idx__a idx__a--next" href="/2027/"><span class="idx__no" aria-hidden="true">03</span><span class="idx__t wm">2027</span><span class="idx__d">What&rsquo;s next, and the waitlist</span><span class="idx__go"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
+    </ol></nav>
+      <p class="nx__home"><a class="textlink" href="/">Back to the homepage</a></p>
     </div>
   </section>
 </main>
@@ -177,10 +174,6 @@
   </ul>
   <nav class="foot__nav" aria-label="Footer">
     <ul>
-      <li><a href="/">Where to next?</a></li>
-      <li><a href="/explore/">Explore</a></li>
-      <li><a href="/2026/">2026 Moments</a></li>
-      <li><a href="/2027/">2027</a></li>
       <li><a class="foot__mail" href="mailto:hello@nextgensummit.us">hello@nextgensummit.us</a></li>
     </ul>
   </nav>
@@ -196,9 +189,9 @@
       </button>
     </div>
     <ul class="menu__list">
-      <li><a href="/">Where to next?</a></li>
-      <li><a href="/explore/" aria-current="page">Explore</a></li>
+      <li><a href="/">Home</a></li>
       <li><a href="/2026/">2026 Moments</a></li>
+      <li><a href="/explore/" aria-current="page">Explore</a></li>
       <li><a href="/2027/">2027</a></li>
       <li><a href="/#waitlist">Join the waitlist</a></li>
     </ul>
