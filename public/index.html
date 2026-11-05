@@ -20,10 +20,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261104-w01">
-<link rel="stylesheet" href="/assets/css/wtn.css?v=20261104-w01">
-<script src="/assets/js/site.js?v=20261104-w01" defer></script>
-<script src="/assets/js/wtn.js?v=20261104-w01" defer></script>
+<link rel="stylesheet" href="/assets/css/site.css?v=20261104-w02">
+<link rel="stylesheet" href="/assets/css/wtn.css?v=20261104-w02">
+<script src="/assets/js/site.js?v=20261104-w02" defer></script>
+<script src="/assets/js/wtn.js?v=20261104-w02" defer></script>
 </head>
 <body>
 <a class="skip" href="#wtn-title">Skip to content</a>
@@ -44,13 +44,14 @@
 <main>
   <!-- 01: the street. Three directions, one question. -->
   <section class="wtn-hero" id="top" data-nav="photo" aria-labelledby="wtn-title">
+    <!-- The scene: the 2026 hero photograph and film stand in for the street artwork in production.
+         The final plate, character and signpost art replace these layers. -->
     <div class="wtn-scene" aria-hidden="true">
-      <div class="wtn-scene__street wtn-ph">
-        <span class="wtn-ph__tag">Placeholder · street environment<small>Photorealistic street. Final artwork in production (Gemini).</small></span>
-      </div>
-      <div class="wtn-scene__character wtn-ph">
-        <span class="wtn-ph__tag">Placeholder · character<small>Flat 2D streetwear illustration</small></span>
-      </div>
+      <picture class="wtn-scene__photo">
+        <source media="(max-aspect-ratio: 3/4)" srcset="/assets/img/hero-m-864.jpg" width="864" height="1152">
+        <img src="/assets/img/hero-1600.jpg" srcset="/assets/img/hero-800.jpg 800w, /assets/img/hero-1200.jpg 1200w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2048.jpg 2048w" sizes="100vw" width="2048" height="1152" fetchpriority="high" decoding="async" alt="">
+      </picture>
+      <video class="wtn-scene__video" data-src="/assets/nextgen-take-1.mp4" muted loop playsinline preload="none" tabindex="-1"></video>
     </div>
 
     <div class="wtn-hero__in">
@@ -61,7 +62,7 @@
       </div>
 
       <nav class="wtn-post" aria-label="Choose where to go next">
-        <div class="wtn-post__pole wtn-ph" aria-hidden="true"><span class="wtn-ph__tag">Placeholder · signpost</span></div>
+        <div class="wtn-post__pole" aria-hidden="true"></div>
         <ul class="wtn-post__list">
           <li class="wtn-post__item wtn-post__item--left">
             <a class="wtn-sign wtn-sign--left" href="/explore/" data-travel="left">

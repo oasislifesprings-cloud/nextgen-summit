@@ -16,10 +16,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261104-w01">
-<link rel="stylesheet" href="/assets/css/wtn.css?v=20261104-w01">
-<script src="/assets/js/site.js?v=20261104-w01" defer></script>
-<script src="/assets/js/wtn.js?v=20261104-w01" defer></script>
+<link rel="stylesheet" href="/assets/css/site.css?v=20261104-w02">
+<link rel="stylesheet" href="/assets/css/wtn.css?v=20261104-w02">
+<script src="/assets/js/site.js?v=20261104-w02" defer></script>
+<script src="/assets/js/wtn.js?v=20261104-w02" defer></script>
 </head>
 <body class="wtn-page">
 <a class="skip" href="#main">Skip to content</a>
@@ -38,7 +38,8 @@
 </header>
 
 <main id="main" tabindex="-1">
-  <section class="wtn-open" aria-labelledby="ex-title">
+  <section class="wtn-open ex-open" aria-labelledby="ex-title">
+    <div class="ex-open__copy">
     <a class="wtn-crumb" href="/" data-travel="back"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Where to next?</a>
     <p class="label" style="margin-top:18px">Explore</p>
     <h1 class="wtn-open__title wm" id="ex-title">nextgen.</h1>
@@ -46,6 +47,11 @@
     <nav class="ex-jump" aria-label="On this page">
       <p class="wtn-next__foot" style="margin-top:28px"><a class="textlink" href="#music">Music <span class="arr" aria-hidden="true">↓</span></a> <a class="textlink" href="#photography">Photography <span class="arr" aria-hidden="true">↓</span></a> <a class="textlink" href="#testimonials">Testimonials <span class="arr" aria-hidden="true">↓</span></a></p>
     </nav>
+    </div>
+    <div class="ex-open__art" aria-hidden="true">
+      <img class="ex-open__a" src="/assets/img/gen-young-professional-900.jpg" srcset="/assets/img/gen-young-professional-600.jpg 600w, /assets/img/gen-young-professional-900.jpg 900w, /assets/img/gen-young-professional-1200.jpg 1200w" sizes="(max-width: 900px) 70vw, 30vw" decoding="async" style="--pos:50% 30%" alt="">
+      <img class="ex-open__b" src="/assets/img/stage-1-700.jpg" srcset="/assets/img/stage-1-480.jpg 480w, /assets/img/stage-1-700.jpg 700w, /assets/img/stage-1-900.jpg 900w" sizes="(max-width: 900px) 40vw, 16vw" decoding="async" style="--pos:60% 50%" alt="">
+    </div>
   </section>
 
   <!-- Music: the SHOW ME release, as on /music/ (artwork, credit, links verbatim). The Spotify player
@@ -91,23 +97,23 @@
       </header>
       <div class="ex-photos">
         <figure class="mo-slot" data-slot="photograph">
-          <div class="mo-media wtn-ph wtn-ph--paper" style="--ar:3/2"><span class="wtn-ph__tag">Photograph · lead<small>Landscape, 3:2, with photographer credit</small></span></div>
+          <div class="mo-media wtn-ph is-standin" style="--ar:3/2"><img src="/assets/img/hero-1600.jpg" srcset="/assets/img/hero-800.jpg 800w, /assets/img/hero-1200.jpg 1200w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2048.jpg 2048w" sizes="(max-width: 900px) 100vw, 50vw" loading="lazy" decoding="async" style="--pos:50% 42%" alt="Stand-in image: seven young people walking together in late afternoon light."><span class="wtn-ph__tag">Photograph, lead<small>Stand-in. Landscape, 3:2, with photographer credit</small></span></div>
           <figcaption class="mo-cap"><span class="mo-ph-text mo-ph-text--s">Photo credit</span></figcaption>
         </figure>
         <figure class="mo-slot" data-slot="photograph">
-          <div class="mo-media wtn-ph wtn-ph--paper" style="--ar:4/5"><span class="wtn-ph__tag">Photograph<small>Portrait, 4:5</small></span></div>
+          <div class="mo-media wtn-ph is-standin" style="--ar:4/5"><img src="/assets/img/closing-1600.jpg" srcset="/assets/img/closing-800.jpg 800w, /assets/img/closing-1200.jpg 1200w, /assets/img/closing-1600.jpg 1600w, /assets/img/closing-2048.jpg 2048w" sizes="(max-width: 900px) 50vw, 25vw" loading="lazy" decoding="async" style="--pos:62% 40%" alt="Stand-in image: a group of young people in conversation."><span class="wtn-ph__tag">Photograph<small>Stand-in. Portrait, 4:5</small></span></div>
           <figcaption class="mo-cap"><span class="mo-ph-text mo-ph-text--s">Photo credit</span></figcaption>
         </figure>
         <figure class="mo-slot" data-slot="photograph">
-          <div class="mo-media wtn-ph wtn-ph--paper" style="--ar:1/1"><span class="wtn-ph__tag">Photograph<small>Square</small></span></div>
+          <div class="mo-media wtn-ph is-standin" style="--ar:1/1"><img src="/assets/img/gen-high-school-900.jpg" srcset="/assets/img/gen-high-school-600.jpg 600w, /assets/img/gen-high-school-900.jpg 900w, /assets/img/gen-high-school-1200.jpg 1200w" sizes="(max-width: 900px) 50vw, 25vw" loading="lazy" decoding="async" style="--pos:50% 30%" alt="Stand-in image: a student in a blazer over a white T-shirt."><span class="wtn-ph__tag">Photograph<small>Stand-in. Square</small></span></div>
           <figcaption class="mo-cap"><span class="mo-ph-text mo-ph-text--s">Photo credit</span></figcaption>
         </figure>
         <figure class="mo-slot" data-slot="photograph">
-          <div class="mo-media wtn-ph wtn-ph--paper" style="--ar:1/1"><span class="wtn-ph__tag">Photograph<small>Square</small></span></div>
+          <div class="mo-media wtn-ph is-standin" style="--ar:1/1"><img src="/assets/img/gen-college-900.jpg" srcset="/assets/img/gen-college-600.jpg 600w, /assets/img/gen-college-900.jpg 900w, /assets/img/gen-college-1200.jpg 1200w" sizes="(max-width: 900px) 50vw, 25vw" loading="lazy" decoding="async" alt="Stand-in image: three students laughing as they walk together."><span class="wtn-ph__tag">Photograph<small>Stand-in. Square</small></span></div>
           <figcaption class="mo-cap"><span class="mo-ph-text mo-ph-text--s">Photo credit</span></figcaption>
         </figure>
         <figure class="mo-slot" data-slot="photograph">
-          <div class="mo-media wtn-ph wtn-ph--paper" style="--ar:1/1"><span class="wtn-ph__tag">Photograph<small>Square</small></span></div>
+          <div class="mo-media wtn-ph is-standin" style="--ar:1/1"><img src="/assets/img/pitch-prep-820.jpg" srcset="/assets/img/pitch-prep-560.jpg 560w, /assets/img/pitch-prep-820.jpg 820w, /assets/img/pitch-prep-1100.jpg 1100w" sizes="(max-width: 900px) 50vw, 25vw" loading="lazy" decoding="async" style="--pos:45% 40%" alt="Stand-in image: a woman rehearsing with her notes in hand."><span class="wtn-ph__tag">Photograph<small>Stand-in. Square</small></span></div>
           <figcaption class="mo-cap"><span class="mo-ph-text mo-ph-text--s">Photo credit</span></figcaption>
         </figure>
       </div>
@@ -136,7 +142,7 @@
           <figcaption><span class="mo-ph-text">First name</span><span class="mo-ph-text mo-ph-text--s">High school, college or young professional</span></figcaption>
         </figure>
       </div>
-      <p class="wtn-dev"><b>Development note</b><br>Photography and testimonial slots wait for real NextGen material. Testimonials need the person&rsquo;s permission before they go in. Remove this note and any empty slots at launch.</p>
+      <p class="wtn-dev"><b>Development note</b><br>The photographs are stand-ins from the NextGen campaign until real NextGen photography arrives; the testimonial slots wait for real words. Testimonials need the person&rsquo;s permission before they go in. Remove this note and any empty slots at launch.</p>
     </div>
   </section>
 

@@ -7,6 +7,43 @@
   var doc = document.documentElement;
   var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)');
 
+  /* ---------- homepage scene: the 2026 hero film over its photograph ----------
+     Same rules as the 2026 hero (site.js initHeroFilm): never loaded with reduced motion or Data
+     Saver, requested only once the page is idle, shown only when frames are playing, paused when
+     the hero is off screen or the tab is hidden. Without JavaScript the photograph stays. */
+  var film = document.querySelector('.wtn-scene__video');
+  if (film) {
+    var saver = navigator.connection && navigator.connection.saveData;
+    if (saver || (reduced && reduced.matches) || typeof film.play !== 'function') film.remove();
+    else {
+      var filmSeen = true;
+      film.muted = true;
+      film.addEventListener('playing', function () { film.classList.add('is-playing'); });
+      film.addEventListener('error', function () { film.remove(); });
+      var syncFilm = function () {
+        if (filmSeen && !document.hidden) { var pl = film.play(); if (pl && pl.catch) pl.catch(function () {}); }
+        else film.pause();
+      };
+      var startFilm = function () {
+        film.preload = 'auto';
+        film.src = film.getAttribute('data-src');
+        syncFilm();
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver(function (es) { filmSeen = es[0].isIntersecting; syncFilm(); }).observe(film.closest('section') || film);
+        }
+        document.addEventListener('visibilitychange', syncFilm);
+      };
+      var filmStarted = false;
+      var whenIdle = function () {
+        if (filmStarted) return;
+        filmStarted = true;
+        (window.requestIdleCallback || function (f) { setTimeout(f, 200); })(startFilm, { timeout: 1500 });
+      };
+      if (document.readyState === 'complete') whenIdle();
+      else { window.addEventListener('load', whenIdle, { once: true }); setTimeout(whenIdle, 3500); }
+    }
+  }
+
   /* ---------- 2026 Moments: mark the chapter in view on the rail ---------- */
   var rail = document.querySelector('.mo-rail');
   if (rail && 'IntersectionObserver' in window) {

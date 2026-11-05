@@ -1,3 +1,4 @@
+/* Hallmark · redesign: polish (interim) · built: the project · system: DESIGN.md (locked NextGen brand) · signature: the 2026 hero film behind the signpost · critique: placeholders read as wireframes; campaign imagery now carries every slot, marked stand-in · waive 48/7a/54/67/63: rgba literals, white on ink, tracked uppercase labels and the dotted page titles are the established brand idiom (DESIGN.md, site.css); 26a/34 live in site.css */
 /* "Where To Next?" -- the future homepage gateway and its section pages.
    Builds on site.css (tokens, nav, buttons, footer, drawer). DESIGN.md Part 2 covers the
    mixed-media exception that applies to the homepage only.
@@ -342,3 +343,102 @@
 .y27-next b{display:block;font:700 12px/1.35 var(--f-sans);letter-spacing:.22em;text-transform:uppercase;color:var(--ink-2)}
 .y27-next span{display:block;margin-top:10px;font:900 clamp(24px,2.2vw,32px)/1.05 var(--f-display);font-variation-settings:"SOFT" 100,"WONK" 0,"opsz" 144;letter-spacing:-.02em}
 @media (max-width:760px){.y27-next{grid-template-columns:1fr}}
+
+/* ---------- interim polish (2026-11-04) ----------
+   A temporary front-facing pass, not the final design: the existing NextGen imagery (the 2026 hero
+   film and photograph, the black-and-white campaign portraits, the stage shots, the Gordon Center)
+   fills the slots so the pages read as finished while the real 2026 media is gathered. Every image in
+   a slot is marked as a stand-in, in its tag and its alt text; real media replaces the <img> inside
+   the same .mo-media. Structure, links and ids are unchanged. */
+
+/* the homepage scene: photograph first, the film over it once frames arrive (wtn.js) */
+.wtn-scene{background:var(--ink)}
+.wtn-scene__photo,.wtn-scene__photo img,.wtn-scene__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%}
+.wtn-scene__photo img{transform:scale(1.04);transition:transform 3.2s var(--ease)}
+.is-ready .wtn-scene__photo img,.js-ready .wtn-scene__photo img{transform:none}
+.wtn-scene__video{opacity:0;transition:opacity 1.1s var(--ease)}
+.wtn-scene__video.is-playing{opacity:1}
+/* the scrim holds the headline at AA on the left and the signs on the right */
+.wtn-scene::after{background:
+  linear-gradient(90deg,rgba(11,11,15,.82) 0%,rgba(11,11,15,.5) 38%,rgba(11,11,15,.28) 62%,rgba(11,11,15,.5) 100%),
+  linear-gradient(180deg,rgba(11,11,15,.55) 0%,rgba(11,11,15,0) 26%,rgba(11,11,15,0) 62%,rgba(11,11,15,.86) 100%)}
+.wtn-hero__title{text-shadow:0 2px 40px rgba(11,11,15,.35)}
+/* the signpost: a painted steel post until the dimensional signpost art arrives */
+.wtn-post__pole{background:linear-gradient(90deg,#24242b 0%,#6c6c76 38%,#9a9aa3 50%,#4a4a52 70%,#1c1c22 100%);border-radius:5px;box-shadow:0 0 0 1px rgba(0,0,0,.35),0 30px 60px rgba(0,0,0,.45)}
+.wtn-post__pole::before{content:"";position:absolute;left:50%;top:-14px;width:34px;height:16px;transform:translateX(-50%);border-radius:8px 8px 3px 3px;background:#9a9aa3}
+.wtn-sign{box-shadow:0 22px 44px rgba(0,0,0,.45),inset 0 -3px 0 rgba(11,11,15,.08)}
+
+/* a stand-in: campaign imagery in a slot, set in the brand's black and white */
+.wtn-ph.is-standin{background:var(--ink);outline:0}
+.wtn-ph.is-standin > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 45%);filter:grayscale(1) contrast(1.05)}
+.wtn-ph.is-standin::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,15,0) 58%,rgba(11,11,15,.6) 100%);pointer-events:none}
+.wtn-ph.is-standin .wtn-ph__tag{top:auto;left:12px;bottom:12px;max-width:calc(100% - 24px);padding:7px 10px;background:rgba(11,11,15,.74);color:#fff;font-size:9.5px;letter-spacing:.12em;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+.wtn-ph.is-standin .wtn-ph__tag small{color:rgba(255,255,255,.78);font-size:11px}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .wtn-ph.is-standin > img{transition:transform .9s var(--ease)}
+  .mo-slot:hover .wtn-ph.is-standin > img{transform:scale(1.03)}
+}
+.mo-media{box-shadow:0 18px 40px rgba(11,11,15,.14)}
+.mo-ch--dark .mo-media{box-shadow:0 18px 44px rgba(0,0,0,.4)}
+
+/* words still to come: a quiet dashed line, not a form field */
+.mo-cap .mo-ph-text,.ex-voice figcaption .mo-ph-text{padding:0 0 2px;border:0;border-bottom:1.5px dashed currentColor;border-radius:0;opacity:.62}
+
+/* the chapter heads: the number set as a magazine folio beside a turquoise rule */
+.mo-no{display:flex;align-items:center;gap:14px}
+.mo-no::after{content:"";width:56px;height:2px;background:currentColor}
+.mo-ch--dark .mo-t{color:#fff}
+
+/* in their words: the quote mark carries the slot until the verified words arrive */
+.mo-quote,.ex-voice{position:relative}
+.mo-quote{padding-top:clamp(70px,7vw,100px)}
+.mo-quote::before,.ex-voice::before{content:"\201C";position:absolute;left:-.05em;font-family:var(--f-display);font-weight:900;font-variation-settings:"SOFT" 100,"WONK" 0,"opsz" 144;line-height:1;pointer-events:none}
+.mo-quote::before{top:6px;font-size:clamp(110px,10vw,160px);color:var(--ink)}
+.mo-quote__q .mo-ph-text--q,.ex-voice .mo-ph-text--q{padding:0;border:0;opacity:.66}
+.mo-quote__by .mo-ph-text{padding:0 0 2px;border:0;border-bottom:1.5px dashed currentColor;border-radius:0}
+.ex-voice{padding-top:clamp(76px,6vw,96px);background:var(--paper);box-shadow:inset 0 0 0 1px var(--rule)}
+.ex-voice::before{left:20px;top:10px;font-size:clamp(96px,8vw,128px);color:var(--accent-ink)}
+
+/* development notes: present for reviewers, quiet enough not to be the design */
+.wtn-dev{background:transparent;color:inherit;border:1.5px dashed var(--rule-strong);font-weight:500;opacity:.9}
+.wtn-dev b{display:inline;margin-right:6px;color:var(--accent-ink)}
+.mo-devnote{margin:22px auto;font-size:12px}
+.wtn-wait .wtn-dev{border-color:var(--rule-strong)}
+
+/* 2026 Moments close: the last frame of the day behind the farewell */
+.mo-close--photo{position:relative;isolation:isolate;overflow:hidden;min-height:min(78svh,760px);display:grid;align-items:end;background:var(--ink);color:#fff}
+.mo-close__bg{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 60%);filter:grayscale(1)}
+.mo-close--photo::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(11,11,15,.2) 0%,rgba(11,11,15,.35) 45%,rgba(11,11,15,.88) 100%)}
+.mo-close--photo .mo-close__in{width:100%}
+.mo-close--photo .label{color:var(--accent)}
+.mo-close--photo .mo-close__t{color:#fff}
+.mo-close--photo .btn--ghost{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
+
+/* Explore opening: the editorial portrait pair from the 2026 site */
+.ex-open{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,88px);align-items:center}
+.ex-open__copy{min-width:0}
+.ex-open__art{position:relative;min-width:0;aspect-ratio:4/5;max-height:72svh;justify-self:end;width:min(100%,520px)}
+.ex-open__art img{position:absolute;display:block;object-fit:cover;filter:grayscale(1);border-radius:14px;box-shadow:0 26px 60px rgba(11,11,15,.22)}
+.ex-open__a{right:0;top:0;width:82%;height:88%;object-position:var(--pos,50% 30%)}
+.ex-open__b{left:0;bottom:0;width:44%;height:44%;object-position:var(--pos,60% 50%);outline:6px solid var(--paper)}
+@media (max-width:900px){
+  .ex-open{grid-template-columns:1fr}
+  .ex-open__art{justify-self:stretch;width:100%;max-height:none;aspect-ratio:5/4}
+  .ex-open__a{width:70%;height:100%}
+  .ex-open__b{width:40%;height:52%}
+}
+
+/* 2027: the next chapter beside a portrait of what is ahead */
+.y27-chapter{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(28px,5vw,88px);align-items:center}
+.y27-chapter__copy{min-width:0}
+.y27-chapter__art{margin:0;min-width:0;aspect-ratio:4/5;border-radius:14px;overflow:hidden;box-shadow:0 26px 60px rgba(11,11,15,.2)}
+.y27-chapter__art img{display:block;width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 40%);filter:grayscale(1)}
+@media (max-width:900px){.y27-chapter{grid-template-columns:1fr}.y27-chapter__art{aspect-ratio:4/3}}
+/* the partner call, set in the Gordon Center */
+.y27-partner{position:relative;isolation:isolate;overflow:hidden;max-width:none;margin:0;padding-left:max(var(--gutter),calc((100% - var(--maxw)) / 2 + var(--gutter)));padding-right:max(var(--gutter),calc((100% - var(--maxw)) / 2 + var(--gutter)));background:var(--ink);color:#fff}
+.y27-partner__bg{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 55%);filter:grayscale(1)}
+.y27-partner::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(11,11,15,.9) 0%,rgba(11,11,15,.66) 55%,rgba(11,11,15,.45) 100%)}
+.y27-partner .label{color:var(--accent)}
+.y27-partner .wtn-band__t{color:#fff}
+.y27-partner .wtn-open__lede{color:rgba(255,255,255,.86)}
+.y27-partner .btn--ghost{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.75)}
