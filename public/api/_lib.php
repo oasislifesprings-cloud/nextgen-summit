@@ -173,6 +173,15 @@ function ngs_store(string $kind, array $data): string
 }
 
 /** Every submission of one kind, newest first, with data decoded. */
+/** The admin's "List" for a sign-up: the 2027 waitlist is tagged list=2027; untagged waitlist rows are 2026's. */
+function ngs_waitlist_list(array $r): string
+{
+    if (($r['kind'] ?? '') !== 'waitlist') {
+        return 'Registration';
+    }
+    return (($r['data']['list'] ?? '') === '2027') ? 'Waitlist 2027' : 'Waitlist 2026';
+}
+
 function ngs_all(string $kind): array
 {
     $db = ngs_db();

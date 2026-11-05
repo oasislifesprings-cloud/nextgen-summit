@@ -121,7 +121,7 @@ if ($authed && isset($_GET['export']) && $error === '') {
         fputcsv($out, ['Signed up (ET)', 'List', 'Name', 'Email', 'Phone', 'Education level', 'School', 'Interested in volunteering']);
         foreach ($registrations as $r) {
             $d = $r['data'];
-            fputcsv($out, array_map($safe, [et($r['created_at']), $r['kind'] === 'waitlist' ? 'Waitlist' : 'Registration', person_name($d), $d['email'] ?? '', $d['phone'] ?? '', $d['education_level'] ?? '', $d['school_name'] ?? '', $d['volunteer_interest'] ?? '']));
+            fputcsv($out, array_map($safe, [et($r['created_at']), ngs_waitlist_list($r), person_name($d), $d['email'] ?? '', $d['phone'] ?? '', $d['education_level'] ?? '', $d['school_name'] ?? '', $d['volunteer_interest'] ?? '']));
         }
     } elseif ($which === 'scholarships') {
         fputcsv($out, ['Applied (ET)', 'Status', 'Full name', 'Email', 'Phone', 'School / College / Organization', 'Why attend', 'Scholarship reason', 'Other reason', 'Can commit to Oct 30']);
@@ -324,6 +324,7 @@ $newScholarships = count(array_filter($scholarships, function ($r) { return q_st
       <div class="stats">
         <div class="stat"><b><?= count($registrations) ?></b><span>Sign-ups</span></div>
         <div class="stat"><b><?= count($emailCount) ?></b><span>Unique emails</span></div>
+        <div class="stat"><b><?= count(array_filter($registrations, function ($r) { return ngs_waitlist_list($r) === 'Waitlist 2027'; })) ?></b><span>2027 waitlist</span></div>
         <?php // the waitlist no longer asks these, so they only show when earlier sign-ups answered them
         foreach (['College' => 'College', 'High School' => 'High school', 'Young Professional' => 'Young professional', 'Other' => 'Other', 'volunteers' => 'Want to volunteer'] as $k => $label):
           if ($stats[$k] > 0): ?>
@@ -353,7 +354,7 @@ $newScholarships = count(array_filter($scholarships, function ($r) { return q_st
             <?php foreach ($shownRegs as $r): $d = $r['data']; $em = strtolower((string) ($d['email'] ?? '')); ?>
               <tr>
                 <td><?= h(et($r['created_at'])) ?></td>
-                <td><?= $r['kind'] === 'waitlist' ? 'Waitlist' : 'Registration' ?></td>
+                <td><?= h(ngs_waitlist_list($r)) ?></td>
                 <td><?= h(person_name($d)) ?></td>
                 <td><a href="mailto:<?= h($d['email'] ?? '') ?>"><?= h($d['email'] ?? '') ?></a><?php if (($emailCount[$em] ?? 0) > 1): ?><span class="dup" title="This email registered more than once">Repeat</span><?php endif; ?></td>
                 <td><?php if (($d['phone'] ?? '') !== ''): ?><a href="tel:<?= h(preg_replace('/[^0-9+]/', '', $d['phone'])) ?>"><?= h($d['phone']) ?></a><?php endif; ?></td>

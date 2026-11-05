@@ -78,6 +78,10 @@ if ($kind === 'waitlist') {
     if (!$emailOk) {
         $errors['email'] = 'Please check your email address.';
     }
+    // the NextGen 2027 waitlist (homepage and /2027/) posts list=2027; earlier sign-ups are 2026's
+    if (ngs_text($_POST, 'list', 10) === '2027') {
+        $data['list'] = '2027';
+    }
 } elseif ($kind === 'registration') {
     $data = [
         'first_name' => ngs_text($_POST, 'first_name', 80),
