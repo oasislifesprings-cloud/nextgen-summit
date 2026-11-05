@@ -20,10 +20,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261105-h01">
-<link rel="stylesheet" href="/assets/css/wtn.css?v=20261105-h01">
-<script src="/assets/js/site.js?v=20261105-h01" defer></script>
-<script src="/assets/js/wtn.js?v=20261105-h01" defer></script>
+<link rel="stylesheet" href="/assets/css/site.css?v=20261105-h02">
+<link rel="stylesheet" href="/assets/css/wtn.css?v=20261105-h02">
+<script src="/assets/js/site.js?v=20261105-h02" defer></script>
+<script src="/assets/js/wtn.js?v=20261105-h02" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -42,21 +42,27 @@
 </header>
 
 <main id="main" tabindex="-1">
-  <!-- The front door: a paper cover. The campaign photograph of friends in conversation (black and
-       white, as the whole site) beside the question; the three destinations are the page's index,
-       in the hero, so they are seen before anything else. -->
-  <section class="hh" id="top" data-nav="paper" aria-labelledby="hh-title">
+  <!-- The front door: the 2026 campaign photograph and film, full bleed in black and white, people
+       walking toward what is next; the question, the line, the waitlist, and the three destinations as
+       the index across the bottom of the first screen. The film (wtn.js) never loads with reduced
+       motion or Data Saver, and waits until the page is idle. -->
+  <section class="hh" id="top" data-nav="photo" aria-labelledby="hh-title">
+    <div class="hh__media" aria-hidden="true">
+      <picture>
+        <source media="(max-aspect-ratio: 3/4)" srcset="/assets/img/hero-m-864.jpg" width="864" height="1152">
+        <img src="/assets/img/hero-1600.jpg" srcset="/assets/img/hero-800.jpg 800w, /assets/img/hero-1200.jpg 1200w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2048.jpg 2048w" sizes="100vw" width="2048" height="1152" fetchpriority="high" decoding="async" alt="">
+      </picture>
+      <video class="hh__video" data-src="/assets/nextgen-take-1.mp4" muted loop playsinline preload="none" tabindex="-1"></video>
+    </div>
     <div class="hh__in">
       <h1 class="hh__t wm" id="hh-title">where to next<span class="q">?</span></h1>
-      <figure class="hh__pic">
-        <img src="/assets/img/closing-1600.jpg" srcset="/assets/img/closing-800.jpg 800w, /assets/img/closing-1200.jpg 1200w, /assets/img/closing-1600.jpg 1600w, /assets/img/closing-2048.jpg 2048w" sizes="(max-width: 860px) 100vw, 58vw" width="2048" height="1152" fetchpriority="high" decoding="async"
-          alt="Five young people in conversation on a flight of stone steps, laughing.">
-      </figure>
-      <p class="hh__lede">A one-day experience for students and young adults to grow, connect, and see what&rsquo;s possible for their future.</p>
-      <p class="hh__act"><a class="btn btn--lg" href="#waitlist">Join the 2027 waitlist</a></p>
+      <div class="hh__foot">
+        <p class="hh__lede">A one-day experience for students and young adults to grow, connect, and see what&rsquo;s possible for their future.</p>
+        <p class="hh__act"><a class="btn btn--lg" href="#waitlist">Save your seat for 2027</a></p>
+      </div>
     </div>
     <div class="hh__idx">
-      <nav class="idx idx--paper" aria-label="Choose where to go"><ol class="idx__list">
+      <nav class="idx" aria-label="Choose where to go"><ol class="idx__list">
       <li><a class="idx__a" href="/2026/"><span class="idx__no" aria-hidden="true">01</span><span class="idx__t wm">2026 moments</span><span class="idx__d">What NextGen 2026 felt like</span><span class="idx__go"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
       <li><a class="idx__a" href="/explore/"><span class="idx__no" aria-hidden="true">02</span><span class="idx__t wm">explore</span><span class="idx__d">Music, photography, testimonials</span><span class="idx__go"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
       <li><a class="idx__a idx__a--next" href="/2027/"><span class="idx__no" aria-hidden="true">03</span><span class="idx__t wm">2027</span><span class="idx__d">What&rsquo;s next, and the waitlist</span><span class="idx__go"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
@@ -65,8 +71,7 @@
   </section>
 
   <!-- The waitlist: a seat at what's next. The photograph is the Gordon Center auditorium, edited:
-       black and white, one seat tinted NextGen teal (assets/img/seat-*; provenance in the README).
-       Eventbrite takes the sign-ups; this page collects nothing. -->
+       black and white, one seat tinted NextGen teal (assets/img/seat-*; provenance in DESIGN.md). -->
   <section class="seat" id="waitlist" data-nav="photo" aria-labelledby="wait-title">
     <div class="seat__stage">
       <picture class="seat__pic">
@@ -82,11 +87,11 @@
     </div>
     <div class="seat__row">
 
-      <!-- Eventbrite is not connected yet. Set data-eventbrite-event (embedded checkout) or
-           data-eventbrite-url on this ticket. City slots: replace each label with a confirmed city and
-           set its own data-eventbrite-url, or delete the block if Eventbrite asks the city. While every
-           city is a placeholder the block stays hidden; the ticket already says the city is to come. -->
-      <div class="tkt" data-eventbrite data-eventbrite-event="" data-eventbrite-url="">
+      <!-- The waitlist is NextGen's own: the form posts to /api/register.php (form-name "waitlist":
+           name, email and phone, as that endpoint requires) and is stored in the site's database. With
+           JavaScript, wtn.js sends it without leaving the page; without, the browser posts it and the
+           server answers with /registration-received/. -->
+      <div class="tkt">
         <div class="tkt__main">
           <p class="tkt__k">Admit one</p>
           <p class="tkt__t wm">nextgen 2027</p>
@@ -97,16 +102,19 @@
           </dl>
         </div>
         <div class="tkt__act">
-          <p class="tkt__status" data-eventbrite-status aria-live="polite">The waitlist opens on Eventbrite soon.</p>
-          <div class="wtn-cities" data-cities>
-            <p class="label wtn-cities__k" id="cities-k">Your city</p>
-            <ul class="wtn-cities__list" aria-labelledby="cities-k">
-              <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
-              <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
-              <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
-            </ul>
+          <form class="tkt__form" action="/api/register.php" method="post" data-waitlist aria-label="Join the NextGen 2027 waitlist">
+            <input type="hidden" name="form-name" value="waitlist">
+            <p class="tkt__hp" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+            <div class="field"><label for="wl-name">Name</label><input id="wl-name" name="name" autocomplete="name" maxlength="120" required></div>
+            <div class="field"><label for="wl-email">Email</label><input id="wl-email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+            <div class="field"><label for="wl-phone">Phone</label><input id="wl-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" required></div>
+            <p class="tkt__err" role="alert" hidden></p>
+            <button class="btn btn--lg" type="submit"><span class="btn__t">Save my seat</span></button>
+          </form>
+          <div class="tkt__done" role="status" tabindex="-1" hidden>
+            <p class="tkt__done-t wm">you&rsquo;re in<span class="q">.</span></p>
+            <p class="tkt__done-p">Your seat for NextGen 2027 is saved. We&rsquo;ll be in touch when the date, the city and the lineup are announced.</p>
           </div>
-          <a class="btn btn--lg" id="eb-waitlist" href="#waitlist" aria-disabled="true" data-eventbrite-button><span data-label>Waitlist opening soon</span></a>
           <p class="tkt__help">Questions? <a href="mailto:hello@nextgensummit.us">hello@nextgensummit.us</a></p>
         </div>
       </div>

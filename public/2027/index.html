@@ -24,10 +24,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261105-h01">
-<link rel="stylesheet" href="/assets/css/wtn.css?v=20261105-h01">
-<script src="/assets/js/site.js?v=20261105-h01" defer></script>
-<script src="/assets/js/wtn.js?v=20261105-h01" defer></script>
+<link rel="stylesheet" href="/assets/css/site.css?v=20261105-h02">
+<link rel="stylesheet" href="/assets/css/wtn.css?v=20261105-h02">
+<script src="/assets/js/site.js?v=20261105-h02" defer></script>
+<script src="/assets/js/wtn.js?v=20261105-h02" defer></script>
 
 </head>
 <body class="wtn-page">
@@ -64,7 +64,7 @@
   </section>
   <!-- What is honestly known: each of these is still to come. Replace a "To be announced" with the
        real detail once it is approved. -->
-  <section class="y27-chapter" data-nav="paper" aria-labelledby="y27-next-t">
+  <section class="y27-chapter" data-nav="photo" aria-labelledby="y27-next-t">
     <div class="y27-chapter__copy">
       <h2 class="y27-chapter__t wm" id="y27-next-t">the next chapter<span class="q">.</span></h2>
       <p class="y27-chapter__lede">Each of these is still to come.</p>
@@ -76,8 +76,8 @@
     </ul>
   </section>
 
-  <!-- A seat at what's next: the same edited Gordon Center photograph and the same ticket as the
-       homepage waitlist. Configure Eventbrite on both tickets (same attributes). -->
+  <!-- A seat at what's next: the same edited Gordon Center photograph and the same waitlist form as
+       the homepage, so the action happens on this page. -->
   <section class="seat seat--invite" id="waitlist" data-nav="photo" aria-labelledby="y27-seat-t">
     <div class="seat__stage">
       <picture class="seat__pic">
@@ -92,11 +92,11 @@
       </div>
     </div>
     <div class="seat__row">
-      <!-- Eventbrite is not connected yet. Set data-eventbrite-event (embedded checkout) or
-           data-eventbrite-url on this ticket. City slots: replace each label with a confirmed city and
-           set its own data-eventbrite-url, or delete the block if Eventbrite asks the city. While every
-           city is a placeholder the block stays hidden; the ticket already says the city is to come. -->
-      <div class="tkt" data-eventbrite data-eventbrite-event="" data-eventbrite-url="">
+      <!-- The waitlist is NextGen's own: the form posts to /api/register.php (form-name "waitlist":
+           name, email and phone, as that endpoint requires) and is stored in the site's database. With
+           JavaScript, wtn.js sends it without leaving the page; without, the browser posts it and the
+           server answers with /registration-received/. -->
+      <div class="tkt">
         <div class="tkt__main">
           <p class="tkt__k">Admit one</p>
           <p class="tkt__t wm">nextgen 2027</p>
@@ -107,16 +107,19 @@
           </dl>
         </div>
         <div class="tkt__act">
-          <p class="tkt__status" data-eventbrite-status aria-live="polite">The waitlist opens on Eventbrite soon.</p>
-          <div class="wtn-cities" data-cities>
-            <p class="label wtn-cities__k" id="cities-k">Your city</p>
-            <ul class="wtn-cities__list" aria-labelledby="cities-k">
-              <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
-              <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
-              <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
-            </ul>
+          <form class="tkt__form" action="/api/register.php" method="post" data-waitlist aria-label="Join the NextGen 2027 waitlist">
+            <input type="hidden" name="form-name" value="waitlist">
+            <p class="tkt__hp" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+            <div class="field"><label for="wl27-name">Name</label><input id="wl27-name" name="name" autocomplete="name" maxlength="120" required></div>
+            <div class="field"><label for="wl27-email">Email</label><input id="wl27-email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+            <div class="field"><label for="wl27-phone">Phone</label><input id="wl27-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" required></div>
+            <p class="tkt__err" role="alert" hidden></p>
+            <button class="btn btn--lg" type="submit"><span class="btn__t">Save my seat</span></button>
+          </form>
+          <div class="tkt__done" role="status" tabindex="-1" hidden>
+            <p class="tkt__done-t wm">you&rsquo;re in<span class="q">.</span></p>
+            <p class="tkt__done-p">Your seat for NextGen 2027 is saved. We&rsquo;ll be in touch when the date, the city and the lineup are announced.</p>
           </div>
-          <a class="btn btn--lg" id="eb-waitlist" href="#waitlist" aria-disabled="true" data-eventbrite-button><span data-label>Waitlist opening soon</span></a>
           <p class="tkt__help">Questions? <a href="mailto:hello@nextgensummit.us">hello@nextgensummit.us</a></p>
         </div>
       </div>

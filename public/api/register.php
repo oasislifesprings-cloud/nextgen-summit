@@ -29,7 +29,7 @@ function ngs_reply(bool $ok, string $kind, string $error, int $status, bool $jso
     }
     http_response_code($status);
     header('Content-Type: text/html; charset=utf-8');
-    $back = ['waitlist' => '/tickets/', 'registration' => '/tickets/', 'question' => '/#faq', 'scholarship' => '/scholarship/'][$kind] ?? '/#involved';
+    $back = ['waitlist' => '/#waitlist', 'registration' => '/tickets/', 'question' => '/#faq', 'scholarship' => '/scholarship/'][$kind] ?? '/#involved';
     echo '<!doctype html><html lang="en"><head><meta charset="utf-8">'
         . '<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">'
         . '<title>Not sent yet · Next Gen Summit</title>'

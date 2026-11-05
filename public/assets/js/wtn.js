@@ -82,65 +82,52 @@
     });
   });
 
-  /* ---------- Eventbrite waitlist ----------
-     Configure on the [data-eventbrite] element, nothing else:
-       data-eventbrite-event="<event id>"   embedded Eventbrite checkout in a modal (preferred)
-       data-eventbrite-url="<event url>"    plain link to the Eventbrite page
-     With neither set, the button stays in its "opening soon" state. No data is collected here;
-     Eventbrite's own script is loaded only when an event id is configured and the button is used. */
-  Array.prototype.forEach.call(document.querySelectorAll('[data-eventbrite]'), function (box) {
-      var btn = box.querySelector('[data-eventbrite-button]');
-      var status = box.querySelector('[data-eventbrite-status]');
-      var id = (box.getAttribute('data-eventbrite-event') || '').trim();
-      var url = (box.getAttribute('data-eventbrite-url') || '').trim();
-      if (btn && id && /^\d+$/.test(id)) {
-        enable('Join the waitlist');
-        btn.addEventListener('click', function (e) {
-          e.preventDefault();
-          loadEventbrite(function () {
-            window.EBWidgets.createWidget({ widgetType: 'checkout', eventId: id, modal: true, modalTriggerElementId: btn.id });
-            btn.click();
-          });
-        }, { once: true });
-      } else if (btn && url && /^https:\/\/(www\.)?eventbrite\.[a-z.]+\//.test(url)) {
-        enable('Join the waitlist');
-        btn.href = url;
-        btn.target = '_blank';
-        btn.rel = 'noopener';
-        btn.insertAdjacentHTML('beforeend', '<span class="sr"> (opens Eventbrite in a new tab)</span>');
-      }
-      function enable(label) {
-        btn.removeAttribute('aria-disabled');
-        btn.removeAttribute('tabindex');
-        btn.querySelector('[data-label]').textContent = label;
-        if (status) status.textContent = 'Opens Eventbrite to reserve your place.';
-      }
-
-  });
-  /* City interest: each confirmed city gets its own Eventbrite waitlist link. A slot with no
-     valid Eventbrite URL stays a disabled placeholder. Nothing is stored or sent from this page. */
-  Array.prototype.forEach.call(document.querySelectorAll('[data-cities] .wtn-city'), function (a) {
-    var u = (a.getAttribute('data-eventbrite-url') || '').trim();
-    if (!/^https:\/\/(www\.)?eventbrite\.[a-z.]+\//.test(u)) return;
-    a.href = u;
-    a.target = '_blank';
-    a.rel = 'noopener';
-    a.removeAttribute('aria-disabled');
-    a.insertAdjacentHTML('beforeend', '<span class="sr"> (opens Eventbrite in a new tab)</span>');
-  });
-
-  function loadEventbrite(done) {
-    if (window.EBWidgets) return done();
-    var s = document.createElement('script');
-    s.src = 'https://www.eventbrite.com/static/widgets/eb_widgets.js';
-    s.async = true;
-    s.onload = done;
-    document.head.appendChild(s);
-  }
-
-  // a disabled link must not navigate or scroll
-  document.addEventListener('click', function (e) {
-    var a = e.target.closest && e.target.closest('a[aria-disabled="true"]');
-    if (a) e.preventDefault();
+  /* ---------- the waitlist: NextGen's own, saved by /api/register.php without leaving the page ----------
+     Without JavaScript (or fetch) the form posts normally and the server answers with
+     /registration-received/. The browser's own validation runs first (required, type=email). */
+  Array.prototype.forEach.call(document.querySelectorAll('form[data-waitlist]'), function (form) {
+    if (!window.fetch || !window.URLSearchParams || !window.FormData) return;
+    var btn = form.querySelector('button[type=submit]');
+    var label = btn.querySelector('.btn__t');
+    var err = form.querySelector('.tkt__err');
+    var done = form.parentNode.querySelector('.tkt__done');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      err.hidden = true;
+      Array.prototype.forEach.call(form.querySelectorAll('[aria-invalid]'), function (i) { i.removeAttribute('aria-invalid'); });
+      btn.disabled = true;
+      btn.setAttribute('aria-busy', 'true');
+      var was = label.textContent;
+      label.textContent = 'Saving your seat';
+      fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' },
+        body: new URLSearchParams(new FormData(form)).toString()
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (d) {
+          if (r.ok && d.ok) return;
+          var x = new Error('waitlist ' + r.status);
+          x.msg = d.error || '';
+          x.fields = Array.isArray(d.fields) ? d.fields : [];
+          throw x;
+        });
+      }).then(function () {
+        form.hidden = true;
+        done.hidden = false;
+        done.focus();
+      }).catch(function (x) {
+        btn.disabled = false;
+        btn.removeAttribute('aria-busy');
+        label.textContent = was;
+        err.textContent = (x && x.msg) || 'That didn\u2019t go through. Please check your connection and try again.';
+        err.hidden = false;
+        var first = null;
+        ((x && x.fields) || []).forEach(function (f) {
+          var i = form.elements[f];
+          if (i && i.setAttribute) { i.setAttribute('aria-invalid', 'true'); first = first || i; }
+        });
+        if (first) first.focus();
+      });
+    });
   });
 })();
