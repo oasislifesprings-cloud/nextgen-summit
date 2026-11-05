@@ -20,10 +20,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261104-w02">
-<link rel="stylesheet" href="/assets/css/wtn.css?v=20261104-w02">
-<script src="/assets/js/site.js?v=20261104-w02" defer></script>
-<script src="/assets/js/wtn.js?v=20261104-w02" defer></script>
+<link rel="stylesheet" href="/assets/css/site.css?v=20261105-r01">
+<link rel="stylesheet" href="/assets/css/wtn.css?v=20261105-r01">
+<script src="/assets/js/site.js?v=20261105-r01" defer></script>
+<script src="/assets/js/wtn.js?v=20261105-r01" defer></script>
 </head>
 <body>
 <a class="skip" href="#wtn-title">Skip to content</a>
@@ -103,7 +103,6 @@
       </div>
 
       <div class="wtn-ticket" data-eventbrite data-eventbrite-event="" data-eventbrite-url="">
-        <p class="label wtn-ticket__k">NextGen 2027</p>
         <p class="wtn-ticket__t wm">save your place.</p>
         <p class="wtn-ticket__status" data-eventbrite-status aria-live="polite">The waitlist opens on Eventbrite soon.</p>
         <!-- City interest. Nothing is collected here: each city is a link to its own Eventbrite
@@ -116,12 +115,16 @@
             <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
             <li><a class="wtn-city" href="#waitlist" aria-disabled="true" data-eventbrite-url="">City to be announced</a></li>
           </ul>
+          <p class="wtn-cities__tba">Cities to be announced.</p>
         </div>
         <div class="wtn-ticket__act">
           <a class="btn btn--lg" id="eb-waitlist" href="#waitlist" aria-disabled="true" data-eventbrite-button><span data-label>Waitlist opening soon</span></a>
           <p class="wtn-ticket__help">Questions? <a href="mailto:hello@nextgensummit.us">hello@nextgensummit.us</a></p>
         </div>
-        <p class="wtn-dev"><b>Development note</b><br>Eventbrite is not connected. Set <code>data-eventbrite-event</code> (embedded checkout) or <code>data-eventbrite-url</code> on this card. City slots: replace each label with a confirmed city and set its own <code>data-eventbrite-url</code>, or delete the block if Eventbrite asks the city. Remove this note at launch.</p>
+        <!-- Eventbrite is not connected yet. Set data-eventbrite-event (embedded checkout) or
+             data-eventbrite-url on this card. City slots: replace each label with a confirmed city and
+             set its own data-eventbrite-url, or delete the block if Eventbrite asks the city. While every
+             city is a placeholder the list is hidden and "Cities to be announced." shows instead. -->
       </div>
     </div>
   </section>

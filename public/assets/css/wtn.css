@@ -1,4 +1,4 @@
-/* Hallmark · redesign: polish (interim) · built: the project · system: DESIGN.md (locked NextGen brand) · signature: the 2026 hero film behind the signpost · critique: placeholders read as wireframes; campaign imagery now carries every slot, marked stand-in · waive 48/7a/54/67/63: rgba literals, white on ink, tracked uppercase labels and the dotted page titles are the established brand idiom (DESIGN.md, site.css); 26a/34 live in site.css */
+/* Hallmark · redesign: refine (interim) · built: the project · system: DESIGN.md (locked NextGen brand) · signature: the 2026 hero film behind the three signs · critique: every page carried four treatments at once (dev boxes, spec tags, dashed captions, a turquoise chapter) and two endings; now one preview line, one-word stand-in chips, one ending, heads a step down so the photographs lead · waive 48/7a/54/67/63: rgba literals, white on ink, tracked uppercase labels and the dotted page titles are the established brand idiom (DESIGN.md, site.css); 26a/34 live in site.css */
 /* "Where To Next?" -- the future homepage gateway and its section pages.
    Builds on site.css (tokens, nav, buttons, footer, drawer). DESIGN.md Part 2 covers the
    mixed-media exception that applies to the homepage only.
@@ -262,7 +262,7 @@
 .mo-ch--accent .mo-d{color:var(--ink)}
 
 .mo-grid{max-width:var(--maxw);margin:0 auto;display:grid;gap:clamp(14px,2vw,28px);align-items:start}
-.mo-grid--feature{grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr)}
+.mo-grid--feature{grid-template-columns:minmax(0,3.2fr) minmax(0,1fr) minmax(0,1fr)}
 .mo-grid--three{grid-template-columns:repeat(3,minmax(0,1fr))}
 .mo-grid--mosaic{grid-template-columns:repeat(3,minmax(0,1fr))}
 .mo-grid--mosaic .mo-slot--tall{grid-row:span 2}
@@ -321,8 +321,8 @@
 .ex-music__note a{color:#F4F1EA;text-underline-offset:3px}
 
 .ex-photos{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(12px,1.6vw,22px)}
-.ex-photos .mo-slot:nth-child(1){grid-column:span 7}
-.ex-photos .mo-slot:nth-child(2){grid-column:span 5}
+.ex-photos .mo-slot:nth-child(1){grid-column:span 8}
+.ex-photos .mo-slot:nth-child(2){grid-column:span 4}
 .ex-photos .mo-slot:nth-child(n+3){grid-column:span 4}
 .ex-voices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,3vw,48px)}
 .ex-voice{margin:0;display:grid;gap:16px;align-content:start;padding:26px;border-radius:14px;background:var(--paper-2)}
@@ -371,15 +371,8 @@
 /* a stand-in: campaign imagery in a slot, set in the brand's black and white */
 .wtn-ph.is-standin{background:var(--ink);outline:0}
 .wtn-ph.is-standin > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 45%);filter:grayscale(1) contrast(1.05)}
-.wtn-ph.is-standin::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,15,0) 58%,rgba(11,11,15,.6) 100%);pointer-events:none}
-.wtn-ph.is-standin .wtn-ph__tag{top:auto;left:12px;bottom:12px;max-width:calc(100% - 24px);padding:7px 10px;background:rgba(11,11,15,.74);color:#fff;font-size:9.5px;letter-spacing:.12em;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
-.wtn-ph.is-standin .wtn-ph__tag small{color:rgba(255,255,255,.78);font-size:11px}
-@media (hover:hover) and (prefers-reduced-motion:no-preference){
-  .wtn-ph.is-standin > img{transition:transform .9s var(--ease)}
-  .mo-slot:hover .wtn-ph.is-standin > img{transform:scale(1.03)}
-}
-.mo-media{box-shadow:0 18px 40px rgba(11,11,15,.14)}
-.mo-ch--dark .mo-media{box-shadow:0 18px 44px rgba(0,0,0,.4)}
+/* one word on the picture; the slot's spec lives in data-spec. Images are not links, so nothing moves on hover */
+.wtn-ph.is-standin .wtn-ph__tag{top:auto;left:10px;bottom:10px;padding:6px 10px;border-radius:999px;background:rgba(11,11,15,.62);color:rgba(255,255,255,.92);font:600 11px/1 var(--f-sans);letter-spacing:.06em;text-transform:none}
 
 /* words still to come: a quiet dashed line, not a form field */
 .mo-cap .mo-ph-text,.ex-voice figcaption .mo-ph-text{padding:0 0 2px;border:0;border-bottom:1.5px dashed currentColor;border-radius:0;opacity:.62}
@@ -393,7 +386,7 @@
 .mo-quote,.ex-voice{position:relative}
 .mo-quote{padding-top:clamp(70px,7vw,100px)}
 .mo-quote::before,.ex-voice::before{content:"\201C";position:absolute;left:-.05em;font-family:var(--f-display);font-weight:900;font-variation-settings:"SOFT" 100,"WONK" 0,"opsz" 144;line-height:1;pointer-events:none}
-.mo-quote::before{top:6px;font-size:clamp(110px,10vw,160px);color:var(--ink)}
+.mo-quote::before{top:6px;font-size:clamp(110px,10vw,160px);color:var(--accent-ink)}
 .mo-quote__q .mo-ph-text--q,.ex-voice .mo-ph-text--q{padding:0;border:0;opacity:.66}
 .mo-quote__by .mo-ph-text{padding:0 0 2px;border:0;border-bottom:1.5px dashed currentColor;border-radius:0}
 .ex-voice{padding-top:clamp(76px,6vw,96px);background:var(--paper);box-shadow:inset 0 0 0 1px var(--rule)}
@@ -408,7 +401,7 @@
 /* 2026 Moments close: the last frame of the day behind the farewell */
 .mo-close--photo{position:relative;isolation:isolate;overflow:hidden;min-height:min(78svh,760px);display:grid;align-items:end;background:var(--ink);color:#fff}
 .mo-close__bg{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 60%);filter:grayscale(1)}
-.mo-close--photo::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(11,11,15,.2) 0%,rgba(11,11,15,.35) 45%,rgba(11,11,15,.88) 100%)}
+.mo-close--photo::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(11,11,15,.2) 0%,rgba(11,11,15,.35) 45%,var(--ink) 100%)}
 .mo-close--photo .mo-close__in{width:100%}
 .mo-close--photo .label{color:var(--accent)}
 .mo-close--photo .mo-close__t{color:#fff}
@@ -437,8 +430,92 @@
 /* the partner call, set in the Gordon Center */
 .y27-partner{position:relative;isolation:isolate;overflow:hidden;max-width:none;margin:0;padding-left:max(var(--gutter),calc((100% - var(--maxw)) / 2 + var(--gutter)));padding-right:max(var(--gutter),calc((100% - var(--maxw)) / 2 + var(--gutter)));background:var(--ink);color:#fff}
 .y27-partner__bg{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 55%);filter:grayscale(1)}
-.y27-partner::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(11,11,15,.9) 0%,rgba(11,11,15,.66) 55%,rgba(11,11,15,.45) 100%)}
+.y27-partner::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(11,11,15,0) 55%,var(--ink) 100%),linear-gradient(90deg,rgba(11,11,15,.9) 0%,rgba(11,11,15,.66) 55%,rgba(11,11,15,.45) 100%)}
 .y27-partner .label{color:var(--accent)}
 .y27-partner .wtn-band__t{color:#fff}
 .y27-partner .wtn-open__lede{color:rgba(255,255,255,.86)}
 .y27-partner .btn--ghost{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.75)}
+
+/* ---------- refinement pass (2026-11-05): premium simplicity ----------
+   One idea per screen, fewer treatments, the photographs carry the story. Markup, links and ids are
+   unchanged apart from copy order on 2027; every rule here skins the same structure, so the final
+   design can replace this block wholesale. */
+
+/* page changes: a short cross-fade where the browser supports it; none with reduced motion */
+@media (prefers-reduced-motion:no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.24s}
+}
+/* focus stays visible on every dark ground */
+.mo-ch--dark :focus-visible,.ex-sec--dark :focus-visible,.wtn-next :focus-visible,.mo-close--photo :focus-visible,.y27 :focus-visible,.y27-partner :focus-visible,.mo-rail :focus-visible{outline-color:#fff}
+
+/* homepage: three destinations, larger and unmistakable */
+.wtn-sign{min-height:86px;padding-top:16px;padding-bottom:16px}
+.wtn-post__item .wtn-sign{min-width:min(100%,300px)}
+.wtn-sign__name{font-size:clamp(38px,3.5vw,54px)}
+.wtn-sign__sub{font-size:11.5px;letter-spacing:.12em}
+.wtn-hero__lede{font-size:clamp(18px,1.45vw,22px)}
+
+/* the waitlist ticket: one message, one action. While every city is a placeholder, one line replaces
+   the three empty city buttons (without :has the buttons simply show) */
+.wtn-ticket__t{margin-top:0}
+.wtn-cities__tba{display:none;margin:0;font:600 15px/1.5 var(--f-sans);color:var(--ink-2)}
+.wtn-cities:not(:has(.wtn-city:not([aria-disabled="true"])))
+  {margin-top:2px}
+.wtn-cities:not(:has(.wtn-city:not([aria-disabled="true"]))) > :not(.wtn-cities__tba){display:none}
+.wtn-cities:not(:has(.wtn-city:not([aria-disabled="true"]))) .wtn-cities__tba{display:block}
+
+/* section heads a step below the page titles, so the pictures lead */
+.mo-t,.ex-t,.wtn-band__t{font-size:clamp(46px,6.2vw,100px)}
+.mo-ch{padding-top:clamp(64px,10vh,128px);padding-bottom:clamp(64px,10vh,128px)}
+.mo-head{margin-bottom:clamp(28px,5vh,52px)}
+.mo-ch--soft{background:var(--paper-2)}
+
+/* the preview line: honest, written for visitors, quiet */
+.wtn-note{margin:0;max-width:60ch;font:500 14px/1.55 var(--f-sans);color:var(--ink-2)}
+.wtn-note b{font-weight:700;color:var(--ink)}
+.mo-note{max-width:none;padding:18px max(var(--gutter),calc((100% - var(--maxw)) / 2 + var(--gutter))) 0;background:var(--ink);color:rgba(255,255,255,.72)}
+.mo-note b{color:#fff}
+.mo-note + .mo-ch{padding-top:clamp(48px,8vh,96px)}
+.ex-head .wtn-note{margin-top:6px}
+
+/* a caption slot that is still a placeholder takes no room; the stand-in chip already says so */
+.mo-cap:has(> .mo-ph-text){display:none}
+
+/* words still to come: one line in the quote's own voice instead of three empty quotes */
+.mo-quotes[data-pending],.ex-voices[data-pending]{grid-template-columns:minmax(0,1fr)}
+.mo-quotes[data-pending] > :not(:first-child),.ex-voices[data-pending] > :not(:first-child){display:none}
+.mo-quotes[data-pending] .mo-quote{border-top:0}
+.mo-quotes[data-pending] .mo-quote__by,.ex-voices[data-pending] figcaption{display:none}
+.mo-quotes[data-pending] .mo-ph-text--q,.ex-voices[data-pending] .mo-ph-text--q{max-width:24ch;font-size:clamp(28px,3.2vw,48px);line-height:1.15;opacity:.72}
+.ex-voices[data-pending] .ex-voice{padding:clamp(76px,6vw,96px) 0 0;background:transparent;box-shadow:none}
+.ex-voices[data-pending] .ex-voice::before{left:-.05em}
+
+/* Explore: the three rooms of the gallery as clear buttons */
+.ex-jump{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(24px,4vh,36px)}
+.ex-jump a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;color:var(--ink);text-decoration:none;font:700 12px/1 var(--f-sans);letter-spacing:.12em;text-transform:uppercase;box-shadow:inset 0 0 0 1.5px var(--ink);transition:background-color .3s var(--ease),color .3s var(--ease)}
+.ex-jump a:hover{background:var(--ink);color:var(--paper)}
+
+/* every section page ends once: the signs, and the way home */
+.wtn-next{padding-top:clamp(56px,9vh,104px);padding-bottom:clamp(48px,7vh,80px)}
+.wtn-next__t{font-size:clamp(40px,4.6vw,72px)}
+.wtn-next__foot .textlink{color:#fff}
+.wtn-next__foot .textlink:hover{color:var(--accent)}
+
+/* 2027: headline, one line, the three open facts, the action */
+.y27-chapter .wtn-band__t{margin:0;color:var(--ink)}
+.y27-chapter .wtn-open__lede{margin-top:18px}
+.y27-chapter__act{margin:32px 0 0}
+.y27-partner .wtn-band__t{margin:0}
+
+@media (max-width:900px){
+  /* two up on a phone, the first picture full width: half the scrolling, the same pictures */
+  .mo-grid--three{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mo-grid--three > .mo-slot:first-child{grid-column:1 / -1}
+  .ex-photos .mo-slot:nth-child(n+2) .mo-media{aspect-ratio:1/1}
+  .mo-grid--open{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* every control is a 44px target on a phone: the nav's waitlist button, Menu, the short footer links */
+.nav .btn--sm{--h:44px}
+.nav__menu{min-width:44px;justify-content:center}
+.foot__nav a{min-width:44px;justify-content:center}

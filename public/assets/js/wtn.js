@@ -85,14 +85,16 @@
   /* ---------- travel between destinations (provisional) ----------
      A sign click sets html[data-travel=<direction>] so CSS can move the scene, then navigates.
      The choreography is a placeholder until the artwork exists; the contract is the attribute
-     and TRAVEL_MS. Reduced motion, modified clicks and new-tab clicks navigate immediately. */
-  var TRAVEL_MS = 520;
+     and TRAVEL_MS. Only the homepage has a scene to move: everywhere else, and with reduced motion,
+     modified clicks or new-tab clicks, a link navigates immediately (the page cross-fade is CSS). */
+  var TRAVEL_MS = 420;
+  var scene = document.querySelector('.wtn-scene');
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[data-travel]');
     if (!a) return;
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     if (a.target && a.target !== '_self') return;
-    if (reduced && reduced.matches) return;
+    if (!scene || (reduced && reduced.matches)) return;
     e.preventDefault();
     doc.setAttribute('data-travel', a.getAttribute('data-travel'));
     setTimeout(function () { location.href = a.href; }, TRAVEL_MS);
