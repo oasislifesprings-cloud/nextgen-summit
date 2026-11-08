@@ -19,6 +19,9 @@
     var HOLD = 4600, DARK = 650, FADE = 800;
     var i = 0, timer = null, paused = false, seen = true, running = false;
 
+    /* the observer's word, checked against the layout: an observer can report a stale state while
+       the page is still settling, and the sequence must not stall on it */
+    function looking() { var r = fb.getBoundingClientRect(), h = window.innerHeight; return seen || (r.bottom > h * 0.2 && r.top < h * 0.8); }
     function load(n) {
       var pic = shots[n];
       if (!pic || pic.__ready) return Promise.resolve();
@@ -40,7 +43,7 @@
     }
     function step() {
       timer = null;
-      if (paused || !seen || document.hidden) { running = false; return; }
+      if (paused || !looking() || document.hidden) { running = false; return; }
       running = true;
       if (still()) {
         // a crossfade: the next photograph comes up while this one goes
@@ -52,12 +55,12 @@
       timer = setTimeout(function () {
         var n = (i + 1) % shots.length;
         load(n).then(function () {
-          if (paused || !seen || document.hidden) { running = false; return; }
+          if (paused || !looking() || document.hidden) { running = false; return; }
           i = n; show(i); timer = setTimeout(step, HOLD);
         });
       }, FADE + DARK);
     }
-    function resume() { if (!running && !paused && seen && !document.hidden && !timer) { running = true; timer = setTimeout(step, HOLD); } }
+    function resume() { if (!running && !paused && looking() && !document.hidden && !timer) { running = true; timer = setTimeout(step, HOLD); } }
     function halt() { if (timer) { clearTimeout(timer); timer = null; } running = false; }
 
     if (shots.length > 1) {
@@ -226,8 +229,13 @@
       var k = (v.videoWidth / v.videoHeight) / (r.width / r.height);
       l.setAttribute('data-fit', k > 0.82 && k < 1.25 ? 'cover' : 'contain');
     }
+    /* the observer can report the stage as visible before the page has settled; ask the layout itself
+       so a stage still below the fold never starts a download */
+    function onScreen() { var r = st.getBoundingClientRect(), h = window.innerHeight; return r.top < h * 0.8 && r.bottom > h * 0.2; }
     function run(v) {
-      if (!v || held || !seen) return;
+      if (!v || held || !seen || !onScreen()) return;
+      /* the film is attached only when it is about to play, so a stage that is merely near costs a poster */
+      if (!v.getAttribute('src') && v.getAttribute('data-src')) v.src = v.getAttribute('data-src');
       v.muted = muted;
       var p = v.play();
       if (p && p.catch) p.catch(function () {
@@ -249,7 +257,7 @@
       back.querySelector('.pcs__still').src = poster;
       var v = vOf(back);
       if (!thrifty) {
-        v.src = a.getAttribute('href');
+        v.setAttribute('data-src', a.getAttribute('href'));
         v.addEventListener('playing', function () { back.classList.add('is-playing'); }, { once: true });
         v.addEventListener('loadedmetadata', function () { fit(back); }, { once: true });
         run(v);

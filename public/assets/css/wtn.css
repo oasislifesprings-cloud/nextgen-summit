@@ -98,7 +98,7 @@ body.wn{background:var(--ink);color:var(--wn-text)}
 
 /* ---------- Home: two full screens, a soft snap between them (proximity, never mandatory) ---------- */
 html.wn-snap{scroll-snap-type:y proximity}
-.fb,.ys{scroll-snap-align:start}
+.fb,.pcs--home,.ys{scroll-snap-align:start}
 
 /* section 1: the flashbulb. Five real 2026 photographs, one at a time, each revealed by a camera
    flash, held, then gone to dark (wtn.js). Reduced motion: a slow crossfade and no flash. */
@@ -402,3 +402,5 @@ html.wn-snap{scroll-snap-type:y proximity}
 @media (max-width:900px){.pcs--archive .pcs__sound{top:calc(var(--nav-h,58px) + 12px)}}
 @media (max-width:560px){.pcs--archive .pcs__go{flex:0 1 auto;width:auto}}
 @media (prefers-reduced-motion:reduce){.pcs--archive .pcs__bub[aria-current="true"]::after{animation:none}}
+/* Home: the stage sits between two dark screens, so no paper seam at its top */
+.pcs--home .pcs__grade::after{display:none}
