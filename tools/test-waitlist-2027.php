@@ -72,13 +72,19 @@ echo "2027 waitlist label\n\nsandbox  $sand\n\n";
 $base = ['form-name' => 'waitlist', 'name' => 'Test Visitor', 'phone' => '(410) 555-0123', 'bot-field' => ''];
 
 echo "=== what register.php keeps ===\n";
-$r1 = post($base + ['email' => 'a2027@example.com', 'list' => '2027']);
+$r1 = post($base + ['email' => 'a2027@example.com', 'list' => '2027', 'cities' => ['baltimore', 'atlanta', 'baltimore', 'nowhere', '<b>x</b>']]);
 ok('a 2027 sign-up is accepted', ($r1['ok'] ?? false) === true, json_encode($r1));
 $r2 = post($base + ['email' => 'a2026@example.com']);
 ok('a sign-up without a list is accepted', ($r2['ok'] ?? false) === true, json_encode($r2));
 $r3 = post($base + ['email' => 'abogus@example.com', 'list' => '<b>2028</b>']);
+$r5 = post($base + ['email' => 'nocity@example.com', 'list' => '2027']);
+ok('a 2027 sign-up with no city is refused and names the cities field', ($r5['ok'] ?? true) === false && in_array('cities', $r5['fields'] ?? [], true), json_encode($r5));
+$r6 = post($base + ['email' => 'badcity@example.com', 'list' => '2027', 'cities' => ['nowhere']]);
+ok('a 2027 sign-up with only unknown cities is refused', ($r6['ok'] ?? true) === false && in_array('cities', $r6['fields'] ?? [], true), json_encode($r6));
+$r7 = post($base + ['email' => 'strcity@example.com', 'list' => '2027', 'cities' => 'baltimore']);
+ok('a single city sent as a plain string is refused, never stored', ($r7['ok'] ?? true) === false, json_encode($r7));
 ok('any other list value is accepted but not kept', ($r3['ok'] ?? false) === true, json_encode($r3));
-$r4 = post($base + ['email' => 'bad', 'list' => '2027']);
+$r4 = post($base + ['email' => 'bad', 'list' => '2027', 'cities' => ['dc']]);
 ok('the usual validation still runs for 2027 sign-ups', ($r4['ok'] ?? true) === false && in_array('email', $r4['fields'] ?? [], true), json_encode($r4));
 
 $_SERVER['SCRIPT_FILENAME'] = __FILE__;
@@ -87,6 +93,8 @@ $rows = [];
 foreach (ngs_all('waitlist') as $r) { $rows[$r['data']['email']] = $r; }
 ok('three sign-ups were saved', count($rows) === 3, implode(', ', array_keys($rows)));
 ok('the 2027 sign-up is stored with list 2027', ($rows['a2027@example.com']['data']['list'] ?? null) === '2027');
+ok('its cities are kept once each, in the published order, unknown ones dropped', ($rows['a2027@example.com']['data']['cities'] ?? null) === ['atlanta', 'baltimore'], json_encode($rows['a2027@example.com']['data']['cities'] ?? null));
+ok('the untagged sign-up has no cities field', !array_key_exists('cities', $rows['a2026@example.com']['data'] ?? ['cities' => 1]));
 ok('the untagged sign-up has no list field', !array_key_exists('list', $rows['a2026@example.com']['data'] ?? ['list' => 1]));
 ok('an unknown list value is never stored', !array_key_exists('list', $rows['abogus@example.com']['data'] ?? ['list' => 1]));
 
@@ -94,6 +102,9 @@ echo "\n=== what the admin shows ===\n";
 ok('2027 sign-up reads "Waitlist 2027"', ngs_waitlist_list($rows['a2027@example.com'] ?? []) === 'Waitlist 2027');
 ok('an earlier sign-up reads "Waitlist 2026"', ngs_waitlist_list($rows['a2026@example.com'] ?? []) === 'Waitlist 2026');
 ok('a registration still reads "Registration"', ngs_waitlist_list(['kind' => 'registration', 'data' => ['list' => '2027']]) === 'Registration');
+ok('the admin names the cities', ngs_waitlist_cities($rows['a2027@example.com'] ?? []) === 'Atlanta, Baltimore');
+ok('a sign-up without cities shows none', ngs_waitlist_cities($rows['a2026@example.com'] ?? []) === '');
+ok('Indiana is listed until leadership confirms the city', (NGS_2027_CITIES['indiana'] ?? '') === 'Indiana');
 
 rmtree($sand);
 echo "\n$pass passed, $fail failed\n";

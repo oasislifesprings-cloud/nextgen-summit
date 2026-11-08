@@ -173,6 +173,26 @@ function ngs_store(string $kind, array $data): string
 }
 
 /** Every submission of one kind, newest first, with data decoded. */
+/** The NextGen 2027 waitlist cities, in the order the site shows them. "Indiana" stands for Indianapolis
+    until leadership confirms the city; change the label here and on /2027/ together. */
+const NGS_2027_CITIES = ['atlanta' => 'Atlanta', 'new-york' => 'New York', 'baltimore' => 'Baltimore', 'dc' => 'DC', 'indiana' => 'Indiana'];
+
+/** The cities a 2027 sign-up picked, as the admin shows them ("Atlanta, Baltimore"); empty for anything else. */
+function ngs_waitlist_cities(array $r): string
+{
+    $picked = $r['data']['cities'] ?? [];
+    if (!is_array($picked)) {
+        return '';
+    }
+    $names = [];
+    foreach ($picked as $c) {
+        if (is_string($c) && isset(NGS_2027_CITIES[$c])) {
+            $names[] = NGS_2027_CITIES[$c];
+        }
+    }
+    return implode(', ', $names);
+}
+
 /** The admin's "List" for a sign-up: the 2027 waitlist is tagged list=2027; untagged waitlist rows are 2026's. */
 function ngs_waitlist_list(array $r): string
 {

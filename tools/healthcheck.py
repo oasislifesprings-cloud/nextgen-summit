@@ -89,7 +89,7 @@ CONTENT = [
 ]
 # Since 2026-11-04 staging reviews the "Where To Next?" homepage (branch where-to-next), so its
 # home page is the gateway to 2026 Moments, Explore and 2027, not the 2026 Summit page.
-STAGING_HOME = ('/', ['where to next', '/2026/', '/explore/', '/2027/', 'waitlist'], 'the Where To Next? homepage')
+STAGING_HOME = ('/', ['You had to be there.', 'href="/2026/"', 'href="/explore/"', 'href="/2027/"', '/2027/#waitlist'], "the What's Next homepage")
 
 ASSET_RE = re.compile(
     r'(?:src|href)\s*=\s*["\']([^"\']+\.(?:css|js|webp|png|jpg|jpeg|svg|mp4|ico|woff2?))(?:\?[^"\']*)?["\']',

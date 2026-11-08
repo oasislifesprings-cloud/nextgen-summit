@@ -118,10 +118,10 @@ if ($authed && isset($_GET['export']) && $error === '') {
         return preg_match('/^[=+\-@\t\r]/', $v) ? "'" . $v : $v;
     };
     if ($which === 'registrations') {
-        fputcsv($out, ['Signed up (ET)', 'List', 'Name', 'Email', 'Phone', 'Education level', 'School', 'Interested in volunteering']);
+        fputcsv($out, ['Signed up (ET)', 'List', 'Cities', 'Name', 'Email', 'Phone', 'Education level', 'School', 'Interested in volunteering']);
         foreach ($registrations as $r) {
             $d = $r['data'];
-            fputcsv($out, array_map($safe, [et($r['created_at']), ngs_waitlist_list($r), person_name($d), $d['email'] ?? '', $d['phone'] ?? '', $d['education_level'] ?? '', $d['school_name'] ?? '', $d['volunteer_interest'] ?? '']));
+            fputcsv($out, array_map($safe, [et($r['created_at']), ngs_waitlist_list($r), ngs_waitlist_cities($r), person_name($d), $d['email'] ?? '', $d['phone'] ?? '', $d['education_level'] ?? '', $d['school_name'] ?? '', $d['volunteer_interest'] ?? '']));
         }
     } elseif ($which === 'scholarships') {
         fputcsv($out, ['Applied (ET)', 'Status', 'Full name', 'Email', 'Phone', 'School / College / Organization', 'Why attend', 'Scholarship reason', 'Other reason', 'Can commit to Oct 30']);
@@ -325,6 +325,11 @@ $newScholarships = count(array_filter($scholarships, function ($r) { return q_st
         <div class="stat"><b><?= count($registrations) ?></b><span>Sign-ups</span></div>
         <div class="stat"><b><?= count($emailCount) ?></b><span>Unique emails</span></div>
         <div class="stat"><b><?= count(array_filter($registrations, function ($r) { return ngs_waitlist_list($r) === 'Waitlist 2027'; })) ?></b><span>2027 waitlist</span></div>
+        <?php foreach (NGS_2027_CITIES as $ck => $cn):
+          $cc = count(array_filter($registrations, function ($r) use ($ck) { return is_array($r['data']['cities'] ?? null) && in_array($ck, $r['data']['cities'], true); }));
+          if ($cc > 0): ?>
+        <div class="stat"><b><?= $cc ?></b><span>2027 &middot; <?= h($cn) ?></span></div>
+        <?php endif; endforeach; ?>
         <?php // the waitlist no longer asks these, so they only show when earlier sign-ups answered them
         foreach (['College' => 'College', 'High School' => 'High school', 'Young Professional' => 'Young professional', 'Other' => 'Other', 'volunteers' => 'Want to volunteer'] as $k => $label):
           if ($stats[$k] > 0): ?>
@@ -349,12 +354,13 @@ $newScholarships = count(array_filter($scholarships, function ($r) { return q_st
           <p class="empty"><?= $q === '' ? 'No registrations yet.' : 'Nothing matches that search.' ?></p>
         <?php else: ?>
           <table>
-            <thead><tr><th>Signed up</th><th>List</th><th>Name</th><th>Email</th><th>Phone</th><th>Level</th><th>School</th><th>Volunteer</th><th><span class="sr">Actions</span></th></tr></thead>
+            <thead><tr><th>Signed up</th><th>List</th><th>Cities</th><th>Name</th><th>Email</th><th>Phone</th><th>Level</th><th>School</th><th>Volunteer</th><th><span class="sr">Actions</span></th></tr></thead>
             <tbody>
             <?php foreach ($shownRegs as $r): $d = $r['data']; $em = strtolower((string) ($d['email'] ?? '')); ?>
               <tr>
                 <td><?= h(et($r['created_at'])) ?></td>
                 <td><?= h(ngs_waitlist_list($r)) ?></td>
+                <td><?= h(ngs_waitlist_cities($r)) ?></td>
                 <td><?= h(person_name($d)) ?></td>
                 <td><a href="mailto:<?= h($d['email'] ?? '') ?>"><?= h($d['email'] ?? '') ?></a><?php if (($emailCount[$em] ?? 0) > 1): ?><span class="dup" title="This email registered more than once">Repeat</span><?php endif; ?></td>
                 <td><?php if (($d['phone'] ?? '') !== ''): ?><a href="tel:<?= h(preg_replace('/[^0-9+]/', '', $d['phone'])) ?>"><?= h($d['phone']) ?></a><?php endif; ?></td>

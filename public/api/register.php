@@ -81,6 +81,16 @@ if ($kind === 'waitlist') {
     // the NextGen 2027 waitlist (homepage and /2027/) posts list=2027; earlier sign-ups are 2026's
     if (ngs_text($_POST, 'list', 10) === '2027') {
         $data['list'] = '2027';
+        // one or more cities from the published list (NGS_2027_CITIES), each kept once, in that order
+        $picked = isset($_POST['cities']) && is_array($_POST['cities']) ? $_POST['cities'] : [];
+        $cities = array_values(array_filter(array_keys(NGS_2027_CITIES), function ($c) use ($picked) {
+            return in_array($c, $picked, true);
+        }));
+        if (!$cities) {
+            $errors['cities'] = 'Please pick at least one city.';
+        } else {
+            $data['cities'] = $cities;
+        }
     }
 } elseif ($kind === 'registration') {
     $data = [

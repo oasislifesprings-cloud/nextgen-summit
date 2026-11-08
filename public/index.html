@@ -1,16 +1,16 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="wn-snap">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<!-- DEVELOPMENT BUILD of the future homepage (branch where-to-next). Not released.
-     Analytics (GTM / gtag) is left out until launch so local previews never reach Google. -->
-<title>NextGen Summit</title>
-<meta name="description" content="NextGen Summit: relive the 2026 moments, explore the music, photography and testimonials, or join the waitlist for NextGen 2027.">
+<!-- DEVELOPMENT BUILD of the "What's Next" site (branch where-to-next), for leadership review on staging. -->
+<title>NextGen Summit · What’s Next?</title>
+<meta name="description" content="NextGen Summit: relive NextGen 2026, explore the vision and the music, and save your seat for NextGen 2027.">
 <meta name="theme-color" content="#0B0B0F">
 <link rel="canonical" href="https://nextgensummit.us/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="NextGen Summit">
+<meta property="og:title" content="NextGen Summit · What’s Next?">
+<meta property="og:description" content="NextGen Summit: relive NextGen 2026, explore the vision and the music, and save your seat for NextGen 2027.">
 <meta property="og:url" content="https://nextgensummit.us/">
 <meta property="og:site_name" content="NextGen Summit">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -19,106 +19,85 @@
 <script>(function(d){d.classList.add('js');setTimeout(function(){if(!d.classList.contains('js-ready'))d.classList.remove('js')},4000)})(document.documentElement)</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261105-h02">
-<link rel="stylesheet" href="/assets/css/wtn.css?v=20261105-h02">
-<script src="/assets/js/site.js?v=20261105-h02" defer></script>
-<script src="/assets/js/wtn.js?v=20261105-h02" defer></script>
+<link rel="preload" as="image" href="/assets/img/2026/hero/flash-1-m-720.webp" imagesrcset="/assets/img/2026/hero/flash-1-m-720.webp 720w, /assets/img/2026/hero/flash-1-m-1080.webp 1080w" imagesizes="100vw" media="(max-aspect-ratio: 4/5)" fetchpriority="high">
+<link rel="preload" as="image" href="/assets/img/2026/hero/flash-1-1920.webp" imagesrcset="/assets/img/2026/hero/flash-1-1280.webp 1280w, /assets/img/2026/hero/flash-1-1920.webp 1920w" imagesizes="100vw" media="not all and (max-aspect-ratio: 4/5)" fetchpriority="high">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,0..100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261107-wn1">
+<link rel="stylesheet" href="/assets/css/wtn.css?v=20261107-wn1">
+<script src="/assets/js/site.js?v=20261107-wn1" defer></script>
+<script src="/assets/js/wtn.js?v=20261107-wn1" defer></script>
 </head>
-<body>
+<body class="wn wn-home">
 <a class="skip" href="#main">Skip to content</a>
+<div class="wn-grain" aria-hidden="true"></div>
 
 <header class="nav on-photo">
   <a class="nav__mark" href="/" aria-label="NextGen Summit, home">
     <span class="wm" aria-hidden="true">nextgen</span><span class="nav__summit" aria-hidden="true">Summit</span>
   </a>
   <nav class="nav__links" aria-label="Main">
-    <a class="nav__link" href="/2026/">2026 Moments</a>
-    <a class="nav__link" href="/explore/">Explore</a>
-    <a class="nav__link" href="/2027/">2027</a>
-    <a class="btn btn--sm" href="#waitlist">Join the waitlist</a>
+    <span class="nav__link is-here" aria-current="page">Home</span>
+    <a class="nav__link" href="/explore/">Explore NextGen</a>
+    <a class="nav__link" href="/2026/">NextGen 2026</a>
+    <a class="nav__link" href="/2027/">NextGen 2027</a>
+    <a class="btn btn--sm nav__wl" href="/2027/#waitlist">Join the 2027 waitlist <svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></a>
     <button class="nav__link nav__menu" type="button" data-open="menu">Menu</button>
   </nav>
 </header>
 
 <main id="main" tabindex="-1">
-  <!-- The front door: the 2026 campaign photograph and film, full bleed in black and white, people
-       walking toward what is next; the question, the line, the waitlist, and the three destinations as
-       the index across the bottom of the first screen. The film (wtn.js) never loads with reduced
-       motion or Data Saver, and waits until the page is idle. -->
-  <section class="hh" id="top" data-nav="photo" aria-labelledby="hh-title">
-    <div class="hh__media" aria-hidden="true">
-      <picture>
-        <source media="(max-aspect-ratio: 3/4)" srcset="/assets/img/hero-m-864.jpg" width="864" height="1152">
-        <img src="/assets/img/hero-1600.jpg" srcset="/assets/img/hero-800.jpg 800w, /assets/img/hero-1200.jpg 1200w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2048.jpg 2048w" sizes="100vw" width="2048" height="1152" fetchpriority="high" decoding="async" alt="">
-      </picture>
-      <video class="hh__video" data-src="/assets/nextgen-take-1.mp4" muted loop playsinline preload="none" tabindex="-1"></video>
+  <!-- 01 What's next? Five real NextGen 2026 photographs, each revealed by a camera flash (wtn.js).
+       Picks and reasons: docs/where-to-next/README.md. The stack is decorative; the doors are the content. -->
+  <section class="fb" id="top" data-nav="photo" data-flashbulb aria-labelledby="fb-title">
+    <div class="fb__stack" aria-hidden="true">
+    <picture class="fb__shot is-on">
+      <source media="(max-aspect-ratio: 4/5)" srcset="/assets/img/2026/hero/flash-1-m-720.webp 720w, /assets/img/2026/hero/flash-1-m-1080.webp 1080w" sizes="100vw">
+      <img src="/assets/img/2026/hero/flash-1-1920.webp" srcset="/assets/img/2026/hero/flash-1-1280.webp 1280w, /assets/img/2026/hero/flash-1-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="" decoding="async" fetchpriority="high">
+    </picture>
+    <picture class="fb__shot">
+      <source media="(max-aspect-ratio: 4/5)" data-srcset="/assets/img/2026/hero/flash-2-m-720.webp 720w, /assets/img/2026/hero/flash-2-m-1080.webp 1080w" sizes="100vw">
+      <img data-src="/assets/img/2026/hero/flash-2-1920.webp" data-srcset="/assets/img/2026/hero/flash-2-1280.webp 1280w, /assets/img/2026/hero/flash-2-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="" decoding="async">
+    </picture>
+    <picture class="fb__shot">
+      <source media="(max-aspect-ratio: 4/5)" data-srcset="/assets/img/2026/hero/flash-3-m-720.webp 720w, /assets/img/2026/hero/flash-3-m-1080.webp 1080w" sizes="100vw">
+      <img data-src="/assets/img/2026/hero/flash-3-1920.webp" data-srcset="/assets/img/2026/hero/flash-3-1280.webp 1280w, /assets/img/2026/hero/flash-3-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="" decoding="async">
+    </picture>
+    <picture class="fb__shot">
+      <source media="(max-aspect-ratio: 4/5)" data-srcset="/assets/img/2026/hero/flash-4-m-720.webp 720w, /assets/img/2026/hero/flash-4-m-1080.webp 1080w" sizes="100vw">
+      <img data-src="/assets/img/2026/hero/flash-4-1920.webp" data-srcset="/assets/img/2026/hero/flash-4-1280.webp 1280w, /assets/img/2026/hero/flash-4-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="" decoding="async">
+    </picture>
+    <picture class="fb__shot">
+      <source media="(max-aspect-ratio: 4/5)" data-srcset="/assets/img/2026/hero/flash-5-m-720.webp 720w, /assets/img/2026/hero/flash-5-m-1080.webp 1080w" sizes="100vw">
+      <img data-src="/assets/img/2026/hero/flash-5-1920.webp" data-srcset="/assets/img/2026/hero/flash-5-1280.webp 1280w, /assets/img/2026/hero/flash-5-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="" decoding="async">
+    </picture>
+      <div class="fb__flash"></div>
     </div>
-    <div class="hh__in">
-      <h1 class="hh__t wm" id="hh-title">where to next<span class="q">?</span></h1>
-      <div class="hh__foot">
-        <p class="hh__lede">A one-day experience for students and young adults to grow, connect, and see what&rsquo;s possible for their future.</p>
-        <p class="hh__act"><a class="btn btn--lg" href="#waitlist">Save your seat for 2027</a></p>
-      </div>
+    <div class="fb__head">
+      <h1 class="fb__t wn-d" id="fb-title">What&rsquo;s next?</h1>
+      <p class="fb__sub">You had to be there.</p>
     </div>
-    <div class="hh__idx">
-      <nav class="idx" aria-label="Choose where to go"><ol class="idx__list">
-      <li><a class="idx__a" href="/2026/"><span class="idx__no" aria-hidden="true">01</span><span class="idx__t wm">2026 moments</span><span class="idx__d">What NextGen 2026 felt like</span><span class="idx__go"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-      <li><a class="idx__a" href="/explore/"><span class="idx__no" aria-hidden="true">02</span><span class="idx__t wm">explore</span><span class="idx__d">Music, photography, testimonials</span><span class="idx__go"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-      <li><a class="idx__a idx__a--next" href="/2027/"><span class="idx__no" aria-hidden="true">03</span><span class="idx__t wm">2027</span><span class="idx__d">What&rsquo;s next, and the waitlist</span><span class="idx__go"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li>
-    </ol></nav>
+    <nav class="fb__doors" aria-label="Choose where to go">
+      <a class="fb__door" href="/2026/"><span>2026</span> <svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></a>
+      <a class="fb__door" href="/explore/"><span>Explore</span> <svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></a>
+      <a class="fb__door fb__door--next" href="/2027/"><span>2027</span> <svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></a>
+    </nav>
+    <div class="fb__foot">
+      <a class="fb__scroll" href="#seat"><svg viewBox="0 0 30 16" aria-hidden="true"><path d="M2 2l13 12L28 2"/></svg>Scroll</a>
+      <button class="fb__pause" type="button" aria-pressed="false" data-fb-pause hidden>Pause photos</button>
     </div>
   </section>
 
-  <!-- The waitlist: a seat at what's next. The photograph is the Gordon Center auditorium, edited:
-       black and white, one seat tinted NextGen teal (assets/img/seat-*; provenance in DESIGN.md). -->
-  <section class="seat" id="waitlist" data-nav="photo" aria-labelledby="wait-title">
-    <div class="seat__stage">
-      <picture class="seat__pic">
-        <source media="(max-aspect-ratio: 4/5)" srcset="/assets/img/seat-m-640.jpg 640w, /assets/img/seat-m-960.jpg 960w" sizes="100vw" width="960" height="1200">
-        <img src="/assets/img/seat-1200.jpg" srcset="/assets/img/seat-800.jpg 800w, /assets/img/seat-1200.jpg 1200w, /assets/img/seat-1800.jpg 1800w" sizes="100vw" width="1800" height="1200" loading="lazy" decoding="async"
-          alt="The Gordon Center auditorium in black and white, every seat empty, one seat in NextGen teal.">
-      </picture>
-      <div class="seat__head">
-        <p class="label seat__k">The 2027 waitlist</p>
-        <h2 class="seat__t wm" id="wait-title"><span>a seat at</span> <span>what&rsquo;s next<span class="q">.</span></span></h2>
-        <p class="seat__lede">Come for fresh perspective. Leave with direction. Be the first to hear when the date, the city and the lineup for NextGen 2027 are announced.</p>
-      </div>
-    </div>
-    <div class="seat__row">
-
-      <!-- The waitlist is NextGen's own: the form posts to /api/register.php (form-name "waitlist":
-           name, email and phone, as that endpoint requires) and is stored in the site's database. With
-           JavaScript, wtn.js sends it without leaving the page; without, the browser posts it and the
-           server answers with /registration-received/. -->
-      <div class="tkt">
-        <div class="tkt__main">
-          <p class="tkt__k">Admit one</p>
-          <p class="tkt__t wm">nextgen 2027</p>
-          <dl class="tkt__meta">
-            <div><dt>Date</dt><dd>To be announced</dd></div>
-            <div><dt>City</dt><dd>To be announced</dd></div>
-            <div><dt>Seat</dt><dd>Yours</dd></div>
-          </dl>
-        </div>
-        <div class="tkt__act">
-          <form class="tkt__form" action="/api/register.php" method="post" data-waitlist aria-label="Join the NextGen 2027 waitlist">
-            <input type="hidden" name="form-name" value="waitlist">
-            <input type="hidden" name="list" value="2027">
-            <p class="tkt__hp" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-            <div class="field"><label for="wl-name">Name</label><input id="wl-name" name="name" autocomplete="name" maxlength="120" required></div>
-            <div class="field"><label for="wl-email">Email</label><input id="wl-email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
-            <div class="field"><label for="wl-phone">Phone</label><input id="wl-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" required></div>
-            <p class="tkt__err" role="alert" hidden></p>
-            <button class="btn btn--lg" type="submit"><span class="btn__t">Save my seat</span></button>
-          </form>
-          <div class="tkt__done" role="status" tabindex="-1" hidden>
-            <p class="tkt__done-t wm">you&rsquo;re in<span class="q">.</span></p>
-            <p class="tkt__done-p">Your seat for NextGen 2027 is saved. We&rsquo;ll be in touch when the date, the city and the lineup are announced.</p>
-          </div>
-          <p class="tkt__help">Questions? <a href="mailto:hello@nextgensummit.us">hello@nextgensummit.us</a></p>
-        </div>
-      </div>
+  <!-- 02 Your seat is waiting. The Gordon Center auditorium in black and white with one seat tinted
+       NextGen teal (an edit of the venue photograph; provenance in DESIGN.md). -->
+  <section class="ys" id="seat" data-nav="photo" aria-labelledby="ys-title">
+    <picture class="ys__pic">
+      <source media="(max-width: 700px)" srcset="/assets/img/seat-rows-m-760.webp">
+      <img src="/assets/img/seat-rows-1800.webp" srcset="/assets/img/seat-rows-1200.webp 1200w, /assets/img/seat-rows-1800.webp 1800w" sizes="100vw" width="1800" height="520" loading="lazy" decoding="async"
+        alt="Rows of empty theatre seats at the Gordon Center in black and white, one seat in NextGen teal.">
+    </picture>
+    <div class="ys__in">
+      <h2 class="ys__t wn-d" id="ys-title">Your seat is waiting.</h2>
+      <p><a class="wn-btn" href="/2027/#waitlist">Join the 2027 waitlist <svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></a></p>
     </div>
   </section>
 </main>
@@ -136,9 +115,9 @@
   </ul>
   <nav class="foot__nav" aria-label="Footer">
     <ul>
-      <li><a href="/2026/">2026 Moments</a></li>
-      <li><a href="/explore/">Explore</a></li>
-      <li><a href="/2027/">2027</a></li>
+      <li><a href="/explore/">Explore NextGen</a></li>
+      <li><a href="/2026/">NextGen 2026</a></li>
+      <li><a href="/2027/">NextGen 2027</a></li>
       <li><a class="foot__mail" href="mailto:hello@nextgensummit.us">hello@nextgensummit.us</a></li>
     </ul>
   </nav>
@@ -155,11 +134,11 @@
     </div>
     <ul class="menu__list">
       <li><a href="/" aria-current="page">Home</a></li>
-      <li><a href="/2026/">2026 Moments</a></li>
-      <li><a href="/explore/">Explore</a></li>
-      <li><a href="/2027/">2027</a></li>
-      <li><a href="#waitlist" data-close>Join the waitlist</a></li>
+      <li><a href="/explore/">Explore NextGen</a></li>
+      <li><a href="/2026/">NextGen 2026</a></li>
+      <li><a href="/2027/">NextGen 2027</a></li>
     </ul>
+    <p class="menu__wl"><a class="btn btn--lg" href="/2027/#waitlist">Join the 2027 waitlist <svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></a></p>
   </div>
 </dialog>
 </body>
