@@ -98,7 +98,7 @@ body.wn{background:var(--ink);color:var(--wn-text)}
 
 /* ---------- Home: two full screens, a soft snap between them (proximity, never mandatory) ---------- */
 html.wn-snap{scroll-snap-type:y proximity}
-.fb,.pcs--home,.ys{scroll-snap-align:start}
+.fb,.ys{scroll-snap-align:start}
 
 /* section 1: the flashbulb. Five real 2026 photographs, one at a time, each revealed by a camera
    flash, held, then gone to dark (wtn.js). Reduced motion: a slow crossfade and no flash. */
@@ -343,9 +343,7 @@ html.wn-snap{scroll-snap-type:y proximity}
   .hl26__strip li,.hl26__strip li:nth-child(n+4){display:block;flex:0 0 74%;max-width:340px;margin:0;scroll-snap-align:start}
 }
 
-/* ---------- NextGen 2026: the pitch competition ----------
-   A screen for the chosen pitch, then all twenty as a sideways reel of portraits with a play mark.
-   The two results (the live final and People's Choice) are separate panels, both pending. */
+/* ---------- NextGen 2026: the two results, separate panels, both pending ---------- */
 .pr{position:relative;background:var(--wn-ink);color:var(--wn-text);padding:clamp(72px,12vh,140px) var(--gutter)}
 .pr__in{max-width:var(--maxw);margin:0 auto}
 .pr__results{margin-top:clamp(40px,7vh,72px);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,1.6vw,24px)}
@@ -378,29 +376,17 @@ html.wn-snap{scroll-snap-type:y proximity}
 .uf:focus-within::after{transform:scaleX(1)}
 .chip{transition:background-color .25s var(--ease),color .25s var(--ease),box-shadow .25s var(--ease),transform .2s var(--ease)}
 .chip:active{transform:scale(.97)}
-/* NextGen 2026: the pitch stage. The homepage People's Choice stage (pc-stage.css) as an archive: all twenty
-   founders in the rail, the chosen one marked with aria-current, no ranks and no clock. */
-.pcs--archive [hidden]{display:none}
-.pcs--archive{--rail-size:clamp(46px,3.5vw,56px)}
-.pcs--archive .pcs__t{font-size:var(--fs-h2);line-height:1.02;word-spacing:.04em}
-.pcs--archive .pcs__now-by{letter-spacing:.12em}
-.pcs--archive .pcs__go{--h:48px;margin-top:4px}
-.pcs--archive .pcs__fine{max-width:44ch}
-.pcs--archive .pcs__sound{top:calc(var(--nav-h,64px) + 16px);bottom:auto;width:44px;height:44px}
-.pcs--archive .pcs__rail{gap:clamp(10px,.85vw,14px);overflow-x:auto;overflow-y:hidden;margin-inline:calc(var(--gutter) * -1);padding:10px var(--gutter);scroll-snap-type:x proximity;scroll-padding-inline:var(--gutter);overscroll-behavior-x:contain;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 var(--gutter),#000 calc(100% - var(--gutter)),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 var(--gutter),#000 calc(100% - var(--gutter)),transparent 100%)}
-.pcs--archive .pcs__rail::-webkit-scrollbar{display:none}
-.pcs--archive .pcs__rail li{flex:0 0 auto;scroll-snap-align:start}
-.pcs--archive .pcs__bub{display:block}
-.pcs--archive .pcs__bub[aria-current="true"]{transform:scale(1.1)}
-.pcs--archive .pcs__bub[aria-current="true"] img{filter:none}
-.pcs--archive .pcs__bub[aria-current="true"]::before{box-shadow:inset 0 0 0 2.5px var(--accent)}
-.pcs--archive .pcs__bub[aria-current="true"]::after{content:"";position:absolute;inset:-3px;border-radius:50%;animation:pcs-breathe 4s ease-in-out infinite;pointer-events:none}
 .pr--res{padding-block:clamp(40px,7vh,72px)}
 .pr--res .pr__results{margin-top:0}
 .pr--res + .room{--seam-top:0px}
 .pr--res + .room::before{display:none}
-@media (max-width:900px){.pcs--archive .pcs__sound{top:calc(var(--nav-h,58px) + 12px)}}
-@media (max-width:560px){.pcs--archive .pcs__go{flex:0 1 auto;width:auto}}
-@media (prefers-reduced-motion:reduce){.pcs--archive .pcs__bub[aria-current="true"]::after{animation:none}}
-/* Home: the stage sits between two dark screens, so no paper seam at its top */
-.pcs--home .pcs__grade::after{display:none}
+/* NextGen 2026: the People's Choice stage keeps the archive's own two buttons (site.css .btn and .btn--ghost,
+   sized by pc-stage.css), not the What's Next button family above, which would otherwise win by load order */
+.pcs .pcs__go,.pcs .pcs__alt{--h:44px;gap:.75em;padding:0 1.35em;font-size:12px;letter-spacing:.12em;background:var(--accent);color:var(--on-accent)}
+.pcs .pcs__go::before,.pcs .pcs__alt::before{display:none}
+.pcs .pcs__go:hover{background:var(--accent-hover)}
+.pcs .pcs__alt{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px currentColor}
+.pcs .pcs__alt:hover{background:transparent;box-shadow:inset 0 0 0 2px currentColor}
+/* the one departure from the archive: every control on the stage is at least 44px to touch (WCAG 2.5.8; the archive had 42 and 38) */
+.pcs .pcs__sound{width:44px;height:44px}
+@media (max-width:560px){.pcs .pcs__go,.pcs .pcs__alt{--h:44px;padding:11px 1em;letter-spacing:.07em}}

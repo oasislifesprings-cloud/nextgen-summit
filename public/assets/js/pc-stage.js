@@ -16,11 +16,8 @@
    simultaneously loaded media elements and past that limit play() fails silently on
    whichever element asks next. The reels cap at two and so does this.
 
-   It reads the vote, it does not touch it. Standings come from /api/pc-rank.php and the
-   deadline from GET /api/pc-vote.php, both of which are anonymous, sessionless reads.
-   Deliberately NOT pc-otp.php?action=status: that one calls pc_session_begin() and would
-   mint a thirty-day cookie and a server-side session file for every person who ever loads
-   the homepage, which is a real cost for a number we only want to print.
+   It reads nothing from a server: the archive is static, so the stage shows the founders in the
+   fixed manifest order.
 
    WHY THE COPY IS VAGUER THAN YOU MIGHT EXPECT
 
@@ -37,19 +34,6 @@
   'use strict';
 
   var SELF = document.currentScript;      // captured now; it is null once a callback runs
-
-  /* The homepage view, recorded before anything else can bail out.
-
-     home_view below fires only once the section scrolls into sight, which makes it a
-     'the nominees were seen' signal rather than a page view -- and a visitor who lands
-     on the homepage and never scrolls would be invisible to the funnel, which would
-     then overstate every conversion rate measured against it.
-
-     This goes straight to the beacon rather than through track(), deliberately: track()
-     also pushes to the dataLayer, and the People's Choice page already emits
-     ngs_pc_page_view there. Routing a homepage view through it would add a second
-     source for an event somebody else's GTM configuration is already counting. */
-  try { if (window.NGD_BEACON) window.NGD_BEACON('page_view', null); } catch (e) {}
 
   var sec = document.querySelector('[data-pcs]');
   if (!sec) return;
@@ -82,17 +66,8 @@
   var deadline = null;
   var state = '';
 
-  /* ---------- analytics, matching what the People's Choice page already emits ---------- */
-  function track(name, data) {
-    try {
-      window.dataLayer = window.dataLayer || [];
-      var p = { event: 'ngs_pc_' + name };
-      for (var k in data) { if (Object.prototype.hasOwnProperty.call(data, k)) p[k] = data[k]; }
-      window.dataLayer.push(p);
-    } catch (e) {}
-    /* and on to NextGen Data, on its own guard. See the note in peoples-choice.js. */
-    try { if (window.NGD_BEACON) window.NGD_BEACON(name, data); } catch (e) {}
-  }
+  /* The archive records nothing: no analytics runs on any page. */
+  function track() {}
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -116,10 +91,6 @@
       s.onerror = fail;
       document.head.appendChild(s);
     });
-  }
-
-  function getJSON(url) {
-    return fetch(url, { credentials: 'omit', cache: 'no-store' }).then(function (r) { return r.json(); });
   }
 
   /* Who is on the stage.
@@ -471,8 +442,8 @@
 
     Promise.all([
       loadManifest(),
-      getJSON('/api/pc-rank.php').catch(function () { return null; }),
-      getJSON('/api/pc-vote.php').catch(function () { return null; })
+      Promise.resolve(null),   // archive: no standings or deadline are read from a server
+      Promise.resolve(null)
     ]).then(function (r) {
       var all = r[0], rank = r[1], vote = r[2];
       if (!all || !all.length) { sec.setAttribute('data-pcs-failed', '1'); return; }
