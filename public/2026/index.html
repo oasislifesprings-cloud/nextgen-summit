@@ -40,8 +40,9 @@
 <script src="/assets/js/sponsors.js?v=20261102-305" defer></script>
 <script src="/assets/js/speakers.js?v=20261102-305" defer></script>
 <script src="/assets/js/film.js?v=20261102-305" defer></script>
-<link rel="stylesheet" href="/assets/css/wtn.css?v=20261108-r1">
-<script src="/assets/js/wtn.js?v=20261108-r1" defer></script>
+<link rel="stylesheet" href="/assets/css/pc-stage.css?v=20261108-r2">
+<link rel="stylesheet" href="/assets/css/wtn.css?v=20261108-r2">
+<script src="/assets/js/wtn.js?v=20261108-r2" defer></script>
 </head>
 <body class="ng26">
 
@@ -165,135 +166,62 @@
     </div>
   </section>
 
-  <!-- the pitch competition. The twenty People's Choice founders and the pitch films they shared,
-       self-hosted, from the reviewed Top 20 public manifest (assets/js/pc-founders.js): names, ventures
-       and one-line descriptions only. The live-final winners and the People's Choice results are two
-       separate results; neither is shown until it has been verified. -->
-  <section class="pr" id="pitch" data-nav="photo" data-pitch aria-labelledby="pr-t">
+  <!-- the pitch competition, on the homepage's People's Choice stage: the film behind the words is the
+       pitch of the founder chosen in the rail. All twenty, from the reviewed Top 20 public manifest
+       (assets/js/pc-founders.js), Myron and Vishwa first as on the homepage. No place or ranking is shown;
+       the live-final winners and the People's Choice results are two separate results, neither shown
+       until it has been verified. -->
+  <section class="pcs pcs--archive" id="pitch" data-nav="photo" data-stage aria-labelledby="pcs-title">
+    <div class="pcs__stage" aria-hidden="true">
+      <div class="pcs__layer is-on" data-st-layer data-fit="cover"><div class="pcs__bg" style="background-image:url(&quot;/assets/video/light-poster.jpg?v=05038d3a&quot;)"></div><img class="pcs__still" src="/assets/video/light-poster.jpg?v=05038d3a" alt="" loading="lazy" decoding="async"></div>
+      <div class="pcs__layer" data-st-layer></div>
+      <div class="pcs__grade"></div>
+    </div>
+
+    <button class="pcs__sound pcs__pause" type="button" data-st-pause aria-pressed="false" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true" data-st-pause-i></svg>
+      <span class="wn-vh" data-st-pause-t>Pause the film</span>
+    </button>
+
+    <div class="pcs__in">
+      <div class="pcs__copy">
+        <p class="pcs__k">People&rsquo;s Choice Awards</p>
+        <h2 class="pcs__t wm" id="pcs-title">Twenty founders.<br>One went to the final.</h2>
+        <p class="pcs__now" data-st-now aria-live="polite"><span class="pcs__now-co">LIGHT</span><span class="pcs__now-by">Myron J. De Bond</span></p>
+        <div class="pcs__cta">
+          <button class="wn-btn b-pri pcs__go" type="button" data-st-sound aria-pressed="false" hidden><span data-st-sound-t>Watch with sound</span><svg class="ar" viewBox="0 0 26 10" aria-hidden="true"><path d="M1 5h23M19.5 1 24 5l-4.5 4"/></svg></button>
+        </div>
+        <p class="pcs__fine">Ten founders pitched live on October 30 for a share of $10,000.</p>
+      </div>
+
+      <ul class="pcs__rail" aria-label="The twenty founders. Choose one to watch their pitch.">
+        <li><a class="pcs__bub" href="/assets/video/light.mp4?v=75e399f0" data-st-pick data-poster="/assets/video/light-poster.jpg?v=05038d3a" data-co="LIGHT" data-who="Myron J. De Bond" aria-label="LIGHT, Myron J. De Bond: watch the pitch" aria-current="true"><img src="/assets/img/founders/light-story.webp?v=c9378cfc" srcset="/assets/img/founders/light-story.webp?v=c9378cfc 320w, /assets/img/founders/light-story@2x.webp?v=dddf94ba 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:50% 47%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/find-your-mission-corp.mp4?v=d62f7404" data-st-pick data-poster="/assets/video/find-your-mission-corp-poster.jpg?v=00848525" data-co="Find Your Mission Corp." data-who="Vishwa Shukla" aria-label="Find Your Mission Corp., Vishwa Shukla: watch the pitch"><img src="/assets/img/founders/find-your-mission-corp-story.webp?v=fb9fc375" srcset="/assets/img/founders/find-your-mission-corp-story.webp?v=fb9fc375 320w, /assets/img/founders/find-your-mission-corp-story@2x.webp?v=a143fc05 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:50% 48%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/haptol-labs.mp4?v=ad280214" data-st-pick data-poster="/assets/video/haptol-labs-poster.jpg?v=684b9ac9" data-co="Haptol Labs" data-who="Caleb Orji" aria-label="Haptol Labs, Caleb Orji: watch the pitch"><img src="/assets/img/founders/haptol-labs-story.webp?v=71ab2a3c" srcset="/assets/img/founders/haptol-labs-story.webp?v=71ab2a3c 320w, /assets/img/founders/haptol-labs-story@2x.webp?v=9968d7b6 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:50% 47%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/credible-blossom.mp4?v=551587a5" data-st-pick data-poster="/assets/video/credible-blossom-poster.jpg?v=b9c278b9" data-co="Credible blossom" data-who="Annrita Karu" aria-label="Credible blossom, Annrita Karu: watch the pitch"><img src="/assets/img/founders/credible-blossom-story.webp?v=b6ae6479" srcset="/assets/img/founders/credible-blossom-story.webp?v=b6ae6479 320w, /assets/img/founders/credible-blossom-story@2x.webp?v=901730f6 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:50% 45%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/sooz.mp4?v=544b7c83" data-st-pick data-poster="/assets/video/sooz-poster.jpg?v=de93bdeb" data-co="Sooz" data-who="Muyiwa Ogunsola" aria-label="Sooz, Muyiwa Ogunsola: watch the pitch"><img src="/assets/img/founders/sooz-story.webp?v=e94f32b4" srcset="/assets/img/founders/sooz-story.webp?v=e94f32b4 320w, /assets/img/founders/sooz-story@2x.webp?v=db7a4db1 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:50% 47%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/the-luminous-lab.mp4?v=f1197d5e" data-st-pick data-poster="/assets/video/the-luminous-lab-poster.jpg?v=8174f404" data-co="The Luminous Lab" data-who="Ariel Laura Métayer" aria-label="The Luminous Lab, Ariel Laura Métayer: watch the pitch"><img src="/assets/img/founders/the-luminous-lab-story.webp?v=786c1de9" srcset="/assets/img/founders/the-luminous-lab-story.webp?v=786c1de9 320w, /assets/img/founders/the-luminous-lab-story@2x.webp?v=848bb2bd 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:50% 45%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/lookbook.mp4?v=3d9678b1" data-st-pick data-poster="/assets/video/lookbook-poster.jpg?v=678e3a8c" data-co="Lookbook" data-who="Ethan Edouard" aria-label="Lookbook, Ethan Edouard: watch the pitch"><img src="/assets/img/founders/lookbook-story.webp?v=5fb07879" srcset="/assets/img/founders/lookbook-story.webp?v=5fb07879 320w, /assets/img/founders/lookbook-story@2x.webp?v=3695c5fb 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:50% 45%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/ibraid.mp4?v=b39a14f1" data-st-pick data-poster="/assets/video/ibraid-poster.jpg?v=5c86c76a" data-co="iBraid" data-who="Velma Funebe" aria-label="iBraid, Velma Funebe: watch the pitch"><img src="/assets/img/founders/ibraid-story.webp?v=f50fc656" srcset="/assets/img/founders/ibraid-story.webp?v=f50fc656 320w, /assets/img/founders/ibraid-story@2x.webp?v=94912b48 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:50% 47%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/beforekeys-llc.mp4?v=886db319" data-st-pick data-poster="/assets/video/beforekeys-llc-poster.jpg?v=0cf7b12a" data-co="BeforeKeys LLC" data-who="Divine Ayomide Fiolu" aria-label="BeforeKeys LLC, Divine Ayomide Fiolu: watch the pitch"><img src="/assets/img/founders/beforekeys-llc-story.webp?v=3808d73f" srcset="/assets/img/founders/beforekeys-llc-story.webp?v=3808d73f 320w, /assets/img/founders/beforekeys-llc-story@2x.webp?v=2ebc0f57 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:50% 47%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/if-the-shoe-fits-itsf.mp4?v=44d85951" data-st-pick data-poster="/assets/video/if-the-shoe-fits-itsf-poster.jpg?v=c67ef996" data-co="If The Shoe Fits (ITSF)" data-who="Jolie Wyatt" aria-label="If The Shoe Fits (ITSF), Jolie Wyatt: watch the pitch"><img src="/assets/img/founders/if-the-shoe-fits-itsf-story.webp?v=225a80f3" srcset="/assets/img/founders/if-the-shoe-fits-itsf-story.webp?v=225a80f3 320w, /assets/img/founders/if-the-shoe-fits-itsf-story@2x.webp?v=09de3150 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:50% 47%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/rest.mp4?v=4db2e035" data-st-pick data-poster="/assets/video/rest-poster.jpg?v=8c9b89c7" data-co="Rest" data-who="Austin Kendrick Lee" aria-label="Rest, Austin Kendrick Lee: watch the pitch"><img src="/assets/img/founders/rest-story.webp?v=dde08639" srcset="/assets/img/founders/rest-story.webp?v=dde08639 320w, /assets/img/founders/rest-story@2x.webp?v=b713488a 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:50% 47%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/pathbridge.mp4?v=3228eea5" data-st-pick data-poster="/assets/video/pathbridge-poster.jpg?v=85c78ea6" data-co="PathBridge" data-who="Benedicta Dankwa" aria-label="PathBridge, Benedicta Dankwa: watch the pitch"><img src="/assets/img/founders/pathbridge-story.webp?v=51f668ea" srcset="/assets/img/founders/pathbridge-story.webp?v=51f668ea 320w, /assets/img/founders/pathbridge-story@2x.webp?v=d301658c 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:50% 47%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/applytrack.mp4?v=89e90164" data-st-pick data-poster="/assets/video/applytrack-poster.jpg?v=7d0bf6d4" data-co="ApplyTrack" data-who="Pedrocia De-Sosoo" aria-label="ApplyTrack, Pedrocia De-Sosoo: watch the pitch"><img src="/assets/img/founders/applytrack-story.webp?v=4ba28fb5" srcset="/assets/img/founders/applytrack-story.webp?v=4ba28fb5 320w, /assets/img/founders/applytrack-story@2x.webp?v=7a1e00ba 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:50% 47%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/jay-s-watermelonade.mp4?v=be03c347" data-st-pick data-poster="/assets/video/jay-s-watermelonade-poster.jpg?v=b4b25713" data-co="Jay's Watermelonade" data-who="Joyson BaLisamore" aria-label="Jay's Watermelonade, Joyson BaLisamore: watch the pitch"><img src="/assets/img/founders/jay-s-watermelonade-story.webp?v=62bac2cc" srcset="/assets/img/founders/jay-s-watermelonade-story.webp?v=62bac2cc 320w, /assets/img/founders/jay-s-watermelonade-story@2x.webp?v=f799fa37 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:50% 47%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/offguardz.mp4?v=3ee51efb" data-st-pick data-poster="/assets/video/offguardz-poster.jpg?v=851bb355" data-co="Offguardz" data-who="Ugochinyere Blessing Okogeri" aria-label="Offguardz, Ugochinyere Blessing Okogeri: watch the pitch"><img src="/assets/img/founders/offguardz-story.webp?v=c7ff13bf" srcset="/assets/img/founders/offguardz-story.webp?v=c7ff13bf 320w, /assets/img/founders/offguardz-story@2x.webp?v=d1856d47 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:50% 47%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/k8culture-productions.mp4?v=9213376f" data-st-pick data-poster="/assets/video/k8culture-productions-poster.jpg?v=2d42eb30" data-co="K8Culture Productions" data-who="Kate Mina Lin" aria-label="K8Culture Productions, Kate Mina Lin: watch the pitch"><img src="/assets/img/founders/k8culture-productions-story.webp?v=fb012834" srcset="/assets/img/founders/k8culture-productions-story.webp?v=fb012834 320w, /assets/img/founders/k8culture-productions-story@2x.webp?v=233e325a 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:41% 50%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/melavyr.mp4?v=135ce63b" data-st-pick data-poster="/assets/video/melavyr-poster.jpg?v=75ae3312" data-co="Melavyr" data-who="Bishop Akalusi" aria-label="Melavyr, Bishop Akalusi: watch the pitch"><img src="/assets/img/founders/melavyr-story.webp?v=a87580ec" srcset="/assets/img/founders/melavyr-story.webp?v=a87580ec 320w, /assets/img/founders/melavyr-story@2x.webp?v=3b6ea8aa 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:50% 51%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/beauty-boot-camp.mp4?v=705dc3f6" data-st-pick data-poster="/assets/video/beauty-boot-camp-poster.jpg?v=527dfdea" data-co="Beauty Boot Camp" data-who="Grace Blay" aria-label="Beauty Boot Camp, Grace Blay: watch the pitch"><img src="/assets/img/founders/beauty-boot-camp-story.webp?v=00c4a728" srcset="/assets/img/founders/beauty-boot-camp-story.webp?v=00c4a728 320w, /assets/img/founders/beauty-boot-camp-story@2x.webp?v=af6e18d6 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:61% 48%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/nextofferup.mp4?v=c95279c6" data-st-pick data-poster="/assets/video/nextofferup-poster.jpg?v=682227a6" data-co="NextOfferUP" data-who="Bryan Ndum" aria-label="NextOfferUP, Bryan Ndum: watch the pitch"><img src="/assets/img/founders/nextofferup-story.webp?v=e201d872" srcset="/assets/img/founders/nextofferup-story.webp?v=e201d872 320w, /assets/img/founders/nextofferup-story@2x.webp?v=8623d0a4 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:50% 47%"></a></li>
+        <li><a class="pcs__bub" href="/assets/video/exam-me.mp4?v=854851c5" data-st-pick data-poster="/assets/video/exam-me-poster.jpg?v=d8eb76ff" data-co="Exam.Me" data-who="Christal S. Burgess" aria-label="Exam.Me, Christal S. Burgess: watch the pitch"><img src="/assets/img/founders/exam-me-story.webp?v=89d04849" srcset="/assets/img/founders/exam-me-story.webp?v=89d04849 320w, /assets/img/founders/exam-me-story@2x.webp?v=010cbd4a 640w" sizes="64px" width="64" height="64" alt="" loading="lazy" decoding="async" style="--focal:50% 47%"></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="pr pr--res" aria-labelledby="pr-res-t">
     <div class="pr__in">
-      <header class="pr__head">
-        <p class="pr__k">The pitch competition</p>
-        <h2 class="pr__t wm" id="pr-t">Twenty founders. Twenty pitches.</h2>
-        <p class="pr__lede">Ten founders pitched live on October 30 for a share of $10,000. These are the twenty pitch films from the People&rsquo;s Choice Awards.</p>
-      </header>
-      <div class="pr__stage">
-        <div class="pr__screen"><video class="pr__video" controls playsinline preload="none" poster="/assets/video/haptol-labs-poster.jpg" src="/assets/video/haptol-labs.mp4" data-pr-video></video></div>
-        <div class="pr__now" aria-live="polite">
-          <p class="pr__num" data-pr-n>01 / 20</p>
-          <h3 class="pr__co" data-pr-co>Haptol Labs</h3>
-          <p class="pr__who" data-pr-who>Caleb Orji</p>
-          <p class="pr__blurb" data-pr-blurb>We make oral care products that nourish the good bacteria in your mouth, rather than destroying them with harsh chemicals, keeping bad breath away all day.</p>
-        </div>
-      </div>
-      <div class="pr__bar">
-        <p class="pr__hint">All twenty pitches</p>
-        <div class="pr__ctl">
-          <button class="pr__arrow b-sec" type="button" data-pr-prev aria-label="Show earlier pitches"><svg viewBox="0 0 26 10" aria-hidden="true"><path d="M25 5H2M6.5 1 2 5l4.5 4"/></svg></button>
-          <button class="pr__arrow b-sec" type="button" data-pr-next aria-label="Show more pitches"><svg viewBox="0 0 26 10" aria-hidden="true"><path d="M1 5h23M19.5 1 24 5l-4.5 4"/></svg></button>
-        </div>
-      </div>
-      <ol class="pr__reel" data-pr-reel tabindex="0" aria-label="The twenty pitch films, scrolls sideways">
-        <li><a class="pr__card" href="/assets/video/haptol-labs.mp4" data-pr-pick data-n="01" data-poster="/assets/video/haptol-labs-poster.jpg" data-co="Haptol Labs" data-who="Caleb Orji" data-blurb="We make oral care products that nourish the good bacteria in your mouth, rather than destroying them with harsh chemicals, keeping bad breath away all day." aria-current="true">
-          <span class="pr__pic"><img src="/assets/img/founders/haptol-labs.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 35%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">01</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Haptol Labs</span><span class="pr__cw">Caleb Orji</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/credible-blossom.mp4" data-pr-pick data-n="02" data-poster="/assets/video/credible-blossom-poster.jpg" data-co="Credible blossom" data-who="Annrita Karu" data-blurb="Credible blossom is an AI-powered platform that matches families with caregivers with similar interests, handles long-term care insurance claims and compensates caregivers fairly.">
-          <span class="pr__pic"><img src="/assets/img/founders/credible-blossom.webp" width="780" height="1100" loading="lazy" decoding="async" alt="" style="object-position:50% 22%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">02</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Credible blossom</span><span class="pr__cw">Annrita Karu</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/sooz.mp4" data-pr-pick data-n="03" data-poster="/assets/video/sooz-poster.jpg" data-co="Sooz" data-who="Muyiwa Ogunsola" data-blurb="We make Sooz, a powdered drink mix that alleviates the burn and digestive discomfort that accompanies spicy food.">
-          <span class="pr__pic"><img src="/assets/img/founders/sooz.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 36%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">03</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Sooz</span><span class="pr__cw">Muyiwa Ogunsola</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/the-luminous-lab.mp4" data-pr-pick data-n="04" data-poster="/assets/video/the-luminous-lab-poster.jpg" data-co="The Luminous Lab" data-who="Ariel Laura Métayer" data-blurb="Kainema is an AI-powered personal development platform that turns vision boards into executable life plans by integrating financial goals, habits, and coaching in one system.">
-          <span class="pr__pic"><img src="/assets/img/founders/the-luminous-lab.webp" width="780" height="1100" loading="lazy" decoding="async" alt="" style="object-position:50% 22%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">04</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>The Luminous Lab</span><span class="pr__cw">Ariel Laura Métayer</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/lookbook.mp4" data-pr-pick data-n="05" data-poster="/assets/video/lookbook-poster.jpg" data-co="Lookbook" data-who="Ethan Edouard" data-blurb="The Lookbook helps people organize, discover, and style their wardrobes through an easy-to-use digital closet app.">
-          <span class="pr__pic"><img src="/assets/img/founders/lookbook.webp" width="780" height="1100" loading="lazy" decoding="async" alt="" style="object-position:50% 22%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">05</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Lookbook</span><span class="pr__cw">Ethan Edouard</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/ibraid.mp4" data-pr-pick data-n="06" data-poster="/assets/video/ibraid-poster.jpg" data-co="iBraid" data-who="Velma Funebe" data-blurb="iBraid is a beauty-tech platform making DIY hairstyling faster, easier, and more affordable through camera-guided technology, starting with braiding and expanding into haircuts.">
-          <span class="pr__pic"><img src="/assets/img/founders/ibraid.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 36%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">06</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>iBraid</span><span class="pr__cw">Velma Funebe</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/beforekeys-llc.mp4" data-pr-pick data-n="07" data-poster="/assets/video/beforekeys-llc-poster.jpg" data-co="BeforeKeys LLC" data-who="Divine Ayomide Fiolu" data-blurb="BeforeKeys flips rental screening: we check who’s asking for your deposit and whether they actually have the right to rent the property.">
-          <span class="pr__pic"><img src="/assets/img/founders/beforekeys-llc.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 36%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">07</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>BeforeKeys LLC</span><span class="pr__cw">Divine Ayomide Fiolu</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/if-the-shoe-fits-itsf.mp4" data-pr-pick data-n="08" data-poster="/assets/video/if-the-shoe-fits-itsf-poster.jpg" data-co="If The Shoe Fits (ITSF)" data-who="Jolie Wyatt" data-blurb="We use additive manufacturing to create custom-fit footwear for women at scale.">
-          <span class="pr__pic"><img src="/assets/img/founders/if-the-shoe-fits-itsf.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 36%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">08</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>If The Shoe Fits (ITSF)</span><span class="pr__cw">Jolie Wyatt</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/rest.mp4" data-pr-pick data-n="09" data-poster="/assets/video/rest-poster.jpg" data-co="Rest" data-who="Austin Kendrick Lee" data-blurb="Rest is a free gym timer that turns wasted minutes between sets into scripture memorization, so busy Christians stop doom scrolling and finish on time.">
-          <span class="pr__pic"><img src="/assets/img/founders/rest.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 36%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">09</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Rest</span><span class="pr__cw">Austin Kendrick Lee</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/pathbridge.mp4" data-pr-pick data-n="10" data-poster="/assets/video/pathbridge-poster.jpg" data-co="PathBridge" data-who="Benedicta Dankwa" data-blurb="PathBridge makes navigating large event venues effortless with intuitive indoor mapping technology. Seamlessly find your destinations with your personal GPS for the great indoors.">
-          <span class="pr__pic"><img src="/assets/img/founders/pathbridge.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 35%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">10</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>PathBridge</span><span class="pr__cw">Benedicta Dankwa</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/applytrack.mp4" data-pr-pick data-n="11" data-poster="/assets/video/applytrack-poster.jpg" data-co="ApplyTrack" data-who="Pedrocia De-Sosoo" data-blurb="ApplyTrack is a job tracker that updates itself from your Gmail, preps you for interviews, and keeps students encouraged through the search.">
-          <span class="pr__pic"><img src="/assets/img/founders/applytrack.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 36%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">11</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>ApplyTrack</span><span class="pr__cw">Pedrocia De-Sosoo</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/jay-s-watermelonade.mp4" data-pr-pick data-n="12" data-poster="/assets/video/jay-s-watermelonade-poster.jpg" data-co="Jay's Watermelonade" data-who="Joyson BaLisamore" data-blurb="We promote healthier hydration that creates socioeconomic opportunity in Baltimore.">
-          <span class="pr__pic"><img src="/assets/img/founders/jay-s-watermelonade.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 35%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">12</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Jay's Watermelonade</span><span class="pr__cw">Joyson BaLisamore</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/offguardz.mp4" data-pr-pick data-n="13" data-poster="/assets/video/offguardz-poster.jpg" data-co="Offguardz" data-who="Ugochinyere Blessing Okogeri" data-blurb="OffGuardz is the Uber for the creator economy, connecting brands, businesses, and individuals with local creators on demand, making content creation accessible and affordable">
-          <span class="pr__pic"><img src="/assets/img/founders/offguardz.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 36%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">13</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Offguardz</span><span class="pr__cw">Ugochinyere Blessing Okogeri</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/k8culture-productions.mp4" data-pr-pick data-n="14" data-poster="/assets/video/k8culture-productions-poster.jpg" data-co="K8Culture Productions" data-who="Kate Mina Lin" data-blurb="K8Culture Productions is an Asian American–owned studio that creates, produces and owns film, series and music rooted in Korean and Chinese culture, so the next global K-culture hit belongs to the community it comes from.">
-          <span class="pr__pic"><img src="/assets/img/founders/k8culture-productions.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:43% 45%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">14</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>K8Culture Productions</span><span class="pr__cw">Kate Mina Lin</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/melavyr.mp4" data-pr-pick data-n="15" data-poster="/assets/video/melavyr-poster.jpg" data-co="Melavyr" data-who="Bishop Akalusi" data-blurb="Melavyr helps identify warning signs of skin cancer and other skin conditions from a photo, giving users clear next steps across every skin tone.">
-          <span class="pr__pic"><img src="/assets/img/founders/melavyr.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 50%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">15</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Melavyr</span><span class="pr__cw">Bishop Akalusi</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/light.mp4" data-pr-pick data-n="16" data-poster="/assets/video/light-poster.jpg" data-co="LIGHT" data-who="Myron J. De Bond" data-blurb="Light is a fashion brand beyond clothes. We want to use our designs to tell a story of hope and shine in a dark world.">
-          <span class="pr__pic"><img src="/assets/img/founders/light.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 36%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">16</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>LIGHT</span><span class="pr__cw">Myron J. De Bond</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/beauty-boot-camp.mp4" data-pr-pick data-n="17" data-poster="/assets/video/beauty-boot-camp-poster.jpg" data-co="Beauty Boot Camp" data-who="Grace Blay" data-blurb="We teach underprivileged girls the hygiene and beauty basics they're often bullied for not knowing, so they can walk into womanhood with confidence.">
-          <span class="pr__pic"><img src="/assets/img/founders/beauty-boot-camp.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:59% 41%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">17</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Beauty Boot Camp</span><span class="pr__cw">Grace Blay</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/nextofferup.mp4" data-pr-pick data-n="18" data-poster="/assets/video/nextofferup-poster.jpg" data-co="NextOfferUP" data-who="Bryan Ndum" data-blurb="NextOfferUP is an AI-powered career platform helping students and job seekers land opportunities through personalized resumes, cover letters, and streamlined job application tracking.">
-          <span class="pr__pic"><img src="/assets/img/founders/nextofferup.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 36%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">18</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>NextOfferUP</span><span class="pr__cw">Bryan Ndum</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/exam-me.mp4" data-pr-pick data-n="19" data-poster="/assets/video/exam-me-poster.jpg" data-co="Exam.Me" data-who="Christal S. Burgess" data-blurb="Exam.Me transforms study materials into personalized practice exams, helping students identify knowledge gaps, build confidence, and prepare smarter for the tests that shape their futures.">
-          <span class="pr__pic"><img src="/assets/img/founders/exam-me.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 35%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">19</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Exam.Me</span><span class="pr__cw">Christal S. Burgess</span></span>
-        </a></li>
-        <li><a class="pr__card" href="/assets/video/find-your-mission-corp.mp4" data-pr-pick data-n="20" data-poster="/assets/video/find-your-mission-corp-poster.jpg" data-co="Find Your Mission Corp." data-who="Vishwa Shukla" data-blurb="We’re empowering underserved high school students by intentionally designing growth-oriented, youth-led spaces for self-advocacy and self-exploration, where schools lack counselors and funding support.">
-          <span class="pr__pic"><img src="/assets/img/founders/find-your-mission-corp.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 40%"></span>
-          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
-          <span class="pr__cap"><span class="pr__cn">20</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Find Your Mission Corp.</span><span class="pr__cw">Vishwa Shukla</span></span>
-        </a></li>
-      </ol>
+      <h2 class="wn-vh" id="pr-res-t">Results</h2>
       <div class="pr__results">
         <div class="pr__res">
           <p class="pr__rk">The live final</p>

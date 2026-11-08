@@ -201,54 +201,139 @@
     lb.addEventListener('close', function () { big.removeAttribute('src'); if (opener) opener.focus(); });
   }
 
-  /* ---------- NextGen 2026: the pitch reel ----------
-     Each card is a link to its pitch film, so without script it simply opens the video. With script a
-     card loads its film into the screen above and plays it; the arrows scroll the reel a page at a time. */
-  var pr = document.querySelector('[data-pitch]');
-  if (pr) {
-    var vid = pr.querySelector('[data-pr-video]');
-    var reel = pr.querySelector('[data-pr-reel]');
-    var cards = Array.prototype.slice.call(pr.querySelectorAll('[data-pr-pick]'));
-    var nowBox = pr.querySelector('.pr__now');
-    var out = { n: pr.querySelector('[data-pr-n]'), co: pr.querySelector('[data-pr-co]'), who: pr.querySelector('[data-pr-who]'), blurb: pr.querySelector('[data-pr-blurb]') };
-    var prev = pr.querySelector('[data-pr-prev]'), next = pr.querySelector('[data-pr-next]');
-    var total = (cards.length < 10 ? '0' : '') + cards.length;
-    function pick(a) {
-      cards.forEach(function (c) { c.removeAttribute('aria-current'); });
-      a.setAttribute('aria-current', 'true');
-      vid.pause();
-      vid.poster = a.getAttribute('data-poster');
-      vid.src = a.href;
-      nowBox.classList.add('is-swap');
-      setTimeout(function () {
-        out.n.textContent = a.getAttribute('data-n') + ' / ' + total;
-        out.co.textContent = a.getAttribute('data-co');
-        out.who.textContent = a.getAttribute('data-who');
-        out.blurb.textContent = a.getAttribute('data-blurb');
-        nowBox.classList.remove('is-swap');
-      }, still() ? 0 : 200);
-      var r = vid.getBoundingClientRect();
-      if (r.top < 0 || r.bottom > window.innerHeight) vid.scrollIntoView({ behavior: still() ? 'auto' : 'smooth', block: 'center' });
-      var p = vid.play();
-      if (p && p.catch) p.catch(function () {});
+  /* ---------- NextGen 2026: the pitch stage ----------
+     The homepage's People's Choice stage, as an archive: the film behind the words is the pitch of the
+     founder chosen in the rail, all twenty of them, and no place or ranking is shown. Two layers cross-fade
+     and the outgoing one gives up its source, so no more than two films are ever loaded (the iOS limit the
+     founder reels learned). Nothing loads until the section is near. Each portrait is a link to its film,
+     so without script it simply opens the video. */
+  var st = document.querySelector('[data-stage]');
+  if (st) {
+    var layers = st.querySelectorAll('[data-st-layer]');
+    var bubs = Array.prototype.slice.call(st.querySelectorAll('[data-st-pick]'));
+    var nowEl = st.querySelector('[data-st-now]');
+    var sBtn = st.querySelector('[data-st-sound]'), pBtn = st.querySelector('[data-st-pause]');
+    var conn = navigator.connection || navigator.webkitConnection || null;
+    var thrifty = !!(conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '')));
+    var front = 0, live = bubs[0], muted = true, held = still(), seen = false, near = false;
+    var PAUSE = '<path d="M8 5.5v13M16 5.5v13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>';
+    var PLAY = '<path d="M8 5.2v13.6L19 12z" fill="currentColor"/>';
+    var fore = function () { return layers[front]; };
+    var vOf = function (l) { return l.querySelector('video'); };
+    function fit(l) {
+      var v = vOf(l), r = st.getBoundingClientRect();
+      if (!v || !v.videoWidth || !r.width) return;
+      var k = (v.videoWidth / v.videoHeight) / (r.width / r.height);
+      l.setAttribute('data-fit', k > 0.82 && k < 1.25 ? 'cover' : 'contain');
     }
-    cards.forEach(function (a) {
+    function run(v) {
+      if (!v || held || !seen) return;
+      v.muted = muted;
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {
+        v.addEventListener('canplay', function () { if (!held && seen) { var q = v.play(); if (q && q.catch) q.catch(function () {}); } }, { once: true });
+      });
+    }
+    function paint() {
+      sBtn.setAttribute('aria-pressed', muted ? 'false' : 'true');
+      sBtn.querySelector('[data-st-sound-t]').textContent = muted ? 'Watch with sound' : 'Turn the sound off';
+      pBtn.setAttribute('aria-pressed', held ? 'true' : 'false');
+      pBtn.querySelector('[data-st-pause-t]').textContent = held ? 'Play the film' : 'Pause the film';
+      pBtn.querySelector('[data-st-pause-i]').innerHTML = held ? PLAY : PAUSE;
+    }
+    function show(a) {
+      var back = layers[front ? 0 : 1], out = fore(), poster = a.getAttribute('data-poster');
+      back.setAttribute('data-fit', 'cover');
+      back.innerHTML = '<div class="pcs__bg"></div><img class="pcs__still" alt="" decoding="async"><video class="pcs__fg" playsinline muted loop preload="none" tabindex="-1"></video>';
+      back.querySelector('.pcs__bg').style.backgroundImage = 'url("' + poster + '")';
+      back.querySelector('.pcs__still').src = poster;
+      var v = vOf(back);
+      if (!thrifty) {
+        v.src = a.getAttribute('href');
+        v.addEventListener('playing', function () { back.classList.add('is-playing'); }, { once: true });
+        v.addEventListener('loadedmetadata', function () { fit(back); }, { once: true });
+        run(v);
+      }
+      back.classList.add('is-on');
+      out.classList.remove('is-on');
+      setTimeout(function () {
+        if (out === fore()) return;            // switched back to this layer since: it is live again
+        var ov = vOf(out);
+        if (ov) { try { ov.pause(); ov.removeAttribute('src'); ov.load(); } catch (e) {} }
+        out.classList.remove('is-playing');
+      }, still() ? 0 : 950);
+      front = front ? 0 : 1;
+      bubs.forEach(function (b) { if (b === a) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+      if (a !== live) {
+        live = a;
+        nowEl.classList.add('is-turning');
+        setTimeout(function () {
+          nowEl.innerHTML = '<span class="pcs__now-co"></span><span class="pcs__now-by"></span>';
+          nowEl.firstChild.textContent = a.getAttribute('data-co');
+          nowEl.lastChild.textContent = a.getAttribute('data-who');
+          nowEl.classList.remove('is-turning');
+        }, still() ? 0 : 180);
+      }
+    }
+    bubs.forEach(function (a) {
       a.addEventListener('click', function (e) {
         if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
         e.preventDefault();
-        pick(a);
+        held = false; paint();
+        if (a === live && vOf(fore())) { run(vOf(fore())); return; }
+        show(a);
       });
     });
-    function ends() {
-      prev.disabled = reel.scrollLeft < 8;
-      next.disabled = reel.scrollLeft + reel.clientWidth > reel.scrollWidth - 8;
+    /* hover changes the film on a mouse, after a short beat so sweeping across the rail does not
+       start twenty downloads; never on touch, where a tap fires a hover first */
+    if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      var hov;
+      bubs.forEach(function (a) {
+        a.addEventListener('pointerenter', function (e) {
+          if (e.pointerType !== 'mouse') return;
+          clearTimeout(hov);
+          hov = setTimeout(function () { if (a !== live) show(a); }, 260);
+        });
+        a.addEventListener('pointerleave', function () { clearTimeout(hov); });
+      });
     }
-    function page(dir) { reel.scrollBy({ left: dir * reel.clientWidth * 0.8, behavior: still() ? 'auto' : 'smooth' }); }
-    prev.addEventListener('click', function () { page(-1); });
-    next.addEventListener('click', function () { page(1); });
-    reel.addEventListener('scroll', function () { window.requestAnimationFrame(ends); }, { passive: true });
-    window.addEventListener('resize', ends);
-    ends();
+    sBtn.addEventListener('click', function () {
+      muted = !muted;
+      var v = vOf(fore());
+      if (!muted) { held = false; if (v) { try { v.currentTime = 0; } catch (e) {} } }
+      if (v) v.muted = muted;
+      paint();
+      run(v);
+    });
+    pBtn.addEventListener('click', function () {
+      held = !held;
+      var v = vOf(fore());
+      if (held) { if (v) v.pause(); } else run(v);
+      paint();
+    });
+    sBtn.hidden = false; pBtn.hidden = false;
+    paint();
+    var refit;
+    window.addEventListener('resize', function () { clearTimeout(refit); refit = setTimeout(function () { fit(fore()); }, 180); }, { passive: true });
+    document.addEventListener('visibilitychange', function () {
+      var v = vOf(fore());
+      if (!v) return;
+      if (document.hidden) v.pause(); else run(v);
+    });
+    if ('IntersectionObserver' in window) {
+      /* load when a screen and a half away; play only while at least a sliver is on screen */
+      new IntersectionObserver(function (es, o) {
+        if (!es[0].isIntersecting || near) return;
+        near = true; o.disconnect();
+        show(live);
+      }, { rootMargin: '150% 0px 150% 0px' }).observe(st);
+      new IntersectionObserver(function (es) {
+        seen = es[0].isIntersecting;
+        var v = vOf(fore());
+        if (!v) return;
+        if (seen) run(v); else v.pause();
+      }, { threshold: 0.15 }).observe(st);
+    } else { seen = true; show(live); }
   }
 
   /* ---------- reveals: blocks below the first screen rise in once as they arrive ----------
