@@ -174,8 +174,11 @@
     function open(n) {
       at = (n + items.length) % items.length;
       var a = items[at], im = a.querySelector('img');
+      big.classList.remove('is-in');
       big.src = a.href;
       big.alt = im.alt;
+      void big.offsetWidth;
+      big.classList.add('is-in');
       count.textContent = (at + 1) + ' of ' + items.length;
       if (!lb.open) lb.showModal();
     }
@@ -196,5 +199,71 @@
     });
     lb.addEventListener('click', function (e) { if (e.target === lb || e.target.classList.contains('lb__fig')) lb.close(); });
     lb.addEventListener('close', function () { big.removeAttribute('src'); if (opener) opener.focus(); });
+  }
+
+  /* ---------- NextGen 2026: the pitch reel ----------
+     Each card is a link to its pitch film, so without script it simply opens the video. With script a
+     card loads its film into the screen above and plays it; the arrows scroll the reel a page at a time. */
+  var pr = document.querySelector('[data-pitch]');
+  if (pr) {
+    var vid = pr.querySelector('[data-pr-video]');
+    var reel = pr.querySelector('[data-pr-reel]');
+    var cards = Array.prototype.slice.call(pr.querySelectorAll('[data-pr-pick]'));
+    var nowBox = pr.querySelector('.pr__now');
+    var out = { n: pr.querySelector('[data-pr-n]'), co: pr.querySelector('[data-pr-co]'), who: pr.querySelector('[data-pr-who]'), blurb: pr.querySelector('[data-pr-blurb]') };
+    var prev = pr.querySelector('[data-pr-prev]'), next = pr.querySelector('[data-pr-next]');
+    var total = (cards.length < 10 ? '0' : '') + cards.length;
+    function pick(a) {
+      cards.forEach(function (c) { c.removeAttribute('aria-current'); });
+      a.setAttribute('aria-current', 'true');
+      vid.pause();
+      vid.poster = a.getAttribute('data-poster');
+      vid.src = a.href;
+      nowBox.classList.add('is-swap');
+      setTimeout(function () {
+        out.n.textContent = a.getAttribute('data-n') + ' / ' + total;
+        out.co.textContent = a.getAttribute('data-co');
+        out.who.textContent = a.getAttribute('data-who');
+        out.blurb.textContent = a.getAttribute('data-blurb');
+        nowBox.classList.remove('is-swap');
+      }, still() ? 0 : 200);
+      var r = vid.getBoundingClientRect();
+      if (r.top < 0 || r.bottom > window.innerHeight) vid.scrollIntoView({ behavior: still() ? 'auto' : 'smooth', block: 'center' });
+      var p = vid.play();
+      if (p && p.catch) p.catch(function () {});
+    }
+    cards.forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        pick(a);
+      });
+    });
+    function ends() {
+      prev.disabled = reel.scrollLeft < 8;
+      next.disabled = reel.scrollLeft + reel.clientWidth > reel.scrollWidth - 8;
+    }
+    function page(dir) { reel.scrollBy({ left: dir * reel.clientWidth * 0.8, behavior: still() ? 'auto' : 'smooth' }); }
+    prev.addEventListener('click', function () { page(-1); });
+    next.addEventListener('click', function () { page(1); });
+    reel.addEventListener('scroll', function () { window.requestAnimationFrame(ends); }, { passive: true });
+    window.addEventListener('resize', ends);
+    ends();
+  }
+
+  /* ---------- reveals: blocks below the first screen rise in once as they arrive ----------
+     Only on What's Next pages, only below the fold at load, never under reduced motion; without
+     script, or if the observer is missing, everything is simply visible. */
+  if (document.body.classList.contains('wn') && 'IntersectionObserver' in window && !still()) {
+    var rv = document.querySelectorAll('.xv__grid, .road__list li, .xm__in, .xa__in, .faq__t, .faq details, .wl__panel, .ys__in, .al__grid');
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    Array.prototype.forEach.call(rv, function (el, k) {
+      if (el.getBoundingClientRect().top < window.innerHeight) return;
+      el.classList.add('wn-rv');
+      if (el.matches('.road__list li, .faq details')) el.style.transitionDelay = ((k % 4) * 0.07) + 's';
+      io.observe(el);
+    });
   }
 })();

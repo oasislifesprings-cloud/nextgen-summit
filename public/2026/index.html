@@ -24,13 +24,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="/assets/img/hero-m-864.jpg" media="(max-aspect-ratio: 3/4)" fetchpriority="high">
 <link rel="preload" as="image" href="/assets/img/hero-1600.jpg" imagesrcset="/assets/img/hero-800.jpg 800w, /assets/img/hero-1200.jpg 1200w, /assets/img/hero-1600.jpg 1600w, /assets/img/hero-2048.jpg 2048w" imagesizes="(max-aspect-ratio: 16/9) 177.78vh, 100vw" media="not all and (max-aspect-ratio: 3/4)" fetchpriority="high">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;family=Caveat:wght@700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
 <link rel="stylesheet" href="/assets/css/site.css?v=20261102-305">
 <link rel="stylesheet" href="/assets/css/announce.css?v=20261102-305">
-<link rel="stylesheet" href="/assets/css/names.css?v=20261102-305">
 <link rel="stylesheet" href="/assets/css/sponsors.css?v=20261102-305">
 <link rel="stylesheet" href="/assets/css/film.css?v=20261102-305">
-<link rel="stylesheet" href="/assets/css/pc-stage.css?v=20261102-305">
 <link rel="stylesheet" href="/assets/css/speakq.css?v=20261102-305">
 <script src="/assets/js/liquid.js?v=20261102-305" defer></script>
 <!-- Lenis (smooth scrolling) and Motion (animation), vendored: see assets/vendor -->
@@ -42,7 +40,8 @@
 <script src="/assets/js/sponsors.js?v=20261102-305" defer></script>
 <script src="/assets/js/speakers.js?v=20261102-305" defer></script>
 <script src="/assets/js/film.js?v=20261102-305" defer></script>
-<link rel="stylesheet" href="/assets/css/wtn.css?v=20261107-wn1">
+<link rel="stylesheet" href="/assets/css/wtn.css?v=20261108-r1">
+<script src="/assets/js/wtn.js?v=20261108-r1" defer></script>
 </head>
 <body class="ng26">
 
@@ -58,7 +57,7 @@
     <a class="nav__link" href="/explore/">Explore NextGen</a>
     <span class="nav__link is-here" aria-current="page">NextGen 2026</span>
     <a class="nav__link" href="/2027/">NextGen 2027</a>
-    <a class="btn btn--sm nav__wl" href="/2027/#waitlist">Join the 2027 waitlist <svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></a>
+    <a class="btn btn--sm nav__wl" href="/2027/#waitlist"><span class="nav__wl-x">Join the 2027&nbsp;</span>Waitlist<svg class="ar" viewBox="0 0 26 10" aria-hidden="true" focusable="false"><path d="M1 5h23M19.5 1 24 5l-4.5 4"/></svg></a>
     <button class="nav__link nav__menu" type="button" data-open="menu">Menu</button>
   </nav>
 </header>
@@ -95,8 +94,8 @@
           <p class="hero__line">We saw what&rsquo;s possible.</p>
         </div>
         <div class="hero__actions">
-          <a class="btn btn--lg" href="/2026/highlights/">See the highlights</a>
-          <a class="textlink" href="#what">The recap <span class="arr" aria-hidden="true">↓</span></a>
+          <a class="btn btn--lg b-pri" href="/2026/highlights/">See the highlights <svg class="ar" viewBox="0 0 26 10" aria-hidden="true" focusable="false"><path d="M1 5h23M19.5 1 24 5l-4.5 4"/></svg></a>
+          <a class="b-sec b-sec--photo" href="#what">The recap</a>
         </div>
       </div>
     </div>
@@ -162,20 +161,150 @@
       </ol>
       <p class="xp__cta rv" style="--d:.34s">
         <!-- the way through: the Experience page plays its own entrance on arrival -->
-        <a class="xp__go" href="/2026/highlights/">See the photo album</a>
       </p>
     </div>
   </section>
 
-  <!-- the People's Choice Awards, after the summit. No ranking is shown: the results are published
-       only once they have been verified (leadership). The photograph is a founder pitching on the day. -->
-  <section class="pcs pcs--static" id="peoples-choice" data-nav="photo" aria-labelledby="pcs-title">
-    <div class="pcs__still" aria-hidden="true"><img src="/assets/img/2026/album/00694-2-1800.webp" srcset="/assets/img/2026/album/00694-2-900.webp 720w, /assets/img/2026/album/00694-2-1800.webp 1440w" sizes="100vw" width="1440" height="1800" loading="lazy" decoding="async" alt=""></div>
-    <div class="pcs__in">
-      <div class="pcs__copy">
-        <p class="pcs__k">People&rsquo;s Choice Awards</p>
-        <h2 class="pcs__t wm" id="pcs-title">Twenty founders.<br>One went to the final.</h2>
-        <p class="pcs__result">Ten founders pitched live on October 30 for a share of $10,000. The winners of the live final and the People&rsquo;s Choice results will be published here once they have been verified.</p>
+  <!-- the pitch competition. The twenty People's Choice founders and the pitch films they shared,
+       self-hosted, from the reviewed Top 20 public manifest (assets/js/pc-founders.js): names, ventures
+       and one-line descriptions only. The live-final winners and the People's Choice results are two
+       separate results; neither is shown until it has been verified. -->
+  <section class="pr" id="pitch" data-nav="photo" data-pitch aria-labelledby="pr-t">
+    <div class="pr__in">
+      <header class="pr__head">
+        <p class="pr__k">The pitch competition</p>
+        <h2 class="pr__t wm" id="pr-t">Twenty founders. Twenty pitches.</h2>
+        <p class="pr__lede">Ten founders pitched live on October 30 for a share of $10,000. These are the twenty pitch films from the People&rsquo;s Choice Awards.</p>
+      </header>
+      <div class="pr__stage">
+        <div class="pr__screen"><video class="pr__video" controls playsinline preload="none" poster="/assets/video/haptol-labs-poster.jpg" src="/assets/video/haptol-labs.mp4" data-pr-video></video></div>
+        <div class="pr__now" aria-live="polite">
+          <p class="pr__num" data-pr-n>01 / 20</p>
+          <h3 class="pr__co" data-pr-co>Haptol Labs</h3>
+          <p class="pr__who" data-pr-who>Caleb Orji</p>
+          <p class="pr__blurb" data-pr-blurb>We make oral care products that nourish the good bacteria in your mouth, rather than destroying them with harsh chemicals, keeping bad breath away all day.</p>
+        </div>
+      </div>
+      <div class="pr__bar">
+        <p class="pr__hint">All twenty pitches</p>
+        <div class="pr__ctl">
+          <button class="pr__arrow b-sec" type="button" data-pr-prev aria-label="Show earlier pitches"><svg viewBox="0 0 26 10" aria-hidden="true"><path d="M25 5H2M6.5 1 2 5l4.5 4"/></svg></button>
+          <button class="pr__arrow b-sec" type="button" data-pr-next aria-label="Show more pitches"><svg viewBox="0 0 26 10" aria-hidden="true"><path d="M1 5h23M19.5 1 24 5l-4.5 4"/></svg></button>
+        </div>
+      </div>
+      <ol class="pr__reel" data-pr-reel tabindex="0" aria-label="The twenty pitch films, scrolls sideways">
+        <li><a class="pr__card" href="/assets/video/haptol-labs.mp4" data-pr-pick data-n="01" data-poster="/assets/video/haptol-labs-poster.jpg" data-co="Haptol Labs" data-who="Caleb Orji" data-blurb="We make oral care products that nourish the good bacteria in your mouth, rather than destroying them with harsh chemicals, keeping bad breath away all day." aria-current="true">
+          <span class="pr__pic"><img src="/assets/img/founders/haptol-labs.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 35%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">01</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Haptol Labs</span><span class="pr__cw">Caleb Orji</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/credible-blossom.mp4" data-pr-pick data-n="02" data-poster="/assets/video/credible-blossom-poster.jpg" data-co="Credible blossom" data-who="Annrita Karu" data-blurb="Credible blossom is an AI-powered platform that matches families with caregivers with similar interests, handles long-term care insurance claims and compensates caregivers fairly.">
+          <span class="pr__pic"><img src="/assets/img/founders/credible-blossom.webp" width="780" height="1100" loading="lazy" decoding="async" alt="" style="object-position:50% 22%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">02</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Credible blossom</span><span class="pr__cw">Annrita Karu</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/sooz.mp4" data-pr-pick data-n="03" data-poster="/assets/video/sooz-poster.jpg" data-co="Sooz" data-who="Muyiwa Ogunsola" data-blurb="We make Sooz, a powdered drink mix that alleviates the burn and digestive discomfort that accompanies spicy food.">
+          <span class="pr__pic"><img src="/assets/img/founders/sooz.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 36%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">03</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Sooz</span><span class="pr__cw">Muyiwa Ogunsola</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/the-luminous-lab.mp4" data-pr-pick data-n="04" data-poster="/assets/video/the-luminous-lab-poster.jpg" data-co="The Luminous Lab" data-who="Ariel Laura Métayer" data-blurb="Kainema is an AI-powered personal development platform that turns vision boards into executable life plans by integrating financial goals, habits, and coaching in one system.">
+          <span class="pr__pic"><img src="/assets/img/founders/the-luminous-lab.webp" width="780" height="1100" loading="lazy" decoding="async" alt="" style="object-position:50% 22%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">04</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>The Luminous Lab</span><span class="pr__cw">Ariel Laura Métayer</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/lookbook.mp4" data-pr-pick data-n="05" data-poster="/assets/video/lookbook-poster.jpg" data-co="Lookbook" data-who="Ethan Edouard" data-blurb="The Lookbook helps people organize, discover, and style their wardrobes through an easy-to-use digital closet app.">
+          <span class="pr__pic"><img src="/assets/img/founders/lookbook.webp" width="780" height="1100" loading="lazy" decoding="async" alt="" style="object-position:50% 22%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">05</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Lookbook</span><span class="pr__cw">Ethan Edouard</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/ibraid.mp4" data-pr-pick data-n="06" data-poster="/assets/video/ibraid-poster.jpg" data-co="iBraid" data-who="Velma Funebe" data-blurb="iBraid is a beauty-tech platform making DIY hairstyling faster, easier, and more affordable through camera-guided technology, starting with braiding and expanding into haircuts.">
+          <span class="pr__pic"><img src="/assets/img/founders/ibraid.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 36%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">06</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>iBraid</span><span class="pr__cw">Velma Funebe</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/beforekeys-llc.mp4" data-pr-pick data-n="07" data-poster="/assets/video/beforekeys-llc-poster.jpg" data-co="BeforeKeys LLC" data-who="Divine Ayomide Fiolu" data-blurb="BeforeKeys flips rental screening: we check who’s asking for your deposit and whether they actually have the right to rent the property.">
+          <span class="pr__pic"><img src="/assets/img/founders/beforekeys-llc.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 36%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">07</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>BeforeKeys LLC</span><span class="pr__cw">Divine Ayomide Fiolu</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/if-the-shoe-fits-itsf.mp4" data-pr-pick data-n="08" data-poster="/assets/video/if-the-shoe-fits-itsf-poster.jpg" data-co="If The Shoe Fits (ITSF)" data-who="Jolie Wyatt" data-blurb="We use additive manufacturing to create custom-fit footwear for women at scale.">
+          <span class="pr__pic"><img src="/assets/img/founders/if-the-shoe-fits-itsf.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 36%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">08</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>If The Shoe Fits (ITSF)</span><span class="pr__cw">Jolie Wyatt</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/rest.mp4" data-pr-pick data-n="09" data-poster="/assets/video/rest-poster.jpg" data-co="Rest" data-who="Austin Kendrick Lee" data-blurb="Rest is a free gym timer that turns wasted minutes between sets into scripture memorization, so busy Christians stop doom scrolling and finish on time.">
+          <span class="pr__pic"><img src="/assets/img/founders/rest.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 36%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">09</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Rest</span><span class="pr__cw">Austin Kendrick Lee</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/pathbridge.mp4" data-pr-pick data-n="10" data-poster="/assets/video/pathbridge-poster.jpg" data-co="PathBridge" data-who="Benedicta Dankwa" data-blurb="PathBridge makes navigating large event venues effortless with intuitive indoor mapping technology. Seamlessly find your destinations with your personal GPS for the great indoors.">
+          <span class="pr__pic"><img src="/assets/img/founders/pathbridge.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 35%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">10</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>PathBridge</span><span class="pr__cw">Benedicta Dankwa</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/applytrack.mp4" data-pr-pick data-n="11" data-poster="/assets/video/applytrack-poster.jpg" data-co="ApplyTrack" data-who="Pedrocia De-Sosoo" data-blurb="ApplyTrack is a job tracker that updates itself from your Gmail, preps you for interviews, and keeps students encouraged through the search.">
+          <span class="pr__pic"><img src="/assets/img/founders/applytrack.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 36%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">11</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>ApplyTrack</span><span class="pr__cw">Pedrocia De-Sosoo</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/jay-s-watermelonade.mp4" data-pr-pick data-n="12" data-poster="/assets/video/jay-s-watermelonade-poster.jpg" data-co="Jay's Watermelonade" data-who="Joyson BaLisamore" data-blurb="We promote healthier hydration that creates socioeconomic opportunity in Baltimore.">
+          <span class="pr__pic"><img src="/assets/img/founders/jay-s-watermelonade.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 35%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">12</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Jay's Watermelonade</span><span class="pr__cw">Joyson BaLisamore</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/offguardz.mp4" data-pr-pick data-n="13" data-poster="/assets/video/offguardz-poster.jpg" data-co="Offguardz" data-who="Ugochinyere Blessing Okogeri" data-blurb="OffGuardz is the Uber for the creator economy, connecting brands, businesses, and individuals with local creators on demand, making content creation accessible and affordable">
+          <span class="pr__pic"><img src="/assets/img/founders/offguardz.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 36%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">13</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Offguardz</span><span class="pr__cw">Ugochinyere Blessing Okogeri</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/k8culture-productions.mp4" data-pr-pick data-n="14" data-poster="/assets/video/k8culture-productions-poster.jpg" data-co="K8Culture Productions" data-who="Kate Mina Lin" data-blurb="K8Culture Productions is an Asian American–owned studio that creates, produces and owns film, series and music rooted in Korean and Chinese culture, so the next global K-culture hit belongs to the community it comes from.">
+          <span class="pr__pic"><img src="/assets/img/founders/k8culture-productions.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:43% 45%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">14</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>K8Culture Productions</span><span class="pr__cw">Kate Mina Lin</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/melavyr.mp4" data-pr-pick data-n="15" data-poster="/assets/video/melavyr-poster.jpg" data-co="Melavyr" data-who="Bishop Akalusi" data-blurb="Melavyr helps identify warning signs of skin cancer and other skin conditions from a photo, giving users clear next steps across every skin tone.">
+          <span class="pr__pic"><img src="/assets/img/founders/melavyr.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 50%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">15</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Melavyr</span><span class="pr__cw">Bishop Akalusi</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/light.mp4" data-pr-pick data-n="16" data-poster="/assets/video/light-poster.jpg" data-co="LIGHT" data-who="Myron J. De Bond" data-blurb="Light is a fashion brand beyond clothes. We want to use our designs to tell a story of hope and shine in a dark world.">
+          <span class="pr__pic"><img src="/assets/img/founders/light.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 36%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">16</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>LIGHT</span><span class="pr__cw">Myron J. De Bond</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/beauty-boot-camp.mp4" data-pr-pick data-n="17" data-poster="/assets/video/beauty-boot-camp-poster.jpg" data-co="Beauty Boot Camp" data-who="Grace Blay" data-blurb="We teach underprivileged girls the hygiene and beauty basics they're often bullied for not knowing, so they can walk into womanhood with confidence.">
+          <span class="pr__pic"><img src="/assets/img/founders/beauty-boot-camp.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:59% 41%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">17</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Beauty Boot Camp</span><span class="pr__cw">Grace Blay</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/nextofferup.mp4" data-pr-pick data-n="18" data-poster="/assets/video/nextofferup-poster.jpg" data-co="NextOfferUP" data-who="Bryan Ndum" data-blurb="NextOfferUP is an AI-powered career platform helping students and job seekers land opportunities through personalized resumes, cover letters, and streamlined job application tracking.">
+          <span class="pr__pic"><img src="/assets/img/founders/nextofferup.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 36%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">18</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>NextOfferUP</span><span class="pr__cw">Bryan Ndum</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/exam-me.mp4" data-pr-pick data-n="19" data-poster="/assets/video/exam-me-poster.jpg" data-co="Exam.Me" data-who="Christal S. Burgess" data-blurb="Exam.Me transforms study materials into personalized practice exams, helping students identify knowledge gaps, build confidence, and prepare smarter for the tests that shape their futures.">
+          <span class="pr__pic"><img src="/assets/img/founders/exam-me.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 35%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">19</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Exam.Me</span><span class="pr__cw">Christal S. Burgess</span></span>
+        </a></li>
+        <li><a class="pr__card" href="/assets/video/find-your-mission-corp.mp4" data-pr-pick data-n="20" data-poster="/assets/video/find-your-mission-corp-poster.jpg" data-co="Find Your Mission Corp." data-who="Vishwa Shukla" data-blurb="We’re empowering underserved high school students by intentionally designing growth-oriented, youth-led spaces for self-advocacy and self-exploration, where schools lack counselors and funding support.">
+          <span class="pr__pic"><img src="/assets/img/founders/find-your-mission-corp.webp" width="800" height="1000" loading="lazy" decoding="async" alt="" style="object-position:50% 40%"></span>
+          <span class="pr__play" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5 3.2v9.6L12.6 8z"/></svg></span>
+          <span class="pr__cap"><span class="pr__cn">20</span><span class="pr__cc"><span class="wn-vh">Play the pitch from </span>Find Your Mission Corp.</span><span class="pr__cw">Vishwa Shukla</span></span>
+        </a></li>
+      </ol>
+      <div class="pr__results">
+        <div class="pr__res">
+          <p class="pr__rk">The live final</p>
+          <p class="pr__rt">Winners to be announced</p>
+          <p class="pr__rp">The results of the live final will be published here once they have been verified.</p>
+        </div>
+        <div class="pr__res">
+          <p class="pr__rk">People&rsquo;s Choice Awards</p>
+          <p class="pr__rt">Results to be announced</p>
+          <p class="pr__rp">The People&rsquo;s Choice results will be published here once they have been verified.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -553,9 +682,9 @@
         <p class="label" style="color:var(--accent)">Event highlights</p>
         <h2 class="hl26__t wm" id="hl26-t">the photo album.</h2>
         <p class="hl26__p">The stage, the room and the people at the Gordon Center on October 30, 2026.</p>
-        <p class="hl26__cta"><a class="btn btn--lg" href="/2026/highlights/">See every photo</a></p>
+        <p class="hl26__cta"><a class="btn btn--lg b-pri" href="/2026/highlights/">See every photo <svg class="ar" viewBox="0 0 26 10" aria-hidden="true" focusable="false"><path d="M1 5h23M19.5 1 24 5l-4.5 4"/></svg></a></p>
       </div>
-      <div class="hl26__grid"><img src="/assets/img/2026/album/00686-2-900.webp" width="720" height="900" loading="lazy" decoding="async" alt="An attendee resting her chin on her hand, listening."><img src="/assets/img/2026/album/01265-2-900.webp" width="720" height="900" loading="lazy" decoding="async" alt="A speaker wearing a Miss Maryland sash, talking from an armchair on stage."><img src="/assets/img/2026/album/00647-2-900.webp" width="720" height="900" loading="lazy" decoding="async" alt="A speaker gesturing across the stage under blue light."></div>
+      <ul class="hl26__strip" tabindex="0" aria-label="Photographs from the day, scrolls sideways on a phone"><li><img src="/assets/img/2026/album/00686-2-900.webp" width="720" height="900" loading="lazy" decoding="async" alt="An attendee resting her chin on her hand, listening."></li><li><img src="/assets/img/2026/album/01265-2-900.webp" width="720" height="900" loading="lazy" decoding="async" alt="A speaker wearing a Miss Maryland sash, talking from an armchair on stage."></li><li><img src="/assets/img/2026/album/00647-2-900.webp" width="720" height="900" loading="lazy" decoding="async" alt="A speaker gesturing across the stage under blue light."></li><li><img src="/assets/img/2026/album/00593-2-900.webp" width="720" height="900" loading="lazy" decoding="async" alt="The audience filling the red seats of the auditorium."></li><li><img src="/assets/img/2026/album/00671-2-900.webp" width="720" height="900" loading="lazy" decoding="async" alt="Hands clapping in the audience."></li><li><img src="/assets/img/2026/album/01620-900.webp" width="720" height="900" loading="lazy" decoding="async" alt="The whole stage and screen, seen from the back of the auditorium."></li></ul>
     </div>
   </section>
 
@@ -572,7 +701,7 @@
       <span class="finale__wm wm rv" aria-hidden="true">nextgen</span>
       <h2 class="finale__title wm rv" id="finale-title" style="--d:.1s"><span class="reg reg--light">what's next?</span></h2>
       <div class="finale__cta rv" style="--d:.3s">
-        <a class="btn btn--lg" href="/2027/#waitlist">Join the 2027 waitlist</a>
+        <a class="btn btn--lg b-pri" href="/2027/#waitlist">Join the 2027 waitlist <svg class="ar" viewBox="0 0 26 10" aria-hidden="true" focusable="false"><path d="M1 5h23M19.5 1 24 5l-4.5 4"/></svg></a>
       </div>
     </div>
   </section>
@@ -616,7 +745,7 @@
       <li><a href="/2026/" aria-current="page">NextGen 2026</a></li>
       <li><a href="/2027/">NextGen 2027</a></li>
     </ul>
-    <p class="menu__wl"><a class="btn btn--lg" href="/2027/#waitlist">Join the 2027 waitlist <svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></a></p>
+    <p class="menu__wl"><a class="btn btn--lg" href="/2027/#waitlist">Join the 2027 waitlist <svg class="ar" viewBox="0 0 26 10" aria-hidden="true" focusable="false"><path d="M1 5h23M19.5 1 24 5l-4.5 4"/></svg></a></p>
   </div>
 </dialog>
 </body>

@@ -19,11 +19,11 @@
 <script>(function(d){d.classList.add('js');setTimeout(function(){if(!d.classList.contains('js-ready'))d.classList.remove('js')},4000)})(document.documentElement)</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,0..100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
 <link rel="stylesheet" href="/assets/css/site.css?v=20261107-wn1">
-<link rel="stylesheet" href="/assets/css/wtn.css?v=20261107-wn1">
+<link rel="stylesheet" href="/assets/css/wtn.css?v=20261108-r1">
 <script src="/assets/js/site.js?v=20261107-wn1" defer></script>
-<script src="/assets/js/wtn.js?v=20261107-wn1" defer></script>
+<script src="/assets/js/wtn.js?v=20261108-r1" defer></script>
 </head>
 <body class="wn wn-2027">
 <a class="skip" href="#main">Skip to content</a>
@@ -38,31 +38,26 @@
     <a class="nav__link" href="/explore/">Explore NextGen</a>
     <a class="nav__link" href="/2026/">NextGen 2026</a>
     <span class="nav__link is-here" aria-current="page">NextGen 2027</span>
-    <a class="btn btn--sm nav__wl" href="#waitlist">Join the 2027 waitlist <svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></a>
+    <a class="btn btn--sm nav__wl" href="#waitlist"><span class="nav__wl-x">Join the 2027&nbsp;</span>Waitlist<svg class="ar" viewBox="0 0 26 10" aria-hidden="true" focusable="false"><path d="M1 5h23M19.5 1 24 5l-4.5 4"/></svg></a>
     <button class="nav__link nav__menu" type="button" data-open="menu">Menu</button>
   </nav>
 </header>
 
 <main id="main" tabindex="-1">
   <!-- 01 Welcome to NextGen: a highway welcome sign at night, built in HTML and CSS (no image). -->
-  <section class="ws" id="top" data-nav="photo" aria-labelledby="ws-sign">
+  <!-- 01 the welcome sign at night (the scene leadership chose; the UI text it was supplied with was
+       removed from the plate). Landscape screens: the scene fills the screen, the copy sits bottom left,
+       clear of the post. Portrait screens: the sign in the top half, the copy below it. -->
+  <section class="ws" id="top" data-nav="photo" aria-labelledby="ws-t">
+    <picture class="ws__pic">
+      <source media="(max-aspect-ratio: 2/3)" srcset="/assets/img/2027/sign-m-720.webp 720w, /assets/img/2027/sign-m-941.webp 941w" sizes="100vw" width="941" height="1672">
+      <img src="/assets/img/2027/sign-1672.webp" srcset="/assets/img/2027/sign-1200.webp 1200w, /assets/img/2027/sign-1672.webp 1672w" sizes="100vw" width="1672" height="941" fetchpriority="high" decoding="async" alt="A road sign at night under a lamp, reading Welcome to NextGen, Est. 2026.">
+    </picture>
     <div class="ws__in">
       <div class="ws__copy">
         <p class="wn-k">NextGen 2027</p>
-        <p class="ws__line">Coming to a city near you.</p>
-        <p><a class="wn-btn" href="#waitlist">Pick your city <svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 2.5v11M3.5 9L8 13.5 12.5 9"/></svg></a></p>
-      </div>
-      <div class="ws__scene">
-        <span class="ws__lamp" aria-hidden="true"></span>
-        <span class="ws__beam" aria-hidden="true"></span>
-        <h1 class="sign" id="ws-sign" aria-label="Welcome to NextGen. Established 2026.">
-          <span class="sign__a" aria-hidden="true">Welcome to</span>
-          <span class="sign__b" aria-hidden="true">NextGen</span>
-          <span class="sign__c" aria-hidden="true">Est. 2026</span>
-          <i class="ws__rivet" style="left:4.2%;top:9%" aria-hidden="true"></i><i class="ws__rivet" style="right:4.2%;top:9%" aria-hidden="true"></i>
-          <i class="ws__rivet" style="left:4.2%;bottom:9%" aria-hidden="true"></i><i class="ws__rivet" style="right:4.2%;bottom:9%" aria-hidden="true"></i>
-        </h1>
-        <span class="ws__pole" aria-hidden="true"></span>
+        <h1 class="ws__t wn-d" id="ws-t">Coming to a city near you.</h1>
+        <p class="ws__go"><a class="wn-btn b-pri" href="#waitlist">Pick your city <svg class="ar" viewBox="0 0 26 10" aria-hidden="true" focusable="false"><path d="M1 5h23M19.5 1 24 5l-4.5 4"/></svg></a></p>
       </div>
     </div>
   </section>
@@ -129,7 +124,7 @@
             </div>
           </fieldset>
           <p class="wl__err" role="alert" hidden></p>
-          <button class="wn-btn" type="submit"><span class="btn__t">Save my seat</span> <svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></button>
+          <button class="wn-btn b-pri" type="submit"><span class="btn__t">Save my seat</span> <svg class="ar" viewBox="0 0 26 10" aria-hidden="true" focusable="false"><path d="M1 5h23M19.5 1 24 5l-4.5 4"/></svg></button>
           <p class="wl__fine">Questions? <a href="mailto:hello@nextgensummit.us">hello@nextgensummit.us</a></p>
         </form>
         <div class="wl__done" role="status" tabindex="-1" hidden>
@@ -177,7 +172,7 @@
       <li><a href="/2026/">NextGen 2026</a></li>
       <li><a href="/2027/" aria-current="page">NextGen 2027</a></li>
     </ul>
-    <p class="menu__wl"><a class="btn btn--lg" href="#waitlist" data-close>Join the 2027 waitlist <svg class="ic" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></a></p>
+    <p class="menu__wl"><a class="btn btn--lg" href="#waitlist" data-close>Join the 2027 waitlist <svg class="ar" viewBox="0 0 26 10" aria-hidden="true" focusable="false"><path d="M1 5h23M19.5 1 24 5l-4.5 4"/></svg></a></p>
   </div>
 </dialog>
 </body>
