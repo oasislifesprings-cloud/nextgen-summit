@@ -72,6 +72,7 @@ PAGES = [
     '/', '/about/', '/tickets/', '/music/', '/experience/', '/scholarship/',
     '/pitch/', '/pitch/peoples-choice/', '/pitch/peoples-choice/top-10/',
     '/thanks/', '/registration-received/', '/scholarship/received/',
+    '/explore/', '/2026/', '/2026/highlights/', '/2027/',
 ]
 
 # Read-only API endpoints, with the keys their answer must contain.
@@ -87,8 +88,8 @@ CONTENT = [
     ('/pitch/peoples-choice/', ['People', 'peoples-choice.js'], "People's Choice"),
     ('/music/', ['open.spotify.com', 'music.apple.com', 'SHOW ME'], 'Music'),
 ]
-# Since 2026-11-04 staging reviews the "Where To Next?" homepage (branch where-to-next), so its
-# home page is the gateway to 2026 Moments, Explore and 2027, not the 2026 Summit page.
+# Since 2026-11-09 both sites serve the What's Next homepage (live from main @ 312acf4; staging
+# reviewed it from 2026-11-04), so the home page is the gateway to 2026, Explore and 2027.
 STAGING_HOME = ('/', ['You had to be there.', 'href="/2026/"', 'href="/explore/"', 'href="/2027/"', '/2027/#waitlist'], "the What's Next homepage")
 
 ASSET_RE = re.compile(
@@ -289,7 +290,7 @@ def check_certificate(base, rep):
 def check_content(base, bodies, rep):
     staging = '://staging.' in base
     for path, needles, label in CONTENT:
-        if staging and path == '/':
+        if path == '/':
             path, needles, label = STAGING_HOME
         html = bodies.get(path)
         if html is None:
