@@ -40,10 +40,11 @@
 <script src="/assets/js/sponsors.js?v=20261102-305" defer></script>
 <script src="/assets/js/speakers.js?v=20261102-305" defer></script>
 <script src="/assets/js/film.js?v=20261102-305" defer></script>
-<link rel="stylesheet" href="/assets/css/pc-stage.css?v=20261109-r7">
-<script src="/assets/js/pc-stage.js?v=20261109-r7" defer></script>
-<link rel="stylesheet" href="/assets/css/wtn.css?v=20261109-r7">
-<script src="/assets/js/wtn.js?v=20261109-r7" defer></script>
+<link rel="stylesheet" href="/assets/css/pc-stage.css?v=20261109-r8">
+<script src="/assets/js/winners-2026.js?v=20261109-r8" defer></script>
+<script src="/assets/js/pc-stage.js?v=20261109-r8" defer></script>
+<link rel="stylesheet" href="/assets/css/wtn.css?v=20261109-r8">
+<script src="/assets/js/wtn.js?v=20261109-r8" defer></script>
 </head>
 <body class="ng26">
 
@@ -167,8 +168,9 @@
     </div>
   </section>
 
-  <!-- the People's Choice Awards, as on the 2026 homepage (archive.nextgensummit.us): the same markup,
-       pc-stage.css and pc-stage.js; the stage shows five founders, the two leadership chose first. -->
+  <!-- the Pitch Competition, on the 2026 homepage's stage (archive.nextgensummit.us): the same markup,
+       pc-stage.css and pc-stage.js. Five founders: Myron and Vish, the two leadership chose, then the
+       three official winners in placing order (assets/js/winners-2026.js). -->
   <section class="pcs" id="peoples-choice" data-nav="photo" aria-labelledby="pcs-title" data-pcs>
     <div class="pcs__stage" aria-hidden="true">
       <div class="pcs__layer" data-pcs-layer></div>
@@ -187,17 +189,17 @@
       </div>
 
       <div class="pcs__copy">
-        <p class="pcs__k">People&rsquo;s Choice Awards</p>
-        <h2 class="pcs__t wm" id="pcs-title">Twenty founders.<br>One goes to the final.</h2>
+        <p class="pcs__k">Pitch Competition</p>
+        <h2 class="pcs__t wm" id="pcs-title">Twenty founders.<br>Three winners.</h2>
 
         <div class="pcs__now" data-pcs-now></div>
 
         <div class="pcs__cta">
-          <a class="btn pcs__go" href="/pitch/peoples-choice/top-10/">Meet the Top 10 <span class="arr" aria-hidden="true">&rarr;</span></a>
+          <a class="btn pcs__go" href="/pitch/peoples-choice/">Meet more founders <span class="arr" aria-hidden="true">&rarr;</span></a>
           <a class="btn btn--ghost pcs__alt" href="/tickets/">The summit has ended</a>
         </div>
 
-        <p class="pcs__fine">Voting closed. Thank you to everyone who voted.</p>
+        <p class="pcs__fine">Ten founders pitched live on October 30. Three took home the prizes.</p>
       </div>
 
       <ul class="pcs__rail" data-pcs-rail role="tablist"
@@ -210,14 +212,18 @@
       <h2 class="wn-vh" id="pr-res-t">Results</h2>
       <div class="pr__results">
         <div class="pr__res">
-          <p class="pr__rk">The live final</p>
-          <p class="pr__rt">Winners to be announced</p>
-          <p class="pr__rp">The results of the live final will be published here once they have been verified.</p>
+          <p class="pr__rk">Pitch Competition</p>
+          <ol class="pr__wl">
+            <li><span class="pr__wp">1st</span><span class="pr__wn">Jay&rsquo;s Watermelonade</span><span class="pr__wz">$5,000</span></li>
+            <li><span class="pr__wp">2nd</span><span class="pr__wn">iBraid</span><span class="pr__wz">$2,500</span></li>
+            <li><span class="pr__wp">3rd</span><span class="pr__wn">Sooz</span><span class="pr__wz">$1,500</span></li>
+          </ol>
         </div>
         <div class="pr__res">
-          <p class="pr__rk">People&rsquo;s Choice Awards</p>
-          <p class="pr__rt">Results to be announced</p>
-          <p class="pr__rp">The People&rsquo;s Choice results will be published here once they have been verified.</p>
+          <p class="pr__rk">People&rsquo;s Choice Business Awards</p>
+          <ol class="pr__wl">
+            <li><span class="pr__wp">1st</span><span class="pr__wn">OffGuardz</span><span class="pr__wz">$400</span></li>
+          </ol>
         </div>
       </div>
     </div>

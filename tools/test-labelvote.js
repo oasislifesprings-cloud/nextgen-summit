@@ -84,7 +84,7 @@ const ALLTHREE  = { ok: true, verified: true, today_entrant: 'entrant-01', used:
                     remaining: 0, bonus_eligible: false, bonus_claimable: false };
 
 const USED = 'Today’s vote is used';
-const BONUS = 'View my vote & +2 bonus';
+const BONUS = 'View my vote & bonus';
 
 console.log('--- the gallery, voting open ---');
 t('a visitor who has not verified', VISITOR,  'entrant-05', { label: 'Vote' });
@@ -157,7 +157,7 @@ r('after voting closes',               'closed',      VISITOR, 'entrant-05',
 r('open, nobody verified yet',         'open',        VISITOR,  'entrant-05', { label: 'Vote' });
 r('open, verified, no vote today',     'open',        NOVOTEYET,'entrant-05', { label: 'Vote' });
 r('their founder, bonus to come',      'open',        ATTENDEE, 'entrant-01',
-  { label: '+2 bonus', on: true });
+  { label: 'Bonus', on: true });
 r('their founder, all three spent',    'open',        ALLTHREE, 'entrant-01',
   { label: 'Voted', on: true });
 r('a different founder, after +1',     'open',        PLUS1,    'entrant-07', { label: 'Used' });

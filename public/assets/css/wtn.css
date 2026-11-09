@@ -395,3 +395,13 @@ html.wn-snap{scroll-snap-type:y proximity}
 /* the one departure from the archive: every control on the stage is at least 44px to touch (WCAG 2.5.8; the archive had 42 and 38) */
 .pcs .pcs__sound{width:44px;height:44px}
 @media (max-width:560px){.pcs .pcs__go,.pcs .pcs__alt{--h:44px;padding:11px 1em;letter-spacing:.07em}}
+/* NextGen 2026 results: the winner on the stage carries its placing and prize under the name */
+.pcs__now-pz{display:block;margin-top:6px;font:600 clamp(12px,1vw,14px)/1.35 var(--f-sans);color:rgba(255,255,255,.82)}
+.pcs__now-pz b{font-weight:800;color:#fff;margin-left:.35em}
+/* the two results panels: one line per winner, placing, name, prize */
+.pr__wl{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.pr__wl li{display:grid;grid-template-columns:3.2em minmax(0,1fr) auto;align-items:baseline;gap:12px;padding-bottom:10px;border-bottom:1px solid var(--wn-line)}
+.pr__wl li:last-child{border-bottom:0;padding-bottom:0}
+.pr__wp{font:700 var(--fs-label)/1.3 var(--f-sans);letter-spacing:.14em;text-transform:uppercase;color:var(--wn-teal)}
+.pr__wn{font:700 clamp(17px,1.4vw,21px)/1.3 var(--f-sans);color:#fff;overflow-wrap:break-word;min-width:0}
+.pr__wz{font:600 15px/1.3 var(--f-sans);color:var(--wn-dim)}

@@ -106,6 +106,26 @@ if ($authed) {
     }
 }
 
+// Registrations view: search, which list, and order. Read before the export so a CSV holds exactly
+// the rows on screen.
+$q = is_string($_GET['q'] ?? null) ? trim($_GET['q']) : '';
+$list = ($_GET['list'] ?? '') === '2027' ? '2027' : '';
+$sort = in_array($_GET['sort'] ?? '', ['old', 'name'], true) ? (string) $_GET['sort'] : 'new';
+
+/** The sign-ups to show: filtered by the search and the list, in the chosen order. */
+function reg_view(array $rows, string $q, string $list, string $sort): array
+{
+    $rows = array_values(array_filter($rows, function ($r) use ($q, $list) {
+        return matches($r, $q) && ($list === '' || ngs_waitlist_list($r) === 'Waitlist 2027');
+    }));
+    if ($sort === 'old') {
+        usort($rows, function ($a, $b) { return strcmp($a['created_at'], $b['created_at']); });
+    } elseif ($sort === 'name') {
+        usort($rows, function ($a, $b) { return strcasecmp(person_name($a['data']), person_name($b['data'])); });
+    }
+    return $rows;
+}
+
 // CSV export. A leading = + - @ is neutralized so spreadsheets never run a formula from a form.
 if ($authed && isset($_GET['export']) && $error === '') {
     $which = in_array($_GET['export'], ['notes', 'questions', 'scholarships'], true) ? $_GET['export'] : 'registrations';
@@ -119,7 +139,7 @@ if ($authed && isset($_GET['export']) && $error === '') {
     };
     if ($which === 'registrations') {
         fputcsv($out, ['Signed up (ET)', 'List', 'Cities', 'Name', 'Email', 'Phone', 'Education level', 'School', 'Interested in volunteering']);
-        foreach ($registrations as $r) {
+        foreach (reg_view($registrations, $q, $list, $sort) as $r) {
             $d = $r['data'];
             fputcsv($out, array_map($safe, [et($r['created_at']), ngs_waitlist_list($r), ngs_waitlist_cities($r), person_name($d), $d['email'] ?? '', $d['phone'] ?? '', $d['education_level'] ?? '', $d['school_name'] ?? '', $d['volunteer_interest'] ?? '']));
         }
@@ -147,7 +167,26 @@ if ($authed && isset($_GET['export']) && $error === '') {
 
 // ?tab=notes is an old link; those notes now live at the foot of Registrations
 $tab = in_array($_GET['tab'] ?? '', ['questions', 'scholarships'], true) ? $_GET['tab'] : 'registrations';
-$q = is_string($_GET['q'] ?? null) ? trim($_GET['q']) : '';
+
+// the 2027 waitlist at a glance: everyone, today (Eastern), and the last seven days
+$wl2027 = array_values(array_filter($registrations, function ($r) { return ngs_waitlist_list($r) === 'Waitlist 2027'; }));
+$etz = new DateTimeZone('America/New_York');
+$todayEt = (new DateTime('now', $etz))->format('Y-m-d');
+$weekAgo = time() - 7 * 86400;
+$wlToday = $wlWeek = 0;
+foreach ($wl2027 as $r) {
+    try {
+        $at = new DateTime($r['created_at']);
+    } catch (Throwable $e) {
+        continue;
+    }
+    if ($at->getTimestamp() >= $weekAgo) {
+        $wlWeek++;
+    }
+    if ($at->setTimezone($etz)->format('Y-m-d') === $todayEt) {
+        $wlToday++;
+    }
+}
 
 $emailCount = [];
 foreach ($registrations as $r) {
@@ -182,10 +221,10 @@ function matches(array $r, string $q): bool
     if ($q === '') {
         return true;
     }
-    $hay = strtolower(implode(' ', array_map('strval', $r['data'])));
+    $hay = strtolower(implode(' ', array_map(function ($v) { return is_array($v) ? implode(' ', array_map('strval', $v)) : (string) $v; }, $r['data'])));
     return strpos($hay, strtolower($q)) !== false;
 }
-$shownRegs = array_values(array_filter($registrations, function ($r) use ($q) { return matches($r, $q); }));
+$shownRegs = reg_view($registrations, $q, $list, $sort);
 $shownNotes = array_values(array_filter($notes, function ($r) use ($q) { return matches($r, $q); }));
 $shownQuestions = array_values(array_filter($questions, function ($r) use ($q) { return matches($r, $q); }));
 $newQuestions = count(array_filter($questions, function ($r) { return q_status($r['data']) === 'new'; }));
@@ -231,6 +270,8 @@ $newScholarships = count(array_filter($scholarships, function ($r) { return q_st
   .bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 18px;margin-bottom:16px}
   .bar__t{font:800 12px/1.3 var(--f-sans);letter-spacing:.14em;text-transform:uppercase}
   .tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .tools form{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .tools select{height:42px;padding:0 10px;border:1.5px solid var(--rule-strong);border-radius:8px;font:500 15px/1 var(--f-sans);background:#fff}
   .tools input{height:42px;min-width:220px;padding:0 12px;border:1.5px solid var(--rule-strong);border-radius:8px;font:500 15px/1 var(--f-sans);background:#fff}
   .tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:#fff}
   .notes{margin-top:clamp(40px,6vh,64px)}
@@ -318,13 +359,15 @@ $newScholarships = count(array_filter($scholarships, function ($r) { return q_st
 
     <section class="panel" role="tabpanel" id="panel-registrations" aria-labelledby="tab-registrations" tabindex="0"<?= $tab === 'registrations' ? '' : ' hidden' ?>>
       <h2 class="wm">registrations.</h2>
-      <p class="adm__sub">Waitlist and registrations · Times shown in Eastern Time.</p>
+      <p class="adm__sub">Waitlist and registrations · Times shown in Eastern Time<?= count($shownRegs) !== count($registrations) ? ' · Showing ' . count($shownRegs) . ' of ' . count($registrations) : '' ?>.</p>
       <?php if (isset($_GET['deleted']) && $tab === 'registrations'): ?><p class="note note--ok" role="status" style="margin-top:18px">Entry deleted.</p><?php endif; ?>
 
       <div class="stats">
         <div class="stat"><b><?= count($registrations) ?></b><span>Sign-ups</span></div>
         <div class="stat"><b><?= count($emailCount) ?></b><span>Unique emails</span></div>
-        <div class="stat"><b><?= count(array_filter($registrations, function ($r) { return ngs_waitlist_list($r) === 'Waitlist 2027'; })) ?></b><span>2027 waitlist</span></div>
+        <div class="stat"><b><?= count($wl2027) ?></b><span>2027 waitlist</span></div>
+        <div class="stat"><b><?= $wlToday ?></b><span>New today</span></div>
+        <div class="stat"><b><?= $wlWeek ?></b><span>Last 7 days</span></div>
         <?php foreach (NGS_2027_CITIES as $ck => $cn):
           $cc = count(array_filter($registrations, function ($r) use ($ck) { return is_array($r['data']['cities'] ?? null) && in_array($ck, $r['data']['cities'], true); }));
           if ($cc > 0): ?>
@@ -343,9 +386,21 @@ $newScholarships = count(array_filter($scholarships, function ($r) { return q_st
           <form method="get" action="/admin/" role="search">
             <input type="hidden" name="tab" value="registrations">
             <label class="sr" for="q-reg">Search registrations</label>
-            <input id="q-reg" name="q" type="search" value="<?= h($q) ?>" placeholder="Search name, email, phone">
+            <input id="q-reg" name="q" type="search" value="<?= h($q) ?>" placeholder="Search name, email, phone, city">
+            <label class="sr" for="list-reg">Which list</label>
+            <select id="list-reg" name="list">
+              <option value=""<?= $list === '' ? ' selected' : '' ?>>All sign-ups</option>
+              <option value="2027"<?= $list === '2027' ? ' selected' : '' ?>>2027 waitlist</option>
+            </select>
+            <label class="sr" for="sort-reg">Order</label>
+            <select id="sort-reg" name="sort">
+              <option value="new"<?= $sort === 'new' ? ' selected' : '' ?>>Newest first</option>
+              <option value="old"<?= $sort === 'old' ? ' selected' : '' ?>>Oldest first</option>
+              <option value="name"<?= $sort === 'name' ? ' selected' : '' ?>>Name A&ndash;Z</option>
+            </select>
+            <button class="btn btn--sm" type="submit">Show</button>
           </form>
-          <a class="btn btn--sm" href="/admin/?export=registrations">Export CSV</a>
+          <a class="btn btn--sm" href="/admin/?<?= h(http_build_query(['export' => 'registrations', 'q' => $q, 'list' => $list, 'sort' => $sort])) ?>">Export CSV</a>
         </div>
       </div>
 

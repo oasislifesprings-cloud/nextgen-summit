@@ -675,7 +675,7 @@
     if (!go) return;
     var waiting = !!(d && (d.bonus_claimable || d.bonus_eligible));
     go.hidden = !who || !waiting;
-    go.textContent = 'Go to my vote & +2 bonus';
+    go.textContent = 'Go to my vote & bonus';
     go.setAttribute('data-pc-other-go', who ? who.id : '');
   }
 
@@ -1107,7 +1107,7 @@
       var used = typeof d.used === 'number' ? d.used : 1;
       b.disabled = false;
       b.classList.remove('btn--ghost');
-      b.textContent = bonusOpen ? 'View my vote & +2 bonus'
+      b.textContent = bonusOpen ? 'View my vote & bonus'
         : 'View my ' + used + (used === 1 ? ' point' : ' points');
     } else {
       /* Every other founder. Still live, deliberately: a disabled button says "no" and
@@ -1158,7 +1158,7 @@
     } else if (typeof d.remaining === 'number' && d.remaining > 0) {
       txt = d.remaining + (d.remaining === 1 ? ' point to give' : ' points to give');
     } else if (d.bonus_eligible) {
-      txt = '+2 bonus available';
+      txt = 'Bonus available';
     } else {
       txt = 'Allowance given today';
     }
@@ -1199,7 +1199,7 @@
     if (id === today) {
       b.disabled = false;
       b.classList.add('reel__act--on');
-      small.textContent = (d.bonus_claimable || d.bonus_eligible) ? '+2 bonus' : 'Voted';
+      small.textContent = (d.bonus_claimable || d.bonus_eligible) ? 'Bonus' : 'Voted';
     } else {
       b.disabled = false;
       b.classList.remove('reel__act--on');

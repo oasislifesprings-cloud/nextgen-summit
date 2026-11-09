@@ -112,6 +112,19 @@
     var taken = {};
     picked.forEach(function (p) { taken[p.f.entrant] = true; });
 
+    /* Since the results were published, the three after them are the official Pitch Competition
+       winners, in placing order (assets/js/winners-2026.js), not a vote ranking. */
+    var won = window.NGS_WINNERS_2026 && window.NGS_WINNERS_2026.pitch;
+    if (won && won.length) {
+      won.forEach(function (w) {
+        if (byId[w.entrant] && !taken[w.entrant]) {
+          picked.push({ f: byId[w.entrant], editorial: false, place: w.place, prize: w.prize, award: 'Pitch Competition' });
+          taken[w.entrant] = true;
+        }
+      });
+      return picked.slice(0, SLOTS);
+    }
+
     var pool;
     if (rank && rank.ok && rank.ranked && rank.order && rank.order.length) {
       pool = rank.order.filter(function (id) { return byId[id] && !taken[id]; });
@@ -157,7 +170,7 @@
         ? '<span class="pcs__flag" aria-hidden="true"></span>'
         : (c.place ? '<span class="pcs__flag pcs__flag--rank">' + esc(ordinal(c.place)) + '</span>' : '');
       var label = e.company + ' — ' + e.name +
-        (c.editorial ? ' (featured)' : (c.place ? ' (' + ordinal(c.place) + ' in the public vote)' : ''));
+        (c.editorial ? ' (featured)' : (c.place ? (c.award ? ' (' + ordinal(c.place) + ' place, ' + c.award + ', ' + c.prize + ')' : ' (' + ordinal(c.place) + ' in the public vote)') : ''));
       return '<li role="presentation">' +
         '<button class="pcs__bub" type="button" role="tab" id="pcs-tab-' + i + '"' +
         ' aria-selected="' + (i === 0 ? 'true' : 'false') + '" tabindex="' + (i === 0 ? '0' : '-1') + '"' +
@@ -167,13 +180,14 @@
   }
 
   function paintNow(i) {
-    var e = cast[i].f;
+    var e = cast[i].f, c = cast[i];
     var write = function () {
       /* Company and founder, and nothing else. The blurb that used to sit here was three
          lines of text over the one thing the section exists to show. */
       nowBox.innerHTML =
         '<span class="pcs__now-co">' + esc(e.company) + '</span>' +
-        '<span class="pcs__now-by">' + esc(e.name) + '</span>';
+        '<span class="pcs__now-by">' + esc(e.name) + '</span>' +
+        (c.award ? '<span class="pcs__now-pz">' + esc(ordinal(c.place)) + ' place, ' + esc(c.award) + ' <b>' + esc(c.prize) + '</b></span>' : '');
       nowBox.classList.remove('is-turning');
     };
     if (reduced.matches) { write(); return; }
