@@ -87,7 +87,7 @@
   /* ---------- NextGen 2027: the waitlist, NextGen's own ----------
      Posts to /api/register.php (form-name "waitlist", list 2027): name, email, phone and one or more
      cities. The browser validates the fields; a city is checked here and again on the server. On
-     success the chosen cities light up on the map and the form says "Seat saved." */
+     success the chosen cities light up on the map and the form says "You’re on the waitlist." */
   Array.prototype.forEach.call(document.querySelectorAll('form[data-waitlist]'), function (form) {
     if (!window.fetch || !window.URLSearchParams || !window.FormData) return;
     var wrap = form.closest('.wl') || form.parentNode;
@@ -119,7 +119,7 @@
       btn.disabled = true;
       btn.setAttribute('aria-busy', 'true');
       var was = label.textContent;
-      label.textContent = 'Saving your seat';
+      label.textContent = 'Joining the waitlist';
       fetch(form.action, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' },

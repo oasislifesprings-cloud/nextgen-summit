@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- DEVELOPMENT BUILD of the "What's Next" site (branch where-to-next), for leadership review on staging. -->
 <title>NextGen 2027 · Coming to a city near you</title>
-<meta name="description" content="NextGen 2027 is coming to a city near you. Pick your city and save your seat on the waitlist.">
+<meta name="description" content="NextGen 2027 is coming to a city near you. Pick your city and join the waitlist.">
 <meta name="theme-color" content="#0B0B0F">
 <link rel="canonical" href="https://nextgensummit.us/2027/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="NextGen 2027 · Coming to a city near you">
-<meta property="og:description" content="NextGen 2027 is coming to a city near you. Pick your city and save your seat on the waitlist.">
+<meta property="og:description" content="NextGen 2027 is coming to a city near you. Pick your city and join the waitlist.">
 <meta property="og:url" content="https://nextgensummit.us/2027/">
 <meta property="og:site_name" content="NextGen Summit">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -20,10 +20,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@144,900,100,0&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261108-r5">
-<link rel="stylesheet" href="/assets/css/wtn.css?v=20261108-r5">
-<script src="/assets/js/site.js?v=20261108-r5" defer></script>
-<script src="/assets/js/wtn.js?v=20261108-r5" defer></script>
+<link rel="stylesheet" href="/assets/css/site.css?v=20261108-r6">
+<link rel="stylesheet" href="/assets/css/wtn.css?v=20261108-r6">
+<script src="/assets/js/site.js?v=20261108-r6" defer></script>
+<script src="/assets/js/wtn.js?v=20261108-r6" defer></script>
 </head>
 <body class="wn wn-2027">
 <a class="skip" href="#main">Skip to content</a>
@@ -105,7 +105,10 @@
         <label class="mk mk--indiana" for="c-indiana" style="--x:27.5%;--y:36.02%" aria-hidden="true"><span class="mk__dot"></span><span class="mk__l">Indiana</span></label>
       </div>
       <div class="wl__panel">
-        <h2 class="wl__t wn-d" id="wl-title">Pick your city.</h2>
+        <div class="wl__head">
+          <h2 class="wl__t wn-d" id="wl-title">Pick your city.</h2>
+          <p class="wl__sub">Get notified when dates and registration open for your cities of choice</p>
+        </div>
         <form class="wl__form" action="/api/register.php" method="post" data-waitlist>
           <input type="hidden" name="form-name" value="waitlist">
           <input type="hidden" name="list" value="2027">
@@ -124,12 +127,12 @@
             </div>
           </fieldset>
           <p class="wl__err" role="alert" hidden></p>
-          <button class="wn-btn b-pri" type="submit"><span class="btn__t">Save my seat</span> <svg class="ar" viewBox="0 0 26 10" aria-hidden="true" focusable="false"><path d="M1 5h23M19.5 1 24 5l-4.5 4"/></svg></button>
+          <button class="wn-btn b-pri" type="submit"><span class="btn__t">Join the waitlist</span> <svg class="ar" viewBox="0 0 26 10" aria-hidden="true" focusable="false"><path d="M1 5h23M19.5 1 24 5l-4.5 4"/></svg></button>
           <p class="wl__fine">Questions? <a href="mailto:hello@nextgensummit.us">hello@nextgensummit.us</a></p>
         </form>
         <div class="wl__done" role="status" tabindex="-1" hidden>
-          <p class="wl__done-t wn-d">Seat saved.</p>
-          <p class="wl__done-p">You&rsquo;re on the NextGen 2027 waitlist. We&rsquo;ll be in touch when the date and the venue for your city are announced.</p>
+          <p class="wl__done-t wn-d">You&rsquo;re on the waitlist.</p>
+          <p class="wl__done-p">We&rsquo;ll let you know when dates and registration open for the cities you picked. This is a waitlist, not a registration or a reserved seat.</p>
         </div>
       </div>
     </div>
