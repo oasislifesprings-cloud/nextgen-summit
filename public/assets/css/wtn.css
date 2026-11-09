@@ -148,7 +148,7 @@ html.wn-snap{scroll-snap-type:y proximity}
   .fb__pause{grid-column:2}
 }
 
-/* section 2: your seat is waiting. The rows sit low; the dark above is the headline's room. */
+/* section 2: your next chapter starts here. The rows sit low; the dark above is the headline's room. */
 .ys{position:relative;isolation:isolate;min-height:max(620px,100svh);display:grid;align-content:start;justify-items:center;overflow:hidden;background:var(--ink);text-align:center}
 .ys__pic{position:absolute;left:0;right:0;bottom:0;z-index:-1;height:min(58%,calc(100vw * .289 + 140px))}
 .ys__pic img{width:100%;height:100%;object-fit:cover;object-position:50% 70%}
